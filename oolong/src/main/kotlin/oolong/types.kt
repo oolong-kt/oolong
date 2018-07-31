@@ -24,7 +24,7 @@ fun <Msg> batchCmd(cmds: Iterable<Cmd<Msg>>): Cmd<Msg> = batchEff(cmds)
 
 // Subscriptions
 
-typealias Sub<Msg> = (Dispatch<Msg>) -> Unit
+typealias Sub<Msg> = Eff<Msg>
 
 fun <Msg> noneSub(): Sub<Msg> = batchSub(ArrayList(0))
 
