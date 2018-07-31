@@ -42,7 +42,7 @@ object Counter {
         this.dispatch = dispatch
     }
 
-    private val subscriptions: (Model) -> Sub<Msg> = {
+    private val subscriptions: (Model) -> Sub<Msg> = { _ ->
         noneSub()
     }
 
