@@ -1,3 +1,3 @@
 # Oolong 🍵
 
-TEA for Kotiln
+[TEA](https://guide.elm-lang.org/architecture/) for Kotiln.
