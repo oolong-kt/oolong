@@ -1,4 +1,7 @@
-![Travis (.org)](https://img.shields.io/travis/pardom/oolong.svg) ![Maven Central](https://img.shields.io/maven-central/v/com.michaelpardo/oolong.svg) ![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/https/oss.sonatype.org/com.michaelpardo/oolong.svg) ![GitHub](https://img.shields.io/github/license/pardom/oolong.svg)
+[![Build Status](https://img.shields.io/travis/pardom/oolong.svg)](https://travis-ci.org/pardom/oolong/)
+[![Maven Central](https://img.shields.io/maven-central/v/com.michaelpardo/oolong.svg)](#download)
+[![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/https/oss.sonatype.org/com.michaelpardo/oolong.svg)](#download)
+[![License](https://img.shields.io/github/license/pardom/oolong.svg)](LICENSE.md)
 
 Oolong 🍵 
 =========
