@@ -9,7 +9,8 @@ import org.jetbrains.spek.api.dsl.on
 class RuntimeTest : Spek({
 
     given("a Counter runtime") {
-        val terminate = runtime(Counter.program)
+        val program = Program(Counter.init, Counter.update, Counter.view)
+        val terminate = runtime(program)
 
         on("an increment message") {
             val count = Counter.model.count
