@@ -1,4 +1,4 @@
-Oolong 🍵
+Oolong 🍵 [![Build Status](https://travis-ci.org/pardom/oolong.svg?branch=master)](https://travis-ci.org/pardom/oolong)
 =========
 
 TEA for Kotiln.
