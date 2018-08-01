@@ -1,4 +1,6 @@
-Oolong 🍵 [![Build Status](https://travis-ci.org/pardom/oolong.svg?branch=master)](https://travis-ci.org/pardom/oolong)
+![Travis (.org)](https://img.shields.io/travis/pardom/oolong.svg) ![Maven Central](https://img.shields.io/maven-central/v/com.michaelpardo/oolong.svg) ![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/https/oss.sonatype.org/com.michaelpardo/oolong.svg) ![GitHub](https://img.shields.io/github/license/pardom/oolong.svg)
+
+Oolong 🍵 
 =========
 
 TEA for Kotiln.
@@ -13,12 +15,12 @@ Download [the latest JAR][2] or grab via Maven:
 <dependency>
   <groupId>com.michaelpardo</groupId>
   <artifactId>oolong</artifactId>
-  <version>1.0.0</version>
+  <version>version</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-implementation 'com.michaelpardo:oolong:1.0.0'
+implementation 'com.michaelpardo:oolong:<version>'
 ```
 
 Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
