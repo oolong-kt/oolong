@@ -1,0 +1,18 @@
+$dokka.format:gfm
+$dokka.linkExtension:md
+$dokka.location:oolong.util$nextBoolean(java.util.Random, kotlin.Function1((kotlin.Boolean, oolong.util.nextBoolean.Msg)))oolong.util/java.util.-random/next-boolean.md
+$dokka.location:oolong.util$nextDouble(java.util.Random, kotlin.Function1((kotlin.Double, oolong.util.nextDouble.Msg)))oolong.util/java.util.-random/next-double.md
+$dokka.location:oolong.util$nextFloat(java.util.Random, kotlin.Function1((kotlin.Float, oolong.util.nextFloat.Msg)))oolong.util/java.util.-random/next-float.md
+$dokka.location:oolong.util$nextGaussian(java.util.Random, kotlin.Function1((kotlin.Double, oolong.util.nextGaussian.Msg)))oolong.util/java.util.-random/next-gaussian.md
+$dokka.location:oolong.util$nextInt(java.util.Random, kotlin.Function1((kotlin.Int, oolong.util.nextInt.Msg)))oolong.util/java.util.-random/next-int.md
+$dokka.location:oolong.util$nextInt(java.util.Random, kotlin.Int, kotlin.Function1((kotlin.Int, oolong.util.nextInt.Msg)))oolong.util/java.util.-random/next-int.md
+$dokka.location:oolong.util$nextLong(java.util.Random, kotlin.Function1((kotlin.Long, oolong.util.nextLong.Msg)))oolong.util/java.util.-random/next-long.md
+$dokka.location:oolong.util$schedule(java.util.Timer, java.util.Date, kotlin.Function1((kotlin.Long, oolong.util.schedule.Msg)))oolong.util/java.util.-timer/schedule.md
+$dokka.location:oolong.util$schedule(java.util.Timer, java.util.Date, kotlin.Long, kotlin.Function1((kotlin.Long, oolong.util.schedule.Msg)))oolong.util/java.util.-timer/schedule.md
+$dokka.location:oolong.util$schedule(java.util.Timer, kotlin.Long, kotlin.Function1((kotlin.Long, oolong.util.schedule.Msg)))oolong.util/java.util.-timer/schedule.md
+$dokka.location:oolong.util$schedule(java.util.Timer, kotlin.Long, kotlin.Long, kotlin.Function1((kotlin.Long, oolong.util.schedule.Msg)))oolong.util/java.util.-timer/schedule.md
+$dokka.location:oolong.util$scheduleAtFixedRate(java.util.Timer, java.util.Date, kotlin.Long, kotlin.Function1((kotlin.Long, oolong.util.scheduleAtFixedRate.Msg)))oolong.util/java.util.-timer/schedule-at-fixed-rate.md
+$dokka.location:oolong.util$scheduleAtFixedRate(java.util.Timer, kotlin.Long, kotlin.Long, kotlin.Function1((kotlin.Long, oolong.util.scheduleAtFixedRate.Msg)))oolong.util/java.util.-timer/schedule-at-fixed-rate.md
+oolong
+oolong.platform
+oolong.util

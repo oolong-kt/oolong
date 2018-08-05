@@ -1,23 +1,31 @@
 package oolong
 
-fun <Model, Msg> runtime(program: Program<Model, Msg>): () -> Unit {
-    val mainThread = Thread.currentThread()
-    val update = program.update
-    val view = program.view
-    val subscriptions = program.subscriptions
+import oolong.platform.Cmd
+import oolong.platform.Sub
+
+typealias Dispatch<Msg> = (Msg) -> Unit
+
+fun <Model, Msg> runtime(
+    init: () -> Pair<Model, Cmd<Msg>>,
+    update: (Msg, Model) -> Pair<Model, Cmd<Msg>>,
+    view: (Model, Dispatch<Msg>) -> Unit,
+    subscriptions: (Model) -> Sub<Msg> = { Sub.none() }
+): () -> Unit {
+    val runtimeThread = Thread.currentThread()
     var running = true
-    fun reduce(update: Update<Model, Msg>) {
+    fun reduce(update: Pair<Model, Cmd<Msg>>) {
         if (!running) return
-        val dispatch = { msg: Msg ->
-            if (Thread.currentThread() != mainThread) {
-                throw IllegalThreadStateException("Dispatch function must be called from the main thread.")
-            }
-            reduce(update(msg, update.model))
+        if (Thread.currentThread() != runtimeThread) {
+            throw IllegalThreadStateException(
+                "Dispatch function must be invoked from $runtimeThread but was invoked from ${Thread.currentThread()}."
+            )
         }
-        update.cmd(dispatch)
-        subscriptions(update.model)(dispatch)
-        view(update.model, dispatch)
+        val (model, eff) = update
+        val dispatch = { msg: Msg -> reduce(update(msg, model)) }
+        eff(dispatch)
+        subscriptions(model)(dispatch)
+        view(model, dispatch)
     }
-    reduce(program.init())
+    reduce(init())
     return { running = false }
 }

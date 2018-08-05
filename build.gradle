@@ -4,7 +4,8 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.51'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.60'
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.17"
     }
 }
 

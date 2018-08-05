@@ -10,12 +10,16 @@ import kotlin.concurrent.thread
 class RuntimeTest : Spek({
 
     given("a Counter runtime") {
-        val program = Program(Counter.init, Counter.update, Counter.view)
-        val terminate = runtime(program)
+        val terminate = runtime(
+            Counter.init,
+            Counter.update,
+            Counter.view,
+            Counter.subscriptions
+        )
 
         on("dispatch called off the main thread") {
             it("throws an exception") {
-                thread {
+                thread(name = "test") {
                     try {
                         Counter.dispatch(Counter.Msg.Increment)
                         assert(false)
@@ -26,7 +30,7 @@ class RuntimeTest : Spek({
             }
         }
 
-        on("an increment message") {
+        on("an increment msg") {
             val count = Counter.model.count
             Counter.dispatch(Counter.Msg.Increment)
             it("increments the count") {
@@ -34,7 +38,7 @@ class RuntimeTest : Spek({
             }
         }
 
-        on("a decrement message") {
+        on("a decrement msg") {
             val count = Counter.model.count
             Counter.dispatch(Counter.Msg.Decrement)
             it("increments the count") {

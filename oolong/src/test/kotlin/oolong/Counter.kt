@@ -1,5 +1,8 @@
 package oolong
 
+import oolong.platform.Cmd
+import oolong.platform.Sub
+
 object Counter {
 
     lateinit var model: Model
@@ -23,20 +26,24 @@ object Counter {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Functions
 
-    val init: () -> Update<Model, Msg> = {
-        Update(Model(0))
+    val init: () -> Pair<Model, Cmd<Msg>> = {
+        Model(0) to Cmd.none()
     }
 
-    val update: (Msg, Model) -> Update<Model, Msg> = { msg, model ->
+    val update: (Msg, Model) -> Pair<Model, Cmd<Msg>> = { msg, model ->
         when (msg) {
-            Msg.Increment -> Update(model.copy(count = model.count + 1))
-            Msg.Decrement -> Update(model.copy(count = model.count - 1))
-        }
+            Msg.Increment -> model.copy(count = model.count + 1)
+            Msg.Decrement -> model.copy(count = model.count - 1)
+        } to Cmd.none()
     }
 
     val view: (Model, Dispatch<Msg>) -> Unit = { model, dispatch ->
         this.model = model
         this.dispatch = dispatch
+    }
+
+    val subscriptions: (Model) -> Sub<Msg> = {
+        Sub.none()
     }
 
 }

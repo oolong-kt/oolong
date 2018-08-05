@@ -10,6 +10,8 @@ TEA for Kotiln.
 
 A Kotlin port of [The Elm Architecture][1] aka Model View Update (MVU) architecture.
 
+[documentation][3]
+
 Download
 --------
 
@@ -30,4 +32,5 @@ Snapshots of the development version are available in [Sonatype's `snapshots` re
 
 [1]: https://guide.elm-lang.org/architecture/
 [2]: https://search.maven.org/remote_content?g=com.michaelpardo&a=oolong&v=LATEST
+[3]: docs/oolong/index.md
 [snap]: https://oss.sonatype.org/content/repositories/snapshots/
