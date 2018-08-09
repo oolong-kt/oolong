@@ -6,6 +6,7 @@ import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
 import org.jetbrains.spek.api.dsl.on
 import kotlin.concurrent.thread
+import kotlin.test.assertFailsWith
 
 class RuntimeTest : Spek({
 
@@ -20,11 +21,8 @@ class RuntimeTest : Spek({
         on("dispatch called off the main thread") {
             it("throws an exception") {
                 thread(name = "test") {
-                    try {
+                    assertFailsWith<IllegalThreadStateException> {
                         Counter.dispatch(Counter.Msg.Increment)
-                        assert(false)
-                    } catch (e: Exception) {
-                        assert(true)
                     }
                 }.join()
             }
@@ -41,7 +39,7 @@ class RuntimeTest : Spek({
         on("a decrement msg") {
             val count = Counter.model.count
             Counter.dispatch(Counter.Msg.Decrement)
-            it("increments the count") {
+            it("decrements the count") {
                 assertThat(Counter.model.count).isEqualTo(count - 1)
             }
         }

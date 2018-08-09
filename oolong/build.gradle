@@ -1,5 +1,6 @@
 apply plugin: 'kotlin'
 apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'org.junit.platform.gradle.plugin'
 
 repositories {
     jcenter()
@@ -11,11 +12,20 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.2.60'
 
     testImplementation 'com.google.truth:truth:0.37'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test:1.2.60'
     testImplementation 'org.jetbrains.spek:spek-api:1.1.5'
     testImplementation 'org.jetbrains.spek:spek-junit-platform-engine:1.1.5'
     testImplementation 'org.junit.platform:junit-platform-runner:1.0.0'
     testImplementation 'org.mockito:mockito-core:2.13.0'
     testImplementation 'org.reduxjava:reduxjava:1.0.0-SNAPSHOT'
+}
+
+junitPlatform {
+    filters {
+        engines {
+            include 'spek'
+        }
+    }
 }
 
 dokka {
