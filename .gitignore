@@ -3,6 +3,8 @@
 *.iml
 out/
 
+local.properties
+
 ### vim ###
 *.swp
 
