@@ -1,56 +1,57 @@
 package oolong
 
 import com.google.common.truth.Truth.assertThat
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.given
-import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.on
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 import kotlin.concurrent.thread
 import kotlin.test.assertFailsWith
 
 class RuntimeTest : Spek({
 
-    given("a Counter runtime") {
+    describe("a Counter runtime") {
         val terminate = Oolong.runtime(
             Counter.init,
             Counter.update,
             Counter.view,
-            {},
+            Counter.render,
             Counter.subscriptions
         )
 
-        on("dispatch called off the main thread") {
+        context("dispatch called off the main thread") {
             it("throws an exception") {
                 thread(name = "test") {
                     assertFailsWith<IllegalThreadStateException> {
-                        Counter.dispatch(Counter.Msg.Increment)
+                        Counter.props.increment()
                     }
                 }.join()
             }
         }
 
-        on("an increment msg") {
-            val count = Counter.model.count
-            Counter.dispatch(Counter.Msg.Increment)
+        context("an increment msg") {
+            val expected = Counter.props.count + 1
+            Counter.props.increment()
+            val actual = Counter.props.count
             it("increments the count") {
-                assertThat(Counter.model.count).isEqualTo(count + 1)
+                assertThat(actual).isEqualTo(expected)
             }
         }
 
-        on("a decrement msg") {
-            val count = Counter.model.count
-            Counter.dispatch(Counter.Msg.Decrement)
+        context("a decrement msg") {
+            val expected = Counter.props.count - 1
+            Counter.props.decrement()
+            val actual = Counter.props.count
             it("decrements the count") {
-                assertThat(Counter.model.count).isEqualTo(count - 1)
+                assertThat(actual).isEqualTo(expected)
             }
         }
 
-        on("termination") {
+        context("termination") {
             terminate()
             it("stops reducing") {
-                val count = Counter.model.count
-                Counter.dispatch(Counter.Msg.Increment)
-                assertThat(Counter.model.count).isEqualTo(count)
+                val expected = Counter.props.count
+                Counter.props.increment()
+                val actual = Counter.props.count
+                assertThat(actual).isEqualTo(expected)
             }
         }
 

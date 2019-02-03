@@ -4,11 +4,11 @@ import oolong.platform.Effect
 
 object Oolong {
 
-    fun <Model, Msg, RenderModel> runtime(
+    fun <Model, Msg, Props> runtime(
         init: Init<Model, Msg>,
         update: Update<Model, Msg>,
-        view: View<Model, Msg, RenderModel>,
-        render: Render<RenderModel>,
+        view: View<Model, Msg, Props>,
+        render: Render<Props>,
         subscriptions: Subscriptions<Model, Msg> = { Effect.none() }
     ): Dispose {
         val runtimeThread = Thread.currentThread()

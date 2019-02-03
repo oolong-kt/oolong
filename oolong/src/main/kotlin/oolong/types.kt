@@ -10,9 +10,9 @@ typealias Init<Model, Msg> = () -> Next<Model, Msg>
 
 typealias Update<Model, Msg> = (Msg, Model) -> Next<Model, Msg>
 
-typealias View<Model, Msg, RenderModel> = (Model, Dispatch<Msg>) -> RenderModel
+typealias View<Model, Msg, Props> = (Model, Dispatch<Msg>) -> Props
 
-typealias Render<RenderModel> = (RenderModel) -> Unit
+typealias Render<Props> = (Props) -> Unit
 
 typealias Subscriptions<Model, Msg> = (Model) -> Effect<Msg>
 

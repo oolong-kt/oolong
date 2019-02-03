@@ -4,26 +4,22 @@ import oolong.platform.Effect
 
 object Counter {
 
-    lateinit var model: Model
-    lateinit var dispatch: Dispatch<Msg>
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Model
+    lateinit var props: Props
 
     data class Model(
         val count: Int
     )
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Messages
 
     sealed class Msg {
         object Increment : Msg()
         object Decrement : Msg()
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Functions
+    data class Props(
+        val count: Int,
+        val increment: () -> Unit,
+        val decrement: () -> Unit
+    )
 
     val init: () -> Pair<Model, Effect<Msg>> = {
         Model(0) to Effect.none()
@@ -36,9 +32,16 @@ object Counter {
         } to Effect.none()
     }
 
-    val view: (Model, Dispatch<Msg>) -> Unit = { model, dispatch ->
-        this.model = model
-        this.dispatch = dispatch
+    val view: View<Model, Msg, Props> = { model, dispatch ->
+        Props(
+            model.count,
+            { dispatch(Msg.Increment) },
+            { dispatch(Msg.Decrement) }
+        )
+    }
+
+    val render: Render<Props> = { props ->
+        this.props = props
     }
 
     val subscriptions: (Model) -> Effect<Msg> = {
