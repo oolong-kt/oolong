@@ -7,14 +7,14 @@ import tornadofx.find
 class CounterApp : App(CounterView::class) {
 
     init {
-        val counterView = find(CounterView::class)
-
-        Oolong.runtime(
-            Counter.init,
-            Counter.update,
-            Counter.view,
-            counterView.render
-        )
+        find(CounterView::class).run {
+            Oolong.runtime(
+                Counter.init,
+                Counter.update,
+                Counter.view,
+                render
+            )
+        }
     }
 
 }
