@@ -22,9 +22,9 @@ object Oolong {
             }
             val (model, effect) = next
             val dispatch = { msg: Msg -> reduce(update(msg, model)) }
+            render(view(model, dispatch))
             effect(dispatch)
             subscriptions(model)(dispatch)
-            render(view(model, dispatch))
         }
         reduce(init())
         return { running = false }
