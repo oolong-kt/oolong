@@ -1,6 +1,6 @@
 package oolong
 
-import oolong.platform.Cmd
+import oolong.platform.Effect
 import oolong.platform.Sub
 
 object Counter {
@@ -26,15 +26,15 @@ object Counter {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Functions
 
-    val init: () -> Pair<Model, Cmd<Msg>> = {
-        Model(0) to Cmd.none()
+    val init: () -> Pair<Model, Effect<Msg>> = {
+        Model(0) to Effect.none()
     }
 
-    val update: (Msg, Model) -> Pair<Model, Cmd<Msg>> = { msg, model ->
+    val update: (Msg, Model) -> Pair<Model, Effect<Msg>> = { msg, model ->
         when (msg) {
             Msg.Increment -> model.copy(count = model.count + 1)
             Msg.Decrement -> model.copy(count = model.count - 1)
-        } to Cmd.none()
+        } to Effect.none()
     }
 
     val view: (Model, Dispatch<Msg>) -> Unit = { model, dispatch ->

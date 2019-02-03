@@ -2,7 +2,7 @@
 
 # Cmd
 
-`class Cmd<Msg>` [(source)](https://github.com/pardom/oolong/tree/master/oolong/src/main/kotlin/oolong/platform/Cmd.kt#L5)
+`class Cmd<Msg>` [(source)](https://github.com/pardom/oolong/tree/master/oolong/src/main/kotlin/oolong/platform/Effect.kt#L5)
 
 ### Constructors
 

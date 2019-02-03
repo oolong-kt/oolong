@@ -1,7 +1,7 @@
 package oolong.util
 
 import oolong.Dispatch
-import oolong.platform.Sub
+import oolong.platform.Effect
 import java.util.Date
 import java.util.Timer
 import java.util.TimerTask
@@ -12,7 +12,7 @@ import java.util.TimerTask
  * @param msg map function of [Long] to [Msg]
  * @return [Sub] of [Msg] for the generated [Long]
  */
-fun <Msg> Timer.schedule(time: Date, msg: (Long) -> Msg) = Sub<Msg> { dispatch ->
+fun <Msg> Timer.schedule(time: Date, msg: (Long) -> Msg) = Effect<Msg> { dispatch ->
     schedule(timerTask(dispatch, msg), time)
 }
 
@@ -22,9 +22,10 @@ fun <Msg> Timer.schedule(time: Date, msg: (Long) -> Msg) = Sub<Msg> { dispatch -
  * @param msg map function of [Long] to [Msg]
  * @return [Sub] of [Msg] for the generated [Long]
  */
-fun <Msg> Timer.schedule(firstTime: Date, period: Long, msg: (Long) -> Msg) = Sub<Msg> { dispatch ->
-    schedule(timerTask(dispatch, msg), firstTime, period)
-}
+fun <Msg> Timer.schedule(firstTime: Date, period: Long, msg: (Long) -> Msg) =
+    Effect<Msg> { dispatch ->
+        schedule(timerTask(dispatch, msg), firstTime, period)
+    }
 
 /**
  * Call [Timer.schedule] with a mapping of [Long] to [Msg].
@@ -32,7 +33,7 @@ fun <Msg> Timer.schedule(firstTime: Date, period: Long, msg: (Long) -> Msg) = Su
  * @param msg map function of [Long] to [Msg]
  * @return [Sub] of [Msg] for the generated [Long]
  */
-fun <Msg> Timer.schedule(delay: Long, msg: (Long) -> Msg) = Sub<Msg> { dispatch ->
+fun <Msg> Timer.schedule(delay: Long, msg: (Long) -> Msg) = Effect<Msg> { dispatch ->
     schedule(timerTask(dispatch, msg), delay)
 }
 
@@ -42,7 +43,7 @@ fun <Msg> Timer.schedule(delay: Long, msg: (Long) -> Msg) = Sub<Msg> { dispatch 
  * @param msg map function of [Long] to [Msg]
  * @return [Sub] of [Msg] for the generated [Long]
  */
-fun <Msg> Timer.schedule(delay: Long, period: Long, msg: (Long) -> Msg) = Sub<Msg> { dispatch ->
+fun <Msg> Timer.schedule(delay: Long, period: Long, msg: (Long) -> Msg) = Effect<Msg> { dispatch ->
     schedule(timerTask(dispatch, msg), delay, period)
 }
 
@@ -53,7 +54,7 @@ fun <Msg> Timer.schedule(delay: Long, period: Long, msg: (Long) -> Msg) = Sub<Ms
  * @return [Sub] of [Msg] for the generated [Long]
  */
 fun <Msg> Timer.scheduleAtFixedRate(firstTime: Date, period: Long, msg: (Long) -> Msg) =
-    Sub<Msg> { dispatch ->
+    Effect<Msg> { dispatch ->
         scheduleAtFixedRate(timerTask(dispatch, msg), firstTime, period)
     }
 
@@ -64,7 +65,7 @@ fun <Msg> Timer.scheduleAtFixedRate(firstTime: Date, period: Long, msg: (Long) -
  * @return [Sub] of [Msg] for the generated [Long]
  */
 fun <Msg> Timer.scheduleAtFixedRate(delay: Long, period: Long, msg: (Long) -> Msg) =
-    Sub<Msg> { dispatch ->
+    Effect<Msg> { dispatch ->
         scheduleAtFixedRate(timerTask(dispatch, msg), delay, period)
     }
 
