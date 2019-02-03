@@ -20,9 +20,9 @@ object Oolong {
                     "Dispatch function must be invoked from $runtimeThread but was invoked from ${Thread.currentThread()}."
                 )
             }
-            val (model, eff) = next
+            val (model, effect) = next
             val dispatch = { msg: Msg -> reduce(update(msg, model)) }
-            eff(dispatch)
+            effect(dispatch)
             subscriptions(model)(dispatch)
             render(view(model, dispatch))
         }
