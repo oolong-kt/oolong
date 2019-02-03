@@ -16,7 +16,7 @@ object Counter {
         object Decrement : Msg()
     }
 
-    data class RenderModel(
+    data class Props(
         val count: Int,
         val onIncrement: () -> Unit,
         val onDecrement: () -> Unit
@@ -33,8 +33,8 @@ object Counter {
         } to Effect.none()
     }
 
-    val view: View<Model, Msg, RenderModel> = { model, dispatch ->
-        RenderModel(
+    val view: View<Model, Msg, Props> = { model, dispatch ->
+        Props(
             model.count,
             { dispatch(Msg.Increment) },
             { dispatch(Msg.Decrement) }

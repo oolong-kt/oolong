@@ -17,7 +17,7 @@ object Random {
         data class NewFace(val face: Int) : Msg()
     }
 
-    data class RenderModel(
+    data class Props(
         val dieFace: Int,
         val onRoll: () -> Unit
     )
@@ -34,8 +34,8 @@ object Random {
         }
     }
 
-    val view: View<Model, Msg, RenderModel> = { model, dispatch ->
-        RenderModel(
+    val view: View<Model, Msg, Props> = { model, dispatch ->
+        Props(
             model.face,
             { dispatch(Msg.Roll) }
         )

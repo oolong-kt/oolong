@@ -4,7 +4,7 @@ import javafx.scene.Parent
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import oolong.Render
-import random.Random.RenderModel
+import random.Random.Props
 import tornadofx.View
 import tornadofx.action
 import tornadofx.button
@@ -22,9 +22,9 @@ class RandomView : View() {
             rollButton = button("Roll")
         }
 
-    val render: Render<RenderModel> = { renderModel ->
-        faceLabel.text = "${renderModel.dieFace}"
-        rollButton.action { renderModel.onRoll() }
+    val render: Render<Props> = { props ->
+        faceLabel.text = "${props.dieFace}"
+        rollButton.action { props.onRoll() }
     }
 
 }

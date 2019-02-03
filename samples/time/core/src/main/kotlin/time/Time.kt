@@ -19,7 +19,7 @@ object Time {
         data class Tick(val time: LocalDateTime) : Msg()
     }
 
-    data class RenderModel(
+    data class Props(
         val hour: Int,
         val minute: Int,
         val second: Int
@@ -35,8 +35,8 @@ object Time {
         } to Effect.none()
     }
 
-    val view: View<Model, Msg, RenderModel> = { model, dispatch ->
-        RenderModel(
+    val view: View<Model, Msg, Props> = { model, dispatch ->
+        Props(
             model.time.hour,
             model.time.minute,
             model.time.second

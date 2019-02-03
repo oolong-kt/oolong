@@ -1,6 +1,6 @@
 package counter
 
-import counter.Counter.RenderModel
+import counter.Counter.Props
 import javafx.scene.Parent
 import javafx.scene.control.Button
 import javafx.scene.control.Label
@@ -24,10 +24,10 @@ class CounterView : View() {
             decrementButton = button("-1")
         }
 
-    val render: Render<RenderModel> = { renderModel ->
-        countLabel.text = "${renderModel.count}"
-        incrementButton.action { renderModel.onIncrement() }
-        decrementButton.action { renderModel.onDecrement() }
+    val render: Render<Props> = { props ->
+        countLabel.text = "${props.count}"
+        incrementButton.action { props.onIncrement() }
+        decrementButton.action { props.onDecrement() }
     }
 
 }
