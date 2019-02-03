@@ -4,16 +4,12 @@ import counter.Counter.RenderModel
 import javafx.scene.Parent
 import javafx.scene.control.Button
 import javafx.scene.control.Label
-import javafx.scene.layout.Priority
 import oolong.Render
 import tornadofx.View
 import tornadofx.action
 import tornadofx.button
-import tornadofx.hbox
-import tornadofx.hboxConstraints
-import tornadofx.hgrow
-import tornadofx.insets
 import tornadofx.label
+import tornadofx.vbox
 
 class CounterView : View() {
 
@@ -28,18 +24,10 @@ class CounterView : View() {
     }
 
     override val root: Parent =
-        hbox {
-            hboxConstraints {
-                padding = insets(10)
-            }
-            decrementButton = button("-")
-            countLabel = label {
-                hboxConstraints {
-                    margin = insets(10, 0)
-                    hgrow = Priority.ALWAYS
-                }
-            }
-            incrementButton = button("+")
+        vbox {
+            incrementButton = button("+1")
+            countLabel = label()
+            decrementButton = button("-1")
         }
 
 }
