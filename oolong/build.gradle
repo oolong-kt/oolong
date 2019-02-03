@@ -5,7 +5,6 @@ apply plugin: 'org.junit.platform.gradle.plugin'
 repositories {
     jcenter()
     maven { url 'https://dl.bintray.com/jetbrains/spek' }
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 
 dependencies {
@@ -15,8 +14,8 @@ dependencies {
     testImplementation 'org.jetbrains.kotlin:kotlin-test:1.3.20'
     testImplementation 'org.jetbrains.spek:spek-api:1.1.5'
     testImplementation 'org.jetbrains.spek:spek-junit-platform-engine:1.1.5'
-    testImplementation 'org.junit.platform:junit-platform-runner:1.0.0'
-    testImplementation 'org.mockito:mockito-core:2.13.0'
+    testImplementation 'org.junit.platform:junit-platform-runner:1.4.0-RC2'
+    testImplementation 'org.mockito:mockito-core:2.24.0'
 }
 
 junitPlatform {
@@ -40,6 +39,7 @@ dokka {
     }
 }
 
-build.dependsOn dokka
+// Re-enable when this is fixed? https://github.com/Kotlin/dokka/issues/213
+// build.dependsOn dokka
 
 apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

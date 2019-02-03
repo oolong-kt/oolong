@@ -10,7 +10,7 @@ import java.util.TimerTask
  * Call [Timer.schedule] with a mapping of [Long] to [Msg].
  *
  * @param msg map function of [Long] to [Msg]
- * @return [Sub] of [Msg] for the generated [Long]
+ * @return [Effect] of [Msg] for the generated [Long]
  */
 fun <Msg> Timer.schedule(time: Date, msg: (Long) -> Msg) = Effect<Msg> { dispatch ->
     schedule(timerTask(dispatch, msg), time)
@@ -20,7 +20,7 @@ fun <Msg> Timer.schedule(time: Date, msg: (Long) -> Msg) = Effect<Msg> { dispatc
  * Call [Timer.schedule] with a mapping of [Long] to [Msg].
  *
  * @param msg map function of [Long] to [Msg]
- * @return [Sub] of [Msg] for the generated [Long]
+ * @return [Effect] of [Msg] for the generated [Long]
  */
 fun <Msg> Timer.schedule(firstTime: Date, period: Long, msg: (Long) -> Msg) =
     Effect<Msg> { dispatch ->
@@ -31,7 +31,7 @@ fun <Msg> Timer.schedule(firstTime: Date, period: Long, msg: (Long) -> Msg) =
  * Call [Timer.schedule] with a mapping of [Long] to [Msg].
  *
  * @param msg map function of [Long] to [Msg]
- * @return [Sub] of [Msg] for the generated [Long]
+ * @return [Effect] of [Msg] for the generated [Long]
  */
 fun <Msg> Timer.schedule(delay: Long, msg: (Long) -> Msg) = Effect<Msg> { dispatch ->
     schedule(timerTask(dispatch, msg), delay)
@@ -41,7 +41,7 @@ fun <Msg> Timer.schedule(delay: Long, msg: (Long) -> Msg) = Effect<Msg> { dispat
  * Call [Timer.schedule] with a mapping of [Long] to [Msg].
  *
  * @param msg map function of [Long] to [Msg]
- * @return [Sub] of [Msg] for the generated [Long]
+ * @return [Effect] of [Msg] for the generated [Long]
  */
 fun <Msg> Timer.schedule(delay: Long, period: Long, msg: (Long) -> Msg) = Effect<Msg> { dispatch ->
     schedule(timerTask(dispatch, msg), delay, period)
@@ -51,7 +51,7 @@ fun <Msg> Timer.schedule(delay: Long, period: Long, msg: (Long) -> Msg) = Effect
  * Call [Timer.scheduleAtFixedRate] with a mapping of [Long] to [Msg].
  *
  * @param msg map function of [Long] to [Msg]
- * @return [Sub] of [Msg] for the generated [Long]
+ * @return [Effect] of [Msg] for the generated [Long]
  */
 fun <Msg> Timer.scheduleAtFixedRate(firstTime: Date, period: Long, msg: (Long) -> Msg) =
     Effect<Msg> { dispatch ->
@@ -62,7 +62,7 @@ fun <Msg> Timer.scheduleAtFixedRate(firstTime: Date, period: Long, msg: (Long) -
  * Call [Timer.scheduleAtFixedRate] with a mapping of [Long] to [Msg].
  *
  * @param msg map function of [Long] to [Msg]
- * @return [Sub] of [Msg] for the generated [Long]
+ * @return [Effect] of [Msg] for the generated [Long]
  */
 fun <Msg> Timer.scheduleAtFixedRate(delay: Long, period: Long, msg: (Long) -> Msg) =
     Effect<Msg> { dispatch ->

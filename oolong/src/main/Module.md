@@ -9,9 +9,9 @@ A Kotlin port of [The Elm Architecture][1] aka Model View Update (MVU) architect
 The Oolong runtime.
 
 # Package oolong.platform
-Oolong types for hanndling effects.
+Oolong types for handling effects.
 
 # Package oolong.util
-Utility functions for creating instances of [Cmd] and [Sub].
+Utility functions for creating instances of [Effect].
 
 [1]: https://guide.elm-lang.org/architecture/

@@ -11,10 +11,11 @@ import kotlin.test.assertFailsWith
 class RuntimeTest : Spek({
 
     given("a Counter runtime") {
-        val terminate = runtime(
+        val terminate = Oolong.runtime(
             Counter.init,
             Counter.update,
             Counter.view,
+            {},
             Counter.subscriptions
         )
 

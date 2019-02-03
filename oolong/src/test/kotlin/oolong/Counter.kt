@@ -1,7 +1,6 @@
 package oolong
 
 import oolong.platform.Effect
-import oolong.platform.Sub
 
 object Counter {
 
@@ -42,8 +41,8 @@ object Counter {
         this.dispatch = dispatch
     }
 
-    val subscriptions: (Model) -> Sub<Msg> = {
-        Sub.none()
+    val subscriptions: (Model) -> Effect<Msg> = {
+        Effect.none()
     }
 
 }

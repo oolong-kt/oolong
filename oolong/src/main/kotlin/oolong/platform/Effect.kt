@@ -13,7 +13,7 @@ class Effect<Msg>(private val block: (Dispatch<Msg>) -> Unit) {
         fun <Msg> batch(vararg effects: Effect<Msg>) = batch(effects.toList())
 
         fun <Msg> batch(effects: Iterable<Effect<Msg>>) = Effect { dispatch: Dispatch<Msg> ->
-            for (cmd in effects) cmd(dispatch)
+            for (effect in effects) effect(dispatch)
         }
 
     }
