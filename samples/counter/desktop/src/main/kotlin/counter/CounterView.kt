@@ -17,17 +17,17 @@ class CounterView : View() {
     private lateinit var incrementButton: Button
     private lateinit var decrementButton: Button
 
-    val render: Render<RenderModel> = { renderModel ->
-        countLabel.text = "${renderModel.count}"
-        incrementButton.action { renderModel.onIncrement() }
-        decrementButton.action { renderModel.onDecrement() }
-    }
-
     override val root: Parent =
         vbox {
             incrementButton = button("+1")
             countLabel = label()
             decrementButton = button("-1")
         }
+
+    val render: Render<RenderModel> = { renderModel ->
+        countLabel.text = "${renderModel.count}"
+        incrementButton.action { renderModel.onIncrement() }
+        decrementButton.action { renderModel.onDecrement() }
+    }
 
 }
