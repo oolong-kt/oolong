@@ -1,12 +1,11 @@
 package oolong
 
 import com.google.common.truth.Truth.assertThat
-import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
+import io.kotlintest.specs.DescribeSpec
 import kotlin.concurrent.thread
 import kotlin.test.assertFailsWith
 
-class RuntimeTest : Spek({
+class RuntimeTest : DescribeSpec({
 
     describe("a Counter runtime") {
         val terminate = Oolong.runtime(
