@@ -11,15 +11,9 @@ object Oolong {
         render: Render<Props>,
         subscriptions: Subscriptions<Model, Msg> = { Effect.none() }
     ): Dispose {
-        val runtimeThread = Thread.currentThread()
         var running = true
         fun reduce(next: Next<Model, Msg>) {
             if (!running) return
-            if (Thread.currentThread() != runtimeThread) {
-                throw IllegalThreadStateException(
-                    "Dispatch function must be invoked from $runtimeThread but was invoked from ${Thread.currentThread()}."
-                )
-            }
             val (model, effect) = next
             val dispatch = { msg: Msg -> reduce(update(msg, model)) }
             render(view(model, dispatch))

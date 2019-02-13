@@ -5,7 +5,7 @@ import io.kotlintest.specs.DescribeSpec
 import kotlin.concurrent.thread
 import kotlin.test.assertFailsWith
 
-class RuntimeTest : DescribeSpec({
+class RuntimeSpec : DescribeSpec({
 
     describe("a Counter runtime") {
         val terminate = Oolong.runtime(
@@ -15,16 +15,6 @@ class RuntimeTest : DescribeSpec({
             Counter.render,
             Counter.subscriptions
         )
-
-        context("dispatch called off the main thread") {
-            it("throws an exception") {
-                thread(name = "test") {
-                    assertFailsWith<IllegalThreadStateException> {
-                        Counter.props.increment()
-                    }
-                }.join()
-            }
-        }
 
         context("an increment msg") {
             val expected = Counter.props.count + 1
