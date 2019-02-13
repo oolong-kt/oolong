@@ -1,5 +1,6 @@
 package random
 
+import javafx.application.Platform
 import javafx.scene.Parent
 import javafx.scene.control.Button
 import javafx.scene.control.Label
@@ -23,8 +24,10 @@ class RandomView : View() {
         }
 
     val render: Render<Props> = { props ->
-        faceLabel.text = "${props.dieFace}"
-        rollButton.action { props.onRoll() }
+        Platform.runLater {
+            faceLabel.text = "${props.dieFace}"
+            rollButton.action { props.onRoll() }
+        }
     }
 
 }

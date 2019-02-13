@@ -1,5 +1,6 @@
 package time
 
+import javafx.application.Platform
 import javafx.scene.Parent
 import javafx.scene.control.Label
 import oolong.Render
@@ -18,8 +19,10 @@ class TimeView : View() {
         }
 
     val render: Render<Props> = { props ->
-        val (hour, minutes, seconds) = props
-        timeLabel.text = "$hour:$minutes:$seconds"
+        Platform.runLater {
+            val (hour, minutes, seconds) = props
+            timeLabel.text = "$hour:$minutes:$seconds"
+        }
     }
 
 }
