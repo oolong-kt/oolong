@@ -4,7 +4,7 @@ import oolong.Oolong
 import tornadofx.App
 import tornadofx.find
 
-class RandomApp : App(RandomView::class) {
+class RandomApp : App(RandomView::class, Styles::class) {
 
     init {
         find(RandomView::class).run {

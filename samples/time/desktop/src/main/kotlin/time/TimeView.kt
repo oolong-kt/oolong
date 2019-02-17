@@ -1,22 +1,28 @@
 package time
 
 import javafx.application.Platform
-import javafx.scene.Parent
+import javafx.geometry.Pos
 import javafx.scene.control.Label
+import javafx.scene.layout.VBox
 import oolong.Render
 import time.Time.Props
 import tornadofx.View
 import tornadofx.label
-import tornadofx.vbox
 
 class TimeView : View() {
 
-    private lateinit var timeLabel: Label
+    override val root = VBox()
 
-    override val root: Parent =
-        vbox {
+    private val timeLabel: Label
+
+    init {
+        with(root) {
+            setPrefSize(400.0, 200.0)
+
+            alignment = Pos.CENTER
             timeLabel = label()
         }
+    }
 
     val render: Render<Props> = { props ->
         Platform.runLater {
