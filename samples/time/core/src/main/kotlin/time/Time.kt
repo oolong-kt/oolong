@@ -20,9 +20,7 @@ object Time {
     }
 
     data class Props(
-        val hour: Int,
-        val minute: Int,
-        val second: Int
+        val time: LocalDateTime
     )
 
     val init: Init<Model, Msg> = {
@@ -36,11 +34,7 @@ object Time {
     }
 
     val view: View<Model, Msg, Props> = { model, dispatch ->
-        Props(
-            model.time.hour,
-            model.time.minute,
-            model.time.second
-        )
+        Props(model.time)
     }
 
     val subscriptions: Subscriptions<Model, Msg> = { model ->

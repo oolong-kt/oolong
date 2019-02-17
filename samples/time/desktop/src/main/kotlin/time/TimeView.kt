@@ -8,6 +8,10 @@ import oolong.Render
 import time.Time.Props
 import tornadofx.View
 import tornadofx.label
+import java.time.format.DateTimeFormatterBuilder
+import java.time.temporal.ChronoField.HOUR_OF_DAY
+import java.time.temporal.ChronoField.MINUTE_OF_HOUR
+import java.time.temporal.ChronoField.SECOND_OF_MINUTE
 
 class TimeView : View() {
 
@@ -17,7 +21,7 @@ class TimeView : View() {
 
     init {
         with(root) {
-            setPrefSize(400.0, 200.0)
+            setPrefSize(200.0, 100.0)
 
             alignment = Pos.CENTER
             timeLabel = label()
@@ -26,9 +30,21 @@ class TimeView : View() {
 
     val render: Render<Props> = { props ->
         Platform.runLater {
-            val (hour, minutes, seconds) = props
-            timeLabel.text = "$hour:$minutes:$seconds"
+            timeLabel.text = props.time.format(FORMATTER)
         }
+    }
+
+    companion object {
+
+        private val FORMATTER = DateTimeFormatterBuilder()
+            .appendValue(HOUR_OF_DAY, 2)
+            .appendLiteral(':')
+            .appendValue(MINUTE_OF_HOUR, 2)
+            .optionalStart()
+            .appendLiteral(':')
+            .appendValue(SECOND_OF_MINUTE, 2)
+            .toFormatter()
+
     }
 
 }

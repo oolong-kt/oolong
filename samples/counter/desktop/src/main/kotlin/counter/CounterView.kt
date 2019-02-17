@@ -22,7 +22,7 @@ class CounterView : View() {
 
     init {
         with(root) {
-            setPrefSize(100.0, 200.0)
+            setPrefSize(100.0, 150.0)
             alignment = Pos.CENTER
             spacing = 10.0
 

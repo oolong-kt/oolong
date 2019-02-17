@@ -6,7 +6,7 @@ import tornadofx.px
 class Styles : Stylesheet() {
     init {
         label {
-            fontSize = 50.px
+            fontSize = 20.px
         }
     }
 }
