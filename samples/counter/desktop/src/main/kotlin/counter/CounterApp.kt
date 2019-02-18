@@ -4,6 +4,7 @@ import oolong.Dispose
 import oolong.JavaFX
 import tornadofx.App
 import tornadofx.find
+import tornadofx.launch
 
 class CounterApp : App(CounterView::class, Styles::class) {
 
@@ -23,6 +24,15 @@ class CounterApp : App(CounterView::class, Styles::class) {
     override fun stop() {
         dispose()
         super.stop()
+    }
+
+    companion object {
+
+        @JvmStatic
+        fun main(vararg args: String) {
+            launch<CounterApp>(*args)
+        }
+
     }
 
 }

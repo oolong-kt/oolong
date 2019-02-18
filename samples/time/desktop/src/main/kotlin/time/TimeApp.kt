@@ -4,6 +4,7 @@ import oolong.Dispose
 import oolong.JavaFX
 import tornadofx.App
 import tornadofx.find
+import tornadofx.launch
 
 class TimeApp : App(TimeView::class, Styles::class) {
 
@@ -24,6 +25,15 @@ class TimeApp : App(TimeView::class, Styles::class) {
     override fun stop() {
         dispose()
         super.stop()
+    }
+
+    companion object {
+
+        @JvmStatic
+        fun main(vararg args: String) {
+            launch<TimeApp>(*args)
+        }
+
     }
 
 }
