@@ -2,48 +2,27 @@ package oolong
 
 import com.google.common.truth.Truth.assertThat
 import io.kotlintest.specs.DescribeSpec
-import kotlin.concurrent.thread
-import kotlin.test.assertFailsWith
+import oolong.platform.Effect
 
 class RuntimeSpec : DescribeSpec({
 
-    describe("a Counter runtime") {
-        val terminate = Oolong.runtime(
-            Counter.init,
-            Counter.update,
-            Counter.view,
-            Counter.render,
-            Counter.subscriptions
-        )
+    describe("runtime") {
 
-        context("an increment msg") {
-            val expected = Counter.props.count + 1
-            Counter.props.increment()
-            val actual = Counter.props.count
-            it("increments the count") {
-                assertThat(actual).isEqualTo(expected)
-            }
+        it("should call view initially") {
+            val initialModel = 1
+            Platform.runtime(
+                { initialModel to Effect.none() },
+                { _: Unit, _: Int -> 1 to Effect.none() },
+                { model: Int, _: Dispatch<Unit> ->
+                    assertThat(model).isEqualTo(initialModel)
+                    model
+                },
+                {},
+                { Effect.none() },
+                this,
+                coroutineContext
+            )()
         }
-
-        context("a decrement msg") {
-            val expected = Counter.props.count - 1
-            Counter.props.decrement()
-            val actual = Counter.props.count
-            it("decrements the count") {
-                assertThat(actual).isEqualTo(expected)
-            }
-        }
-
-        context("termination") {
-            terminate()
-            it("stops reducing") {
-                val expected = Counter.props.count
-                Counter.props.increment()
-                val actual = Counter.props.count
-                assertThat(actual).isEqualTo(expected)
-            }
-        }
-
     }
 
 })

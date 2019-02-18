@@ -4,7 +4,8 @@ import oolong.Dispatch
 
 class Effect<Msg>(private val block: (Dispatch<Msg>) -> Unit) {
 
-    operator fun invoke(dispatch: Dispatch<Msg>) = block(dispatch)
+    operator fun invoke(dispatch: Dispatch<Msg>) =
+        block(dispatch)
 
     companion object {
 

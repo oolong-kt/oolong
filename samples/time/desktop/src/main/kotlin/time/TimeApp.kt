@@ -1,14 +1,17 @@
 package time
 
-import oolong.Oolong
+import oolong.Dispose
+import oolong.JavaFX
 import tornadofx.App
 import tornadofx.find
 
 class TimeApp : App(TimeView::class, Styles::class) {
 
+    private val dispose: Dispose
+
     init {
         find(TimeView::class).run {
-            Oolong.runtime(
+            dispose = JavaFX.runtime(
                 Time.init,
                 Time.update,
                 Time.view,
@@ -16,6 +19,11 @@ class TimeApp : App(TimeView::class, Styles::class) {
                 Time.subscriptions
             )
         }
+    }
+
+    override fun stop() {
+        dispose()
+        super.stop()
     }
 
 }

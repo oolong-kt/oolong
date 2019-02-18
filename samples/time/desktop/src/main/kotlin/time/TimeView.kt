@@ -1,6 +1,5 @@
 package time
 
-import javafx.application.Platform
 import javafx.geometry.Pos
 import javafx.scene.control.Label
 import javafx.scene.layout.VBox
@@ -29,9 +28,7 @@ class TimeView : View() {
     }
 
     val render: Render<Props> = { props ->
-        Platform.runLater {
-            timeLabel.text = props.time.format(FORMATTER)
-        }
+        timeLabel.text = props.time.format(FORMATTER)
     }
 
     companion object {

@@ -11,6 +11,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1")
 
     testImplementation("com.google.truth:truth:0.42")
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.3.20")

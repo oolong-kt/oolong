@@ -1,4 +1,7 @@
 include(":oolong")
+include(":oolong-android")
+include(":oolong-javafx")
+include(":oolong-swing")
 
 include(":samples:counter:core")
 include(":samples:counter:desktop")

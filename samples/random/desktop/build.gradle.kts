@@ -15,8 +15,9 @@ val compileKotlin by tasks.getting(KotlinJvmCompile::class) {
 }
 
 dependencies {
-    implementation(project(":oolong"))
+    implementation(project(":oolong-javafx"))
     implementation(project(":samples:random:core"))
     implementation(kotlin("stdlib"))
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-javafx:1.1.1")
     implementation("no.tornado:tornadofx:1.7.18")
 }
