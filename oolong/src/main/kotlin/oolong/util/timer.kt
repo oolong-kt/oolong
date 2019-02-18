@@ -1,81 +1,73 @@
 package oolong.util
 
-import oolong.Dispatch
-import oolong.platform.Effect
+import oolong.Effect
 import java.util.Date
-import java.util.Timer
 import java.util.TimerTask
+import kotlin.concurrent.fixedRateTimer
+import kotlin.concurrent.timer
 
 /**
- * Call [Timer.schedule] with a mapping of [Long] to [Msg].
+ * Call [timer] with a generator function of [Msg].
  *
- * @param msg map function of [Long] to [Msg]
- * @return [Effect] of [Msg] for the generated [Long]
+ * @param msg generator function of [Msg]
+ * @return [Effect] of [Msg]
  */
-fun <Msg> Timer.schedule(time: Date, msg: (Long) -> Msg) =
-    Effect<Msg> { dispatch ->
-        schedule(timerTask(dispatch, msg), time)
-    }
+fun <Msg> timer(
+    name: String? = null,
+    daemon: Boolean = false,
+    initialDelay: Long = 0.toLong(),
+    period: Long,
+    msg: () -> Msg
+): Effect<Msg> =
+    effect(msg) { action -> timer(name, daemon, initialDelay, period, action) }
 
 /**
- * Call [Timer.schedule] with a mapping of [Long] to [Msg].
+ * Call [timer] with a generator function of [Msg].
  *
- * @param msg map function of [Long] to [Msg]
- * @return [Effect] of [Msg] for the generated [Long]
+ * @param msg generator function of [Msg]
+ * @return [Effect] of [Msg]
  */
-fun <Msg> Timer.schedule(firstTime: Date, period: Long, msg: (Long) -> Msg) =
-    Effect<Msg> { dispatch ->
-        schedule(timerTask(dispatch, msg), firstTime, period)
-    }
+fun <Msg> timer(
+    name: String? = null,
+    daemon: Boolean = false,
+    startAt: Date,
+    period: Long,
+    msg: () -> Msg
+): Effect<Msg> =
+    effect(msg) { action -> timer(name, daemon, startAt, period, action) }
 
 /**
- * Call [Timer.schedule] with a mapping of [Long] to [Msg].
+ * Call [fixedRateTimer] with a generator function of [Msg].
  *
- * @param msg map function of [Long] to [Msg]
- * @return [Effect] of [Msg] for the generated [Long]
+ * @param msg generator function of [Msg]
+ * @return [Effect] of [Msg]
  */
-fun <Msg> Timer.schedule(delay: Long, msg: (Long) -> Msg) =
-    Effect<Msg> { dispatch ->
-        schedule(timerTask(dispatch, msg), delay)
-    }
+fun <Msg> fixedRateTimer(
+    name: String? = null,
+    daemon: Boolean = false,
+    initialDelay: Long = 0.toLong(),
+    period: Long,
+    msg: () -> Msg
+): Effect<Msg> =
+    effect(msg) { action -> fixedRateTimer(name, daemon, initialDelay, period, action) }
 
 /**
- * Call [Timer.schedule] with a mapping of [Long] to [Msg].
+ * Call [fixedRateTimer] with a generator function of [Msg].
  *
- * @param msg map function of [Long] to [Msg]
- * @return [Effect] of [Msg] for the generated [Long]
+ * @param msg generator function of [Msg]
+ * @return [Effect] of [Msg]
  */
-fun <Msg> Timer.schedule(delay: Long, period: Long, msg: (Long) -> Msg) =
-    Effect<Msg> { dispatch ->
-        schedule(timerTask(dispatch, msg), delay, period)
-    }
+fun <Msg> fixedRateTimer(
+    name: String? = null,
+    daemon: Boolean = false,
+    startAt: Date,
+    period: Long,
+    msg: () -> Msg
+): Effect<Msg> =
+    effect(msg) { action -> fixedRateTimer(name, daemon, startAt, period, action) }
 
-/**
- * Call [Timer.scheduleAtFixedRate] with a mapping of [Long] to [Msg].
- *
- * @param msg map function of [Long] to [Msg]
- * @return [Effect] of [Msg] for the generated [Long]
- */
-fun <Msg> Timer.scheduleAtFixedRate(firstTime: Date, period: Long, msg: (Long) -> Msg) =
-    Effect<Msg> { dispatch ->
-        scheduleAtFixedRate(timerTask(dispatch, msg), firstTime, period)
-    }
-
-/**
- * Call [Timer.scheduleAtFixedRate] with a mapping of [Long] to [Msg].
- *
- * @param msg map function of [Long] to [Msg]
- * @return [Effect] of [Msg] for the generated [Long]
- */
-fun <Msg> Timer.scheduleAtFixedRate(delay: Long, period: Long, msg: (Long) -> Msg) =
-    Effect<Msg> { dispatch ->
-        scheduleAtFixedRate(timerTask(dispatch, msg), delay, period)
-    }
-
-private fun <Msg> timerTask(dispatch: Dispatch<Msg>, msg: (Long) -> Msg): TimerTask {
-    return object : TimerTask() {
-        override fun run() {
-            dispatch(msg(System.currentTimeMillis()))
-        }
-    }
-}
+private inline fun <Msg> effect(
+    crossinline msg: () -> Msg,
+    crossinline block: (TimerTask.() -> Unit) -> Unit
+): Effect<Msg> =
+    Effect { dispatch -> block { dispatch(msg()) } }

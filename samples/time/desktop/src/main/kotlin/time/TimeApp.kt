@@ -16,8 +16,7 @@ class TimeApp : App(TimeView::class, Styles::class) {
                 Time.init,
                 Time.update,
                 Time.view,
-                render,
-                Time.subscriptions
+                render
             )
         }
     }

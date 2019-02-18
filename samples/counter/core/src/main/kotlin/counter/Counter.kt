@@ -3,7 +3,7 @@ package counter
 import oolong.Init
 import oolong.Update
 import oolong.View
-import oolong.platform.Effect
+import oolong.util.noEffect
 
 object Counter {
 
@@ -23,14 +23,14 @@ object Counter {
     )
 
     val init: Init<Model, Msg> = {
-        Model() to Effect.none()
+        Model() to noEffect()
     }
 
     val update: Update<Model, Msg> = { msg, model ->
         when (msg) {
             Msg.Increment -> model.copy(count = model.count + 1)
             Msg.Decrement -> model.copy(count = model.count - 1)
-        } to Effect.none()
+        } to noEffect()
     }
 
     val view: View<Model, Msg, Props> = { model, dispatch ->

@@ -1,13 +1,11 @@
 package time
 
 import oolong.Init
-import oolong.Subscriptions
 import oolong.Update
 import oolong.View
-import oolong.platform.Effect
-import oolong.util.schedule
+import oolong.util.fixedRateTimer
+import oolong.util.noEffect
 import java.time.LocalDateTime
-import java.util.Timer
 
 object Time {
 
@@ -24,22 +22,19 @@ object Time {
     )
 
     val init: Init<Model, Msg> = {
-        Model(LocalDateTime.now()) to Effect.none()
+        val state = Model(LocalDateTime.now())
+        val subscriptions = fixedRateTimer(period = 1000L) { Msg.Tick(LocalDateTime.now()) }
+        state to subscriptions
     }
 
     val update: Update<Model, Msg> = { msg, model ->
         when (msg) {
             is Msg.Tick -> Model(msg.time)
-        } to Effect.none()
+        } to noEffect()
     }
 
     val view: View<Model, Msg, Props> = { model, dispatch ->
         Props(model.time)
-    }
-
-    val subscriptions: Subscriptions<Model, Msg> = { model ->
-        val timer = Timer()
-        timer.schedule(1000) { Msg.Tick(LocalDateTime.now()) }
     }
 
 }

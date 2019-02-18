@@ -1,5 +1,5 @@
 package oolong
 
-import oolong.Platform.MainRuntime
+import oolong.Oolong.MainRuntime
 
 object Android : MainRuntime()

@@ -3,8 +3,9 @@ package random
 import oolong.Init
 import oolong.Update
 import oolong.View
-import oolong.platform.Effect
 import oolong.util.nextInt
+import oolong.util.noEffect
+import kotlin.random.Random
 
 object Random {
 
@@ -23,14 +24,13 @@ object Random {
     )
 
     val init: Init<Model, Msg> = {
-        Model() to Effect.none()
+        Model() to noEffect()
     }
 
     val update: Update<Model, Msg> = { msg, model ->
-        val random = java.util.Random()
         when (msg) {
-            Msg.Roll -> model to random.nextInt<Msg>(5) { Msg.NewFace(it + 1) }
-            is Msg.NewFace -> Model(msg.face) to Effect.none()
+            Msg.Roll -> model to Random.nextInt(1, 6) { Msg.NewFace(it) }
+            is Msg.NewFace -> Model(msg.face) to noEffect()
         }
     }
 
