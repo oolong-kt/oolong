@@ -12,5 +12,3 @@ dependencies {
     api(project(":oolong"))
     implementation(Dependencies.Kotlin.Coroutines.Swing)
 }
-
-apply(from = rootProject.file("gradle/gradle-mvn-push.gradle"))

@@ -1,3 +1,5 @@
+enableFeaturePreview("GRADLE_METADATA")
+
 include(":oolong")
 include(":oolong-android")
 include(":oolong-javafx")

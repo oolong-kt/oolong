@@ -24,8 +24,9 @@ object Dependencies {
             val Swing = Dependency(this, "$BASE-swing")
 
             object Core : Group(Coroutines) {
-                private const val BASE = "kotlinx-coroutines-core"
+                private const val BASE = "${Coroutines.BASE}-core"
                 val Common = Dependency(this, "$BASE-common")
+                val Native = Dependency(this, "$BASE-native")
                 override val DEFAULT = Dependency(this, BASE)
             }
         }
@@ -40,6 +41,7 @@ object Dependencies {
             private const val BASE = "kotlin-stdlib"
             val Common = Dependency(this, "$BASE-common")
             val JDK8 = Dependency(this, "$BASE-jdk8")
+            val JS = Dependency(this, "$BASE-js")
             override val DEFAULT = Dependency(this, BASE)
         }
 
@@ -53,7 +55,7 @@ object Dependencies {
     object Spek : Group("org.spekframework.spek2", "2.0.0") {
         object Dsl : Group(Spek) {
             private const val BASE = "spek-dsl"
-            val Jvm = Dependency(this, "$BASE-jvm")
+            val JVM = Dependency(this, "$BASE-jvm")
             val Metadata = Dependency(this, "$BASE-metadata")
         }
 

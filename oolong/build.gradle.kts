@@ -2,6 +2,7 @@ import oolong.Dependencies
 
 plugins {
     kotlin("multiplatform")
+    id("maven-publish")
 }
 
 repositories {
@@ -10,6 +11,7 @@ repositories {
 
 kotlin {
     jvm()
+    iosX64()
 
     sourceSets {
         val commonMain by getting {
@@ -36,13 +38,17 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(Dependencies.Kotlin.Test)
-                implementation(Dependencies.Spek.Dsl.Jvm)
-
+                implementation(Dependencies.Spek.Dsl.JVM)
                 runtimeOnly(Dependencies.Kotlin.Reflect)
                 runtimeOnly(Dependencies.Spek.Runner.JUnit5)
             }
         }
 
+        val iosX64Main by getting {
+            dependencies {
+                implementation(Dependencies.Kotlin.Coroutines.Core.Native)
+            }
+        }
     }
 }
 
