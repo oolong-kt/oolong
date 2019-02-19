@@ -22,4 +22,4 @@ fun <Msg> batchEffects(vararg effects: Effect<Msg>): Effect<Msg> =
  * @param effects a list of effects
  */
 fun <Msg> batchEffects(effects: Iterable<Effect<Msg>>): Effect<Msg> =
-    Effect { dispatch -> for (effect in effects) effect(dispatch) }
+    { dispatch -> for (effect in effects) effect(dispatch) }

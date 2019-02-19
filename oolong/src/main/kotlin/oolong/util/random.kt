@@ -269,4 +269,5 @@ fun <Msg> Random.nextULong(range: ULongRange, msg: (ULong) -> Msg): Effect<Msg> 
 private inline fun <T, Msg> effect(
     crossinline msg: (T) -> Msg,
     crossinline block: () -> T
-): Effect<Msg> = Effect { dispatch -> dispatch(msg(block())) }
+): Effect<Msg> =
+    { dispatch -> dispatch(msg(block())) }

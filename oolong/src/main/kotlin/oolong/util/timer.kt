@@ -70,4 +70,4 @@ private inline fun <Msg> effect(
     crossinline msg: () -> Msg,
     crossinline block: (TimerTask.() -> Unit) -> Unit
 ): Effect<Msg> =
-    Effect { dispatch -> block { dispatch(msg()) } }
+    { dispatch -> block { dispatch(msg()) } }

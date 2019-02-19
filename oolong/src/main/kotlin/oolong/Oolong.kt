@@ -18,7 +18,7 @@ object Oolong {
         effectContext: CoroutineContext = Dispatchers.IO,
         renderContext: CoroutineContext = effectContext
     ): Dispose {
-        val channel = Channel<Next<out Model, out Msg>>(Channel.CONFLATED)
+        val channel = Channel<Next<Model, Msg>>(Channel.CONFLATED)
         val runtimeJob = runtimeScope.launch {
             channel.send(init())
             for (next in channel) {
