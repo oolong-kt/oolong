@@ -1,3 +1,4 @@
+import oolong.Dependencies
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
@@ -10,12 +11,12 @@ repositories {
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1")
+    implementation(Dependencies.Kotlin.StdLib)
+    implementation(Dependencies.Kotlin.Coroutines)
 
-    testImplementation("com.google.truth:truth:0.42")
-    testImplementation("org.jetbrains.kotlin:kotlin-test:1.3.20")
-    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.2.1")
+    testImplementation(Dependencies.Truth)
+    testImplementation(Dependencies.Kotlin.Test)
+    testImplementation(Dependencies.KotlinTest.Runner)
 }
 
 

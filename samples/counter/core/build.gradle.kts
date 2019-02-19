@@ -1,3 +1,5 @@
+import oolong.Dependencies
+
 plugins {
     kotlin("jvm")
 }
@@ -8,5 +10,5 @@ repositories {
 
 dependencies {
     implementation(project(":oolong"))
-    implementation(kotlin("stdlib"))
+    implementation(Dependencies.Kotlin.StdLib)
 }

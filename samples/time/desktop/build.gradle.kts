@@ -1,3 +1,4 @@
+import oolong.Dependencies
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile
 
 plugins {
@@ -17,7 +18,7 @@ val compileKotlin by tasks.getting(KotlinJvmCompile::class) {
 dependencies {
     implementation(project(":oolong-javafx"))
     implementation(project(":samples:time:core"))
-    implementation(kotlin("stdlib"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-javafx:1.1.1")
-    implementation("no.tornado:tornadofx:1.7.18")
+    implementation(Dependencies.Kotlin.StdLib)
+    implementation(Dependencies.Kotlin.Coroutines.JavaFX)
+    implementation(Dependencies.TornadoFX)
 }

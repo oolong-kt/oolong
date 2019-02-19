@@ -26,7 +26,6 @@ class RandomApp : App(RandomView::class, Styles::class) {
         super.stop()
     }
 
-
     companion object {
 
         @JvmStatic

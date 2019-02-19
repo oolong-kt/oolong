@@ -1,3 +1,5 @@
+import oolong.Dependencies
+
 plugins {
     kotlin("jvm")
 }
@@ -8,7 +10,7 @@ repositories {
 
 dependencies {
     api(project(":oolong"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1")
+    implementation(Dependencies.Kotlin.Coroutines.Android)
 }
 
 apply(from = rootProject.file("gradle/gradle-mvn-push.gradle"))
