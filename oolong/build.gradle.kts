@@ -1,46 +1,55 @@
 import oolong.Dependencies
-import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    kotlin("jvm")
-    id("org.jetbrains.dokka")
+    kotlin("multiplatform")
 }
 
 repositories {
     jcenter()
 }
 
-dependencies {
-    implementation(Dependencies.Kotlin.StdLib)
-    implementation(Dependencies.Kotlin.Coroutines)
+kotlin {
+    jvm()
 
-    testImplementation(Dependencies.Truth)
-    testImplementation(Dependencies.Kotlin.Test)
-    testImplementation(Dependencies.KotlinTest.Runner)
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation(Dependencies.Kotlin.StdLib.Common)
+                implementation(Dependencies.Kotlin.Coroutines.Core.Common)
+            }
+        }
+
+        val commonTest by getting {
+            dependencies {
+                implementation(Dependencies.Kotlin.Test.Common)
+                implementation(Dependencies.Spek.Dsl.Metadata)
+            }
+        }
+
+        val jvmMain by getting {
+            dependencies {
+                implementation(Dependencies.Kotlin.StdLib.JDK8)
+                implementation(Dependencies.Kotlin.Coroutines.Core)
+            }
+        }
+
+        val jvmTest by getting {
+            dependencies {
+                implementation(Dependencies.Kotlin.Test)
+                implementation(Dependencies.Spek.Dsl.Jvm)
+
+                runtimeOnly(Dependencies.Kotlin.Reflect)
+                runtimeOnly(Dependencies.Spek.Runner.JUnit5)
+            }
+        }
+
+    }
 }
-
 
 tasks {
-    getting(Test::class) {
-        useJUnitPlatform()
-    }
-
-    val dokka by getting(DokkaTask::class) {
-        outputFormat = "gfm"
-        outputDirectory = "docs"
-
-        includes = listOf("src/main/Module.md")
-
-//        linkMapping {
-//            dir = "${projectDir}/src/main/kotlin"
-//            url = "https://github.com/pardom/oolong/tree/master/oolong/src/main/kotlin"
-//            suffix = "#L"
-//        }
-    }
-
-    getting(GradleBuild::class) {
-        dependsOn(dokka)
+    val jvmTest by getting(Test::class) {
+        useJUnitPlatform {
+            includeEngines("spek2")
+        }
     }
 }
-
-apply(from = rootProject.file("gradle/gradle-mvn-push.gradle"))

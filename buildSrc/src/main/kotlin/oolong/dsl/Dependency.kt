@@ -1,4 +1,4 @@
-package oolong
+package oolong.dsl
 
 class Dependency(
     private val group: Group,
@@ -19,10 +19,10 @@ class Dependency(
 
         constructor(parent: Group) : this(parent.id, parent.version)
 
-        open val DEFAULT: Artifact? = null
+        open val DEFAULT: Dependency? = null
 
         final override fun toString(): String {
-            return DEFAULT?.let { Dependency(this, it).toString() } ?: id
+            return DEFAULT?.toString() ?: id
         }
 
     }
