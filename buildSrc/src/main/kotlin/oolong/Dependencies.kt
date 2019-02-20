@@ -37,6 +37,12 @@ object Dependencies {
             }
         }
 
+        object Html : Group("org.jetbrains.kotlinx", "0.6.10") {
+            private const val BASE = "kotlinx-html"
+            val JS = Dependency(this, "$BASE-js")
+            val JVM = Dependency(this, "$BASE-jvm")
+        }
+
         object StdLib : Group(Kotlin) {
             private const val BASE = "kotlin-stdlib"
             val Common = Dependency(this, "$BASE-common")

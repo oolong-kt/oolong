@@ -3,27 +3,27 @@ package time
 import oolong.Init
 import oolong.Update
 import oolong.View
-import oolong.util.fixedRateTimer
+import oolong.util.interval
 import oolong.util.noEffect
-import java.time.LocalDateTime
 
 object Time {
 
     data class Model(
-        val time: LocalDateTime
+        val time: Long
     )
 
     sealed class Msg {
-        data class Tick(val time: LocalDateTime) : Msg()
+        data class Tick(val time: Long) : Msg()
     }
 
     data class Props(
-        val time: LocalDateTime
+        val time: Long
     )
 
     val init: Init<Model, Msg> = {
-        val state = Model(LocalDateTime.now())
-        val subscriptions = fixedRateTimer(period = 1000L) { Msg.Tick(LocalDateTime.now()) }
+        // TODO: multiplatform function to get current time
+        val state = Model(0)
+        val subscriptions = interval<Msg>(1000L) { Msg.Tick(0) }
         state to subscriptions
     }
 

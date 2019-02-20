@@ -21,18 +21,21 @@ kotlin {
             dependencies {
                 implementation(project(":oolong"))
                 implementation(Dependencies.Kotlin.StdLib.Common)
+                implementation(Dependencies.Kotlin.Coroutines.Core.Common)
             }
         }
 
         val jsMain by getting {
             dependencies {
                 implementation(Dependencies.Kotlin.StdLib.JS)
+                implementation(Dependencies.Kotlin.Coroutines.Core.JS)
             }
         }
 
         val jvmMain by getting {
             dependencies {
                 implementation(Dependencies.Kotlin.StdLib.JDK8)
+                implementation(Dependencies.Kotlin.Coroutines.Core)
             }
         }
     }
