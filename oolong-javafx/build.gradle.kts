@@ -12,5 +12,3 @@ dependencies {
     api(project(":oolong"))
     implementation(Dependencies.Kotlin.Coroutines.JavaFX)
 }
-
-apply(from = rootProject.file("gradle/gradle-mvn-push.gradle"))

@@ -15,7 +15,7 @@ object Oolong {
         view: View<Model, Msg, Props>,
         render: Render<Props>,
         runtimeScope: CoroutineScope = GlobalScope,
-        effectContext: CoroutineContext = Dispatchers.IO,
+        effectContext: CoroutineContext = Dispatchers.Default,
         renderContext: CoroutineContext = effectContext
     ): Dispose {
         val channel = Channel<Next<out Model, out Msg>>(Channel.CONFLATED)
@@ -48,7 +48,7 @@ object Oolong {
             view: View<Model, Msg, Props>,
             render: Render<Props>,
             runtimeScope: CoroutineScope = GlobalScope,
-            effectContext: CoroutineContext = Dispatchers.IO
+            effectContext: CoroutineContext = Dispatchers.Default
         ) = Oolong.runtime(
             init,
             update,
