@@ -1,7 +1,6 @@
 buildscript {
     repositories {
         jcenter()
-        google()
     }
     dependencies {
         classpath(oolong.Dependencies.Kotlin.Gradle.Plugin)

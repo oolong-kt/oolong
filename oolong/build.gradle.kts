@@ -10,8 +10,12 @@ repositories {
 }
 
 kotlin {
+    js()
     jvm()
-    iosX64()
+    iosX64("ios")
+    linuxX64("linux")
+    macosX64("macOS")
+    mingwX64("windows")
 
     sourceSets {
         val commonMain by getting {
@@ -24,7 +28,20 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(Dependencies.Kotlin.Test.Common)
-                implementation(Dependencies.Spek.Dsl.Metadata)
+                implementation(Dependencies.Kotlin.Test.AnnotationsCommon)
+            }
+        }
+
+        val jsMain by getting {
+            dependencies {
+                implementation(Dependencies.Kotlin.StdLib.JS)
+                implementation(Dependencies.Kotlin.Coroutines.Core.JS)
+            }
+        }
+
+        val jsTest by getting {
+            dependencies {
+                implementation(Dependencies.Kotlin.Test.JS)
             }
         }
 
@@ -38,24 +55,32 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(Dependencies.Kotlin.Test)
-                implementation(Dependencies.Spek.Dsl.JVM)
-                runtimeOnly(Dependencies.Kotlin.Reflect)
-                runtimeOnly(Dependencies.Spek.Runner.JUnit5)
+                implementation(Dependencies.Kotlin.Test.JUnit5)
             }
         }
 
-        val iosX64Main by getting {
+        val iosMain by getting {
             dependencies {
                 implementation(Dependencies.Kotlin.Coroutines.Core.Native)
             }
         }
-    }
-}
 
-tasks {
-    val jvmTest by getting(Test::class) {
-        useJUnitPlatform {
-            includeEngines("spek2")
+        val linuxMain by getting {
+            dependencies {
+                implementation(Dependencies.Kotlin.Coroutines.Core.Native)
+            }
+        }
+
+        val macOSMain by getting {
+            dependencies {
+                implementation(Dependencies.Kotlin.Coroutines.Core.Native)
+            }
+        }
+
+        val windowsMain by getting {
+            dependencies {
+                implementation(Dependencies.Kotlin.Coroutines.Core.Native)
+            }
         }
     }
 }
