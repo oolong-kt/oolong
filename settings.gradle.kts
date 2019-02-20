@@ -6,10 +6,10 @@ include(":oolong-javafx")
 include(":oolong-swing")
 
 include(":samples:counter:core")
-include(":samples:counter:desktop")
+include(":samples:counter:javafx")
 
 include(":samples:random:core")
-include(":samples:random:desktop")
+include(":samples:random:javafx")
 
 include(":samples:time:core")
-include(":samples:time:desktop")
+include(":samples:time:javafx")
