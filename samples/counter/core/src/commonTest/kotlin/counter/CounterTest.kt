@@ -6,7 +6,7 @@ import kotlin.test.assertEquals
 class CounterTest {
 
     @Test
-    fun `increment messages adds 1 to count`() {
+    fun increment_messages_adds_1_to_count() {
         val (state, _) = Counter.update(
             Counter.Msg.Increment,
             Counter.Model()
@@ -15,7 +15,7 @@ class CounterTest {
     }
 
     @Test
-    fun `decrement messages subtracts 1 from count`() {
+    fun decrement_messages_subtracts_1_from_count() {
         val (state, _) = Counter.update(
             Counter.Msg.Decrement,
             Counter.Model()

@@ -36,6 +36,12 @@ kotlin {
                 implementation(Dependencies.Kotlin.StdLib.JS)
             }
         }
+        
+        val jsTest by getting {
+            dependencies {
+                implementation(Dependencies.Kotlin.Test.JS)
+            }
+        }
 
         val jvmMain by getting {
             dependencies {
