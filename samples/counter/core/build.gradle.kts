@@ -24,6 +24,13 @@ kotlin {
             }
         }
 
+        val commonTest by getting {
+            dependencies {
+                implementation(Dependencies.Kotlin.Test.Common)
+                implementation(Dependencies.Kotlin.Test.AnnotationsCommon)
+            }
+        }
+
         val jsMain by getting {
             dependencies {
                 implementation(Dependencies.Kotlin.StdLib.JS)
@@ -33,6 +40,13 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(Dependencies.Kotlin.StdLib.JDK8)
+            }
+        }
+
+        val jvmTest by getting {
+            dependencies {
+                implementation(Dependencies.Kotlin.Test)
+                implementation(Dependencies.Kotlin.Test.JUnit5)
             }
         }
     }
