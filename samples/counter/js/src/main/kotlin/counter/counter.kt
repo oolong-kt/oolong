@@ -31,9 +31,9 @@ private val render = { props: Counter.Props ->
 
 fun main() {
     Oolong.runtime(
-            Counter.init,
-            Counter.update,
-            Counter.view,
-            render
+        Counter.init,
+        Counter.update,
+        Counter.view,
+        render
     )
 }

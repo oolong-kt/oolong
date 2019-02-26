@@ -19,9 +19,9 @@ private val render = { props: Time.Props ->
 
 fun main() {
     Oolong.runtime(
-            Time.init,
-            Time.update,
-            Time.view,
-            render
+        Time.init,
+        Time.update,
+        Time.view,
+        render
     )
 }

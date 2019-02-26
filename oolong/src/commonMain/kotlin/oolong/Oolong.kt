@@ -9,34 +9,34 @@ import kotlin.coroutines.CoroutineContext
 object Oolong {
 
     fun <Model, Msg, Props> runtime(
-            init: Init<Model, Msg>,
-            update: Update<Model, Msg>,
-            view: View<Model, Msg, Props>,
-            render: Render<Props>,
-            runtimeScope: CoroutineScope = GlobalScope,
-            effectContext: CoroutineContext = Dispatchers.Default,
-            renderContext: CoroutineContext = effectContext
+        init: Init<Model, Msg>,
+        update: Update<Model, Msg>,
+        view: View<Model, Msg, Props>,
+        render: Render<Props>,
+        runtimeScope: CoroutineScope = GlobalScope,
+        effectContext: CoroutineContext = Dispatchers.Default,
+        renderContext: CoroutineContext = effectContext
     ): Dispose {
         val runtime = Runtime(
-                init,
-                update,
-                view,
-                render,
-                runtimeScope,
-                effectContext,
-                renderContext
+            init,
+            update,
+            view,
+            render,
+            runtimeScope,
+            effectContext,
+            renderContext
         )
         return { runtime.dispose() }
     }
 
     private class Runtime<Model, Msg, Props>(
-            init: Init<Model, Msg>,
-            private val update: Update<Model, Msg>,
-            private val view: View<Model, Msg, Props>,
-            private val render: Render<Props>,
-            runtimeScope: CoroutineScope = GlobalScope,
-            private val effectContext: CoroutineContext = Dispatchers.Default,
-            private val renderContext: CoroutineContext = effectContext
+        init: Init<Model, Msg>,
+        private val update: Update<Model, Msg>,
+        private val view: View<Model, Msg, Props>,
+        private val render: Render<Props>,
+        runtimeScope: CoroutineScope = GlobalScope,
+        private val effectContext: CoroutineContext = Dispatchers.Default,
+        private val renderContext: CoroutineContext = effectContext
     ) : CoroutineScope by runtimeScope {
 
         private var running = true
@@ -70,20 +70,20 @@ object Oolong {
     abstract class MainRuntime {
 
         fun <Model, Msg, Props> runtime(
-                init: Init<Model, Msg>,
-                update: Update<Model, Msg>,
-                view: View<Model, Msg, Props>,
-                render: Render<Props>,
-                runtimeScope: CoroutineScope = GlobalScope,
-                effectContext: CoroutineContext = Dispatchers.Default
+            init: Init<Model, Msg>,
+            update: Update<Model, Msg>,
+            view: View<Model, Msg, Props>,
+            render: Render<Props>,
+            runtimeScope: CoroutineScope = GlobalScope,
+            effectContext: CoroutineContext = Dispatchers.Default
         ) = Oolong.runtime(
-                init,
-                update,
-                view,
-                render,
-                runtimeScope,
-                effectContext,
-                Dispatchers.Main
+            init,
+            update,
+            view,
+            render,
+            runtimeScope,
+            effectContext,
+            Dispatchers.Main
         )
 
     }

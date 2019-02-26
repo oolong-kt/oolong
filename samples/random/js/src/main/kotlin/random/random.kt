@@ -26,9 +26,9 @@ private val render = { props: Random.Props ->
 
 fun main() {
     Oolong.runtime(
-            Random.init,
-            Random.update,
-            Random.view,
-            render
+        Random.init,
+        Random.update,
+        Random.view,
+        render
     )
 }
