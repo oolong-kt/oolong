@@ -28,7 +28,7 @@ class TimeView : View() {
         }
     }
 
-    val render: Render<Props> = { props ->
+    val render: Render<Props> = { _ ->
         // timeLabel.text = props.time.format(FORMATTER)
         timeLabel.text = LocalDateTime.now().format(FORMATTER)
     }

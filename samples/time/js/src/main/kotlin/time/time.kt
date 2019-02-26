@@ -7,7 +7,7 @@ import kotlin.browser.document
 import kotlin.dom.clear
 import kotlin.js.Date
 
-private val render = { props: Time.Props ->
+private val render = { _: Time.Props ->
     with(document.getElementById("container")!!) {
         clear()
         append {

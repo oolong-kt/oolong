@@ -27,13 +27,13 @@ object Time {
         state to subscriptions
     }
 
-    val update: Update<Model, Msg> = { msg, model ->
+    val update: Update<Model, Msg> = { msg, _ ->
         when (msg) {
             is Msg.Tick -> Model(msg.time)
         } to noEffect()
     }
 
-    val view: View<Model, Msg, Props> = { model, dispatch ->
+    val view: View<Model, Msg, Props> = { model, _ ->
         Props(model.time)
     }
 
