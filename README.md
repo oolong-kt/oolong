@@ -6,11 +6,7 @@
 Oolong 🍵 
 =========
 
-TEA for Kotiln.
-
-A Kotlin port of [The Elm Architecture][1] aka Model View Update (MVU) architecture.
-
-[documentation][3]
+MVU for Kotiln multiplatform.
 
 Download
 --------
