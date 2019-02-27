@@ -23,14 +23,14 @@ object Counter {
     )
 
     val init: Init<Model, Msg> = {
-        Model() to noEffect()
+        Model() to { _ -> }
     }
 
     val update: Update<Model, Msg> = { msg, model ->
         when (msg) {
             Msg.Increment -> model.copy(count = model.count + 1)
             Msg.Decrement -> model.copy(count = model.count - 1)
-        } to noEffect()
+        } to { _ -> }
     }
 
     val view: View<Model, Msg, Props> = { model, dispatch ->

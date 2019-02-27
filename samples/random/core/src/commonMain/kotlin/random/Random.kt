@@ -24,13 +24,13 @@ object Random {
     )
 
     val init: Init<Model, Msg> = {
-        Model() to noEffect()
+        Model() to { _ -> }
     }
 
     val update: Update<Model, Msg> = { msg, model ->
         when (msg) {
             Msg.Roll -> model to Random.nextInt(1, 6) { Msg.NewFace(it) }
-            is Msg.NewFace -> Model(msg.face) to noEffect()
+            is Msg.NewFace -> Model(msg.face) to { _ -> }
         }
     }
 

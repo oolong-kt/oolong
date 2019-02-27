@@ -9,7 +9,7 @@ import oolong.Dispatch
 import oolong.Effect
 
 fun <Msg> timeout(period: Long, scope: CoroutineScope = GlobalScope, msg: () -> Msg): Effect<Msg> {
-    return Effect { dispatch: Dispatch<Msg> ->
+    return { dispatch: Dispatch<Msg> ->
         scope.launch {
             delay(period)
             dispatch(msg())
@@ -23,7 +23,7 @@ fun <Msg> interval(
     scope: CoroutineScope = GlobalScope,
     msg: () -> Msg
 ): Effect<Msg> {
-    return Effect { dispatch: Dispatch<Msg> ->
+    return { dispatch: Dispatch<Msg> ->
         scope.launch {
             delay(initialDelay)
             while (isActive) {

@@ -1,10 +1,10 @@
 package time
 
 import oolong.Init
+import oolong.Next
 import oolong.Update
 import oolong.View
 import oolong.util.interval
-import oolong.util.noEffect
 
 object Time {
 
@@ -24,13 +24,13 @@ object Time {
         // TODO: multiplatform function to get current time
         val state = Model(0)
         val subscriptions = interval<Msg>(1000L) { Msg.Tick(0) }
-        state to subscriptions
+        (state to subscriptions) as Next<Model, Msg>
     }
 
     val update: Update<Model, Msg> = { msg, _ ->
         when (msg) {
             is Msg.Tick -> Model(msg.time)
-        } to noEffect()
+        } to { _ -> }
     }
 
     val view: View<Model, Msg, Props> = { model, _ ->
