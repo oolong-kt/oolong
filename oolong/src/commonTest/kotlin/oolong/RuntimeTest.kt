@@ -3,6 +3,7 @@ package oolong
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Runnable
+import oolong.util.withoutEffects
 import kotlin.coroutines.CoroutineContext
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -20,8 +21,8 @@ class RuntimeTest {
     fun runtime_should_call_render_initially() {
         val initialState = 1
         testRuntime(
-            { initialState to { _ -> } },
-            { _: Unit, model: Int -> model to { _ -> } },
+            withoutEffects { -> initialState },
+            withoutEffects { _: Unit, model: Int -> model },
             { model: Int, _: Dispatch<Unit> -> model },
             { props: Int -> assertEquals(initialState, props) }
         )
@@ -31,8 +32,8 @@ class RuntimeTest {
     fun runtime_should_call_render_after_dispatch() {
         var count = 0
         testRuntime(
-            { "init" to { _ -> } },
-            { msg: String, _: String -> msg to { _ -> } },
+            withoutEffects { -> "init" },
+            withoutEffects { msg: String, _: String -> msg },
             { model: String, dispatch: Dispatch<String> -> model to dispatch },
             { (model: String, dispatch: Dispatch<String>) ->
                 count++
@@ -55,7 +56,7 @@ class RuntimeTest {
     fun runtime_should_not_call_update_view_render_if_disposed() {
         var initialRender = true
         testRuntime(
-            { "state" to { _ -> } },
+            withoutEffects { -> "state" },
             { msg: String, _: String -> msg to { dispatch -> dispatch("next") } },
             { model: String, _: Dispatch<String> -> model },
             {

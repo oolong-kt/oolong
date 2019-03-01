@@ -4,6 +4,7 @@ import oolong.Init
 import oolong.Update
 import oolong.View
 import oolong.util.noEffect
+import oolong.util.withoutEffects
 
 object Counter {
 
@@ -22,15 +23,15 @@ object Counter {
         val onDecrement: () -> Unit
     )
 
-    val init: Init<Model, Msg> = {
-        Model() to { _ -> }
+    val init: Init<Model, Msg> = withoutEffects { ->
+        Model()
     }
 
-    val update: Update<Model, Msg> = { msg, model ->
+    val update: Update<Model, Msg> = withoutEffects { msg, model ->
         when (msg) {
             Msg.Increment -> model.copy(count = model.count + 1)
             Msg.Decrement -> model.copy(count = model.count - 1)
-        } to { _ -> }
+        }
     }
 
     val view: View<Model, Msg, Props> = { model, dispatch ->

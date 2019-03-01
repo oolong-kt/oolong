@@ -7,7 +7,6 @@ package oolong
  */
 typealias Dispatch<Msg> = (msg: Msg) -> Unit
 
-
 /**
  * Runs a side-effect away from the runtime
  *

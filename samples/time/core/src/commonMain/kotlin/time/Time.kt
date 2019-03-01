@@ -5,6 +5,8 @@ import oolong.Next
 import oolong.Update
 import oolong.View
 import oolong.util.interval
+import oolong.util.noEffect
+import oolong.util.withoutEffects
 
 object Time {
 
@@ -27,10 +29,10 @@ object Time {
         (state to subscriptions) as Next<Model, Msg>
     }
 
-    val update: Update<Model, Msg> = { msg, _ ->
+    val update: Update<Model, Msg> = withoutEffects { msg, _ ->
         when (msg) {
             is Msg.Tick -> Model(msg.time)
-        } to { _ -> }
+        }
     }
 
     val view: View<Model, Msg, Props> = { model, _ ->

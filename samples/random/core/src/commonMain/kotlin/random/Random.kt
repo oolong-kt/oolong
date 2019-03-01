@@ -5,6 +5,7 @@ import oolong.Update
 import oolong.View
 import oolong.util.nextInt
 import oolong.util.noEffect
+import oolong.util.withoutEffects
 import kotlin.random.Random
 
 object Random {
@@ -23,14 +24,14 @@ object Random {
         val onRoll: () -> Unit
     )
 
-    val init: Init<Model, Msg> = {
-        Model() to { _ -> }
+    val init: Init<Model, Msg> = withoutEffects { ->
+        Model()
     }
 
     val update: Update<Model, Msg> = { msg, model ->
         when (msg) {
             Msg.Roll -> model to Random.nextInt(1, 6) { Msg.NewFace(it) }
-            is Msg.NewFace -> Model(msg.face) to { _ -> }
+            is Msg.NewFace -> Model(msg.face) to noEffect()
         }
     }
 
