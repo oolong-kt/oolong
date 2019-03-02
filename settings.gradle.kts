@@ -16,5 +16,6 @@ include(":samples:random:javafx")
 include(":samples:random:js")
 
 include(":samples:time:core")
+include(":samples:time:android")
 include(":samples:time:javafx")
 include(":samples:time:js")
