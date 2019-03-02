@@ -11,6 +11,7 @@ include(":samples:counter:javafx")
 include(":samples:counter:js")
 
 include(":samples:random:core")
+include(":samples:random:android")
 include(":samples:random:javafx")
 include(":samples:random:js")
 
