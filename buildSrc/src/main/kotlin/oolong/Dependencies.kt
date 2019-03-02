@@ -5,11 +5,23 @@ import oolong.dsl.Dependency.Group
 
 object Dependencies {
 
-    object Dokka : Group("org.jetbrains.dokka", "0.9.17") {
-        object Gradle : Group(Dokka) {
-            object Plugin : Group(Gradle) {
-                override val DEFAULT = Dependency(this, "dokka-gradle-plugin")
+    object Android : Group("") {
+
+        object Gradle : Group("com.android.tools.build", "3.3.0") {
+            val Plugin = Dependency(this, "gradle")
+        }
+
+        object X : Group("") {
+            object AppCompat : Group("androidx.appcompat", "1.0.0") {
+                override val DEFAULT = Dependency(this, "appcompat")
             }
+
+        }
+    }
+
+    object Dokka : Group("org.jetbrains.dokka", "0.9.17") {
+        object Gradle : Group(this) {
+            val Plugin = Dependency(this, "dokka-gradle-plugin")
         }
     }
 
@@ -22,7 +34,7 @@ object Dependencies {
             val JavaFX = Dependency(this, "$BASE-javafx")
             val Swing = Dependency(this, "$BASE-swing")
 
-            object Core : Group(Coroutines) {
+            object Core : Group(this) {
                 private const val BASE = "${Coroutines.BASE}-core"
                 val Common = Dependency(this, "$BASE-common")
                 val JS = Dependency(this, "$BASE-js")
@@ -31,10 +43,8 @@ object Dependencies {
             }
         }
 
-        object Gradle : Group(Kotlin) {
-            object Plugin : Group(Gradle) {
-                override val DEFAULT = Dependency(this, "kotlin-gradle-plugin")
-            }
+        object Gradle : Group(this) {
+            val Plugin = Dependency(this, "kotlin-gradle-plugin")
         }
 
         object Html : Group("org.jetbrains.kotlinx", "0.6.10") {
@@ -43,7 +53,7 @@ object Dependencies {
             val JVM = Dependency(this, "$BASE-jvm")
         }
 
-        object StdLib : Group(Kotlin) {
+        object StdLib : Group(this) {
             private const val BASE = "kotlin-stdlib"
             val Common = Dependency(this, "$BASE-common")
             val JDK8 = Dependency(this, "$BASE-jdk8")
@@ -51,7 +61,7 @@ object Dependencies {
             override val DEFAULT = Dependency(this, BASE)
         }
 
-        object Test : Group(Kotlin) {
+        object Test : Group(this) {
             private const val BASE = "kotlin-test"
             val AnnotationsCommon = Dependency(this, "$BASE-annotations-common")
             val Common = Dependency(this, "$BASE-common")

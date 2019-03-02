@@ -6,6 +6,7 @@ include(":oolong-javafx")
 include(":oolong-swing")
 
 include(":samples:counter:core")
+include(":samples:counter:android")
 include(":samples:counter:javafx")
 include(":samples:counter:js")
 

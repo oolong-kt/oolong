@@ -11,7 +11,6 @@ class Dependency(
         version: String = group.id
     ) : this(group, Artifact(artifactId, version))
 
-
     abstract class Group(
         val id: String,
         val version: String? = null
