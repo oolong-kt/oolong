@@ -3,8 +3,7 @@ package counter
 import oolong.Init
 import oolong.Update
 import oolong.View
-import oolong.util.noEffect
-import oolong.util.withoutEffects
+import oolong.util.effect.withoutEffects
 
 object Counter {
 

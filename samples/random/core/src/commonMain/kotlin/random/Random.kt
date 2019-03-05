@@ -3,9 +3,9 @@ package random
 import oolong.Init
 import oolong.Update
 import oolong.View
-import oolong.util.nextInt
-import oolong.util.noEffect
-import oolong.util.withoutEffects
+import oolong.util.effect.noEffect
+import oolong.util.effect.withoutEffects
+import oolong.util.random.nextInt
 import kotlin.random.Random
 
 object Random {

@@ -16,7 +16,6 @@ val compileKotlin by tasks.getting(KotlinJvmCompile::class) {
 }
 
 dependencies {
-    implementation(project(":oolong"))
     implementation(project(":samples:time:core"))
     implementation(Dependencies.Kotlin.StdLib)
     implementation(Dependencies.Kotlin.Coroutines.JavaFX)

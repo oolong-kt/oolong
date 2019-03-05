@@ -48,7 +48,7 @@ typealias View<Model, Msg, Props> = (model: Model, dispatch: Dispatch<Msg>) -> P
 typealias Render<Props> = (props: Props) -> Unit
 
 /**
- * Stops the runtime and cleans up resources
+ * Stops the function and cleans up resources
  */
 typealias Dispose = () -> Unit
 

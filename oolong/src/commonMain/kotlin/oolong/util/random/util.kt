@@ -1,4 +1,4 @@
-package oolong.util
+package oolong.util.random
 
 import oolong.Effect
 import kotlin.random.Random

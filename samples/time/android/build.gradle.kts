@@ -22,7 +22,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":oolong"))
     implementation(project(":samples:time:core"))
     implementation(Dependencies.Kotlin.StdLib)
     implementation(Dependencies.Kotlin.Coroutines.Android)

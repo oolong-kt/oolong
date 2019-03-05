@@ -4,9 +4,8 @@ import oolong.Init
 import oolong.Next
 import oolong.Update
 import oolong.View
-import oolong.util.interval
-import oolong.util.noEffect
-import oolong.util.withoutEffects
+import oolong.util.delay.interval
+import oolong.util.effect.withoutEffects
 
 object Time {
 
@@ -26,7 +25,7 @@ object Time {
         // TODO: multiplatform function to get current time
         val state = Model(0)
         val subscriptions = interval<Msg>(1000L) { Msg.Tick(0) }
-        (state to subscriptions) as Next<Model, Msg>
+        (state to subscriptions.first) as Next<Model, Msg>
     }
 
     val update: Update<Model, Msg> = withoutEffects { msg, _ ->

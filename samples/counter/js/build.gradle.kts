@@ -9,7 +9,6 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":oolong"))
     implementation(project(":samples:counter:core"))
     implementation(Dependencies.Kotlin.Coroutines.Core.JS)
     implementation(Dependencies.Kotlin.Html.JS)

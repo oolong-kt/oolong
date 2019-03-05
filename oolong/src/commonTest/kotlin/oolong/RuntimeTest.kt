@@ -3,7 +3,7 @@ package oolong
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Runnable
-import oolong.util.withoutEffects
+import oolong.util.effect.withoutEffects
 import kotlin.coroutines.CoroutineContext
 import kotlin.test.Test
 import kotlin.test.assertEquals
