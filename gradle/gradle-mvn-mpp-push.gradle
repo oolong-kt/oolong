@@ -4,8 +4,6 @@ apply plugin: 'org.jetbrains.dokka'
 
 dokka {
     impliedPlatforms = ["Common"] // This will force platform tags for all non-common sources e.g. "JVM"
-    outputFormat = "gfm"
-    outputDirectory = "$rootDir/docs"
     kotlinTasks {
         // dokka fails to retrieve sources from MPP-tasks so they must be set empty to avoid exception
         // use sourceRoot instead (see below)
@@ -21,11 +19,26 @@ dokka {
         url = "https://github.com/pardom/oolong/tree/master/oolong/src/commonMain/kotlin"
         suffix = "#L"
     }
-    externalDocumentationLink {
-        url = new URL("https://kotlinlang.org/api/latest/jvm/stdlib/")
+    if (kotlin.sourceSets.getNames().contains("jvmMain")) {
+        sourceRoot {
+            // assuming there is only a single source dir...
+            path = kotlin.sourceSets.jvmMain.kotlin.srcDirs[0]
+            platforms = ["JVM"]
+        }
     }
-    externalDocumentationLink {
-        url = new URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/")
+    if (kotlin.sourceSets.getNames().contains("jsMain")) {
+        sourceRoot {
+            // assuming there is only a single source dir...
+            path = kotlin.sourceSets.jsMain.kotlin.srcDirs[0]
+            platforms = ["js"]
+        }
+    }
+    if (kotlin.sourceSets.getNames().contains("nativeMain")) {
+        sourceRoot {
+            // assuming there is only a single source dir...
+            path = kotlin.sourceSets.nativeMain.kotlin.srcDirs[0]
+            platforms = ["native"]
+        }
     }
 }
 
@@ -97,14 +110,6 @@ publishing {
                     }
                 }
             }
-        }
-    }
-
-    // Use default artifact name for the JVM target until we start publishing artifacts for all
-    // platforms
-    publications {
-        jvm {
-            artifactId = 'okio'
         }
     }
 
