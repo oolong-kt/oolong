@@ -88,3 +88,5 @@ kotlin {
 configurations {
     create("compileClasspath")
 }
+
+apply("$rootDir/gradle/gradle-mvn-mpp-push.gradle")

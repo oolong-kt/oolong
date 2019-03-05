@@ -1,4 +1,4 @@
-[oolong](../index.md) / [oolong.util](index.md) / [nextUBytes](./next-u-bytes.md)
+[oolong](../index.md) / [oolong.util.random](index.md) / [nextUBytes](./next-u-bytes.md)
 
 # nextUBytes
 

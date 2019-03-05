@@ -1,4 +1,4 @@
-[oolong](../index.md) / [oolong.util](index.md) / [nextFloat](./next-float.md)
+[oolong](../index.md) / [oolong.util.random](index.md) / [nextFloat](./next-float.md)
 
 # nextFloat
 

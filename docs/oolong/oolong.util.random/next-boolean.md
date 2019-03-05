@@ -1,4 +1,4 @@
-[oolong](../index.md) / [oolong.util](index.md) / [nextBoolean](./next-boolean.md)
+[oolong](../index.md) / [oolong.util.random](index.md) / [nextBoolean](./next-boolean.md)
 
 # nextBoolean
 

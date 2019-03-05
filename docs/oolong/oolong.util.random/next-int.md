@@ -1,4 +1,4 @@
-[oolong](../index.md) / [oolong.util](index.md) / [nextInt](./next-int.md)
+[oolong](../index.md) / [oolong.util.random](index.md) / [nextInt](./next-int.md)
 
 # nextInt
 

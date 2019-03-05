@@ -1,4 +1,4 @@
-[oolong](../index.md) / [oolong.util](index.md) / [nextBits](./next-bits.md)
+[oolong](../index.md) / [oolong.util.random](index.md) / [nextBits](./next-bits.md)
 
 # nextBits
 
