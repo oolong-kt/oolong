@@ -1,13 +1,15 @@
 
 
-## Oolong
-
 ### All Types
 
 | Name | Summary |
 |---|---|
-| [oolong.platform.Effect](../oolong.platform/-cmd/index.md) |  |
-| [oolong.Dispatch](../oolong/-dispatch.md) |  |
-| [java.util.Random](../oolong.util/java.util.-random/index.md) (extensions in package oolong.util) |  |
-| [oolong.platform.Sub](../oolong.platform/-sub/index.md) |  |
-| [java.util.Timer](../oolong.util/java.util.-timer/index.md) (extensions in package oolong.util) |  |
+| [oolong.Dispatch](../oolong/-dispatch.md) | Dispatches a message to the runtime |
+| [oolong.Dispose](../oolong/-dispose.md) | Stops the runtime and cleans up resources |
+| [oolong.Effect](../oolong/-effect.md) | Runs a side-effect away from the runtime |
+| [oolong.Init](../oolong/-init.md) | Creates an initial state and side-effects |
+| [oolong.Next](../oolong/-next.md) | A pair of the next state and side-effects |
+| [oolong.Oolong](../oolong/-oolong/index.md) |  |
+| [oolong.Render](../oolong/-render.md) | Renders the view properties |
+| [oolong.Update](../oolong/-update.md) | Creates a next state and side-effects from a message and current state |
+| [oolong.View](../oolong/-view.md) | Creates view properties from the current state |

@@ -2,4 +2,10 @@
 
 # Dispatch
 
-`typealias Dispatch<Msg> = (`[`Msg`](-dispatch.md#Msg)`) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/pardom/oolong/tree/master/oolong/src/main/kotlin/oolong/runtime.kt#L6)
+`typealias Dispatch<Msg> = (msg: `[`Msg`](-dispatch.md#Msg)`) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+Dispatches a message to the runtime
+
+### Parameters
+
+`msg` - the message to send
