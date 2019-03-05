@@ -52,7 +52,7 @@ private inline fun <Msg> delayed(
                 while (supervisor.isActive) {
                     delay(delay)
                     with(supervisor) {
-                        if (supervisor.isActive) {
+                        if (isActive) {
                             launch { block(dispatch) }
                         }
                     }
