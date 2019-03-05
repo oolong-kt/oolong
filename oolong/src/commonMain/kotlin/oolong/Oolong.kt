@@ -8,6 +8,9 @@ import kotlin.coroutines.CoroutineContext
 
 object Oolong {
 
+    /**
+     * Create an runtime.
+     */
     fun <Model, Msg, Props> runtime(
         init: Init<Model, Msg>,
         update: Update<Model, Msg>,
@@ -27,6 +30,30 @@ object Oolong {
             renderContext
         )
         return { runtime.dispose() }
+    }
+
+    object Main {
+
+        /**
+         * Create a runtime with a render [CoroutineContext] of [Dispatchers.Main].
+         */
+        fun <Model, Msg, Props> runtime(
+            init: Init<Model, Msg>,
+            update: Update<Model, Msg>,
+            view: View<Model, Msg, Props>,
+            render: Render<Props>,
+            runtimeScope: CoroutineScope = GlobalScope,
+            effectContext: CoroutineContext = Dispatchers.Default
+        ) = Oolong.runtime(
+            init,
+            update,
+            view,
+            render,
+            runtimeScope,
+            effectContext,
+            Dispatchers.Main
+        )
+
     }
 
     private class Runtime<Model, Msg, Props>(
@@ -65,27 +92,6 @@ object Oolong {
         fun dispose() {
             running = false
         }
-    }
-
-    abstract class MainRuntime {
-
-        fun <Model, Msg, Props> runtime(
-            init: Init<Model, Msg>,
-            update: Update<Model, Msg>,
-            view: View<Model, Msg, Props>,
-            render: Render<Props>,
-            runtimeScope: CoroutineScope = GlobalScope,
-            effectContext: CoroutineContext = Dispatchers.Default
-        ) = Oolong.runtime(
-            init,
-            update,
-            view,
-            render,
-            runtimeScope,
-            effectContext,
-            Dispatchers.Main
-        )
-
     }
 
 }

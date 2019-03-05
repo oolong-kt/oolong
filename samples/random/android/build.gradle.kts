@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":oolong-android"))
+    implementation(project(":oolong"))
     implementation(project(":samples:random:core"))
     implementation(Dependencies.Kotlin.StdLib)
     implementation(Dependencies.Kotlin.Coroutines.Android)

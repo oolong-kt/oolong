@@ -2,8 +2,8 @@ package sample.time
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import oolong.Oolong
 import time.Time
-import oolong.Android
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         val timeView = findViewById<TimeView>(R.id.time_view)
 
-        Android.runtime(
+        Oolong.Main.runtime(
             Time.init,
             Time.update,
             Time.view,

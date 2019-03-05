@@ -1,7 +1,7 @@
 package time
 
 import oolong.Dispose
-import oolong.JavaFX
+import oolong.Oolong
 import tornadofx.App
 import tornadofx.find
 import tornadofx.launch
@@ -12,7 +12,7 @@ class TimeApp : App(TimeView::class, Styles::class) {
 
     init {
         find(TimeView::class).run {
-            dispose = JavaFX.runtime(
+            dispose = Oolong.Main.runtime(
                 Time.init,
                 Time.update,
                 Time.view,

@@ -2,7 +2,8 @@ import oolong.Dependencies
 
 plugins {
     kotlin("multiplatform")
-    id("maven-publish")
+    `maven-publish`
+    signing
 }
 
 repositories {
@@ -21,7 +22,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(Dependencies.Kotlin.StdLib.Common)
-                implementation(Dependencies.Kotlin.Coroutines.Core.Common)
+                api(Dependencies.Kotlin.Coroutines.Core.Common)
             }
         }
 
@@ -34,7 +35,7 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                implementation(Dependencies.Kotlin.Coroutines.Core.JS)
+                api(Dependencies.Kotlin.Coroutines.Core.JS)
             }
         }
 
@@ -46,7 +47,7 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
-                implementation(Dependencies.Kotlin.Coroutines.Core)
+                api(Dependencies.Kotlin.Coroutines.Core)
             }
         }
 
@@ -59,25 +60,25 @@ kotlin {
 
         val iosMain by getting {
             dependencies {
-                implementation(Dependencies.Kotlin.Coroutines.Core.Native)
+                api(Dependencies.Kotlin.Coroutines.Core.Native)
             }
         }
 
         val linuxMain by getting {
             dependencies {
-                implementation(Dependencies.Kotlin.Coroutines.Core.Native)
+                api(Dependencies.Kotlin.Coroutines.Core.Native)
             }
         }
 
         val macOSMain by getting {
             dependencies {
-                implementation(Dependencies.Kotlin.Coroutines.Core.Native)
+                api(Dependencies.Kotlin.Coroutines.Core.Native)
             }
         }
 
         val windowsMain by getting {
             dependencies {
-                implementation(Dependencies.Kotlin.Coroutines.Core.Native)
+                api(Dependencies.Kotlin.Coroutines.Core.Native)
             }
         }
     }

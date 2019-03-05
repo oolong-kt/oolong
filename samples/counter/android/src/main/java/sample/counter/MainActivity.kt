@@ -3,7 +3,6 @@ package sample.counter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import counter.Counter
-import oolong.Android
 import oolong.Oolong
 
 class MainActivity : AppCompatActivity() {
@@ -14,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         val counterView = findViewById<CounterView>(R.id.counter_view)
 
-        Android.runtime(
+        Oolong.Main.runtime(
             Counter.init,
             Counter.update,
             Counter.view,

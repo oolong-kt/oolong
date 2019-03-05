@@ -16,9 +16,10 @@ val compileKotlin by tasks.getting(KotlinJvmCompile::class) {
 }
 
 dependencies {
-    implementation(project(":oolong-javafx"))
+    implementation(project(":oolong"))
     implementation(project(":samples:counter:core"))
     implementation(Dependencies.Kotlin.StdLib)
+    implementation(Dependencies.Kotlin.Coroutines.Core)
     implementation(Dependencies.Kotlin.Coroutines.JavaFX)
     implementation(Dependencies.TornadoFX)
 }

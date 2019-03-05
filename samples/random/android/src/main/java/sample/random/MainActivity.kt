@@ -2,8 +2,8 @@ package sample.random
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import oolong.Oolong
 import random.Random
-import oolong.Android
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         val randomView = findViewById<RandomView>(R.id.random_view)
 
-        Android.runtime(
+        Oolong.Main.runtime(
             Random.init,
             Random.update,
             Random.view,

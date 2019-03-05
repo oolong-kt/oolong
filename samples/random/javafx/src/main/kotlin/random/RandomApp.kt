@@ -1,7 +1,7 @@
 package random
 
 import oolong.Dispose
-import oolong.JavaFX
+import oolong.Oolong
 import tornadofx.App
 import tornadofx.find
 import tornadofx.launch
@@ -12,7 +12,7 @@ class RandomApp : App(RandomView::class, Styles::class) {
 
     init {
         find(RandomView::class).run {
-            dispose = JavaFX.runtime(
+            dispose = Oolong.Main.runtime(
                 Random.init,
                 Random.update,
                 Random.view,

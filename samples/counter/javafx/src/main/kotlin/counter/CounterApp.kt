@@ -1,7 +1,7 @@
 package counter
 
 import oolong.Dispose
-import oolong.JavaFX
+import oolong.Oolong
 import tornadofx.App
 import tornadofx.find
 import tornadofx.launch
@@ -12,7 +12,7 @@ class CounterApp : App(CounterView::class, Styles::class) {
 
     init {
         find(CounterView::class).run {
-            dispose = JavaFX.runtime(
+            dispose = Oolong.Main.runtime(
                 Counter.init,
                 Counter.update,
                 Counter.view,
