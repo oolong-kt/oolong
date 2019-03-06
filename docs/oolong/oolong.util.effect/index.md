@@ -2,6 +2,8 @@
 
 ## Package oolong.util.effect
 
+Utility functions for creating effects.
+
 ### Functions
 
 | Name | Summary |

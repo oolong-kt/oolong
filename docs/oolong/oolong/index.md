@@ -2,6 +2,8 @@
 
 ## Package oolong
 
+The Oolong runtime and types.
+
 ### Types
 
 | Name | Summary |

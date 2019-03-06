@@ -2,6 +2,8 @@
 
 ## Package oolong.util.random
 
+Utility functions for creating random effects.
+
 ### Functions
 
 | Name | Summary |

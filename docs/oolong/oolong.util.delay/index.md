@@ -2,6 +2,8 @@
 
 ## Package oolong.util.delay
 
+Utility functions for creating delay effects.
+
 ### Functions
 
 | Name | Summary |

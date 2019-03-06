@@ -4,11 +4,14 @@ apply plugin: 'org.jetbrains.dokka'
 
 dokka {
     impliedPlatforms = ["Common"] // This will force platform tags for all non-common sources e.g. "JVM"
+    outputFormat = "gfm"
+    outputDirectory = "$rootDir/docs"
     kotlinTasks {
         // dokka fails to retrieve sources from MPP-tasks so they must be set empty to avoid exception
         // use sourceRoot instead (see below)
         []
     }
+    includes = ['README.md']
     sourceRoot {
         // assuming there is only a single source dir...
         path = kotlin.sourceSets.commonMain.kotlin.srcDirs[0]

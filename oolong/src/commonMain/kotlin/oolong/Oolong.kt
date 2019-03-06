@@ -9,7 +9,7 @@ import kotlin.coroutines.CoroutineContext
 object Oolong {
 
     /**
-     * Create an runtime.
+     * Create a runtime.
      */
     fun <Model, Msg, Props> runtime(
         init: Init<Model, Msg>,
