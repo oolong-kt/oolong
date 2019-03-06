@@ -75,6 +75,6 @@ Download
 
 ```kotlin
 dependencies {
-    implementation("com.michaelpardo:oolong:1.1.0-SNAPSHOT")
+    implementation("com.michaelpardo:oolong:2.0.0-SNAPSHOT")
 }
 ```
