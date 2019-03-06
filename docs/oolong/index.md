@@ -12,7 +12,7 @@ Oolong is an [Elm](https://guide.elm-lang.org/architecture) inspired Model-View-
 
 By applying this simple pattern you can create composable, testable programs that can run on any platform. Oolong enables a common codebase for all platforms by using a `Render` function which is implemented by each frontend.
 
-Get started with Oolong by reading the [official guide](docs/guide/index.md).
+Get started with Oolong by reading the [official guide](../guide/index.md).
 
 ### Packages
 
