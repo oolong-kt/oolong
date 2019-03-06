@@ -9,6 +9,7 @@ The Oolong runtime and types.
 | Name | Summary |
 |---|---|
 | [Oolong](-oolong/index.md) | `object Oolong` |
+| [Program](-program/index.md) | `interface Program<Model, Msg, Props>`<br>An interface to encapsulate the requirements of an Oolong runtime. |
 
 ### Type Aliases
 
