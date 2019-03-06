@@ -12,6 +12,25 @@ object Oolong {
      * Create a runtime.
      */
     fun <Model, Msg, Props> runtime(
+        program: Program<Model, Msg, Props>,
+        render: Render<Props>,
+        runtimeScope: CoroutineScope = GlobalScope,
+        effectContext: CoroutineContext = Dispatchers.Default,
+        renderContext: CoroutineContext = effectContext
+    ) = runtime(
+        program::init,
+        program::update,
+        program::view,
+        render,
+        runtimeScope,
+        effectContext,
+        renderContext
+    )
+
+    /**
+     * Create a runtime.
+     */
+    fun <Model, Msg, Props> runtime(
         init: Init<Model, Msg>,
         update: Update<Model, Msg>,
         view: View<Model, Msg, Props>,
@@ -38,13 +57,30 @@ object Oolong {
          * Create a runtime with a render [CoroutineContext] of [Dispatchers.Main].
          */
         fun <Model, Msg, Props> runtime(
+            program: Program<Model, Msg, Props>,
+            render: Render<Props>,
+            runtimeScope: CoroutineScope = GlobalScope,
+            effectContext: CoroutineContext = Dispatchers.Default
+        ) = runtime(
+            program::init,
+            program::update,
+            program::view,
+            render,
+            runtimeScope,
+            effectContext
+        )
+
+        /**
+         * Create a runtime with a render [CoroutineContext] of [Dispatchers.Main].
+         */
+        fun <Model, Msg, Props> runtime(
             init: Init<Model, Msg>,
             update: Update<Model, Msg>,
             view: View<Model, Msg, Props>,
             render: Render<Props>,
             runtimeScope: CoroutineScope = GlobalScope,
             effectContext: CoroutineContext = Dispatchers.Default
-        ) = Oolong.runtime(
+        ) = runtime(
             init,
             update,
             view,
