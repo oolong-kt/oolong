@@ -11,7 +11,14 @@ repositories {
 kotlin {
     js()
     jvm()
-    iosX64("ios")
+    iosX64("ios") {
+        binaries {
+            framework("CounterCore") {
+                export(project(":oolong"))
+                transitiveExport = true
+            }
+        }
+    }
     linuxX64("linux")
     macosX64("macOS")
     mingwX64("windows")

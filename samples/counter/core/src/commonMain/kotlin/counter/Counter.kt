@@ -1,6 +1,9 @@
 package counter
 
+import oolong.Dispose
 import oolong.Init
+import oolong.Oolong
+import oolong.Render
 import oolong.Update
 import oolong.View
 import oolong.util.effect.withoutEffects
@@ -39,6 +42,10 @@ object Counter {
             { dispatch(Msg.Increment) },
             { dispatch(Msg.Decrement) }
         )
+    }
+
+    fun runtime(render: Render<Props>): Dispose {
+        return Oolong.runtime(init, update, view, render)
     }
 
 }

@@ -5,6 +5,9 @@ out/
 
 local.properties
 
+### Xcode ###
+xcuserdata/
+
 ### vim ###
 *.swp
 
