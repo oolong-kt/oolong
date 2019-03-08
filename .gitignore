@@ -23,9 +23,3 @@ xcuserdata/
 ### Gradle ###
 .gradle
 build/
-
-### KotlinTest ###
-.kotlintest
-
-### Dokka ###
-package-list

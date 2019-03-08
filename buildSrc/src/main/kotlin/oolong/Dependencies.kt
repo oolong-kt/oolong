@@ -7,7 +7,7 @@ object Dependencies {
 
     object Android : Group("") {
 
-        object Gradle : Group("com.android.tools.build", "3.3.0") {
+        object Gradle : Group("com.android.tools.build", "3.3.2") {
             val Plugin = Dependency(this, "gradle")
         }
 

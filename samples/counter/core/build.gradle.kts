@@ -15,7 +15,6 @@ kotlin {
         binaries {
             framework("CounterCore") {
                 export(project(":oolong"))
-                transitiveExport = true
             }
         }
     }
