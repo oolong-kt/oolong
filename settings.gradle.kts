@@ -16,3 +16,5 @@ include(":samples:time:core")
 include(":samples:time:android")
 include(":samples:time:javafx")
 include(":samples:time:js")
+
+include(":samples:todo:core")
