@@ -2,12 +2,13 @@ package time
 
 import kotlinx.html.dom.append
 import kotlinx.html.p
+import oolong.Dispatch
 import oolong.Oolong
 import kotlin.browser.document
 import kotlin.dom.clear
 import kotlin.js.Date
 
-private val render = { _: Time.Props ->
+private val render = { _: Time.Props, _: Dispatch<Time.Msg> ->
     with(document.getElementById("container")!!) {
         clear()
         append {

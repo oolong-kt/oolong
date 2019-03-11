@@ -9,15 +9,15 @@
 	var container = document.getElementById("container");
 	var node;
 
-	function render(props) {
+	function render(props, dispatch) {
 		return h('div', {}, [
-			renderInput(props.input),
-			renderEntries(props.entries),
-			renderControls(props.controls)
+			renderInput(props.input, dispatch),
+			renderEntries(props.entries, dispatch),
+			renderControls(props.controls, dispatch)
 		]);
 	}
 
-	function renderInput(input) {
+	function renderInput(input, dispatch) {
 		return h('header', { class: 'header' }, [
 			h('h1', {}, 'todos'),
 			h('input', {
@@ -27,18 +27,18 @@
 				autofocus: true,
 				value: input.value,
 				oninput: function (e) {
-					input.onUpdateField(e.target.value);
+					dispatch(input.onUpdateField(e.target.value));
 				},
 				onkeydown: function (e) {
 					if (e.keyCode == 13) {
-						input.onAdd();
+						dispatch(input.onAdd());
 					}
 				}
 			})
 		]);
 	}
 
-	function renderEntries(entries) {
+	function renderEntries(entries, dispatch) {
 		return h('section', { class: 'main' }, [
 			h('input', {
 				id: 'toggle-all',
@@ -49,16 +49,18 @@
 			h('label', {
 				for: 'toggle-all',
 				onclick: function () {
-					entries.onCheckAll(!entries.allCompleted);
+					dispatch(entries.onCheckAll(!entries.allCompleted));
 				}
 			}, 'Mark all as complete'),
 			h('ul', { class: 'todo-list' }, [
-				entries.entries.toArray().map(renderEntry)
+				entries.entries
+					.toArray()
+					.map((entry) => renderEntry(entry, dispatch))
 			])
 		]);
 	}
 
-	function renderEntry(entry) {
+	function renderEntry(entry, dispatch) {
 		var classList = '';
 		if (entry.completed) {
 			classList += ' completed';
@@ -73,18 +75,18 @@
 					type: 'checkbox',
 					checked: entry.completed,
 					onclick: function () {
-						entry.onCheck(entry.id, !entry.completed);
+						dispatch(entry.onCheck(entry.id, !entry.completed));
 					}
 				}),
 				h('label', {
 					ondblclick: function () {
-						entry.onEditingEntry(entry.id, true)
+						dispatch(entry.onEditingEntry(entry.id, true));
 					}
 				}, entry.description),
 				h('button', {
 					class: 'destroy',
 					onclick: function () {
-						entry.onDelete(entry.id);
+						dispatch(entry.onDelete(entry.id));
 					}
 				})
 			]),
@@ -92,29 +94,29 @@
 				class: 'edit',
 				value: entry.description,
 				oninput: function (e) {
-					entry.onUpdateEntry(entry.id, e.target.value);
+					dispatch(entry.onUpdateEntry(entry.id, e.target.value));
 				},
 				onblur: function () {
-					entry.onEditingEntry(entry.id, false);
+					dispatch(entry.onEditingEntry(entry.id, false));
 				},
 				onkeydown: function (e) {
 					if (e.keyCode == 13) {
-						entry.onEditingEntry(entry.id, false);
+						dispatch(entry.onEditingEntry(entry.id, false));
 					}
 				}
 			})
 		]);
 	}
 
-	function renderControls(controls) {
+	function renderControls(controls, dispatch) {
 		return h('footer',
 			{
 				class: 'footer',
 				hidden: controls.hidden
 			}, [
-				renderControlsCount(controls.count),
-				renderControlsFilters(controls.filters),
-				renderControlsClear(controls.clear)
+				renderControlsCount(controls.count, dispatch),
+				renderControlsFilters(controls.filters, dispatch),
+				renderControlsClear(controls.clear, dispatch)
 			]);
 	}
 
@@ -124,19 +126,19 @@
 		], count.entriesLeft == 1 ? ' item left' : ' items left');
 	}
 
-	function renderControlsFilters(filters) {
+	function renderControlsFilters(filters, dispatch) {
 		return h('ul', { class: 'filters' }, [
-			visibilitySwap('#/', "All", filters.allVisibilitySwap),
-			visibilitySwap('#/active', "Active", filters.activeVisibilitySwap),
-			visibilitySwap('#/completed', "Completed", filters.completedVisibilitySwap)
+			visibilitySwap('#/', "All", filters.allVisibilitySwap, dispatch),
+			visibilitySwap('#/active', "Active", filters.activeVisibilitySwap, dispatch),
+			visibilitySwap('#/completed', "Completed", filters.completedVisibilitySwap, dispatch)
 		]);
 	}
 
-	function visibilitySwap(uri, text, visibilitySwap) {
+	function visibilitySwap(uri, text, visibilitySwap, dispatch) {
 		return h('li',
 			{
 				onclick: function () {
-					visibilitySwap.onChangeVisibility(visibilitySwap.visibility)
+					dispatch(visibilitySwap.onChangeVisibility(visibilitySwap.visibility))
 				}
 			}, [
 				h('a', {
@@ -146,11 +148,13 @@
 			]);
 	}
 
-	function renderControlsClear(clear) {
+	function renderControlsClear(clear, dispatch) {
 		return h('button', {
 			class: 'clear-completed',
 			hidden: clear.hidden,
-			onclick: function () { clear.onDeleteCompleted(); }
+			onclick: function () {
+				dispatch(clear.onDeleteCompleted());
+			}
 		}, 'Clear completed')
 	}
 
@@ -158,9 +162,8 @@
 		Todo.init(null),
 		Todo.update,
 		Todo.view,
-		function (props) {
-			console.log(props)
-			node = patch(node, render(props), container)
+		function (props, dispatch) {
+			node = patch(node, render(props, dispatch), container)
 		}
 	)
 

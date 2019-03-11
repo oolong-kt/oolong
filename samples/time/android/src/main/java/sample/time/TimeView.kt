@@ -7,6 +7,7 @@ import android.widget.TextView
 import time.Time
 import java.text.DateFormat
 import java.util.Date
+import oolong.Dispatch
 
 class TimeView : LinearLayout {
 
@@ -22,7 +23,7 @@ class TimeView : LinearLayout {
         defStyleRes: Int = 0
     ) : super(context, attrs, defStyleAttr, defStyleRes)
 
-    fun render(props: Time.Props) {
+    fun render(props: Time.Props, dispatch: Dispatch<Time.Msg>) {
         timeTextView.text = formatter.format(Date())
     }
 

@@ -23,8 +23,8 @@ class RuntimeTest {
         testRuntime(
             withoutEffects { -> initialState },
             withoutEffects { _: Unit, model: Int -> model },
-            { model: Int, _: Dispatch<Unit> -> model },
-            { props: Int -> assertEquals(initialState, props) }
+            { model: Int -> model },
+            { props: Int, _ -> assertEquals(initialState, props) }
         )
     }
 
@@ -34,8 +34,8 @@ class RuntimeTest {
         testRuntime(
             withoutEffects { -> "init" },
             withoutEffects { msg: String, _: String -> msg },
-            { model: String, dispatch: Dispatch<String> -> model to dispatch },
-            { (model: String, dispatch: Dispatch<String>) ->
+            { model: String -> model },
+            { model: String, dispatch: Dispatch<String> ->
                 count++
                 when (model) {
                     "init" -> {
@@ -58,8 +58,8 @@ class RuntimeTest {
         testRuntime(
             withoutEffects { -> "state" },
             { msg: String, _: String -> msg to { dispatch -> dispatch("next") } },
-            { model: String, _: Dispatch<String> -> model },
-            {
+            { model: String -> model },
+            { _, _ ->
                 if (initialRender) initialRender = false
                 else fail()
             }
@@ -69,8 +69,8 @@ class RuntimeTest {
     private fun <Model, Msg, Props> testRuntime(
         init: Init<Model, Msg>,
         update: Update<Model, Msg>,
-        view: View<Model, Msg, Props>,
-        render: Render<Props>
+        view: View<Model, Props>,
+        render: Render<Msg, Props>
     ) = Oolong.runtime(init, update, view, render, GlobalScope, dispatcher, dispatcher)
 
 }

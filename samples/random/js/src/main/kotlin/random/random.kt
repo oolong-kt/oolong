@@ -5,11 +5,12 @@ import kotlinx.html.dom.append
 import kotlinx.html.id
 import kotlinx.html.js.onClickFunction
 import kotlinx.html.p
+import oolong.Dispatch
 import oolong.Oolong
 import kotlin.browser.document
 import kotlin.dom.clear
 
-private val render = { props: Random.Props ->
+private val render = { props: Random.Props, dispatch: Dispatch<Random.Msg> ->
     with(document.getElementById("container")!!) {
         clear()
         append {
@@ -17,7 +18,7 @@ private val render = { props: Random.Props ->
             button {
                 id = "roll"
                 +"Roll"
-                onClickFunction = { props.onRoll() }
+                onClickFunction = { dispatch(props.onRoll()) }
             }
         }
     }

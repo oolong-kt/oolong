@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import counter.Counter
+import oolong.Dispatch
 
 class CounterView : LinearLayout {
 
@@ -22,10 +23,10 @@ class CounterView : LinearLayout {
         defStyleRes: Int = 0
     ) : super(context, attrs, defStyleAttr, defStyleRes)
 
-    fun render(props: Counter.Props) {
+    fun render(props: Counter.Props, dispatch: Dispatch<Counter.Msg>) {
         countTextView.text = "${props.count}"
-        incrementButton.setOnClickListener { props.onIncrement() }
-        decrementButton.setOnClickListener { props.onDecrement() }
+        incrementButton.setOnClickListener { dispatch(props.onIncrement()) }
+        decrementButton.setOnClickListener { dispatch(props.onDecrement()) }
     }
 
 }

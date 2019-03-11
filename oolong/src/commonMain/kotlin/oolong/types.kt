@@ -38,14 +38,14 @@ typealias Update<Model, Msg> = (msg: Msg, model: Model) -> Next<Model, Msg>
  * @param model the current state
  * @param dispatch the dispatch function
  */
-typealias View<Model, Msg, Props> = (model: Model, dispatch: Dispatch<Msg>) -> Props
+typealias View<Model, Props> = (model: Model) -> Props
 
 /**
  * Renders the view properties
  *
  * @param props view properties
  */
-typealias Render<Props> = (props: Props) -> Unit
+typealias Render<Msg, Props> = (props: Props, dispatch: Dispatch<Msg>) -> Unit
 
 /**
  * Stops the function and cleans up resources

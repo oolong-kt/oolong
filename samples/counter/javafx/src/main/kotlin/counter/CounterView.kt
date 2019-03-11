@@ -1,6 +1,5 @@
 package counter
 
-import counter.Counter.Props
 import javafx.geometry.Pos
 import javafx.scene.control.Button
 import javafx.scene.control.Label
@@ -31,10 +30,10 @@ class CounterView : View() {
         }
     }
 
-    val render: Render<Props> = { props ->
+    val render: Render<Counter.Msg, Counter.Props> = { props, dispatch ->
         countLabel.text = "${props.count}"
-        incrementButton.action { props.onIncrement() }
-        decrementButton.action { props.onDecrement() }
+        incrementButton.action { dispatch(props.onIncrement()) }
+        decrementButton.action { dispatch(props.onDecrement()) }
     }
 
 }

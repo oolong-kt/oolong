@@ -4,7 +4,6 @@ import javafx.geometry.Pos
 import javafx.scene.control.Label
 import javafx.scene.layout.VBox
 import oolong.Render
-import time.Time.Props
 import tornadofx.View
 import tornadofx.label
 import java.time.LocalDateTime
@@ -28,7 +27,7 @@ class TimeView : View() {
         }
     }
 
-    val render: Render<Props> = { _ ->
+    val render: Render<Time.Msg, Time.Props> = { _, _ ->
         // timeLabel.text = props.time.format(FORMATTER)
         timeLabel.text = LocalDateTime.now().format(FORMATTER)
     }

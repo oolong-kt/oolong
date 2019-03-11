@@ -22,8 +22,7 @@ interface Program<Model, Msg, Props> {
      * Creates view properties from the current state
      *
      * @param model the current state
-     * @param dispatch the dispatch function
      */
-    fun view(model: Model, dispatch: Dispatch<Msg>): Props
+    fun view(model: Model): Props
 
 }

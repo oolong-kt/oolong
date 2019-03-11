@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import random.Random
+import oolong.Dispatch
 
 class RandomView : LinearLayout {
 
@@ -21,9 +22,9 @@ class RandomView : LinearLayout {
         defStyleRes: Int = 0
     ) : super(context, attrs, defStyleAttr, defStyleRes)
 
-    fun render(props: Random.Props) {
+    fun render(props: Random.Props, dispatch: Dispatch<Random.Msg>) {
         dieFaceTextView.text = "${props.dieFace}"
-        rollButton.setOnClickListener { props.onRoll() }
+        rollButton.setOnClickListener { dispatch(props.onRoll()) }
     }
 
 }
