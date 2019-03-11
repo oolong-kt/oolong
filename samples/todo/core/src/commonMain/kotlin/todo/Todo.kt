@@ -1,7 +1,11 @@
 package todo
 
 import oolong.Dispatch
+import oolong.Dispose
+import oolong.Init
 import oolong.Next
+import oolong.Oolong
+import oolong.Render
 import oolong.Update
 import oolong.View
 import oolong.util.effect.noEffect
@@ -49,8 +53,10 @@ object Todo {
         )
     }
 
-    val init: (Model?) -> Next<Model, Msg> = { model ->
-        (model ?: emptyModel()) to { _ -> }
+    val init: (Model?) -> Init<Model, Msg> = { model ->
+        {
+            (model ?: emptyModel()) to { _ -> }
+        }
     }
 
     // UPDATE
@@ -184,7 +190,7 @@ object Todo {
 
         data class Entries(
             val visible: Boolean,
-            val checked: Boolean,
+            val allCompleted: Boolean,
             val onCheckAll: () -> Unit,
             val entries: List<Entry>
         ) {
@@ -202,6 +208,7 @@ object Todo {
         }
 
         data class Controls(
+            val hidden: Boolean,
             val count: Count,
             val filters: Filters,
             val clear: Clear
@@ -214,12 +221,12 @@ object Todo {
             data class Filters(
                 val allVisibilitySwap: VisibilitySwap,
                 val activeVisibilitySwap: VisibilitySwap,
-                val completeVisibilitySwap: VisibilitySwap
+                val completedVisibilitySwap: VisibilitySwap
             ) {
 
                 data class VisibilitySwap(
+                    val selected: Boolean,
                     val visibility: Visibility,
-                    val actualVisibility: Visibility,
                     val onChangeVisibility: (Visibility) -> Unit
                 )
 
@@ -292,8 +299,9 @@ object Todo {
 
     val viewControls = { visibility: Visibility, entries: List<Entry>, dispatch: Dispatch<Msg> ->
         val entriesCompleted = entries.filter(Entry::completed).size
-        val entriesLeft = (entries - entriesCompleted).size
+        val entriesLeft = entries.size - entriesCompleted
         Props.Controls(
+            entries.isEmpty(),
             viewControlsCount(entriesLeft),
             viewControlsFilters(visibility, dispatch),
             viewControlsClear(entriesCompleted, dispatch)
@@ -316,8 +324,8 @@ object Todo {
 
     val visibilitySwap = { visibility: Visibility, actualVisibility: Visibility, dispatch: Dispatch<Msg> ->
         Props.Controls.Filters.VisibilitySwap(
+            visibility == actualVisibility,
             visibility,
-            actualVisibility,
             { dispatch(Msg.ChangeVisibility(visibility)) }
         )
     }
