@@ -18,6 +18,12 @@ repositories {
 
 kotlin {
     js()
+    js {
+        compilations["main"].kotlinOptions {
+            moduleKind = "umd"
+            sourceMap = true
+        }
+    }
     jvm()
     iosX64("ios")
     linuxX64("linux")
