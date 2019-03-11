@@ -15,7 +15,7 @@ object Oolong {
     @JsName("program")
     fun <Model, Msg, Props> program(
         program: Program<Model, Msg, Props>,
-        render: Render<Props>,
+        render: Render<Msg, Props>,
         runtimeScope: CoroutineScope = GlobalScope,
         effectContext: CoroutineContext = Dispatchers.Default,
         renderContext: CoroutineContext = effectContext
@@ -36,8 +36,8 @@ object Oolong {
     fun <Model, Msg, Props> runtime(
         init: Init<Model, Msg>,
         update: Update<Model, Msg>,
-        view: View<Model, Msg, Props>,
-        render: Render<Props>,
+        view: View<Model, Props>,
+        render: Render<Msg, Props>,
         runtimeScope: CoroutineScope = GlobalScope,
         effectContext: CoroutineContext = Dispatchers.Default,
         renderContext: CoroutineContext = effectContext
@@ -62,7 +62,7 @@ object Oolong {
         @JsName("program")
         fun <Model, Msg, Props> program(
             program: Program<Model, Msg, Props>,
-            render: Render<Props>,
+            render: Render<Msg, Props>,
             runtimeScope: CoroutineScope = GlobalScope,
             effectContext: CoroutineContext = Dispatchers.Default
         ) = runtime(
@@ -81,8 +81,8 @@ object Oolong {
         fun <Model, Msg, Props> runtime(
             init: Init<Model, Msg>,
             update: Update<Model, Msg>,
-            view: View<Model, Msg, Props>,
-            render: Render<Props>,
+            view: View<Model, Props>,
+            render: Render<Msg, Props>,
             runtimeScope: CoroutineScope = GlobalScope,
             effectContext: CoroutineContext = Dispatchers.Default
         ) = runtime(
@@ -100,8 +100,8 @@ object Oolong {
     private class Runtime<Model, Msg, Props>(
         init: Init<Model, Msg>,
         private val update: Update<Model, Msg>,
-        private val view: View<Model, Msg, Props>,
-        private val render: Render<Props>,
+        private val view: View<Model, Props>,
+        private val render: Render<Msg, Props>,
         runtimeScope: CoroutineScope = GlobalScope,
         private val effectContext: CoroutineContext = Dispatchers.Default,
         private val renderContext: CoroutineContext = effectContext
@@ -127,7 +127,7 @@ object Oolong {
             val (state, effect) = next
             currentState = state
             launch(effectContext) { effect(::dispatch) }
-            launch(renderContext) { render(view(state, ::dispatch)) }
+            launch(renderContext) { render(view(state), ::dispatch) }
         }
 
         fun dispose() {

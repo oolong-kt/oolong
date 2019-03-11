@@ -18,8 +18,8 @@ object Counter {
 
     data class Props(
         val count: Int,
-        val onIncrement: () -> Unit,
-        val onDecrement: () -> Unit
+        val onIncrement: () -> Msg,
+        val onDecrement: () -> Msg
     )
 
     val init: Init<Model, Msg> = withoutEffects { ->
@@ -33,11 +33,11 @@ object Counter {
         }
     }
 
-    val view: View<Model, Msg, Props> = { model, dispatch ->
+    val view: View<Model, Props> = { model ->
         Props(
             model.count,
-            { dispatch(Msg.Increment) },
-            { dispatch(Msg.Decrement) }
+            { Msg.Increment },
+            { Msg.Decrement }
         )
     }
 

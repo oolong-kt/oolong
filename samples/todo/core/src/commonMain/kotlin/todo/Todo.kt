@@ -1,11 +1,6 @@
 package todo
 
-import oolong.Dispatch
-import oolong.Dispose
 import oolong.Init
-import oolong.Next
-import oolong.Oolong
-import oolong.Render
 import oolong.Update
 import oolong.View
 import oolong.util.effect.noEffect
@@ -184,14 +179,14 @@ object Todo {
 
         data class Input(
             val value: String,
-            val onUpdateField: (String) -> Unit,
-            val onAdd: () -> Unit
+            val onUpdateField: (String) -> Msg,
+            val onAdd: () -> Msg
         )
 
         data class Entries(
             val visible: Boolean,
             val allCompleted: Boolean,
-            val onCheckAll: () -> Unit,
+            val onCheckAll: () -> Msg,
             val entries: List<Entry>
         ) {
 
@@ -200,10 +195,10 @@ object Todo {
                 val completed: Boolean,
                 val editing: Boolean,
                 val description: String,
-                val onCheck: (Int, Boolean) -> Unit,
-                val onUpdateEntry: (Int, String) -> Unit,
-                val onEditingEntry: (Int, Boolean) -> Unit,
-                val onDelete: (Int) -> Unit
+                val onCheck: (Int, Boolean) -> Msg,
+                val onUpdateEntry: (Int, String) -> Msg,
+                val onEditingEntry: (Int, Boolean) -> Msg,
+                val onDelete: (Int) -> Msg
             )
         }
 
@@ -227,7 +222,7 @@ object Todo {
                 data class VisibilitySwap(
                     val selected: Boolean,
                     val visibility: Visibility,
-                    val onChangeVisibility: (Visibility) -> Unit
+                    val onChangeVisibility: (Visibility) -> Msg
                 )
 
             }
@@ -235,23 +230,23 @@ object Todo {
             data class Clear(
                 val hidden: Boolean,
                 val entriesCompleted: Int,
-                val onDeleteCompleted: () -> Unit
+                val onDeleteCompleted: () -> Msg
             )
         }
 
     }
 
-    val view: View<Model, Msg, Props> = { model, dispatch ->
+    val view: View<Model, Props> = { model ->
         Props(
-            viewInput(model.field, dispatch),
-            viewEntries(model.visibility, model.entries, dispatch),
-            viewControls(model.visibility, model.entries, dispatch)
+            viewInput(model.field),
+            viewEntries(model.visibility, model.entries),
+            viewControls(model.visibility, model.entries)
         )
     }
 
-    val viewInput = { task: String, dispatch: Dispatch<Msg> ->
-        val onUpdateField = { value: String -> dispatch(Msg.UpdateField(value)) }
-        val onAdd = { dispatch(Msg.Add) }
+    val viewInput = { task: String ->
+        val onUpdateField = { value: String -> Msg.UpdateField(value) }
+        val onAdd = { Msg.Add }
         Props.Input(
             task,
             onUpdateField,
@@ -262,7 +257,7 @@ object Todo {
     // VIEW ALL ENTRIES
 
 
-    val viewEntries = { visibility: Visibility, entries: List<Entry>, dispatch: Dispatch<Msg> ->
+    val viewEntries = { visibility: Visibility, entries: List<Entry> ->
         val isVisible = { todo: Entry ->
             when (visibility) {
                 Visibility.COMPLETED -> todo.completed
@@ -275,36 +270,36 @@ object Todo {
         Props.Entries(
             visible,
             allCompleted,
-            { dispatch(Msg.CheckAll(!allCompleted)) },
-            entries.filter(isVisible).map { entry -> viewEntry(entry, dispatch) }
+            { Msg.CheckAll(!allCompleted) },
+            entries.filter(isVisible).map { entry -> viewEntry(entry) }
         )
     }
 
     // VIEW INDIVIDUAL ENTRIES
 
-    val viewEntry = { todo: Entry, dispatch: Dispatch<Msg> ->
+    val viewEntry = { todo: Entry ->
         Props.Entries.Entry(
             todo.id,
             todo.completed,
             todo.editing,
             todo.description,
-            { id: Int, completed: Boolean -> dispatch(Msg.Check(id, completed)) },
-            { id: Int, description: String -> dispatch(Msg.UpdateEntry(id, description)) },
-            { id: Int, completed: Boolean -> dispatch(Msg.EditingEntry(id, completed)) },
-            { id: Int -> dispatch(Msg.Delete(id)) }
+            { id: Int, completed: Boolean -> Msg.Check(id, completed) },
+            { id: Int, description: String -> Msg.UpdateEntry(id, description) },
+            { id: Int, completed: Boolean -> Msg.EditingEntry(id, completed) },
+            { id: Int -> Msg.Delete(id) }
         )
     }
 
     // VIEW CONTROLS AND FOOTER
 
-    val viewControls = { visibility: Visibility, entries: List<Entry>, dispatch: Dispatch<Msg> ->
+    val viewControls = { visibility: Visibility, entries: List<Entry> ->
         val entriesCompleted = entries.filter(Entry::completed).size
         val entriesLeft = entries.size - entriesCompleted
         Props.Controls(
             entries.isEmpty(),
             viewControlsCount(entriesLeft),
-            viewControlsFilters(visibility, dispatch),
-            viewControlsClear(entriesCompleted, dispatch)
+            viewControlsFilters(visibility),
+            viewControlsClear(entriesCompleted)
         )
     }
 
@@ -314,27 +309,27 @@ object Todo {
         )
     }
 
-    val viewControlsFilters = { visibility: Visibility, dispatch: Dispatch<Msg> ->
+    val viewControlsFilters = { visibility: Visibility ->
         Props.Controls.Filters(
-            visibilitySwap(Visibility.ALL, visibility, dispatch),
-            visibilitySwap(Visibility.ACTIVE, visibility, dispatch),
-            visibilitySwap(Visibility.COMPLETED, visibility, dispatch)
+            visibilitySwap(Visibility.ALL, visibility),
+            visibilitySwap(Visibility.ACTIVE, visibility),
+            visibilitySwap(Visibility.COMPLETED, visibility)
         )
     }
 
-    val visibilitySwap = { visibility: Visibility, actualVisibility: Visibility, dispatch: Dispatch<Msg> ->
+    val visibilitySwap = { visibility: Visibility, actualVisibility: Visibility ->
         Props.Controls.Filters.VisibilitySwap(
             visibility == actualVisibility,
             visibility,
-            { dispatch(Msg.ChangeVisibility(visibility)) }
+            { Msg.ChangeVisibility(visibility) }
         )
     }
 
-    val viewControlsClear = { entriesCompleted: Int, dispatch: Dispatch<Msg> ->
+    val viewControlsClear = { entriesCompleted: Int ->
         Props.Controls.Clear(
             entriesCompleted == 0,
             entriesCompleted,
-            { dispatch(Msg.DeleteComplete) }
+            { Msg.DeleteComplete }
         )
     }
 

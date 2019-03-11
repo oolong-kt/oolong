@@ -21,7 +21,7 @@ object Random {
 
     data class Props(
         val dieFace: Int,
-        val onRoll: () -> Unit
+        val onRoll: () -> Msg
     )
 
     val init: Init<Model, Msg> = withoutEffects { ->
@@ -35,10 +35,10 @@ object Random {
         }
     }
 
-    val view: View<Model, Msg, Props> = { model, dispatch ->
+    val view: View<Model, Props> = { model ->
         Props(
             model.face,
-            { dispatch(Msg.Roll) }
+            { Msg.Roll }
         )
     }
 

@@ -34,7 +34,7 @@ object Time {
         }
     }
 
-    val view: View<Model, Msg, Props> = { model, _ ->
+    val view: View<Model, Props> = { model ->
         Props(model.time)
     }
 
