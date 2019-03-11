@@ -1,15 +1,7 @@
 import oolong.Dependencies
 
-val GROUP: String by project
-val VERSION_NAME: String by project
-
-group = GROUP
-version = VERSION_NAME
-
 plugins {
     kotlin("multiplatform")
-    `maven-publish`
-    signing
 }
 
 repositories {
@@ -17,7 +9,6 @@ repositories {
 }
 
 kotlin {
-    js()
     js {
         compilations["main"].kotlinOptions {
             moduleKind = "umd"
@@ -33,8 +24,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(project(":oolong"))
                 implementation(Dependencies.Kotlin.StdLib.Common)
-                api(Dependencies.Kotlin.Coroutines.Core.Common)
             }
         }
 
@@ -47,7 +38,7 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                api(Dependencies.Kotlin.Coroutines.Core.JS)
+                implementation(Dependencies.Kotlin.StdLib.JS)
             }
         }
 
@@ -59,7 +50,7 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
-                api(Dependencies.Kotlin.Coroutines.Core)
+                implementation(Dependencies.Kotlin.StdLib.JDK8)
             }
         }
 
@@ -69,30 +60,6 @@ kotlin {
                 implementation(Dependencies.Kotlin.Test.JUnit5)
             }
         }
-
-        val iosMain by getting {
-            dependencies {
-                api(Dependencies.Kotlin.Coroutines.Core.Native)
-            }
-        }
-
-        val linuxMain by getting {
-            dependencies {
-                api(Dependencies.Kotlin.Coroutines.Core.Native)
-            }
-        }
-
-        val macOSMain by getting {
-            dependencies {
-                api(Dependencies.Kotlin.Coroutines.Core.Native)
-            }
-        }
-
-        val windowsMain by getting {
-            dependencies {
-                api(Dependencies.Kotlin.Coroutines.Core.Native)
-            }
-        }
     }
 }
 
@@ -100,5 +67,3 @@ kotlin {
 configurations {
     create("compileClasspath")
 }
-
-apply("$rootDir/gradle/gradle-mvn-mpp-push.gradle")

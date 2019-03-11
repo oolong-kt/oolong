@@ -5,13 +5,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
+import kotlin.js.JsName
 
 object Oolong {
 
     /**
      * Create a runtime.
      */
-    fun <Model, Msg, Props> runtime(
+    @JsName("program")
+    fun <Model, Msg, Props> program(
         program: Program<Model, Msg, Props>,
         render: Render<Props>,
         runtimeScope: CoroutineScope = GlobalScope,
@@ -30,6 +32,7 @@ object Oolong {
     /**
      * Create a runtime.
      */
+    @JsName("runtime")
     fun <Model, Msg, Props> runtime(
         init: Init<Model, Msg>,
         update: Update<Model, Msg>,
@@ -56,7 +59,8 @@ object Oolong {
         /**
          * Create a runtime with a render [CoroutineContext] of [Dispatchers.Main].
          */
-        fun <Model, Msg, Props> runtime(
+        @JsName("program")
+        fun <Model, Msg, Props> program(
             program: Program<Model, Msg, Props>,
             render: Render<Props>,
             runtimeScope: CoroutineScope = GlobalScope,
@@ -73,6 +77,7 @@ object Oolong {
         /**
          * Create a runtime with a render [CoroutineContext] of [Dispatchers.Main].
          */
+        @JsName("runtime")
         fun <Model, Msg, Props> runtime(
             init: Init<Model, Msg>,
             update: Update<Model, Msg>,
