@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "dependencies": {
+    "kotlin": "^1.3.21",
+    "kotlinx-coroutines-core": "^1.1.1",
+    "superfine": "^6.0.1",
+    "todomvc-app-css": "^2.2.0",
+    "todomvc-common": "^1.0.5"
+  }
+}

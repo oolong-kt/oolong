@@ -1,19 +1,28 @@
-# TodoMVC App Template
+# Oolong/Superfine • [TodoMVC](http://todomvc.com)
 
-> Template used for creating [TodoMVC](http://todomvc.com) apps
+Oolong is an [Elm](https://guide.elm-lang.org/architecture) inspired Model-View-Update (MVU) implementation for Kotiln multiplatform. As the name implies, three core concepts comprise the foundation of this architecture: 
 
-![](https://github.com/tastejs/todomvc-app-css/raw/master/screenshot.png)
+* **Model** - a type to represent the program state
+
+* **Update** - a function to update the state
+
+* **View** - a function to map the state to view properties
+
+By applying this simple pattern you can create composable, testable programs that can run on any platform. Oolong enables a common codebase for all platforms by using a `Render` function which is implemented by each frontend.
+
+Get started with Oolong by reading the [official guide](../../../docs/guide/index.md).
+
+### Support
+
+*Let us [know](https://github.com/tastejs/todomvc/issues) if you discover anything worth sharing.*
 
 
-## Getting started
+## Installation
 
-- Read the [Application Specification](https://github.com/tastejs/todomvc/blob/master/app-spec.md) before touching the template.
+```
+./build.sh
+```
 
-- Delete this file and rename `app-readme.md` to `readme.md` and fill it out.
+## Credit
 
-- Clone this repo and install the dependencies with [npm](https://npmjs.com) by running: `npm install`.
-
-
-## License
-
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" rel="dct:type">work</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sindresorhus.com" property="cc:attributionName" rel="cc:attributionURL">TasteJS</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/deed.en_US">Creative Commons Attribution 4.0 International License</a>.
+Created by [Micahel Pardo](http://michaelpardo.com)

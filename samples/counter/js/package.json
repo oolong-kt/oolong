@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "dependencies": {
+    "kotlin": "^1.3.21",
+    "kotlinx-coroutines-core": "^1.1.1",
+    "superfine": "^6.0.1"
+  }
+}

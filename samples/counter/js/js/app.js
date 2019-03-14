@@ -14,7 +14,7 @@
 				onclick: function () {
 					dispatch(props.onIncrement())
 				}
-			}, '-1'),
+			}, '+1'),
 			h('p', {}, props.count),
 			h('button', {
 				onclick: function () {
