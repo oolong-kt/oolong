@@ -1,4 +1,4 @@
-# Oolong/Superfine • [TodoMVC](http://todomvc.com)
+# Oolong • [TodoMVC](http://todomvc.com)
 
 Oolong is an [Elm](https://guide.elm-lang.org/architecture) inspired Model-View-Update (MVU) implementation for Kotiln multiplatform. As the name implies, three core concepts comprise the foundation of this architecture: 
 
