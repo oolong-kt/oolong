@@ -16,7 +16,6 @@ Get started with Oolong by reading the [official guide](../../../docs/guide/inde
 
 *Let us [know](https://github.com/tastejs/todomvc/issues) if you discover anything worth sharing.*
 
-
 ## Installation
 
 ```
