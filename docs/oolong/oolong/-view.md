@@ -2,7 +2,7 @@
 
 # View
 
-`typealias View<Model, Msg, Props> = (model: `[`Model`](-view.md#Model)`, dispatch: `[`Dispatch`](-dispatch.md)`<`[`Msg`](-view.md#Msg)`>) -> `[`Props`](-view.md#Props)
+`typealias View<Model, Props> = (model: `[`Model`](-view.md#Model)`) -> `[`Props`](-view.md#Props)
 
 Creates view properties from the current state
 
