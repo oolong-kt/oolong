@@ -63,6 +63,9 @@ object Counter {
 }
 ```
 
+Samples
+-------
+
 More examples can be found in the [samples directory](samples).
 
 Documentation
