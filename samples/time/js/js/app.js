@@ -10,7 +10,9 @@
 
 	function render(props, dispatch) {
 		return h('div', {}, [
-			h('p', {}, new Date().toTimeString())
+			h('p', {
+				class: 'mdc-typography mdc-typography--body1'
+			}, new Date().toTimeString())
 		]);
 	}
 

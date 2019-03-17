@@ -10,8 +10,11 @@
 
 	function render(props, dispatch) {
 		return h('div', {}, [
-			h('p', {}, props.dieFace),
+			h('p', {
+				class: 'mdc-typography mdc-typography--body1'
+			}, props.dieFace),
 			h('button', {
+				class: 'mdc-button mdc-button--raised mdc-button__label	',
 				onclick: function () {
 					dispatch(props.onRoll())
 				}

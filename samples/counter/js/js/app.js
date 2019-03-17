@@ -11,16 +11,20 @@
 	function render(props, dispatch) {
 		return h('div', {}, [
 			h('button', {
+				class: 'mdc-button mdc-button--raised mdc-button__label	',
 				onclick: function () {
 					dispatch(props.onIncrement())
 				}
-			}, '+1'),
-			h('p', {}, props.count),
+			}, h('span', { class: 'mdc-button__label' }, '+1')),
+			h('p', {
+				class: 'mdc-typography mdc-typography--body1'
+			}, props.count),
 			h('button', {
+				class: 'mdc-button mdc-button--raised mdc-button__label	',
 				onclick: function () {
 					dispatch(props.onDecrement())
 				}
-			}, '-1')
+			}, h('span', { class: 'mdc-button__label' }, '-1'))
 		]);
 	}
 
