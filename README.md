@@ -35,7 +35,7 @@ object Counter {
         object Decrement : Msg()
     }
 
-    data class Props(
+    class Props(
         val count: Int,
         val onIncrement: () -> Msg,
         val onDecrement: () -> Msg
