@@ -18,8 +18,5 @@ local.properties
 .gradle
 build/
 
-### KotlinTest ###
-.kotlintest
-
 ### Dokka ###
 package-list

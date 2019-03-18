@@ -1,6 +1,11 @@
 # Summary
 
 * [Introduction](README.md)
+* [Core Concepts](core-concepts.md)
+* [Effects](effects/README.md)
+    * [Delay](effects/delay.md)
+    * [Random](effects/random.md)
+* [Rendering](rendering.md)
 
 ---
 
@@ -8,6 +13,9 @@
     * [oolong](oolong/oolong/index.md)
         * [Oolong](oolong/oolong/-oolong/index.md)
             * [Main](oolong/oolong/-oolong/-main/index.md)
+                * [program](oolong/oolong/-oolong/-main/program.md)
+                * [runtime](oolong/oolong/-oolong/-main/runtime.md)
+            * [program](oolong/oolong/-oolong/program.md)
             * [runtime](oolong/oolong/-oolong/runtime.md)
         * [Program](oolong/oolong/-program/index.md)
             * [init](oolong/oolong/-program/init.md)
