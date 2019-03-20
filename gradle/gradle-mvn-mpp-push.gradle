@@ -19,7 +19,7 @@ dokka {
     }
     linkMapping {
         dir = "oolong/src/commonMain/kotlin"
-        url = "https://github.com/pardom/oolong/tree/master/oolong/src/commonMain/kotlin"
+        url = "https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin"
         suffix = "#L"
     }
     if (kotlin.sourceSets.getNames().contains("jvmMain")) {
