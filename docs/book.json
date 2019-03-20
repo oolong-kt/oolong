@@ -1,6 +1,6 @@
 {
     "plugins": [
         "expand-active-chapter",
-        "kotlin-playground@https://github.com/pardom/gitbook-plugin-kotlin-playground"
+        "kotlin-playground@https://github.com/oolong-kt/gitbook-plugin-kotlin-playground"
     ]
 }

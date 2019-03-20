@@ -1,7 +1,7 @@
 Oolong 🍵 
 =========
 
-[![Build Status](https://img.shields.io/travis/oolong-kt/oolong/master.svg)](https://travis-ci.org/pardom/oolong/)
+[![Build Status](https://img.shields.io/travis/oolong-kt/oolong/master.svg)](https://travis-ci.org/oolong-kt/oolong/)
 [![Maven Central](https://img.shields.io/maven-central/v/org.oolong-kt/oolong.svg)](#download)
 [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/https/oss.sonatype.org/org.oolong-kt/oolong.svg)](#download)
 [![License](https://img.shields.io/github/license/oolong-kt/oolong.svg)](LICENSE.md)
