@@ -1,9 +1,9 @@
 # Oolong 🍵
 
-[![Build Status](https://img.shields.io/travis/pardom/oolong/master.svg)](https://travis-ci.org/pardom/oolong/)
-[![Maven Central](https://img.shields.io/maven-central/v/com.michaelpardo/oolong.svg)](#download)
-[![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/https/oss.sonatype.org/com.michaelpardo/oolong.svg)](#download)
-[![License](https://img.shields.io/github/license/pardom/oolong.svg)](LICENSE.md)
+[![Build Status](https://img.shields.io/travis/oolong-kt/oolong/master.svg)](https://travis-ci.org/oolong-kt/oolong/)
+[![Maven Central](https://img.shields.io/maven-central/v/org.oolong-kt/oolong.svg)](#download)
+[![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/https/oss.sonatype.org/org.oolong-kt/oolong.svg)](#download)
+[![License](https://img.shields.io/github/license/oolong-kt/oolong.svg)](LICENSE.md)
 [![Github](https://img.shields.io/github/stars/oolong-kt/oolong.svg?style=social)](https://github.com/oolong-kt/oolong)
 
 Oolong is an Elm inspired Model-View-Update (MVU) implementation for Kotiln multiplatform. As the name implies, three core concepts comprise the foundation of this architecture:
