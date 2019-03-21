@@ -1,4 +1,4 @@
-package oolong.dsl
+package deps.dsl
 
 class Dependency(
     private val group: Group,

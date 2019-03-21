@@ -1,4 +1,4 @@
-package oolong.dsl
+package deps.dsl
 
 interface WithCharSequence : CharSequence {
 

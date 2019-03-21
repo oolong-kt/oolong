@@ -1,5 +1,3 @@
-import oolong.Dependencies
-
 val GROUP: String by project
 val VERSION_NAME: String by project
 
@@ -33,64 +31,64 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(Dependencies.Kotlin.StdLib.Common)
-                api(Dependencies.Kotlin.Coroutines.Core.Common)
+                implementation(deps.Kotlin.StdLib.Common)
+                api(deps.Kotlin.Coroutines.Core.Common)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(Dependencies.Kotlin.Test.Common)
-                implementation(Dependencies.Kotlin.Test.AnnotationsCommon)
+                implementation(deps.Kotlin.Test.Common)
+                implementation(deps.Kotlin.Test.AnnotationsCommon)
             }
         }
 
         val jsMain by getting {
             dependencies {
-                api(Dependencies.Kotlin.Coroutines.Core.JS)
+                api(deps.Kotlin.Coroutines.Core.JS)
             }
         }
 
         val jsTest by getting {
             dependencies {
-                implementation(Dependencies.Kotlin.Test.JS)
+                implementation(deps.Kotlin.Test.JS)
             }
         }
 
         val jvmMain by getting {
             dependencies {
-                api(Dependencies.Kotlin.Coroutines.Core)
+                api(deps.Kotlin.Coroutines.Core)
             }
         }
 
         val jvmTest by getting {
             dependencies {
-                implementation(Dependencies.Kotlin.Test)
-                implementation(Dependencies.Kotlin.Test.JUnit5)
+                implementation(deps.Kotlin.Test)
+                implementation(deps.Kotlin.Test.JUnit5)
             }
         }
 
         val iosMain by getting {
             dependencies {
-                api(Dependencies.Kotlin.Coroutines.Core.Native)
+                api(deps.Kotlin.Coroutines.Core.Native)
             }
         }
 
         val linuxMain by getting {
             dependencies {
-                api(Dependencies.Kotlin.Coroutines.Core.Native)
+                api(deps.Kotlin.Coroutines.Core.Native)
             }
         }
 
         val macOSMain by getting {
             dependencies {
-                api(Dependencies.Kotlin.Coroutines.Core.Native)
+                api(deps.Kotlin.Coroutines.Core.Native)
             }
         }
 
         val windowsMain by getting {
             dependencies {
-                api(Dependencies.Kotlin.Coroutines.Core.Native)
+                api(deps.Kotlin.Coroutines.Core.Native)
             }
         }
     }

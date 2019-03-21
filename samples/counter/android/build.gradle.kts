@@ -1,5 +1,3 @@
-import oolong.Dependencies
-
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -23,7 +21,7 @@ android {
 
 dependencies {
     implementation(project(":samples:counter:core"))
-    implementation(Dependencies.Kotlin.StdLib)
-    implementation(Dependencies.Kotlin.Coroutines.Android)
-    implementation(Dependencies.Android.X.AppCompat)
+    implementation(deps.Kotlin.StdLib)
+    implementation(deps.Kotlin.Coroutines.Android)
+    implementation(deps.Android.X.AppCompat)
 }
