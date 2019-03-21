@@ -2,7 +2,7 @@
 
 # View
 
-`typealias View<Model, Props> = (model: `[`Model`](-view.md#Model)`) -> `[`Props`](-view.md#Props)
+`typealias View<Model, Props> = (model: `[`Model`](-view.md#Model)`) -> `[`Props`](-view.md#Props) [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/types.kt#L41)
 
 Creates view properties from the current state
 

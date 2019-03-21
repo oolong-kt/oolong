@@ -19,7 +19,7 @@ object Dependencies {
         }
     }
 
-    object Dokka : Group("org.jetbrains.dokka", "0.9.17") {
+    object Dokka : Group("org.jetbrains.dokka", "0.9.18") {
         object Gradle : Group(this) {
             val Plugin = Dependency(this, "dokka-gradle-plugin")
         }
