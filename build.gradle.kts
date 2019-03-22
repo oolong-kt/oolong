@@ -4,8 +4,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath(oolong.Dependencies.Android.Gradle.Plugin)
-        classpath(oolong.Dependencies.Kotlin.Gradle.Plugin)
-        classpath(oolong.Dependencies.Dokka.Gradle.Plugin)
+        classpath(deps.Android.Gradle.Plugin)
+        classpath(deps.Kotlin.Gradle.Plugin)
+        classpath(deps.Dokka.Gradle.Plugin)
     }
 }

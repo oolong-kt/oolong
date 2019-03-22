@@ -1,5 +1,3 @@
-import oolong.Dependencies
-
 plugins {
     kotlin("multiplatform")
 }
@@ -20,39 +18,39 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":oolong"))
-                implementation(Dependencies.Kotlin.StdLib.Common)
+                implementation(deps.Kotlin.StdLib.Common)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(Dependencies.Kotlin.Test.Common)
-                implementation(Dependencies.Kotlin.Test.AnnotationsCommon)
+                implementation(deps.Kotlin.Test.Common)
+                implementation(deps.Kotlin.Test.AnnotationsCommon)
             }
         }
 
         val jsMain by getting {
             dependencies {
-                implementation(Dependencies.Kotlin.StdLib.JS)
+                implementation(deps.Kotlin.StdLib.JS)
             }
         }
 
         val jsTest by getting {
             dependencies {
-                implementation(Dependencies.Kotlin.Test.JS)
+                implementation(deps.Kotlin.Test.JS)
             }
         }
 
         val jvmMain by getting {
             dependencies {
-                implementation(Dependencies.Kotlin.StdLib.JDK8)
+                implementation(deps.Kotlin.StdLib.JDK8)
             }
         }
 
         val jvmTest by getting {
             dependencies {
-                implementation(Dependencies.Kotlin.Test)
-                implementation(Dependencies.Kotlin.Test.JUnit5)
+                implementation(deps.Kotlin.Test)
+                implementation(deps.Kotlin.Test.JUnit5)
             }
         }
     }

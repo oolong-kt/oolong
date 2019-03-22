@@ -2,7 +2,7 @@
 
 # Program
 
-`interface Program<Model, Msg, Props>`
+`interface Program<Model, Msg, Props>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/Program.kt#L6)
 
 An interface to encapsulate the requirements of an Oolong runtime.
 

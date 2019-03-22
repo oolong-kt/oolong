@@ -2,7 +2,7 @@
 
 # Main
 
-`object Main`
+`object Main` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/Oolong.kt#L57)
 
 ### Functions
 
