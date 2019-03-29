@@ -3,6 +3,7 @@
   "dependencies": {
     "kotlin": "^1.3.21",
     "kotlinx-coroutines-core": "^1.1.1",
+    "material-components-web": "^1.1.0",
     "superfine": "^6.0.1"
   }
 }
