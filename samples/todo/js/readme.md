@@ -24,4 +24,4 @@ Get started with Oolong by reading the [official guide](https://oolong-kt.org/).
 
 ## Credit
 
-Created by [Micahel Pardo](http://michaelpardo.com)
+Created by [Michael Pardo](http://michaelpardo.com)
