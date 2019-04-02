@@ -1,10 +1,10 @@
 package random
 
+import oolong.Effect
 import oolong.Init
 import oolong.Update
 import oolong.View
 import oolong.util.effect.noEffect
-import oolong.util.effect.withoutEffects
 import oolong.util.random.nextInt
 import kotlin.random.Random
 
@@ -24,13 +24,13 @@ object Random {
         val onRoll: () -> Msg
     )
 
-    val init: Init<Model, Msg> = withoutEffects { ->
-        Model()
+    val init: Init<Model, Msg> = {
+        Model() to rollDie()
     }
 
     val update: Update<Model, Msg> = { msg, model ->
         when (msg) {
-            Msg.Roll -> model to Random.nextInt(1, 6) { Msg.NewFace(it) }
+            Msg.Roll -> model to rollDie()
             is Msg.NewFace -> Model(msg.face) to noEffect()
         }
     }
@@ -40,6 +40,10 @@ object Random {
             model.face,
             { Msg.Roll }
         )
+    }
+
+    private val rollDie: () -> Effect<Msg> = {
+        Random.nextInt(1..6) { Msg.NewFace(it) } as Effect<Msg>
     }
 
 }
