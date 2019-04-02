@@ -1,3 +1,7 @@
+import com.moowork.gradle.node.npm.NpmInstallTask
+import com.moowork.gradle.node.task.NodeTask
+import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
+
 val GROUP: String by project
 val VERSION_NAME: String by project
 
@@ -8,6 +12,7 @@ plugins {
     kotlin("multiplatform")
     `maven-publish`
     signing
+    id(deps.Node.Plugin)
 }
 
 repositories {
@@ -17,9 +22,11 @@ repositories {
 kotlin {
     js()
     js {
-        compilations["main"].kotlinOptions {
-            moduleKind = "umd"
-            sourceMap = true
+        compilations.forEach {
+            it.kotlinOptions {
+                moduleKind = "umd"
+                sourceMap = true
+            }
         }
     }
     jvm()
@@ -90,6 +97,42 @@ kotlin {
             dependencies {
                 api(deps.Kotlin.Coroutines.Core.Native)
             }
+        }
+    }
+}
+
+node {
+    download = true
+}
+
+tasks {
+    val compileKotlinJs by getting(Kotlin2JsCompile::class)
+    val compileTestKotlinJs by getting(Kotlin2JsCompile::class)
+    val npmInstall by getting(NpmInstallTask::class)
+
+    val copyJsArtifacts by creating(Copy::class) {
+        dependsOn(compileKotlinJs)
+        from(compileKotlinJs.destinationDir)
+        from(compileTestKotlinJs.destinationDir)
+        into("$buildDir/node_modules")
+    }
+
+    val runJest by creating(NodeTask::class) {
+        dependsOn(compileTestKotlinJs, copyJsArtifacts, npmInstall )
+        setScript(file("node_modules/jest/bin/jest.js"))
+        setArgs(mutableListOf(projectDir.toURI().relativize(compileTestKotlinJs.outputFile.toURI())))
+    }
+
+    val jsTest by getting {
+        dependsOn(runJest)
+    }
+}
+
+// workaround for https://github.com/srs/gradle-node-plugin/issues/301
+repositories.whenObjectAdded {
+    if (this is IvyArtifactRepository) {
+        metadataSources {
+            artifact()
         }
     }
 }

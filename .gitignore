@@ -18,5 +18,8 @@ local.properties
 .gradle
 build/
 
+### Node ###
+node_modules/
+
 ### Dokka ###
 package-list
