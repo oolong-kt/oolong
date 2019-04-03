@@ -118,7 +118,7 @@ tasks {
     }
 
     val runJest by creating(NodeTask::class) {
-        dependsOn(compileTestKotlinJs, copyJsArtifacts, npmInstall )
+        dependsOn(compileTestKotlinJs, copyJsArtifacts, npmInstall)
         setScript(file("node_modules/jest/bin/jest.js"))
         setArgs(mutableListOf(projectDir.toURI().relativize(compileTestKotlinJs.outputFile.toURI())))
     }
