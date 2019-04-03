@@ -1,5 +1,6 @@
 package oolong
 
+import oolong.util.delay.timeout
 import oolong.util.effect.withoutEffects
 import kotlin.js.JsName
 import kotlin.test.Test
@@ -42,6 +43,32 @@ class RuntimeTest {
                     }
                     "done" -> {
                         assertEquals(count, 3)
+                        resolve()
+                    }
+                }
+            }
+        )
+    }
+
+    @Test
+    @JsName("effects_do_not_block_runtime")
+    fun `effects do not block runtime`() = runTest { resolve ->
+        val states = mutableListOf<String>()
+        Oolong.runtime(
+            { ("init" to timeout(100) { "effect" }.first) as Pair<String, Effect<String>> },
+            withoutEffects { msg: String, _: String -> msg },
+            { model: String -> model },
+            { model: String, dispatch: Dispatch<String> ->
+                states.add(model)
+                when (model) {
+                    "init" -> {
+                        dispatch("next")
+                    }
+                    "effect" -> {
+                        dispatch("done")
+                    }
+                    "done" -> {
+                        assertEquals(listOf("init", "next", "effect", "done"), states)
                         resolve()
                     }
                 }

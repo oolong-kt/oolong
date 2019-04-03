@@ -17,6 +17,7 @@ local.properties
 ### Gradle ###
 .gradle
 build/
+classes/
 
 ### Node ###
 node_modules/
