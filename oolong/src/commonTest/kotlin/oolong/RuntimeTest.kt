@@ -1,37 +1,33 @@
 package oolong
 
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Runnable
 import oolong.util.effect.withoutEffects
-import kotlin.coroutines.CoroutineContext
+import kotlin.js.JsName
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
 
 class RuntimeTest {
 
-    private val dispatcher = object : CoroutineDispatcher() {
-        override fun dispatch(context: CoroutineContext, block: Runnable) {
-            block.run()
-        }
-    }
-
     @Test
-    fun runtime_should_call_render_initially() {
+    @JsName("runtime_should_call_render_initially")
+    fun `runtime should call render initially`() = runTest { resolve ->
         val initialState = 1
-        testRuntime(
+        Oolong.runtime(
             withoutEffects { -> initialState },
             withoutEffects { _: Unit, model: Int -> model },
             { model: Int -> model },
-            { props: Int, _ -> assertEquals(initialState, props) }
+            { props: Int, _: Dispatch<Unit> ->
+                assertEquals(initialState, props)
+                resolve()
+            }
         )
     }
 
     @Test
-    fun runtime_should_call_render_after_dispatch() {
+    @JsName("runtime_should_call_render_after_dispatch")
+    fun `runtime should call render after dispatch`() = runTest { resolve ->
         var count = 0
-        testRuntime(
+        Oolong.runtime(
             withoutEffects { -> "init" },
             withoutEffects { msg: String, _: String -> msg },
             { model: String -> model },
@@ -46,6 +42,7 @@ class RuntimeTest {
                     }
                     "done" -> {
                         assertEquals(count, 3)
+                        resolve()
                     }
                 }
             }
@@ -53,24 +50,36 @@ class RuntimeTest {
     }
 
     @Test
-    fun runtime_should_not_call_update_view_render_if_disposed() {
+    @JsName("runtime_should_not_overflow_stack")
+    fun `runtime should not overflow stack`() = runTest { resolve ->
+        Oolong.runtime(
+            withoutEffects { -> 0 },
+            withoutEffects { _: Unit, model: Int -> model + 1 },
+            { model: Int -> model },
+            { model: Int, dispatch: Dispatch<Unit> ->
+                if (model > 50_000) {
+                    resolve()
+                } else {
+                    dispatch(Unit)
+                }
+            }
+        )
+    }
+
+    @Test
+    @JsName("runtime_should_not_call_update_view_render_if_disposed")
+    fun `runtime should not call update view render if disposed`() = runTest { resolve ->
         var initialRender = true
-        testRuntime(
+        Oolong.runtime(
             withoutEffects { -> "state" },
-            { msg: String, _: String -> msg to { dispatch -> dispatch("next") } },
+            { msg: String, _: String -> msg to { dispatch: Dispatch<String> -> dispatch("next") } },
             { model: String -> model },
-            { _, _ ->
+            { _: String, _: Dispatch<String> ->
                 if (initialRender) initialRender = false
                 else fail()
+                resolve()
             }
         )()
     }
-
-    private fun <Model, Msg, Props> testRuntime(
-        init: Init<Model, Msg>,
-        update: Update<Model, Msg>,
-        view: View<Model, Props>,
-        render: Render<Msg, Props>
-    ) = Oolong.runtime(init, update, view, render, GlobalScope, dispatcher, dispatcher)
 
 }
