@@ -1,0 +1,30 @@
+{
+  "name": "oolong",
+  "version": "2.0.0",
+  "description": "MVU for Kotlin Multiplatform",
+  "main": "oolong.js",
+  "dependencies": {
+    "kotlin": "^1.3.21",
+    "kotlinx-coroutines-core": "^1.1.1"
+  },
+  "devDependencies": {
+    "jest": "^24.6.0",
+    "kotlin-test": "^1.3.21"
+  },
+  "scripts": {
+    "test": "../gradlew :oolong:jsTest"
+  },
+  "jest": {
+    "testRegex": "_test\\.js$"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oolong-kt/oolong.git"
+  },
+  "author": "Michael Pardo",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/oolong-kt/oolong/issues"
+  },
+  "homepage": "https://oolong-kt.org"
+}

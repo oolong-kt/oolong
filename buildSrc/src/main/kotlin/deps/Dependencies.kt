@@ -1,4 +1,4 @@
-package deps 
+package deps
 
 import deps.dsl.Dependency
 import deps.dsl.Dependency.Group
@@ -67,6 +67,14 @@ object Kotlin : Group("org.jetbrains.kotlin", "1.3.21") {
         val JVM = Dependency(this, BASE)
         val JUnit5 = Dependency(this, "$BASE-junit5")
         override val DEFAULT = Dependency(this, BASE)
+    }
+}
+
+object Node : Group("com.moowork.gradle", "1.3.1") {
+    const val Plugin = "com.moowork.node"
+
+    object Gradle : Group(this) {
+        val Plugin = Dependency(this, "gradle-node-plugin")
     }
 }
 
