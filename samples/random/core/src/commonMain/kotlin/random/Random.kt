@@ -4,9 +4,8 @@ import oolong.Effect
 import oolong.Init
 import oolong.Update
 import oolong.View
-import oolong.effect.noEffect
+import oolong.effect.none
 import oolong.random.nextInt
-import kotlin.random.Random
 
 object Random {
 
@@ -31,7 +30,7 @@ object Random {
     val update: Update<Model, Msg> = { msg, model ->
         when (msg) {
             Msg.Roll -> model to rollDie()
-            is Msg.NewFace -> Model(msg.face) to noEffect()
+            is Msg.NewFace -> Model(msg.face) to none()
         }
     }
 
