@@ -3,7 +3,7 @@ package todo
 import oolong.Init
 import oolong.Update
 import oolong.View
-import oolong.util.effect.noEffect
+import oolong.effect.noEffect
 
 object Todo {
 

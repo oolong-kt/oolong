@@ -17,9 +17,10 @@ By applying this simple pattern you can create composable, testable programs tha
 | Name | Summary |
 |---|---|
 | [oolong](oolong/index.md) | The Oolong runtime and types. |
-| [oolong.util.delay](oolong.util.delay/index.md) | Utility functions for creating delay effects. |
-| [oolong.util.effect](oolong.util.effect/index.md) | Utility functions for creating effects. |
-| [oolong.util.random](oolong.util.random/index.md) | Utility functions for creating random effects. |
+| [oolong.delay](oolong.delay/index.md) |  |
+| [oolong.effect](oolong.effect/index.md) |  |
+| [oolong.next](oolong.next/index.md) |  |
+| [oolong.random](oolong.random/index.md) |  |
 
 ### Index
 
