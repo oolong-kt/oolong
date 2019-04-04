@@ -4,4 +4,5 @@ $dokka.linkExtension:md
 oolong
 oolong.delay
 oolong.effect
+oolong.next
 oolong.random

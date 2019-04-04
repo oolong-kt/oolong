@@ -2,9 +2,9 @@
 
 # nextULong
 
-`fun <Msg> <ERROR CLASS>.nextULong(msg: (<ERROR CLASS>) -> `[`Msg`](next-u-long.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-u-long.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L236)
-`fun <Msg> <ERROR CLASS>.nextULong(until: <ERROR CLASS>, msg: (<ERROR CLASS>) -> `[`Msg`](next-u-long.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-u-long.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L246)
-`fun <Msg> <ERROR CLASS>.nextULong(from: <ERROR CLASS>, until: <ERROR CLASS>, msg: (<ERROR CLASS>) -> `[`Msg`](next-u-long.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-u-long.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L256)
+`fun <Msg> nextULong(msg: (<ERROR CLASS>) -> `[`Msg`](next-u-long.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-u-long.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L236)
+`fun <Msg> nextULong(until: <ERROR CLASS>, msg: (<ERROR CLASS>) -> `[`Msg`](next-u-long.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-u-long.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L246)
+`fun <Msg> nextULong(from: <ERROR CLASS>, until: <ERROR CLASS>, msg: (<ERROR CLASS>) -> `[`Msg`](next-u-long.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-u-long.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L256)
 
 Call [Random.nextULong](#) with a mapping of [ULong](#) to [Msg](next-u-long.md#Msg).
 
