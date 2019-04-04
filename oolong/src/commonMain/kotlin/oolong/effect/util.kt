@@ -7,36 +7,36 @@ import oolong.Update
 /**
  * Create an empty effect.
  */
-fun <Msg> noEffect(): Effect<Msg> =
-    batchEffects(emptyList())
+fun <Msg> none(): Effect<Msg> =
+    batch(emptyList())
 
 /**
  * Compose a list of effects into a single effect.
  *
  * @param effects a list of effects
  */
-fun <Msg> batchEffects(vararg effects: Effect<Msg>): Effect<Msg> =
-    batchEffects(effects.asIterable())
+fun <Msg> batch(vararg effects: Effect<Msg>): Effect<Msg> =
+    batch(effects.asIterable())
 
 /**
  * Compose a list of effects into a single effect.
  *
  * @param effects a list of effects
  */
-fun <Msg> batchEffects(effects: Iterable<Effect<Msg>>): Effect<Msg> =
+fun <Msg> batch(effects: Iterable<Effect<Msg>>): Effect<Msg> =
     { dispatch -> for (effect in effects) effect(dispatch) }
 
 /**
  * Create an [Init] function with no effects.
  */
 fun <Model, Msg> withoutEffects(init: () -> Model): Init<Model, Msg> =
-    { init() to noEffect() }
+    { init() to none() }
 
 /**
  * Create an [Update] function with no effects.
  */
 fun <Model, Msg> withoutEffects(init: (msg: Msg, model: Model) -> Model): Update<Model, Msg> =
-    { msg, model -> init(msg, model) to noEffect() }
+    { msg, model -> init(msg, model) to none() }
 
 /**
  * Map from [Effect] of [A] to [Effect] of [Msg]
