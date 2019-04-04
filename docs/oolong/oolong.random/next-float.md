@@ -1,8 +1,8 @@
-[oolong](../index.md) / [oolong.util.random](index.md) / [nextFloat](./next-float.md)
+[oolong](../index.md) / [oolong.random](index.md) / [nextFloat](./next-float.md)
 
 # nextFloat
 
-`fun <Msg> <ERROR CLASS>.nextFloat(msg: (`[`Float`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html)`) -> `[`Msg`](next-float.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-float.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/util/random/util.kt#L94)
+`fun <Msg> <ERROR CLASS>.nextFloat(msg: (`[`Float`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html)`) -> `[`Msg`](next-float.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-float.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L94)
 
 Call [Random.nextFloat](#) with a mapping of [Float](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html) to [Msg](next-float.md#Msg).
 

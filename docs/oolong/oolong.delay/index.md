@@ -1,8 +1,6 @@
-[oolong](../index.md) / [oolong.util.delay](./index.md)
+[oolong](../index.md) / [oolong.delay](./index.md)
 
-## Package oolong.util.delay
-
-Utility functions for creating delay effects.
+## Package oolong.delay
 
 ### Functions
 

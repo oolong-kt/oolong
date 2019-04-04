@@ -4,8 +4,8 @@ import oolong.Init
 import oolong.Next
 import oolong.Update
 import oolong.View
-import oolong.util.delay.interval
-import oolong.util.effect.withoutEffects
+import oolong.delay.interval
+import oolong.effect.withoutEffects
 
 object Time {
 

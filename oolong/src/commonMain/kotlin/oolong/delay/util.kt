@@ -1,4 +1,4 @@
-package oolong.util.delay
+package oolong.delay
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope

@@ -4,8 +4,8 @@ import oolong.Effect
 import oolong.Init
 import oolong.Update
 import oolong.View
-import oolong.util.effect.noEffect
-import oolong.util.random.nextInt
+import oolong.effect.noEffect
+import oolong.random.nextInt
 import kotlin.random.Random
 
 object Random {
@@ -43,7 +43,7 @@ object Random {
     }
 
     private val rollDie: () -> Effect<Msg> = {
-        Random.nextInt(1..6) { Msg.NewFace(it) } as Effect<Msg>
+        nextInt(1..6) { Msg.NewFace(it) } as Effect<Msg>
     }
 
 }

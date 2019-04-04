@@ -1,8 +1,6 @@
-[oolong](../index.md) / [oolong.util.effect](./index.md)
+[oolong](../index.md) / [oolong.effect](./index.md)
 
-## Package oolong.util.effect
-
-Utility functions for creating effects.
+## Package oolong.effect
 
 ### Functions
 

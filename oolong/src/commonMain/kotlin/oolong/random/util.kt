@@ -1,4 +1,4 @@
-package oolong.util.random
+package oolong.random
 
 import oolong.Effect
 import kotlin.random.Random
@@ -14,7 +14,7 @@ import kotlin.random.nextULong
  * @param msg map function of [Int] to [Msg]
  * @return [Effect] of [Msg] for the generated [Int]
  */
-fun <Msg> Random.nextBits(bitCount: Int, msg: (Int) -> Msg): Effect<Msg> =
+fun <Msg> nextBits(bitCount: Int, msg: (Int) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextBits(bitCount) }
 
 /**
@@ -23,7 +23,7 @@ fun <Msg> Random.nextBits(bitCount: Int, msg: (Int) -> Msg): Effect<Msg> =
  * @param msg map function of [Boolean] to [Msg]
  * @return [Effect] of [Msg] for the generated [Boolean]
  */
-fun <Msg> Random.nextBoolean(msg: (Boolean) -> Msg): Effect<Msg> =
+fun <Msg> nextBoolean(msg: (Boolean) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextBoolean() }
 
 /**
@@ -32,7 +32,7 @@ fun <Msg> Random.nextBoolean(msg: (Boolean) -> Msg): Effect<Msg> =
  * @param msg map function of [ByteArray] to [Msg]
  * @return [Effect] of [Msg] for the generated [ByteArray]
  */
-fun <Msg> Random.nextBytes(
+fun <Msg> nextBytes(
     array: ByteArray,
     fromIndex: Int,
     toIndex: Int,
@@ -46,7 +46,7 @@ fun <Msg> Random.nextBytes(
  * @param msg map function of [ByteArray] to [Msg]
  * @return [Effect] of [Msg] for the generated [ByteArray]
  */
-fun <Msg> Random.nextBytes(array: ByteArray, msg: (ByteArray) -> Msg): Effect<Msg> =
+fun <Msg> nextBytes(array: ByteArray, msg: (ByteArray) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextBytes(array) }
 
 /**
@@ -55,7 +55,7 @@ fun <Msg> Random.nextBytes(array: ByteArray, msg: (ByteArray) -> Msg): Effect<Ms
  * @param msg map function of [ByteArray] to [Msg]
  * @return [Effect] of [Msg] for the generated [ByteArray]
  */
-fun <Msg> Random.nextBytes(size: Int, msg: (ByteArray) -> Msg): Effect<Msg> =
+fun <Msg> nextBytes(size: Int, msg: (ByteArray) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextBytes(size) }
 
 /**
@@ -64,7 +64,7 @@ fun <Msg> Random.nextBytes(size: Int, msg: (ByteArray) -> Msg): Effect<Msg> =
  * @param msg map function of [Double] to [Msg]
  * @return [Effect] of [Msg] for the generated [Double]
  */
-fun <Msg> Random.nextDouble(msg: (Double) -> Msg): Effect<Msg> =
+fun <Msg> nextDouble(msg: (Double) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextDouble() }
 
 /**
@@ -73,7 +73,7 @@ fun <Msg> Random.nextDouble(msg: (Double) -> Msg): Effect<Msg> =
  * @param msg map function of [Double] to [Msg]
  * @return [Effect] of [Msg] for the generated [Double]
  */
-fun <Msg> Random.nextDouble(until: Double, msg: (Double) -> Msg): Effect<Msg> =
+fun <Msg> nextDouble(until: Double, msg: (Double) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextDouble(until) }
 
 /**
@@ -82,7 +82,7 @@ fun <Msg> Random.nextDouble(until: Double, msg: (Double) -> Msg): Effect<Msg> =
  * @param msg map function of [Double] to [Msg]
  * @return [Effect] of [Msg] for the generated [Double]
  */
-fun <Msg> Random.nextDouble(from: Double, until: Double, msg: (Double) -> Msg): Effect<Msg> =
+fun <Msg> nextDouble(from: Double, until: Double, msg: (Double) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextDouble(from, until) }
 
 /**
@@ -91,7 +91,7 @@ fun <Msg> Random.nextDouble(from: Double, until: Double, msg: (Double) -> Msg): 
  * @param msg map function of [Float] to [Msg]
  * @return [Effect] of [Msg] for the generated [Float]
  */
-fun <Msg> Random.nextFloat(msg: (Float) -> Msg): Effect<Msg> =
+fun <Msg> nextFloat(msg: (Float) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextFloat() }
 
 /**
@@ -100,7 +100,7 @@ fun <Msg> Random.nextFloat(msg: (Float) -> Msg): Effect<Msg> =
  * @param msg map function of [Int] to [Msg]
  * @return [Effect] of [Msg] for the generated [Int]
  */
-fun <Msg> Random.nextInt(msg: (Int) -> Msg): Effect<Msg> =
+fun <Msg> nextInt(msg: (Int) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextInt() }
 
 /**
@@ -109,7 +109,7 @@ fun <Msg> Random.nextInt(msg: (Int) -> Msg): Effect<Msg> =
  * @param msg map function of [Int] to [Msg]
  * @return [Effect] of [Msg] for the generated [Int]
  */
-fun <Msg> Random.nextInt(until: Int, msg: (Int) -> Msg): Effect<Msg> =
+fun <Msg> nextInt(until: Int, msg: (Int) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextInt(until) }
 
 /**
@@ -118,7 +118,7 @@ fun <Msg> Random.nextInt(until: Int, msg: (Int) -> Msg): Effect<Msg> =
  * @param msg map function of [Int] to [Msg]
  * @return [Effect] of [Msg] for the generated [Int]
  */
-fun <Msg> Random.nextInt(from: Int, until: Int, msg: (Int) -> Msg): Effect<Msg> =
+fun <Msg> nextInt(from: Int, until: Int, msg: (Int) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextInt(from, until) }
 
 /**
@@ -127,7 +127,7 @@ fun <Msg> Random.nextInt(from: Int, until: Int, msg: (Int) -> Msg): Effect<Msg> 
  * @param msg map function of [Int] to [Msg]
  * @return [Effect] of [Msg] for the generated [Int]
  */
-fun <Msg> Random.nextInt(range: IntRange, msg: (Int) -> Msg): Effect<Msg> =
+fun <Msg> nextInt(range: IntRange, msg: (Int) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextInt(range) }
 
 /**
@@ -136,7 +136,7 @@ fun <Msg> Random.nextInt(range: IntRange, msg: (Int) -> Msg): Effect<Msg> =
  * @param msg map function of [Long] to [Msg]
  * @return [Effect] of [Msg] for the generated [Long]
  */
-fun <Msg> Random.nextLong(msg: (Long) -> Msg): Effect<Msg> =
+fun <Msg> nextLong(msg: (Long) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextLong() }
 
 /**
@@ -145,7 +145,7 @@ fun <Msg> Random.nextLong(msg: (Long) -> Msg): Effect<Msg> =
  * @param msg map function of [Long] to [Msg]
  * @return [Effect] of [Msg] for the generated [Long]
  */
-fun <Msg> Random.nextLong(until: Long, msg: (Long) -> Msg): Effect<Msg> =
+fun <Msg> nextLong(until: Long, msg: (Long) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextLong(until) }
 
 /**
@@ -154,7 +154,7 @@ fun <Msg> Random.nextLong(until: Long, msg: (Long) -> Msg): Effect<Msg> =
  * @param msg map function of [Long] to [Msg]
  * @return [Effect] of [Msg] for the generated [Long]
  */
-fun <Msg> Random.nextLong(from: Long, until: Long, msg: (Long) -> Msg): Effect<Msg> =
+fun <Msg> nextLong(from: Long, until: Long, msg: (Long) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextLong(from, until) }
 
 /**
@@ -163,7 +163,7 @@ fun <Msg> Random.nextLong(from: Long, until: Long, msg: (Long) -> Msg): Effect<M
  * @param msg map function of [Long] to [Msg]
  * @return [Effect] of [Msg] for the generated [Long]
  */
-fun <Msg> Random.nextLong(range: LongRange, msg: (Long) -> Msg): Effect<Msg> =
+fun <Msg> nextLong(range: LongRange, msg: (Long) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextLong(range) }
 
 /**
@@ -173,7 +173,7 @@ fun <Msg> Random.nextLong(range: LongRange, msg: (Long) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [UByteArray]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> Random.nextUBytes(array: UByteArray, msg: (UByteArray) -> Msg): Effect<Msg> =
+fun <Msg> nextUBytes(array: UByteArray, msg: (UByteArray) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextUBytes(array) }
 
 /**
@@ -183,7 +183,7 @@ fun <Msg> Random.nextUBytes(array: UByteArray, msg: (UByteArray) -> Msg): Effect
  * @return [Effect] of [Msg] for the generated [UByteArray]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> Random.nextUBytes(size: Int, msg: (UByteArray) -> Msg): Effect<Msg> =
+fun <Msg> nextUBytes(size: Int, msg: (UByteArray) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextUBytes(size) }
 
 /**
@@ -193,7 +193,7 @@ fun <Msg> Random.nextUBytes(size: Int, msg: (UByteArray) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [UInt]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> Random.nextUInt(msg: (UInt) -> Msg): Effect<Msg> =
+fun <Msg> nextUInt(msg: (UInt) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextUInt() }
 
 /**
@@ -203,7 +203,7 @@ fun <Msg> Random.nextUInt(msg: (UInt) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [UInt]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> Random.nextUInt(until: UInt, msg: (UInt) -> Msg): Effect<Msg> =
+fun <Msg> nextUInt(until: UInt, msg: (UInt) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextUInt(until) }
 
 /**
@@ -213,7 +213,7 @@ fun <Msg> Random.nextUInt(until: UInt, msg: (UInt) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [UInt]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> Random.nextUInt(from: UInt, until: UInt, msg: (UInt) -> Msg): Effect<Msg> =
+fun <Msg> nextUInt(from: UInt, until: UInt, msg: (UInt) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextUInt(from, until) }
 
 /**
@@ -223,7 +223,7 @@ fun <Msg> Random.nextUInt(from: UInt, until: UInt, msg: (UInt) -> Msg): Effect<M
  * @return [Effect] of [Msg] for the generated [UInt]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> Random.nextUInt(range: UIntRange, msg: (UInt) -> Msg): Effect<Msg> =
+fun <Msg> nextUInt(range: UIntRange, msg: (UInt) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextUInt(range) }
 
 /**
@@ -233,7 +233,7 @@ fun <Msg> Random.nextUInt(range: UIntRange, msg: (UInt) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [ULong]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> Random.nextULong(msg: (ULong) -> Msg): Effect<Msg> =
+fun <Msg> nextULong(msg: (ULong) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextULong() }
 
 /**
@@ -243,7 +243,7 @@ fun <Msg> Random.nextULong(msg: (ULong) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [ULong]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> Random.nextULong(until: ULong, msg: (ULong) -> Msg): Effect<Msg> =
+fun <Msg> nextULong(until: ULong, msg: (ULong) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextULong(until) }
 
 /**
@@ -253,7 +253,7 @@ fun <Msg> Random.nextULong(until: ULong, msg: (ULong) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [ULong]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> Random.nextULong(from: ULong, until: ULong, msg: (ULong) -> Msg): Effect<Msg> =
+fun <Msg> nextULong(from: ULong, until: ULong, msg: (ULong) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextULong(from, until) }
 
 /**
@@ -263,7 +263,7 @@ fun <Msg> Random.nextULong(from: ULong, until: ULong, msg: (ULong) -> Msg): Effe
  * @return [Effect] of [Msg] for the generated [ULong]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> Random.nextULong(range: ULongRange, msg: (ULong) -> Msg): Effect<Msg> =
+fun <Msg> nextULong(range: ULongRange, msg: (ULong) -> Msg): Effect<Msg> =
     effect(msg) { Random.nextULong(range) }
 
 private inline fun <T, Msg> effect(

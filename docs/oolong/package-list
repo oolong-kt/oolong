@@ -2,6 +2,6 @@ $dokka.format:gfm
 $dokka.linkExtension:md
 
 oolong
-oolong.util.delay
-oolong.util.effect
-oolong.util.random
+oolong.delay
+oolong.effect
+oolong.random

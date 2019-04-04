@@ -1,7 +1,7 @@
 package oolong
 
-import oolong.util.delay.timeout
-import oolong.util.effect.withoutEffects
+import oolong.delay.timeout
+import oolong.effect.withoutEffects
 import kotlin.js.JsName
 import kotlin.test.Test
 import kotlin.test.assertEquals

@@ -1,4 +1,4 @@
-package oolong.util.effect
+package oolong.effect
 
 import oolong.Effect
 import oolong.Init

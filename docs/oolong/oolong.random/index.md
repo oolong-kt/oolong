@@ -1,8 +1,6 @@
-[oolong](../index.md) / [oolong.util.random](./index.md)
+[oolong](../index.md) / [oolong.random](./index.md)
 
-## Package oolong.util.random
-
-Utility functions for creating random effects.
+## Package oolong.random
 
 ### Functions
 
