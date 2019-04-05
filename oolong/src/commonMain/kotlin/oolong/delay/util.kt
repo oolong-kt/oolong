@@ -10,6 +10,7 @@ import kotlinx.coroutines.plus
 import oolong.Dispatch
 import oolong.Dispose
 import oolong.Effect
+import oolong.effect
 
 /**
  * Generate a [Msg] after a specified delay.
@@ -46,7 +47,7 @@ private inline fun <Msg> delayed(
     crossinline block: Job.(Dispatch<Msg>) -> Unit
 ): Pair<Effect<Msg>, Dispose> {
     val supervisor = SupervisorJob()
-    return { dispatch: Dispatch<Msg> ->
+    return effect { dispatch: Dispatch<Msg> ->
         with(scope + supervisor) {
             launch {
                 while (supervisor.isActive) {

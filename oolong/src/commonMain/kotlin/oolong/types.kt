@@ -12,7 +12,7 @@ typealias Dispatch<Msg> = (msg: Msg) -> Unit
  *
  * @param dispatch the dispatch function
  */
-typealias Effect<Msg> = (dispatch: Dispatch<Msg>) -> Unit
+typealias Effect<Msg> = suspend (dispatch: Dispatch<Msg>) -> Unit
 
 /**
  * A pair of the next state and side-effects
@@ -45,10 +45,34 @@ typealias View<Model, Props> = (model: Model) -> Props
  *
  * @param props view properties
  */
-typealias Render<Msg, Props> = (props: Props, dispatch: Dispatch<Msg>) -> Unit
+typealias Render<Msg, Props> = suspend (props: Props, dispatch: Dispatch<Msg>) -> Unit
 
 /**
  * Stops the function and cleans up resources
  */
 typealias Dispose = () -> Unit
 
+/**
+ * [Effect] builder function.
+ */
+fun <Msg> effect(block: Effect<Msg>) = block
+
+/**
+ * [Init] builder function.
+ */
+fun <Model, Msg> init(block: Init<Model, Msg>) = block
+
+/**
+ * [Update] builder function.
+ */
+fun <Model, Msg> update(block: Update<Model, Msg>) = block
+
+/**
+ * [View] builder function.
+ */
+fun <Model, Props> view(block: View<Model, Props>) = block
+
+/**
+ * [Render] builder function.
+ */
+fun <Props, Msg> render(block: Render<Props, Msg>) = block
