@@ -3,7 +3,7 @@ package todo
 import oolong.Init
 import oolong.Update
 import oolong.View
-import oolong.effect.noEffect
+import oolong.effect.none
 
 object Todo {
 
@@ -104,7 +104,7 @@ object Todo {
     val update: Update<Model, Msg> = { msg, model ->
         when (msg) {
             Msg.NoOp -> {
-                model to noEffect()
+                model to none()
             }
             Msg.Add -> {
                 model.copy(
@@ -115,10 +115,10 @@ object Todo {
                     } else {
                         model.entries + newEntry(model.field, model.uid)
                     }
-                ) to noEffect()
+                ) to none()
             }
             is Msg.UpdateField -> {
-                model.copy(field = msg.str) to noEffect()
+                model.copy(field = msg.str) to none()
             }
             is Msg.EditingEntry -> {
                 val updateEntry = { entry: Entry ->
@@ -129,7 +129,7 @@ object Todo {
                     }
                 }
                 // TODO: return effect to attempt focus of entry
-                model.copy(entries = model.entries.map(updateEntry)) to noEffect()
+                model.copy(entries = model.entries.map(updateEntry)) to none()
             }
             is Msg.UpdateEntry -> {
                 val updateEntry = { entry: Entry ->
@@ -139,13 +139,13 @@ object Todo {
                         entry
                     }
                 }
-                model.copy(entries = model.entries.map(updateEntry)) to noEffect()
+                model.copy(entries = model.entries.map(updateEntry)) to none()
             }
             is Msg.Delete -> {
-                model.copy(entries = model.entries.filter { entry -> entry.id != msg.entryId }) to noEffect()
+                model.copy(entries = model.entries.filter { entry -> entry.id != msg.entryId }) to none()
             }
             Msg.DeleteComplete -> {
-                model.copy(entries = model.entries.filter { entry -> !entry.completed }) to noEffect()
+                model.copy(entries = model.entries.filter { entry -> !entry.completed }) to none()
             }
             is Msg.Check -> {
                 val updateEntry = { entry: Entry ->
@@ -155,16 +155,16 @@ object Todo {
                         entry
                     }
                 }
-                model.copy(entries = model.entries.map(updateEntry)) to noEffect()
+                model.copy(entries = model.entries.map(updateEntry)) to none()
             }
             is Msg.CheckAll -> {
                 val updateEntry = { entry: Entry ->
                     entry.copy(completed = msg.completed)
                 }
-                model.copy(entries = model.entries.map(updateEntry)) to noEffect()
+                model.copy(entries = model.entries.map(updateEntry)) to none()
             }
             is Msg.ChangeVisibility -> {
-                model.copy(visibility = msg.visibility) to noEffect()
+                model.copy(visibility = msg.visibility) to none()
             }
         }
     }
