@@ -2,7 +2,7 @@
 
 # interval
 
-`fun <Msg> interval(delay: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`, scope: <ERROR CLASS> = GlobalScope, msg: () -> `[`Msg`](interval.md#Msg)`): <ERROR CLASS><`[`Effect`](../oolong/-effect.md)`<`[`Msg`](interval.md#Msg)`>, `[`Dispose`](../oolong/-dispose.md)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/delay/util.kt#L37)
+`fun <Msg> interval(delay: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`, scope: <ERROR CLASS> = GlobalScope, msg: () -> `[`Msg`](interval.md#Msg)`): <ERROR CLASS><`[`Effect`](../oolong/-effect.md)`<`[`Msg`](interval.md#Msg)`>, `[`Dispose`](../oolong/-dispose.md)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/delay/util.kt#L38)
 
 Generate [Msg](interval.md#Msg)s at a specified delay.
 
