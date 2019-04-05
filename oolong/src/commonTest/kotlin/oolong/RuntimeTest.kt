@@ -99,7 +99,7 @@ class RuntimeTest {
         var initialRender = true
         Oolong.runtime(
             withoutEffects { -> "state" },
-            { msg: String, _: String -> msg to { dispatch: Dispatch<String> -> dispatch("next") } },
+            { msg: String, _: String -> (msg to effect { dispatch: Dispatch<String> -> dispatch("next") }) as Next<String, String> },
             { model: String -> model },
             { _: String, _: Dispatch<String> ->
                 if (initialRender) initialRender = false
