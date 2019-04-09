@@ -28,7 +28,6 @@ class EffectTest {
             assertEquals(expected, actual)
         }
         parentEffect { actual ->
-            assertTrue(actual is ParentMsg.ChildMsgW)
             assertEquals(expected, actual.childMsg)
         }
         resolve()

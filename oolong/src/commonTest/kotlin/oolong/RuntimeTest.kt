@@ -1,7 +1,7 @@
 package oolong
 
 import oolong.delay.timeout
-import oolong.effect.withoutEffects
+import oolong.effect.none
 import kotlin.js.JsName
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -14,8 +14,8 @@ class RuntimeTest {
     fun `runtime should call render initially`() = runTest { resolve ->
         val initialState = 1
         Oolong.runtime(
-            withoutEffects { -> initialState },
-            withoutEffects { _: Unit, model: Int -> model },
+            { initialState to none() },
+            { _: Unit, model: Int -> model to none() },
             { model: Int -> model },
             { props: Int, _: Dispatch<Unit> ->
                 assertEquals(initialState, props)
@@ -29,8 +29,8 @@ class RuntimeTest {
     fun `runtime should call render after dispatch`() = runTest { resolve ->
         var count = 0
         Oolong.runtime(
-            withoutEffects { -> "init" },
-            withoutEffects { msg: String, _: String -> msg },
+            { "init" to none() },
+            { msg: String, _: String -> msg to none() },
             { model: String -> model },
             { model: String, dispatch: Dispatch<String> ->
                 count++
@@ -55,8 +55,8 @@ class RuntimeTest {
     fun `effects do not block runtime`() = runTest { resolve ->
         val states = mutableListOf<String>()
         Oolong.runtime(
-            { ("init" to timeout(100) { "effect" }.first) as Pair<String, Effect<String>> },
-            withoutEffects { msg: String, _: String -> msg },
+            { "init" to timeout(100) { "effect" }.first },
+            { msg: String, _: String -> msg to none() },
             { model: String -> model },
             { model: String, dispatch: Dispatch<String> ->
                 states.add(model)
@@ -80,8 +80,8 @@ class RuntimeTest {
     @JsName("runtime_should_not_overflow_stack")
     fun `runtime should not overflow stack`() = runTest { resolve ->
         Oolong.runtime(
-            withoutEffects { -> 0 },
-            withoutEffects { _: Unit, model: Int -> model + 1 },
+            { 0 to none() },
+            { _: Unit, model: Int -> model + 1 to none() },
             { model: Int -> model },
             { model: Int, dispatch: Dispatch<Unit> ->
                 if (model > 50_000) {
@@ -98,8 +98,8 @@ class RuntimeTest {
     fun `runtime should not call update view render if disposed`() = runTest { resolve ->
         var initialRender = true
         Oolong.runtime(
-            withoutEffects { -> "state" },
-            { msg: String, _: String -> (msg to effect { dispatch: Dispatch<String> -> dispatch("next") }) as Next<String, String> },
+            { "state" to none() },
+            { msg: String, _: String -> msg to effect { dispatch: Dispatch<String> -> dispatch("next") } },
             { model: String -> model },
             { _: String, _: Dispatch<String> ->
                 if (initialRender) initialRender = false

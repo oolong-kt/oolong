@@ -45,7 +45,7 @@ typealias View<Model, Props> = (model: Model) -> Props
  *
  * @param props view properties
  */
-typealias Render<Msg, Props> = suspend (props: Props, dispatch: Dispatch<Msg>) -> Unit
+typealias Render<Msg, Props> = (props: Props, dispatch: Dispatch<Msg>) -> Unit
 
 /**
  * Stops the function and cleans up resources

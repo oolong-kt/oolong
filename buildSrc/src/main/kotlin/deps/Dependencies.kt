@@ -26,7 +26,7 @@ object Dokka : Group("org.jetbrains.dokka", "0.9.18") {
 object Kotlin : Group("org.jetbrains.kotlin", "1.3.30-eap-125") {
     private const val BASE = "kotlin"
 
-    object Coroutines : Group("org.jetbrains.kotlinx", "1.1.1") {
+    object Coroutines : Group("org.jetbrains.kotlinx", "1.1.1-eap13-125") {
         private const val BASE = "kotlinx-coroutines"
         val Android = Dependency(this, "$BASE-android")
         val JavaFX = Dependency(this, "$BASE-javafx")
