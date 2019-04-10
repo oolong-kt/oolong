@@ -42,4 +42,4 @@ fun <Model, Msg> withoutEffects(init: (msg: Msg, model: Model) -> Model): Update
  * Map from [Effect] of [A] to [Effect] of [Msg]
  */
 fun <A, Msg> map(effect: Effect<A>, f: (A) -> Msg): Effect<Msg> =
-    { effect { msg -> f(msg) } }
+    { dispatch -> effect { a -> dispatch(f(a)) } }
