@@ -5,7 +5,6 @@ import oolong.runTest
 import kotlin.js.JsName
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class EffectTest {
 
@@ -20,18 +19,12 @@ class EffectTest {
     @Test
     @JsName("map_should_dispatch_mapped_message")
     fun `map should dispatch mapped message`() = runTest { resolve ->
-        val expected = ChildMsg.NoOp
-        val childEffect: Effect<ChildMsg> = { dispatch -> dispatch(expected) }
+        val childEffect: Effect<ChildMsg> = { dispatch -> dispatch(ChildMsg.NoOp) }
         val parentEffect = map(childEffect) { ParentMsg.ChildMsgW(it) }
-
-        childEffect { actual ->
-            assertEquals(expected, actual)
+        parentEffect { msg ->
+            assertEquals(msg, ParentMsg.ChildMsgW(ChildMsg.NoOp))
+            resolve()
         }
-        parentEffect { actual ->
-            assertTrue(actual is ParentMsg.ChildMsgW)
-            assertEquals(expected, actual.childMsg)
-        }
-        resolve()
     }
 
 }
