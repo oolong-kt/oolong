@@ -78,7 +78,7 @@ class RuntimeTest {
 
     @Test
     @JsName("runtime_should_not_overflow_stack")
-    fun `runtime should not overflow stack`() = runTest { resolve ->
+    fun `runtime should not overflow stack`() = runTest(10_000) { resolve ->
         Oolong.runtime(
             withoutEffects { -> 0 },
             withoutEffects { _: Unit, model: Int -> model + 1 },
