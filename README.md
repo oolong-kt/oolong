@@ -37,19 +37,19 @@ object Counter {
 
     class Props(
         val count: Int,
-        val onIncrement: () -> Msg,
-        val onDecrement: () -> Msg
+        val increment: () -> Msg,
+        val decrement: () -> Msg
     )
 
     val init: Init<Model, Msg> = { 
-        Model() to noEffect()
+        Model() to none()
     }
 
     val update: Update<Model, Msg> = { msg, model ->
         when (msg) {
             Msg.Increment -> model.copy(count = model.count + 1)
             Msg.Decrement -> model.copy(count = model.count - 1)
-        } to noEffect()
+        } to none()
     }
 
     val view: View<Model, Props> = { model ->
