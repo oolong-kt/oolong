@@ -8,8 +8,9 @@ The Oolong runtime and types.
 
 | Name | Summary |
 |---|---|
+| [Component](-component/index.md) | `interface Component<Model, Msg, Props>`<br>An interface to encapsulate the requirements of a compositional child in a [Program](-program/index.md). |
 | [Oolong](-oolong/index.md) | `object Oolong` |
-| [Program](-program/index.md) | `interface Program<Model, Msg, Props>`<br>An interface to encapsulate the requirements of an Oolong runtime. |
+| [Program](-program/index.md) | `interface Program<Model, Msg, Props> : `[`Component`](-component/index.md)`<`[`Model`](-program/index.md#Model)`, `[`Msg`](-program/index.md#Msg)`, `[`Props`](-program/index.md#Props)`>`<br>An interface to encapsulate the requirements of an Oolong runtime. |
 
 ### Type Aliases
 
@@ -20,7 +21,7 @@ The Oolong runtime and types.
 | [Effect](-effect.md) | `typealias Effect<Msg> = suspend (dispatch: `[`Dispatch`](-dispatch.md)`<`[`Msg`](-effect.md#Msg)`>) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Runs a side-effect away from the runtime |
 | [Init](-init.md) | `typealias Init<Model, Msg> = () -> `[`Next`](-next.md)`<`[`Model`](-init.md#Model)`, `[`Msg`](-init.md#Msg)`>`<br>Creates an initial state and side-effects |
 | [Next](-next.md) | `typealias Next<Model, Msg> = <ERROR CLASS><`[`Model`](-next.md#Model)`, `[`Effect`](-effect.md)`<`[`Msg`](-next.md#Msg)`>>`<br>A pair of the next state and side-effects |
-| [Render](-render.md) | `typealias Render<Msg, Props> = suspend (props: `[`Props`](-render.md#Props)`, dispatch: `[`Dispatch`](-dispatch.md)`<`[`Msg`](-render.md#Msg)`>) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Renders the view properties |
+| [Render](-render.md) | `typealias Render<Msg, Props> = (props: `[`Props`](-render.md#Props)`, dispatch: `[`Dispatch`](-dispatch.md)`<`[`Msg`](-render.md#Msg)`>) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Renders the view properties |
 | [Update](-update.md) | `typealias Update<Model, Msg> = (msg: `[`Msg`](-update.md#Msg)`, model: `[`Model`](-update.md#Model)`) -> `[`Next`](-next.md)`<`[`Model`](-update.md#Model)`, `[`Msg`](-update.md#Msg)`>`<br>Creates a next state and side-effects from a message and current state |
 | [View](-view.md) | `typealias View<Model, Props> = (model: `[`Model`](-view.md#Model)`) -> `[`Props`](-view.md#Props)<br>Creates view properties from the current state |
 
