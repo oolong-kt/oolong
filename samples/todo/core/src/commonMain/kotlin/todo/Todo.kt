@@ -50,7 +50,7 @@ object Todo {
 
     val init: (Model?) -> Init<Model, Msg> = { model ->
         {
-            (model ?: emptyModel()) to { _ -> }
+            (model ?: emptyModel()) to none()
         }
     }
 

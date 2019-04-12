@@ -6,6 +6,7 @@
 
 | Name | Summary |
 |---|---|
+| [oolong.Component](../oolong/-component/index.md) | An interface to encapsulate the requirements of a compositional child in a [Program](../oolong/-program/index.md). |
 | [oolong.Dispatch](../oolong/-dispatch.md) | Dispatches a message to the runtime |
 | [oolong.Dispose](../oolong/-dispose.md) | Stops the function and cleans up resources |
 | [oolong.Effect](../oolong/-effect.md) | Runs a side-effect away from the runtime |

@@ -23,10 +23,10 @@ object Dokka : Group("org.jetbrains.dokka", "0.9.18") {
     }
 }
 
-object Kotlin : Group("org.jetbrains.kotlin", "1.3.21") {
+object Kotlin : Group("org.jetbrains.kotlin", "1.3.30") {
     private const val BASE = "kotlin"
 
-    object Coroutines : Group("org.jetbrains.kotlinx", "1.1.1") {
+    object Coroutines : Group("org.jetbrains.kotlinx", "1.2.0") {
         private const val BASE = "kotlinx-coroutines"
         val Android = Dependency(this, "$BASE-android")
         val JavaFX = Dependency(this, "$BASE-javafx")
@@ -43,12 +43,6 @@ object Kotlin : Group("org.jetbrains.kotlin", "1.3.21") {
 
     object Gradle : Group(this) {
         val Plugin = Dependency(this, "kotlin-gradle-plugin")
-    }
-
-    object Html : Group("org.jetbrains.kotlinx", "0.6.10") {
-        private const val BASE = "kotlinx-html"
-        val JS = Dependency(this, "$BASE-js")
-        val JVM = Dependency(this, "$BASE-jvm")
     }
 
     object StdLib : Group(this) {

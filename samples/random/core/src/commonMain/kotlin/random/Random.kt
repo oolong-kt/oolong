@@ -42,7 +42,7 @@ object Random {
     }
 
     private val rollDie: () -> Effect<Msg> = {
-        nextInt(1..6) { Msg.NewFace(it) } as Effect<Msg>
+        nextInt(1..6) { Msg.NewFace(it) }
     }
 
 }
