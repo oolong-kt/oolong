@@ -12,7 +12,7 @@ typealias Dispatch<Msg> = (msg: Msg) -> Unit
  *
  * @param dispatch the dispatch function
  */
-typealias Effect<Msg> = suspend (dispatch: Dispatch<Msg>) -> Unit
+typealias Effect<Msg> = suspend (dispatch: Dispatch<Msg>) -> Any?
 
 /**
  * A pair of the next state and side-effects
@@ -45,7 +45,7 @@ typealias View<Model, Props> = (model: Model) -> Props
  *
  * @param props view properties
  */
-typealias Render<Msg, Props> = (props: Props, dispatch: Dispatch<Msg>) -> Unit
+typealias Render<Msg, Props> = (props: Props, dispatch: Dispatch<Msg>) -> Any?
 
 /**
  * Stops the function and cleans up resources
