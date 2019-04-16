@@ -4,7 +4,7 @@ import oolong.Next
 import oolong.effect.map
 
 /**
- * Map from [Next] of [A] and [B] to [Next] of [Model] and [Msg]
+ * Map from [Next] of [A] and [B] to [Next] of [C] and [D]
  */
-fun <A, B, Model, Msg> map(next: Next<A, B>, fa: (A) -> Model, fb: (B) -> Msg): Next<Model, Msg> =
+fun <A, B, C, D> map(next: Next<A, B>, fa: (A) -> C, fb: (B) -> D): Next<C, D> =
     fa(next.first) to map(next.second, fb)

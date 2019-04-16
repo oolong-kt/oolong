@@ -1,8 +1,6 @@
 package oolong.effect
 
 import oolong.Effect
-import oolong.Init
-import oolong.Update
 
 /**
  * Create an empty effect.
@@ -27,7 +25,7 @@ fun <Msg> batch(effects: Iterable<Effect<Msg>>): Effect<Msg> =
     { dispatch -> for (effect in effects) effect(dispatch) }
 
 /**
- * Map from [Effect] of [A] to [Effect] of [Msg]
+ * Map from [Effect] of [A] to [Effect] of [B]
  */
-fun <A, Msg> map(effect: Effect<A>, f: (A) -> Msg): Effect<Msg> =
+fun <A, B> map(effect: Effect<A>, f: (A) -> B): Effect<B> =
     { dispatch -> effect { a -> dispatch(f(a)) } }
