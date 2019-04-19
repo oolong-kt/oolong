@@ -1,6 +1,9 @@
 package oolong.effect
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import oolong.Effect
+import oolong.effect
 import oolong.runTest
 import kotlin.js.JsName
 import kotlin.test.Test
@@ -25,6 +28,24 @@ class EffectTest {
             assertEquals(msg, ParentMsg.ChildMsgW(ChildMsg.NoOp))
             resolve()
         }
+    }
+
+    @Test
+    @JsName("batch_should_not_block_iteration")
+    fun `batch should not block iteration`() = runTest { resolve ->
+        val delay = 100L
+        val range = 1..10
+        val effects = batch(range.map { i ->
+            effect<Int> { dispatch ->
+                delay(delay)
+                dispatch(i)
+            }
+        })
+        val messages = mutableListOf<Int>()
+        launch { effects { i -> messages.add(i) } }
+        delay(delay * 2)
+        assertEquals(range.toList(), messages.sorted())
+        resolve()
     }
 
 }

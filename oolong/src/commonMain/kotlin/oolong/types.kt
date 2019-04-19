@@ -1,5 +1,7 @@
 package oolong
 
+import kotlinx.coroutines.CoroutineScope
+
 /**
  * Dispatches a message to the runtime
  *
@@ -12,7 +14,7 @@ typealias Dispatch<Msg> = (msg: Msg) -> Unit
  *
  * @param dispatch the dispatch function
  */
-typealias Effect<Msg> = suspend (dispatch: Dispatch<Msg>) -> Any?
+typealias Effect<Msg> = suspend CoroutineScope.(dispatch: Dispatch<Msg>) -> Any?
 
 /**
  * A pair of the next state and side-effects
