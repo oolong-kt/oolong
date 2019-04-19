@@ -4,7 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlin.test.fail
 
-fun runTest(timeout: Long = 1000, step: Long = 10, block: suspend (resolve: () -> Unit) -> Unit) {
+fun runTest(timeout: Long = 1000, step: Long = 10, block: suspend CoroutineScope.(resolve: () -> Unit) -> Unit) {
     wrapBlocking {
         var elapsed = 0L
         var resolved = false

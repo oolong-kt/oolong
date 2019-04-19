@@ -1,5 +1,6 @@
 package oolong.effect
 
+import kotlinx.coroutines.launch
 import oolong.Effect
 
 /**
@@ -22,7 +23,7 @@ fun <Msg> batch(vararg effects: Effect<Msg>): Effect<Msg> =
  * @param effects a list of effects
  */
 fun <Msg> batch(effects: Iterable<Effect<Msg>>): Effect<Msg> =
-    { dispatch -> for (effect in effects) effect(dispatch) }
+    { dispatch -> for (effect in effects) launch { effect(dispatch) } }
 
 /**
  * Map from [Effect] of [A] to [Effect] of [B]
