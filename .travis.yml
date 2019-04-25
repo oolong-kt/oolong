@@ -13,7 +13,7 @@ language: android
 jdk:
   - oraclejdk8
 
-install: ./gradlew :oolong:build
+install: ./gradlew build
 
 script: .buildscript/deploy_snapshot.sh ":oolong:publish"
 
