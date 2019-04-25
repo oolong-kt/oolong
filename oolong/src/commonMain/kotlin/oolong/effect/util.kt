@@ -1,16 +1,19 @@
 package oolong.effect
 
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import oolong.Dispose
 import oolong.Effect
+import oolong.effect
 
 /**
- * Create an empty effect.
+ * Create an empty [Effect].
  */
-fun <Msg> none(): Effect<Msg> =
-    batch(emptyList())
+fun <Msg> none(): Effect<Msg> = {}
 
 /**
- * Compose a list of effects into a single effect.
+ * Compose a collection of [Effect] into a single [Effect].
  *
  * @param effects a list of effects
  */
@@ -18,7 +21,7 @@ fun <Msg> batch(vararg effects: Effect<Msg>): Effect<Msg> =
     batch(effects.asIterable())
 
 /**
- * Compose a list of effects into a single effect.
+ * Compose a collection of [Effect] into a single [Effect].
  *
  * @param effects a list of effects
  */
@@ -30,3 +33,16 @@ fun <Msg> batch(effects: Iterable<Effect<Msg>>): Effect<Msg> =
  */
 fun <A, B> map(effect: Effect<A>, f: (A) -> B): Effect<B> =
     { dispatch -> effect { a -> dispatch(f(a)) } }
+
+/**
+ * Create a [Pair] of [Effect] and [Dispose].
+ */
+fun <Msg> disposableEffect(effect: Effect<Msg>): Pair<Effect<Msg>, Dispose> {
+    val supervisor = SupervisorJob()
+    val dispose = { supervisor.cancel() }
+    return effect<Msg> { dispatch ->
+        withContext(coroutineContext + supervisor) {
+            effect(dispatch)
+        }
+    } to dispose
+}

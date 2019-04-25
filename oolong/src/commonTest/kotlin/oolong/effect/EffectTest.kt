@@ -3,11 +3,13 @@ package oolong.effect
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import oolong.Effect
+import oolong.delay.delay
 import oolong.effect
 import oolong.runTest
 import kotlin.js.JsName
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.fail
 
 class EffectTest {
 
@@ -45,6 +47,16 @@ class EffectTest {
         launch { effects { i -> messages.add(i) } }
         delay(delay * 2)
         assertEquals(range.toList(), messages.sorted())
+        resolve()
+    }
+
+    @Test
+    @JsName("disposable_effect_should_cancel_effect_when_disposed")
+    fun `disposable effect should cancel effect when disposed`() = runTest { resolve ->
+        val (effect, dispose) = disposableEffect(delay(100) { })
+        launch { effect { fail("Effect was disposed and should not be called.") } }
+        dispose()
+        delay(200)
         resolve()
     }
 
