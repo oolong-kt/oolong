@@ -19,7 +19,7 @@ object Oolong {
         runtimeScope: CoroutineScope = GlobalScope,
         effectContext: CoroutineContext = Dispatchers.Default,
         renderContext: CoroutineContext = effectContext
-    ) = runtime(
+    ): Dispose = runtime(
         program::init,
         program::update,
         program::view,
@@ -65,7 +65,7 @@ object Oolong {
             render: Render<Msg, Props>,
             runtimeScope: CoroutineScope = GlobalScope,
             effectContext: CoroutineContext = Dispatchers.Default
-        ) = runtime(
+        ): Dispose = runtime(
             program::init,
             program::update,
             program::view,
@@ -85,7 +85,7 @@ object Oolong {
             render: Render<Msg, Props>,
             runtimeScope: CoroutineScope = GlobalScope,
             effectContext: CoroutineContext = Dispatchers.Default
-        ) = runtime(
+        ): Dispose = runtime(
             init,
             update,
             view,

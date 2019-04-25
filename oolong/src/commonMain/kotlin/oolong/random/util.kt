@@ -15,7 +15,7 @@ import kotlin.random.nextULong
  * @return [Effect] of [Msg] for the generated [Int]
  */
 fun <Msg> nextBits(bitCount: Int, msg: (Int) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextBits(bitCount) }
+    { dispatch -> dispatch(msg(Random.nextBits(bitCount))) }
 
 /**
  * Call [Random.nextBoolean] with a mapping of [Boolean] to [Msg].
@@ -24,7 +24,7 @@ fun <Msg> nextBits(bitCount: Int, msg: (Int) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [Boolean]
  */
 fun <Msg> nextBoolean(msg: (Boolean) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextBoolean() }
+    { dispatch -> dispatch(msg(Random.nextBoolean())) }
 
 /**
  * Call [Random.nextBytes] with a mapping of [ByteArray] to [Msg].
@@ -32,13 +32,8 @@ fun <Msg> nextBoolean(msg: (Boolean) -> Msg): Effect<Msg> =
  * @param msg map function of [ByteArray] to [Msg]
  * @return [Effect] of [Msg] for the generated [ByteArray]
  */
-fun <Msg> nextBytes(
-    array: ByteArray,
-    fromIndex: Int,
-    toIndex: Int,
-    msg: (ByteArray) -> Msg
-): Effect<Msg> =
-    effect(msg) { Random.nextBytes(array, fromIndex, toIndex) }
+fun <Msg> nextBytes(array: ByteArray, fromIndex: Int, toIndex: Int, msg: (ByteArray) -> Msg): Effect<Msg> =
+    { dispatch -> dispatch(msg(Random.nextBytes(array, fromIndex, toIndex))) }
 
 /**
  * Call [Random.nextBytes] with a mapping of [ByteArray] to [Msg].
@@ -47,7 +42,7 @@ fun <Msg> nextBytes(
  * @return [Effect] of [Msg] for the generated [ByteArray]
  */
 fun <Msg> nextBytes(array: ByteArray, msg: (ByteArray) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextBytes(array) }
+    { dispatch -> dispatch(msg(Random.nextBytes(array))) }
 
 /**
  * Call [Random.nextBytes] with a mapping of [ByteArray] to [Msg].
@@ -56,7 +51,7 @@ fun <Msg> nextBytes(array: ByteArray, msg: (ByteArray) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [ByteArray]
  */
 fun <Msg> nextBytes(size: Int, msg: (ByteArray) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextBytes(size) }
+    { dispatch -> dispatch(msg(Random.nextBytes(size))) }
 
 /**
  * Call [Random.nextDouble] with a mapping of [Double] to [Msg].
@@ -65,7 +60,7 @@ fun <Msg> nextBytes(size: Int, msg: (ByteArray) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [Double]
  */
 fun <Msg> nextDouble(msg: (Double) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextDouble() }
+    { dispatch -> dispatch(msg(Random.nextDouble())) }
 
 /**
  * Call [Random.nextDouble] with a mapping of [Double] to [Msg].
@@ -74,7 +69,7 @@ fun <Msg> nextDouble(msg: (Double) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [Double]
  */
 fun <Msg> nextDouble(until: Double, msg: (Double) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextDouble(until) }
+    { dispatch -> dispatch(msg(Random.nextDouble(until))) }
 
 /**
  * Call [Random.nextDouble] with a mapping of [Double] to [Msg].
@@ -83,7 +78,7 @@ fun <Msg> nextDouble(until: Double, msg: (Double) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [Double]
  */
 fun <Msg> nextDouble(from: Double, until: Double, msg: (Double) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextDouble(from, until) }
+    { dispatch -> dispatch(msg(Random.nextDouble(from, until))) }
 
 /**
  * Call [Random.nextFloat] with a mapping of [Float] to [Msg].
@@ -92,7 +87,7 @@ fun <Msg> nextDouble(from: Double, until: Double, msg: (Double) -> Msg): Effect<
  * @return [Effect] of [Msg] for the generated [Float]
  */
 fun <Msg> nextFloat(msg: (Float) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextFloat() }
+    { dispatch -> dispatch(msg(Random.nextFloat())) }
 
 /**
  * Call [Random.nextInt] with a mapping of [Int] to [Msg].
@@ -101,7 +96,7 @@ fun <Msg> nextFloat(msg: (Float) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [Int]
  */
 fun <Msg> nextInt(msg: (Int) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextInt() }
+    { dispatch -> dispatch(msg(Random.nextInt())) }
 
 /**
  * Call [Random.nextInt] with a mapping of [Int] to [Msg].
@@ -110,7 +105,7 @@ fun <Msg> nextInt(msg: (Int) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [Int]
  */
 fun <Msg> nextInt(until: Int, msg: (Int) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextInt(until) }
+    { dispatch -> dispatch(msg(Random.nextInt(until))) }
 
 /**
  * Call [Random.nextInt] with a mapping of [Int] to [Msg].
@@ -119,7 +114,7 @@ fun <Msg> nextInt(until: Int, msg: (Int) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [Int]
  */
 fun <Msg> nextInt(from: Int, until: Int, msg: (Int) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextInt(from, until) }
+    { dispatch -> dispatch(msg(Random.nextInt(from, until))) }
 
 /**
  * Call [Random.nextInt] with a mapping of [Int] to [Msg].
@@ -128,7 +123,7 @@ fun <Msg> nextInt(from: Int, until: Int, msg: (Int) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [Int]
  */
 fun <Msg> nextInt(range: IntRange, msg: (Int) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextInt(range) }
+    { dispatch -> dispatch(msg(Random.nextInt(range))) }
 
 /**
  * Call [Random.nextLong] with a mapping of [Long] to [Msg].
@@ -137,7 +132,7 @@ fun <Msg> nextInt(range: IntRange, msg: (Int) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [Long]
  */
 fun <Msg> nextLong(msg: (Long) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextLong() }
+    { dispatch -> dispatch(msg(Random.nextLong())) }
 
 /**
  * Call [Random.nextLong] with a mapping of [Long] to [Msg].
@@ -146,7 +141,7 @@ fun <Msg> nextLong(msg: (Long) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [Long]
  */
 fun <Msg> nextLong(until: Long, msg: (Long) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextLong(until) }
+    { dispatch -> dispatch(msg(Random.nextLong(until))) }
 
 /**
  * Call [Random.nextLong] with a mapping of [Long] to [Msg].
@@ -155,7 +150,7 @@ fun <Msg> nextLong(until: Long, msg: (Long) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [Long]
  */
 fun <Msg> nextLong(from: Long, until: Long, msg: (Long) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextLong(from, until) }
+    { dispatch -> dispatch(msg(Random.nextLong(from, until))) }
 
 /**
  * Call [Random.nextLong] with a mapping of [Long] to [Msg].
@@ -164,7 +159,7 @@ fun <Msg> nextLong(from: Long, until: Long, msg: (Long) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [Long]
  */
 fun <Msg> nextLong(range: LongRange, msg: (Long) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextLong(range) }
+    { dispatch -> dispatch(msg(Random.nextLong(range))) }
 
 /**
  * Call [Random.nextUBytes] with a mapping of [UByteArray] to [Msg].
@@ -174,7 +169,7 @@ fun <Msg> nextLong(range: LongRange, msg: (Long) -> Msg): Effect<Msg> =
  */
 @ExperimentalUnsignedTypes
 fun <Msg> nextUBytes(array: UByteArray, msg: (UByteArray) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextUBytes(array) }
+    { dispatch -> dispatch(msg(Random.nextUBytes(array))) }
 
 /**
  * Call [Random.nextUBytes] with a mapping of [UByteArray] to [Msg].
@@ -184,7 +179,7 @@ fun <Msg> nextUBytes(array: UByteArray, msg: (UByteArray) -> Msg): Effect<Msg> =
  */
 @ExperimentalUnsignedTypes
 fun <Msg> nextUBytes(size: Int, msg: (UByteArray) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextUBytes(size) }
+    { dispatch -> dispatch(msg(Random.nextUBytes(size))) }
 
 /**
  * Call [Random.nextUInt] with a mapping of [UInt] to [Msg].
@@ -194,7 +189,7 @@ fun <Msg> nextUBytes(size: Int, msg: (UByteArray) -> Msg): Effect<Msg> =
  */
 @ExperimentalUnsignedTypes
 fun <Msg> nextUInt(msg: (UInt) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextUInt() }
+    { dispatch -> dispatch(msg(Random.nextUInt())) }
 
 /**
  * Call [Random.nextUInt] with a mapping of [UInt] to [Msg].
@@ -204,7 +199,7 @@ fun <Msg> nextUInt(msg: (UInt) -> Msg): Effect<Msg> =
  */
 @ExperimentalUnsignedTypes
 fun <Msg> nextUInt(until: UInt, msg: (UInt) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextUInt(until) }
+    { dispatch -> dispatch(msg(Random.nextUInt(until))) }
 
 /**
  * Call [Random.nextUInt] with a mapping of [UInt] to [Msg].
@@ -214,7 +209,7 @@ fun <Msg> nextUInt(until: UInt, msg: (UInt) -> Msg): Effect<Msg> =
  */
 @ExperimentalUnsignedTypes
 fun <Msg> nextUInt(from: UInt, until: UInt, msg: (UInt) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextUInt(from, until) }
+    { dispatch -> dispatch(msg(Random.nextUInt(from, until))) }
 
 /**
  * Call [Random.nextUInt] with a mapping of [UInt] to [Msg].
@@ -224,7 +219,7 @@ fun <Msg> nextUInt(from: UInt, until: UInt, msg: (UInt) -> Msg): Effect<Msg> =
  */
 @ExperimentalUnsignedTypes
 fun <Msg> nextUInt(range: UIntRange, msg: (UInt) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextUInt(range) }
+    { dispatch -> dispatch(msg(Random.nextUInt(range))) }
 
 /**
  * Call [Random.nextULong] with a mapping of [ULong] to [Msg].
@@ -234,7 +229,7 @@ fun <Msg> nextUInt(range: UIntRange, msg: (UInt) -> Msg): Effect<Msg> =
  */
 @ExperimentalUnsignedTypes
 fun <Msg> nextULong(msg: (ULong) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextULong() }
+    { dispatch -> dispatch(msg(Random.nextULong())) }
 
 /**
  * Call [Random.nextULong] with a mapping of [ULong] to [Msg].
@@ -244,7 +239,7 @@ fun <Msg> nextULong(msg: (ULong) -> Msg): Effect<Msg> =
  */
 @ExperimentalUnsignedTypes
 fun <Msg> nextULong(until: ULong, msg: (ULong) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextULong(until) }
+    { dispatch -> dispatch(msg(Random.nextULong(until))) }
 
 /**
  * Call [Random.nextULong] with a mapping of [ULong] to [Msg].
@@ -254,7 +249,7 @@ fun <Msg> nextULong(until: ULong, msg: (ULong) -> Msg): Effect<Msg> =
  */
 @ExperimentalUnsignedTypes
 fun <Msg> nextULong(from: ULong, until: ULong, msg: (ULong) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextULong(from, until) }
+    { dispatch -> dispatch(msg(Random.nextULong(from, until))) }
 
 /**
  * Call [Random.nextULong] with a mapping of [ULong] to [Msg].
@@ -264,9 +259,4 @@ fun <Msg> nextULong(from: ULong, until: ULong, msg: (ULong) -> Msg): Effect<Msg>
  */
 @ExperimentalUnsignedTypes
 fun <Msg> nextULong(range: ULongRange, msg: (ULong) -> Msg): Effect<Msg> =
-    effect(msg) { Random.nextULong(range) }
-
-private inline fun <T, Msg> effect(
-    crossinline msg: (T) -> Msg,
-    crossinline block: () -> T
-): Effect<Msg> = { dispatch -> dispatch(msg(block())) }
+    { dispatch -> dispatch(msg(Random.nextULong(range))) }
