@@ -2,15 +2,15 @@ PODS:
   - core (1.0.0)
 
 DEPENDENCIES:
-  - core (from `/Users/michaelpardo/Source/oolong-kt/oolong/samples/counter/core`)
+  - core (from `../core`)
 
 EXTERNAL SOURCES:
   core:
-    :path: "/Users/michaelpardo/Source/oolong-kt/oolong/samples/counter/core"
+    :path: "../core"
 
 SPEC CHECKSUMS:
   core: 1ffca0c6bfc70942f64152614f20821daba8dedb
 
-PODFILE CHECKSUM: 5e793f4204a236c60891819dee2215f41e2630c5
+PODFILE CHECKSUM: 916814c9058db386c56179534e52de69bf5ec8b2
 
 COCOAPODS: 1.6.1

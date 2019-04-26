@@ -1,20 +1,17 @@
-package counter
+package random
 
-import counter.Counter.Msg
-import counter.Counter.Props
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import oolong.Oolong
 import oolong.Render
 
-fun Counter.runtime(render: Render<Msg, Props>) =
+fun Random.runtime(render: Render<Random.Msg, Random.Props>) =
     Oolong.runtime(
         init,
         update,
         view,
         render,
         GlobalScope,
-        Dispatchers.Default,
+        MainLoopDispatcher,
         MainLoopDispatcher
     )
-
