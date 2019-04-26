@@ -1,5 +1,8 @@
+version = "1.0.0"
+
 plugins {
     kotlin("multiplatform")
+    kotlin("native.cocoapods")
 }
 
 repositories {
@@ -13,6 +16,11 @@ kotlin {
     linuxX64("linux")
     macosX64("macOS")
     mingwX64("windows")
+
+    cocoapods {
+        summary = "Time Sample"
+        homepage = "https://github.com/oolong-kt/oolong/tree/master/samples/time"
+    }
 
     sourceSets {
         val commonMain by getting {

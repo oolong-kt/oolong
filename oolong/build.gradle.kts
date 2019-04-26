@@ -10,6 +10,7 @@ version = VERSION_NAME
 
 plugins {
     kotlin("multiplatform")
+    kotlin("native.cocoapods")
     `maven-publish`
     signing
     id(deps.Node.Plugin)
@@ -20,7 +21,6 @@ repositories {
 }
 
 kotlin {
-    js()
     js {
         compilations.forEach {
             it.kotlinOptions {
@@ -30,10 +30,19 @@ kotlin {
         }
     }
     jvm()
-    iosX64("ios")
+    iosX64("ios") {
+        binaries {
+            framework("Oolong")
+        }
+    }
     linuxX64("linux")
     macosX64("macOS")
     mingwX64("windows")
+
+    cocoapods {
+        summary = "MVU for Kotlin Multiplatform"
+        homepage = "http://oolong-kt.org"
+    }
 
     sourceSets {
         val commonMain by getting {

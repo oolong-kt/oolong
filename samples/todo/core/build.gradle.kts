@@ -13,11 +13,6 @@ kotlin {
             sourceMap = true
         }
     }
-    jvm()
-    iosX64("ios")
-    linuxX64("linux")
-    macosX64("macOS")
-    mingwX64("windows")
 
     sourceSets {
         val commonMain by getting {
@@ -45,23 +40,5 @@ kotlin {
                 implementation(deps.Kotlin.Test.JS)
             }
         }
-
-        val jvmMain by getting {
-            dependencies {
-                implementation(deps.Kotlin.StdLib.JDK8)
-            }
-        }
-
-        val jvmTest by getting {
-            dependencies {
-                implementation(deps.Kotlin.Test)
-                implementation(deps.Kotlin.Test.JUnit5)
-            }
-        }
     }
-}
-
-// workaround for https://youtrack.jetbrains.com/issue/KT-27170
-configurations {
-    create("compileClasspath")
 }
