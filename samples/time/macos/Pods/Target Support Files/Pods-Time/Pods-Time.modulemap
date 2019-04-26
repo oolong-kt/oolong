@@ -1,0 +1,6 @@
+framework module Pods_Time {
+  umbrella header "Pods-Time-umbrella.h"
+
+  export *
+  module * { export * }
+}
