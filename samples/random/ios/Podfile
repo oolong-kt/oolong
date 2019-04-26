@@ -6,5 +6,6 @@ target 'Random' do
   use_frameworks!
 
   # Pods for Counter
+  pod 'Closures'
   pod 'core', :path => '../core'
 end

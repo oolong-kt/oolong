@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Closures
 import core
 
 class ViewController: UIViewController {
@@ -21,7 +22,7 @@ class ViewController: UIViewController {
     
     private func render(props: Random.Props, dispatch: @escaping (Random.Msg) -> KotlinUnit) {
         dieFaceLabel.text = "\(props.dieFace)"
-        rollButton.on(.touchUpInside) { (sender, event) in dispatch(props.onRoll()) }
+        rollButton.onTap { dispatch(props.onRoll()) }
     }
 
 }

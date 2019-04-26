@@ -1,16 +1,23 @@
 PODS:
+  - Closures (0.6)
   - core (1.0.0)
 
 DEPENDENCIES:
+  - Closures
   - core (from `../core`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Closures
 
 EXTERNAL SOURCES:
   core:
     :path: "../core"
 
 SPEC CHECKSUMS:
+  Closures: 7477e86502e33d7ae435b8c60ce219390e06c476
   core: 1ffca0c6bfc70942f64152614f20821daba8dedb
 
-PODFILE CHECKSUM: 916814c9058db386c56179534e52de69bf5ec8b2
+PODFILE CHECKSUM: c748ab701f999eed80e1475951d5378dd791c1c1
 
 COCOAPODS: 1.6.1

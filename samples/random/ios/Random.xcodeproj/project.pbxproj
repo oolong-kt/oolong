@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1DB1657722736BF4001962FA /* UIButton+Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB1657622736BF4001962FA /* UIButton+Events.swift */; };
 		1DD37E462273664100A1E944 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD37E452273664100A1E944 /* AppDelegate.swift */; };
 		1DD37E482273664100A1E944 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD37E472273664100A1E944 /* ViewController.swift */; };
 		1DD37E4B2273664100A1E944 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DD37E492273664100A1E944 /* Main.storyboard */; };
@@ -17,7 +16,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1DB1657622736BF4001962FA /* UIButton+Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Events.swift"; sourceTree = "<group>"; };
 		1DD37E422273664100A1E944 /* Random.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Random.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DD37E452273664100A1E944 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1DD37E472273664100A1E944 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +67,6 @@
 				1DD37E4C2273664300A1E944 /* Assets.xcassets */,
 				1DD37E4E2273664300A1E944 /* LaunchScreen.storyboard */,
 				1DD37E512273664300A1E944 /* Info.plist */,
-				1DB1657622736BF4001962FA /* UIButton+Events.swift */,
 			);
 			path = Random;
 			sourceTree = "<group>";
@@ -102,6 +99,7 @@
 				1DD37E3E2273664100A1E944 /* Sources */,
 				1DD37E3F2273664100A1E944 /* Frameworks */,
 				1DD37E402273664100A1E944 /* Resources */,
+				297FD9B346ADA59D70E7A614 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -159,6 +157,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		297FD9B346ADA59D70E7A614 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Random/Pods-Random-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Closures/Closures.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Closures.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random/Pods-Random-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		48C5C4EA0F3271DB3454CEEA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -189,7 +209,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DD37E482273664100A1E944 /* ViewController.swift in Sources */,
-				1DB1657722736BF4001962FA /* UIButton+Events.swift in Sources */,
 				1DD37E462273664100A1E944 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

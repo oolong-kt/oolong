@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Closures
 import core
 
 class ViewController: UIViewController {
@@ -23,8 +24,8 @@ class ViewController: UIViewController {
 
     private func render(props: Counter.Props, dispatch: @escaping (Counter.Msg) -> KotlinUnit) {
         countLabel.text = "\(props.count)"
-        incrementButton.on(.touchUpInside) { (sender, event) in dispatch(props.onIncrement()) }
-        decrementButton.on(.touchUpInside) { (sender, event) in dispatch(props.onDecrement()) }
+        incrementButton.onTap { dispatch(props.onIncrement()) }
+        decrementButton.onTap { dispatch(props.onDecrement()) }
     }
     
 }
