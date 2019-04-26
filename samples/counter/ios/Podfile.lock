@@ -1,16 +1,23 @@
 PODS:
+  - Closures (0.6)
   - core (1.0.0)
 
 DEPENDENCIES:
-  - core (from `/Users/michaelpardo/Source/oolong-kt/oolong/samples/counter/core`)
+  - Closures
+  - core (from `../core`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Closures
 
 EXTERNAL SOURCES:
   core:
-    :path: "/Users/michaelpardo/Source/oolong-kt/oolong/samples/counter/core"
+    :path: "../core"
 
 SPEC CHECKSUMS:
+  Closures: 7477e86502e33d7ae435b8c60ce219390e06c476
   core: 1ffca0c6bfc70942f64152614f20821daba8dedb
 
-PODFILE CHECKSUM: 5e793f4204a236c60891819dee2215f41e2630c5
+PODFILE CHECKSUM: c748ab701f999eed80e1475951d5378dd791c1c1
 
 COCOAPODS: 1.6.1

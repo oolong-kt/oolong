@@ -1,0 +1,6 @@
+framework module Closures {
+  umbrella header "Closures-umbrella.h"
+
+  export *
+  module * { export * }
+}

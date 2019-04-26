@@ -12,7 +12,15 @@ repositories {
 kotlin {
     js()
     jvm()
-    iosX64("ios")
+    iosX64("ios") {
+        binaries {
+            getFramework("debug").apply {
+                export(project(":oolong"))
+                export(deps.Kotlin.Coroutines.Core)
+                transitiveExport = true
+            }
+        }
+    }
     linuxX64("linux")
     macosX64("macOS")
     mingwX64("windows")
@@ -26,6 +34,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":oolong"))
+                api(deps.Kotlin.Coroutines.Core)
                 implementation(deps.Kotlin.StdLib.Common)
             }
         }

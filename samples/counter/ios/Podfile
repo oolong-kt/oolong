@@ -6,5 +6,6 @@ target 'Counter' do
   use_frameworks!
 
   # Pods for Counter
-  pod 'core', :path => '/Users/michaelpardo/Source/oolong-kt/oolong/samples/counter/core'
+  pod 'Closures'
+  pod 'core', :path => '../core'
 end

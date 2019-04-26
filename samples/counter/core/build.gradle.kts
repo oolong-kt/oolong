@@ -22,7 +22,15 @@ kotlin {
         }
     }
     linuxX64("linux")
-    macosX64("macOS")
+    macosX64("macos") {
+        binaries {
+            getFramework("debug").apply {
+                export(project(":oolong"))
+                export(deps.Kotlin.Coroutines.Core)
+                transitiveExport = true
+            }
+        }
+    }
     mingwX64("windows")
 
     cocoapods {
