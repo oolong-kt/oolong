@@ -8,12 +8,12 @@ branches:
 
 osx_image: xcode9.3
 
-language: android
+language: java
 
 jdk:
   - oraclejdk8
 
-install: ./gradlew build
+install: ./gradlew :oolong:build
 
 script: .buildscript/deploy_snapshot.sh ":oolong:publish"
 
