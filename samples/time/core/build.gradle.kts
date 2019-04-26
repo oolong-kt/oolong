@@ -27,7 +27,6 @@ kotlin {
             dependencies {
                 api(project(":oolong"))
                 implementation(deps.Kotlin.StdLib.Common)
-                implementation(deps.Kotlin.Coroutines.Core.Common)
             }
         }
 
