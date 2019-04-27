@@ -11,4 +11,7 @@ include(":samples:random:android")
 include(":samples:time:core")
 include(":samples:time:android")
 
+include(":samples:todo:core")
+include(":samples:todo:android")
+
 include(":samples:todomvc:core")
