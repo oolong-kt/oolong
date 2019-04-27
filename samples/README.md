@@ -18,8 +18,11 @@ A simple time display to demonstrate subscriptions.
 
 [View JS Demo](https://oolong-kt.org/samples/time/js/)
 
+## Todo
 
-## Todo 
+A Todo app demonstratic advanced techniques.
+
+## TodoMVC
 
 An implementation of [TodoMVC](http://todomvc.com/) written in Oolong.
 
