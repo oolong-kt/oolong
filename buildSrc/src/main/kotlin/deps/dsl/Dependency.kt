@@ -8,22 +8,30 @@ class Dependency(
     constructor(
         group: Group,
         artifactId: String,
-        version: String = group.id
+        version: String? = group.version
     ) : this(group, Artifact(artifactId, version))
 
-    abstract class Group(
+    constructor(
+        groupId: String,
+        artifactId: String,
+        version: String
+    ) : this(Group(groupId, version), artifactId, version)
+
+    open class Group(
         val id: String,
         val version: String? = null
     ) : WithCharSequence {
 
-        constructor(parent: Group) : this(parent.id, parent.version)
+        constructor(
+            parent: Group,
+            version: String? = parent.version
+        ) : this(parent.id, version)
 
-        open val DEFAULT: Dependency? = null
+        open val default: Dependency? = null
 
         final override fun toString(): String {
-            return DEFAULT?.toString() ?: id
+            return default?.toString() ?: id
         }
-
     }
 
     class Artifact(
@@ -34,8 +42,7 @@ class Dependency(
     override fun toString(): String {
         val version = group.version
             ?: artifact.version
-            ?: throw IllegalArgumentException("Version must be provided by Group or Artifact.")
+            ?: throw IllegalArgumentException("Version not provided for ${group.id}:${artifact.id}")
         return "${group.id}:${artifact.id}:$version"
     }
-
 }
