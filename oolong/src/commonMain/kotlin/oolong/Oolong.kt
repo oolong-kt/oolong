@@ -59,7 +59,7 @@ object Oolong {
         /**
          * Create a runtime with a render [CoroutineContext] of [Dispatchers.Main].
          */
-        @JsName("program")
+        @JsName("mainProgram")
         fun <Model, Msg, Props> program(
             program: Program<Model, Msg, Props>,
             render: Render<Msg, Props>,
@@ -77,7 +77,7 @@ object Oolong {
         /**
          * Create a runtime with a render [CoroutineContext] of [Dispatchers.Main].
          */
-        @JsName("runtime")
+        @JsName("mainRuntime")
         fun <Model, Msg, Props> runtime(
             init: Init<Model, Msg>,
             update: Update<Model, Msg>,
