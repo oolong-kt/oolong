@@ -1,5 +1,6 @@
 package oolong.delay
 
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -12,7 +13,7 @@ import oolong.Effect
  * @param msg generator function of [Msg]
  * @return a delayed effect
  */
-fun <Msg> delay(timeMillis: Long, msg: () -> Msg): Effect<Msg> =
+fun <Msg> delay(timeMillis: Long, msg: suspend CoroutineScope.() -> Msg): Effect<Msg> =
     { dispatch ->
         delay(timeMillis)
         dispatch(msg())
@@ -25,7 +26,7 @@ fun <Msg> delay(timeMillis: Long, msg: () -> Msg): Effect<Msg> =
  * @param msg generator function of [Msg]
  * @return a delayed effect
  */
-fun <Msg> interval(timeMillis: Long, msg: () -> Msg): Effect<Msg> =
+fun <Msg> interval(timeMillis: Long, msg: suspend CoroutineScope.() -> Msg): Effect<Msg> =
     { dispatch ->
         while (isActive) {
             delay(timeMillis)
