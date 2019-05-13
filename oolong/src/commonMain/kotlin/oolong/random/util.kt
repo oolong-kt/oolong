@@ -1,5 +1,6 @@
 package oolong.random
 
+import kotlinx.coroutines.CoroutineScope
 import oolong.Effect
 import kotlin.random.Random
 import kotlin.random.nextInt
@@ -14,7 +15,7 @@ import kotlin.random.nextULong
  * @param msg map function of [Int] to [Msg]
  * @return [Effect] of [Msg] for the generated [Int]
  */
-fun <Msg> nextBits(bitCount: Int, msg: (Int) -> Msg): Effect<Msg> =
+fun <Msg> nextBits(bitCount: Int, msg: suspend CoroutineScope.(Int) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextBits(bitCount))) }
 
 /**
@@ -23,7 +24,7 @@ fun <Msg> nextBits(bitCount: Int, msg: (Int) -> Msg): Effect<Msg> =
  * @param msg map function of [Boolean] to [Msg]
  * @return [Effect] of [Msg] for the generated [Boolean]
  */
-fun <Msg> nextBoolean(msg: (Boolean) -> Msg): Effect<Msg> =
+fun <Msg> nextBoolean(msg: suspend CoroutineScope.(Boolean) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextBoolean())) }
 
 /**
@@ -32,8 +33,12 @@ fun <Msg> nextBoolean(msg: (Boolean) -> Msg): Effect<Msg> =
  * @param msg map function of [ByteArray] to [Msg]
  * @return [Effect] of [Msg] for the generated [ByteArray]
  */
-fun <Msg> nextBytes(array: ByteArray, fromIndex: Int, toIndex: Int, msg: (ByteArray) -> Msg): Effect<Msg> =
-    { dispatch -> dispatch(msg(Random.nextBytes(array, fromIndex, toIndex))) }
+fun <Msg> nextBytes(
+    array: ByteArray,
+    fromIndex: Int,
+    toIndex: Int,
+    msg: suspend CoroutineScope.(ByteArray) -> Msg
+): Effect<Msg> = { dispatch -> dispatch(msg(Random.nextBytes(array, fromIndex, toIndex))) }
 
 /**
  * Call [Random.nextBytes] with a mapping of [ByteArray] to [Msg].
@@ -41,7 +46,7 @@ fun <Msg> nextBytes(array: ByteArray, fromIndex: Int, toIndex: Int, msg: (ByteAr
  * @param msg map function of [ByteArray] to [Msg]
  * @return [Effect] of [Msg] for the generated [ByteArray]
  */
-fun <Msg> nextBytes(array: ByteArray, msg: (ByteArray) -> Msg): Effect<Msg> =
+fun <Msg> nextBytes(array: ByteArray, msg: suspend CoroutineScope.(ByteArray) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextBytes(array))) }
 
 /**
@@ -50,7 +55,7 @@ fun <Msg> nextBytes(array: ByteArray, msg: (ByteArray) -> Msg): Effect<Msg> =
  * @param msg map function of [ByteArray] to [Msg]
  * @return [Effect] of [Msg] for the generated [ByteArray]
  */
-fun <Msg> nextBytes(size: Int, msg: (ByteArray) -> Msg): Effect<Msg> =
+fun <Msg> nextBytes(size: Int, msg: suspend CoroutineScope.(ByteArray) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextBytes(size))) }
 
 /**
@@ -59,7 +64,7 @@ fun <Msg> nextBytes(size: Int, msg: (ByteArray) -> Msg): Effect<Msg> =
  * @param msg map function of [Double] to [Msg]
  * @return [Effect] of [Msg] for the generated [Double]
  */
-fun <Msg> nextDouble(msg: (Double) -> Msg): Effect<Msg> =
+fun <Msg> nextDouble(msg: suspend CoroutineScope.(Double) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextDouble())) }
 
 /**
@@ -68,7 +73,7 @@ fun <Msg> nextDouble(msg: (Double) -> Msg): Effect<Msg> =
  * @param msg map function of [Double] to [Msg]
  * @return [Effect] of [Msg] for the generated [Double]
  */
-fun <Msg> nextDouble(until: Double, msg: (Double) -> Msg): Effect<Msg> =
+fun <Msg> nextDouble(until: Double, msg: suspend CoroutineScope.(Double) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextDouble(until))) }
 
 /**
@@ -77,7 +82,7 @@ fun <Msg> nextDouble(until: Double, msg: (Double) -> Msg): Effect<Msg> =
  * @param msg map function of [Double] to [Msg]
  * @return [Effect] of [Msg] for the generated [Double]
  */
-fun <Msg> nextDouble(from: Double, until: Double, msg: (Double) -> Msg): Effect<Msg> =
+fun <Msg> nextDouble(from: Double, until: Double, msg: suspend CoroutineScope.(Double) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextDouble(from, until))) }
 
 /**
@@ -86,7 +91,7 @@ fun <Msg> nextDouble(from: Double, until: Double, msg: (Double) -> Msg): Effect<
  * @param msg map function of [Float] to [Msg]
  * @return [Effect] of [Msg] for the generated [Float]
  */
-fun <Msg> nextFloat(msg: (Float) -> Msg): Effect<Msg> =
+fun <Msg> nextFloat(msg: suspend CoroutineScope.(Float) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextFloat())) }
 
 /**
@@ -95,7 +100,7 @@ fun <Msg> nextFloat(msg: (Float) -> Msg): Effect<Msg> =
  * @param msg map function of [Int] to [Msg]
  * @return [Effect] of [Msg] for the generated [Int]
  */
-fun <Msg> nextInt(msg: (Int) -> Msg): Effect<Msg> =
+fun <Msg> nextInt(msg: suspend CoroutineScope.(Int) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextInt())) }
 
 /**
@@ -104,7 +109,7 @@ fun <Msg> nextInt(msg: (Int) -> Msg): Effect<Msg> =
  * @param msg map function of [Int] to [Msg]
  * @return [Effect] of [Msg] for the generated [Int]
  */
-fun <Msg> nextInt(until: Int, msg: (Int) -> Msg): Effect<Msg> =
+fun <Msg> nextInt(until: Int, msg: suspend CoroutineScope.(Int) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextInt(until))) }
 
 /**
@@ -113,7 +118,7 @@ fun <Msg> nextInt(until: Int, msg: (Int) -> Msg): Effect<Msg> =
  * @param msg map function of [Int] to [Msg]
  * @return [Effect] of [Msg] for the generated [Int]
  */
-fun <Msg> nextInt(from: Int, until: Int, msg: (Int) -> Msg): Effect<Msg> =
+fun <Msg> nextInt(from: Int, until: Int, msg: suspend CoroutineScope.(Int) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextInt(from, until))) }
 
 /**
@@ -122,7 +127,7 @@ fun <Msg> nextInt(from: Int, until: Int, msg: (Int) -> Msg): Effect<Msg> =
  * @param msg map function of [Int] to [Msg]
  * @return [Effect] of [Msg] for the generated [Int]
  */
-fun <Msg> nextInt(range: IntRange, msg: (Int) -> Msg): Effect<Msg> =
+fun <Msg> nextInt(range: IntRange, msg: suspend CoroutineScope.(Int) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextInt(range))) }
 
 /**
@@ -131,7 +136,7 @@ fun <Msg> nextInt(range: IntRange, msg: (Int) -> Msg): Effect<Msg> =
  * @param msg map function of [Long] to [Msg]
  * @return [Effect] of [Msg] for the generated [Long]
  */
-fun <Msg> nextLong(msg: (Long) -> Msg): Effect<Msg> =
+fun <Msg> nextLong(msg: suspend CoroutineScope.(Long) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextLong())) }
 
 /**
@@ -140,7 +145,7 @@ fun <Msg> nextLong(msg: (Long) -> Msg): Effect<Msg> =
  * @param msg map function of [Long] to [Msg]
  * @return [Effect] of [Msg] for the generated [Long]
  */
-fun <Msg> nextLong(until: Long, msg: (Long) -> Msg): Effect<Msg> =
+fun <Msg> nextLong(until: Long, msg: suspend CoroutineScope.(Long) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextLong(until))) }
 
 /**
@@ -149,7 +154,7 @@ fun <Msg> nextLong(until: Long, msg: (Long) -> Msg): Effect<Msg> =
  * @param msg map function of [Long] to [Msg]
  * @return [Effect] of [Msg] for the generated [Long]
  */
-fun <Msg> nextLong(from: Long, until: Long, msg: (Long) -> Msg): Effect<Msg> =
+fun <Msg> nextLong(from: Long, until: Long, msg: suspend CoroutineScope.(Long) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextLong(from, until))) }
 
 /**
@@ -158,7 +163,7 @@ fun <Msg> nextLong(from: Long, until: Long, msg: (Long) -> Msg): Effect<Msg> =
  * @param msg map function of [Long] to [Msg]
  * @return [Effect] of [Msg] for the generated [Long]
  */
-fun <Msg> nextLong(range: LongRange, msg: (Long) -> Msg): Effect<Msg> =
+fun <Msg> nextLong(range: LongRange, msg: suspend CoroutineScope.(Long) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextLong(range))) }
 
 /**
@@ -168,7 +173,7 @@ fun <Msg> nextLong(range: LongRange, msg: (Long) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [UByteArray]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> nextUBytes(array: UByteArray, msg: (UByteArray) -> Msg): Effect<Msg> =
+fun <Msg> nextUBytes(array: UByteArray, msg: suspend CoroutineScope.(UByteArray) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextUBytes(array))) }
 
 /**
@@ -178,7 +183,7 @@ fun <Msg> nextUBytes(array: UByteArray, msg: (UByteArray) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [UByteArray]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> nextUBytes(size: Int, msg: (UByteArray) -> Msg): Effect<Msg> =
+fun <Msg> nextUBytes(size: Int, msg: suspend CoroutineScope.(UByteArray) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextUBytes(size))) }
 
 /**
@@ -188,7 +193,7 @@ fun <Msg> nextUBytes(size: Int, msg: (UByteArray) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [UInt]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> nextUInt(msg: (UInt) -> Msg): Effect<Msg> =
+fun <Msg> nextUInt(msg: suspend CoroutineScope.(UInt) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextUInt())) }
 
 /**
@@ -198,7 +203,7 @@ fun <Msg> nextUInt(msg: (UInt) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [UInt]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> nextUInt(until: UInt, msg: (UInt) -> Msg): Effect<Msg> =
+fun <Msg> nextUInt(until: UInt, msg: suspend CoroutineScope.(UInt) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextUInt(until))) }
 
 /**
@@ -208,7 +213,7 @@ fun <Msg> nextUInt(until: UInt, msg: (UInt) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [UInt]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> nextUInt(from: UInt, until: UInt, msg: (UInt) -> Msg): Effect<Msg> =
+fun <Msg> nextUInt(from: UInt, until: UInt, msg: suspend CoroutineScope.(UInt) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextUInt(from, until))) }
 
 /**
@@ -218,7 +223,7 @@ fun <Msg> nextUInt(from: UInt, until: UInt, msg: (UInt) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [UInt]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> nextUInt(range: UIntRange, msg: (UInt) -> Msg): Effect<Msg> =
+fun <Msg> nextUInt(range: UIntRange, msg: suspend CoroutineScope.(UInt) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextUInt(range))) }
 
 /**
@@ -228,7 +233,7 @@ fun <Msg> nextUInt(range: UIntRange, msg: (UInt) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [ULong]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> nextULong(msg: (ULong) -> Msg): Effect<Msg> =
+fun <Msg> nextULong(msg: suspend CoroutineScope.(ULong) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextULong())) }
 
 /**
@@ -238,7 +243,7 @@ fun <Msg> nextULong(msg: (ULong) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [ULong]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> nextULong(until: ULong, msg: (ULong) -> Msg): Effect<Msg> =
+fun <Msg> nextULong(until: ULong, msg: suspend CoroutineScope.(ULong) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextULong(until))) }
 
 /**
@@ -248,7 +253,7 @@ fun <Msg> nextULong(until: ULong, msg: (ULong) -> Msg): Effect<Msg> =
  * @return [Effect] of [Msg] for the generated [ULong]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> nextULong(from: ULong, until: ULong, msg: (ULong) -> Msg): Effect<Msg> =
+fun <Msg> nextULong(from: ULong, until: ULong, msg: suspend CoroutineScope.(ULong) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextULong(from, until))) }
 
 /**
@@ -258,5 +263,5 @@ fun <Msg> nextULong(from: ULong, until: ULong, msg: (ULong) -> Msg): Effect<Msg>
  * @return [Effect] of [Msg] for the generated [ULong]
  */
 @ExperimentalUnsignedTypes
-fun <Msg> nextULong(range: ULongRange, msg: (ULong) -> Msg): Effect<Msg> =
+fun <Msg> nextULong(range: ULongRange, msg: suspend CoroutineScope.(ULong) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextULong(range))) }
