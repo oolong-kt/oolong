@@ -12,26 +12,6 @@ object Oolong {
     /**
      * Create a runtime.
      */
-    @JsName("program")
-    fun <Model, Msg, Props> program(
-        program: Program<Model, Msg, Props>,
-        render: Render<Msg, Props>,
-        runtimeScope: CoroutineScope = GlobalScope,
-        effectContext: CoroutineContext = Dispatchers.Default,
-        renderContext: CoroutineContext = effectContext
-    ): Dispose = runtime(
-        program::init,
-        program::update,
-        program::view,
-        render,
-        runtimeScope,
-        effectContext,
-        renderContext
-    )
-
-    /**
-     * Create a runtime.
-     */
     @JsName("runtime")
     fun <Model, Msg, Props> runtime(
         init: Init<Model, Msg>,
@@ -40,7 +20,7 @@ object Oolong {
         render: Render<Msg, Props>,
         runtimeScope: CoroutineScope = GlobalScope,
         effectContext: CoroutineContext = Dispatchers.Default,
-        renderContext: CoroutineContext = effectContext
+        renderContext: CoroutineContext = Dispatchers.Main
     ): Dispose {
         val runtime = Runtime(
             init,
@@ -52,49 +32,6 @@ object Oolong {
             renderContext
         )
         return { runtime.dispose() }
-    }
-
-    object Main {
-
-        /**
-         * Create a runtime with a render [CoroutineContext] of [Dispatchers.Main].
-         */
-        @JsName("mainProgram")
-        fun <Model, Msg, Props> program(
-            program: Program<Model, Msg, Props>,
-            render: Render<Msg, Props>,
-            runtimeScope: CoroutineScope = GlobalScope,
-            effectContext: CoroutineContext = Dispatchers.Default
-        ): Dispose = runtime(
-            program::init,
-            program::update,
-            program::view,
-            render,
-            runtimeScope,
-            effectContext
-        )
-
-        /**
-         * Create a runtime with a render [CoroutineContext] of [Dispatchers.Main].
-         */
-        @JsName("mainRuntime")
-        fun <Model, Msg, Props> runtime(
-            init: Init<Model, Msg>,
-            update: Update<Model, Msg>,
-            view: View<Model, Props>,
-            render: Render<Msg, Props>,
-            runtimeScope: CoroutineScope = GlobalScope,
-            effectContext: CoroutineContext = Dispatchers.Default
-        ): Dispose = runtime(
-            init,
-            update,
-            view,
-            render,
-            runtimeScope,
-            effectContext,
-            Dispatchers.Main
-        )
-
     }
 
     private class Runtime<Model, Msg, Props>(
