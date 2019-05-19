@@ -10,9 +10,9 @@ Oolong is an Elm inspired Model-View-Update (MVU) implementation for Kotiln mult
 
 * **Model** - a type to represent the program state
 
-* **Update** - a function to update the state
-
 * **View** - a function to map the state to view properties
+
+* **Update** - a function to update the state
 
 By applying this simple pattern you can create composable, testable programs that can run on any platform. Oolong enables a common codebase for all platforms by using a Render function which is implemented by each frontend.
 
@@ -34,8 +34,8 @@ object Counter {
 
     data class Props(
         val count: Int,
-        val onIncrement: () -> Msg,
-        val onDecrement: () -> Msg
+        val increment: () -> Msg,
+        val decrement: () -> Msg
     )
 
     val init: Init<Model, Msg> = { 

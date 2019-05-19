@@ -11,9 +11,9 @@ Oolong is an [Elm](https://guide.elm-lang.org/architecture) inspired Model-View-
 
 * **Model** - a type to represent the program state
 
-* **Update** - a function to update the state
-
 * **View** - a function to map the state to view properties
+
+* **Update** - a function to update the state
 
 By applying this simple pattern you can create composable, testable programs that can run on any platform. Oolong enables a common codebase for all platforms by using a `Render` function which is implemented by each frontend.
 

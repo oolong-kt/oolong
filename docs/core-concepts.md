@@ -51,8 +51,8 @@ There are two types of data you may want to store in your view properties. First
 ```kotlin
 class Props(
     val count: Int,
-    val onIncrement: () -> Msg,
-    val onDecrement: () -> Msg
+    val increment: () -> Msg,
+    val decrement: () -> Msg
 )
 ```
 
@@ -96,8 +96,8 @@ We also need to know how to render the view properties returned by the view func
 val render: Render<Msg, Props> = { props, dispatch ->
     // Platform specific rendering
     countLabel.text = "${props.count}"
-    incrementButton.setOnClickListener { dispatch(props.onIncrement()) }
-    decrementButton.setOnClickListener { dispatch(props.onDecrement()) }
+    incrementButton.setOnClickListener { dispatch(props.increment()) }
+    decrementButton.setOnClickListener { dispatch(props.decrement()) }
 }
 ```
 
