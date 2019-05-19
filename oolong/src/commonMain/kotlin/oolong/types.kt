@@ -57,24 +57,24 @@ typealias Dispose = () -> Unit
 /**
  * [Effect] builder function.
  */
-fun <Msg> effect(block: Effect<Msg>): Effect<Msg> = block
+fun <Msg : Any> effect(block: Effect<Msg>): Effect<Msg> = block
 
 /**
  * [Init] builder function.
  */
-fun <Model, Msg> init(block: Init<Model, Msg>): Init<Model, Msg> = block
+fun <Model : Any, Msg : Any> init(block: Init<Model, Msg>): Init<Model, Msg> = block
 
 /**
  * [Update] builder function.
  */
-fun <Model, Msg> update(block: Update<Model, Msg>): Update<Model, Msg> = block
+fun <Model : Any, Msg : Any> update(block: Update<Model, Msg>): Update<Model, Msg> = block
 
 /**
  * [View] builder function.
  */
-fun <Model, Props> view(block: View<Model, Props>): View<Model, Props> = block
+fun <Model : Any, Props : Any> view(block: View<Model, Props>): View<Model, Props> = block
 
 /**
  * [Render] builder function.
  */
-fun <Props, Msg> render(block: Render<Props, Msg>): Render<Props, Msg> = block
+fun <Props : Any, Msg : Any> render(block: Render<Props, Msg>): Render<Props, Msg> = block

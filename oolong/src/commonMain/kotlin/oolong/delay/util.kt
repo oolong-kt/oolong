@@ -13,7 +13,7 @@ import oolong.Effect
  * @param msg generator function of [Msg]
  * @return a delayed effect
  */
-fun <Msg> delay(timeMillis: Long, msg: suspend CoroutineScope.() -> Msg): Effect<Msg> =
+fun <Msg : Any> delay(timeMillis: Long, msg: suspend CoroutineScope.() -> Msg): Effect<Msg> =
     { dispatch ->
         delay(timeMillis)
         dispatch(msg())
@@ -26,7 +26,7 @@ fun <Msg> delay(timeMillis: Long, msg: suspend CoroutineScope.() -> Msg): Effect
  * @param msg generator function of [Msg]
  * @return a delayed effect
  */
-fun <Msg> interval(timeMillis: Long, msg: suspend CoroutineScope.() -> Msg): Effect<Msg> =
+fun <Msg : Any> interval(timeMillis: Long, msg: suspend CoroutineScope.() -> Msg): Effect<Msg> =
     { dispatch ->
         while (isActive) {
             delay(timeMillis)

@@ -10,14 +10,14 @@ import oolong.effect
 /**
  * Create an empty [Effect].
  */
-fun <Msg> none(): Effect<Msg> = {}
+fun <Msg : Any> none(): Effect<Msg> = {}
 
 /**
  * Compose a collection of [Effect] into a single [Effect].
  *
  * @param effects a list of effects
  */
-fun <Msg> batch(vararg effects: Effect<Msg>): Effect<Msg> =
+fun <Msg : Any> batch(vararg effects: Effect<Msg>): Effect<Msg> =
     batch(effects.asIterable())
 
 /**
@@ -25,19 +25,19 @@ fun <Msg> batch(vararg effects: Effect<Msg>): Effect<Msg> =
  *
  * @param effects a list of effects
  */
-fun <Msg> batch(effects: Iterable<Effect<Msg>>): Effect<Msg> =
+fun <Msg : Any> batch(effects: Iterable<Effect<Msg>>): Effect<Msg> =
     { dispatch -> for (effect in effects) launch { effect(dispatch) } }
 
 /**
  * Map from [Effect] of [A] to [Effect] of [B]
  */
-fun <A, B> map(effect: Effect<A>, f: (A) -> B): Effect<B> =
+fun <A : Any, B : Any> map(effect: Effect<A>, f: (A) -> B): Effect<B> =
     { dispatch -> effect { a -> dispatch(f(a)) } }
 
 /**
  * Create a [Pair] of [Effect] and [Dispose].
  */
-fun <Msg> disposableEffect(effect: Effect<Msg>): Pair<Effect<Msg>, Dispose> {
+fun <Msg : Any> disposableEffect(effect: Effect<Msg>): Pair<Effect<Msg>, Dispose> {
     val supervisor = SupervisorJob()
     val dispose = { supervisor.cancel() }
     return effect<Msg> { dispatch ->

@@ -13,7 +13,7 @@ object Oolong {
      * Create a runtime.
      */
     @JsName("runtime")
-    fun <Model, Msg, Props> runtime(
+    fun <Model : Any, Msg : Any, Props : Any> runtime(
         init: Init<Model, Msg>,
         update: Update<Model, Msg>,
         view: View<Model, Props>,
@@ -34,7 +34,7 @@ object Oolong {
         return { runtime.dispose() }
     }
 
-    private class Runtime<Model, Msg, Props>(
+    private class Runtime<Model : Any, Msg : Any, Props : Any>(
         init: Init<Model, Msg>,
         private val update: Update<Model, Msg>,
         private val view: View<Model, Props>,

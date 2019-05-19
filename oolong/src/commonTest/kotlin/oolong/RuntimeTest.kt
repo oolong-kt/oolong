@@ -13,7 +13,7 @@ class RuntimeTest {
     @JsName("runtime_should_call_render_initially")
     fun `runtime should call render initially`() = runTest { resolve ->
         val initialState = 1
-        Oolong.runtime(
+        runtime(
             { initialState to none() },
             { _: Unit, model: Int -> model to none() },
             { model: Int -> model },
@@ -28,7 +28,7 @@ class RuntimeTest {
     @JsName("runtime_should_call_render_after_dispatch")
     fun `runtime should call render after dispatch`() = runTest { resolve ->
         var count = 0
-        Oolong.runtime(
+        runtime(
             { "init" to none() },
             { msg: String, _: String -> msg to none() },
             { model: String -> model },
@@ -54,7 +54,7 @@ class RuntimeTest {
     @JsName("effects_do_not_block_runtime")
     fun `effects do not block runtime`() = runTest { resolve ->
         val states = mutableListOf<String>()
-        Oolong.runtime(
+        runtime(
             { "init" to delay(100) { "effect" } },
             { msg: String, _: String -> msg to none() },
             { model: String -> model },
@@ -79,7 +79,7 @@ class RuntimeTest {
     @Test
     @JsName("runtime_should_not_overflow_stack")
     fun `runtime should not overflow stack`() = runTest(10_000) { resolve ->
-        Oolong.runtime(
+        runtime(
             { 0 to none() },
             { _: Unit, model: Int -> model + 1 to none() },
             { model: Int -> model },
@@ -97,7 +97,7 @@ class RuntimeTest {
     @JsName("runtime_should_not_call_update_view_render_if_disposed")
     fun `runtime should not call update view render if disposed`() = runTest { resolve ->
         var initialRender = true
-        Oolong.runtime(
+        runtime(
             { "state" to none() },
             { msg: String, _: String -> msg to effect { dispatch: Dispatch<String> -> dispatch("next") } },
             { model: String -> model },
