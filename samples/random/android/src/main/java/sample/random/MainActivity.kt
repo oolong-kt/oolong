@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         val randomView = findViewById<RandomView>(R.id.random_view)
 
-        Oolong.Main.runtime(
+        Oolong.runtime(
             Random.init,
             Random.update,
             Random.view,

@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         val timeView = findViewById<TimeView>(R.id.time_view)
 
-        Oolong.Main.runtime(
+        Oolong.runtime(
             Time.init,
             Time.update,
             Time.view,

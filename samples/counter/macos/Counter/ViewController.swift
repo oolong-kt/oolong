@@ -22,8 +22,8 @@ class ViewController: NSViewController {
     
     private func render(props: Counter.Props, dispatch: @escaping (Counter.Msg) -> KotlinUnit) {
         countLabel.stringValue = "\(props.count)"
-        incrementButton.setAction { closure in dispatch(props.onIncrement()) }
-        decrementButton.setAction { control in dispatch(props.onDecrement()) }
+        incrementButton.setAction { _ in dispatch(props.onIncrement()) }
+        decrementButton.setAction { _ in dispatch(props.onDecrement()) }
     }
 
 }

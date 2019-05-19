@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         val counterView = findViewById<CounterView>(R.id.counter_view)
 
-        Oolong.Main.runtime(
+        Oolong.runtime(
             Counter.init,
             Counter.update,
             Counter.view,

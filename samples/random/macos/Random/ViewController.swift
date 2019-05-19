@@ -21,7 +21,7 @@ class ViewController: NSViewController {
     
     private func render(props: Random.Props, dispatch: @escaping (Random.Msg) -> KotlinUnit) {
         dieFaceLabel.stringValue = "\(props.dieFace)"
-        rollButton.setAction { closure in dispatch(props.onRoll()) }
+        rollButton.setAction { _ in dispatch(props.onRoll()) }
     }
     
 }

@@ -5,6 +5,7 @@ plugins {
 
 repositories {
     google()
+    mavenCentral()
     jcenter()
 }
 

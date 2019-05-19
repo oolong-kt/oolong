@@ -6,6 +6,7 @@ plugins {
 }
 
 repositories {
+    mavenCentral()
     jcenter()
 }
 
@@ -26,6 +27,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":oolong"))
+                implementation(project(":samples:util:core"))
                 implementation(deps.Kotlin.StdLib.Common)
             }
         }

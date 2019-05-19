@@ -1,7 +1,7 @@
 package counter
 
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.MainLoopDispatcher
 import oolong.Oolong
 import oolong.Render
 
