@@ -2,7 +2,7 @@
 
 # effect
 
-`fun <Msg> effect(block: `[`Effect`](-effect.md)`<`[`Msg`](effect.md#Msg)`>): `[`Effect`](-effect.md)`<`[`Msg`](effect.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/types.kt#L58)
+`fun <Msg : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> effect(block: `[`Effect`](-effect.md)`<`[`Msg`](effect.md#Msg)`>): `[`Effect`](-effect.md)`<`[`Msg`](effect.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/types.kt#L60)
 
 [Effect](-effect.md) builder function.
 

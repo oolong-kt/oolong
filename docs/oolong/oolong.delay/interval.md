@@ -2,18 +2,16 @@
 
 # interval
 
-`fun <Msg> interval(delay: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`, scope: <ERROR CLASS> = GlobalScope, msg: () -> `[`Msg`](interval.md#Msg)`): <ERROR CLASS><`[`Effect`](../oolong/-effect.md)`<`[`Msg`](interval.md#Msg)`>, `[`Dispose`](../oolong/-dispose.md)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/delay/util.kt#L38)
+`fun <Msg : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> interval(timeMillis: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`, msg: suspend <ERROR CLASS>.() -> `[`Msg`](interval.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](interval.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/delay/util.kt#L29)
 
-Generate [Msg](interval.md#Msg)s at a specified delay.
+Generate [Msg](interval.md#Msg)s at a specified timeMillis.
 
 ### Parameters
 
-`delay` - the delay length before the effect is invoked
-
-`scope` - the [CoroutineScope](#) in which to run the effect
+`timeMillis` - time in milliseconds.
 
 `msg` - generator function of [Msg](interval.md#Msg)
 
 **Return**
-A pair of effect and dispose
+a delayed effect
 

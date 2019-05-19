@@ -2,7 +2,7 @@
 
 # Render
 
-`typealias Render<Msg, Props> = (props: `[`Props`](-render.md#Props)`, dispatch: `[`Dispatch`](-dispatch.md)`<`[`Msg`](-render.md#Msg)`>) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/types.kt#L48)
+`typealias Render<Msg, Props> = (props: `[`Props`](-render.md#Props)`, dispatch: `[`Dispatch`](-dispatch.md)`<`[`Msg`](-render.md#Msg)`>) -> `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`?` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/types.kt#L50)
 
 Renders the view properties
 

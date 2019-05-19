@@ -3,6 +3,7 @@ $dokka.linkExtension:md
 
 oolong
 oolong.delay
+oolong.dispatch
 oolong.effect
 oolong.next
 oolong.random

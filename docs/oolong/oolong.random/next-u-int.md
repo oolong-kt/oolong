@@ -2,9 +2,9 @@
 
 # nextUInt
 
-`fun <Msg> nextUInt(msg: (<ERROR CLASS>) -> `[`Msg`](next-u-int.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-u-int.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L196)
-`fun <Msg> nextUInt(until: <ERROR CLASS>, msg: (<ERROR CLASS>) -> `[`Msg`](next-u-int.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-u-int.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L206)
-`fun <Msg> nextUInt(from: <ERROR CLASS>, until: <ERROR CLASS>, msg: (<ERROR CLASS>) -> `[`Msg`](next-u-int.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-u-int.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L216)
+`fun <Msg : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> nextUInt(msg: suspend <ERROR CLASS>.(<ERROR CLASS>) -> `[`Msg`](next-u-int.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-u-int.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L196)
+`fun <Msg : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> nextUInt(until: <ERROR CLASS>, msg: suspend <ERROR CLASS>.(<ERROR CLASS>) -> `[`Msg`](next-u-int.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-u-int.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L206)
+`fun <Msg : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> nextUInt(from: <ERROR CLASS>, until: <ERROR CLASS>, msg: suspend <ERROR CLASS>.(<ERROR CLASS>) -> `[`Msg`](next-u-int.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-u-int.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L216)
 
 Call [Random.nextUInt](#) with a mapping of [UInt](#) to [Msg](next-u-int.md#Msg).
 

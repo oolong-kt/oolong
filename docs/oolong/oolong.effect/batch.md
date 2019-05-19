@@ -2,10 +2,10 @@
 
 # batch
 
-`fun <Msg> batch(vararg effects: `[`Effect`](../oolong/-effect.md)`<`[`Msg`](batch.md#Msg)`>): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](batch.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/effect/util.kt#L18)
-`fun <Msg> batch(effects: `[`Iterable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html)`<`[`Effect`](../oolong/-effect.md)`<`[`Msg`](batch.md#Msg)`>>): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](batch.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/effect/util.kt#L26)
+`fun <Msg : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> batch(vararg effects: `[`Effect`](../oolong/-effect.md)`<`[`Msg`](batch.md#Msg)`>): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](batch.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/effect/util.kt#L20)
+`fun <Msg : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> batch(effects: `[`Iterable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html)`<`[`Effect`](../oolong/-effect.md)`<`[`Msg`](batch.md#Msg)`>>): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](batch.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/effect/util.kt#L28)
 
-Compose a list of effects into a single effect.
+Compose a collection of [Effect](../oolong/-effect.md) into a single [Effect](../oolong/-effect.md).
 
 ### Parameters
 
