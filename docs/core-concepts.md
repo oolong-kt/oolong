@@ -34,8 +34,8 @@ So far we have mentioned two conventions: models are `data` classes, and message
 ```kotlin
 val update: Update<Model, Msg> = { msg, model ->
     when (msg) {
-        Msg.Increment -> model.copy(count = model.count + 1)
-        Msg.Decrement -> model.copy(count = model.count - 1)
+        Msg.Increment -> model.copy(count = model.count + 1) to none()
+        Msg.Decrement -> model.copy(count = model.count - 1) to none()
     }
 }
 ```
@@ -61,8 +61,8 @@ class Props(
 The view function, as mentioned above, takes the current state its argument and returns view properties. In our counter example we populate the view properties with:
 
 * `count` - the current count.
-* `onIncrement` - a function which returns the `Increment` message.
-* `onDecrement` - a function which returns the `Decrement` message.
+* `increment` - a function which returns the `Increment` message.
+* `decrement` - a function which returns the `Decrement` message.
 
 ```kotlin
 val view: View<Model, Props> = { model ->
@@ -83,8 +83,8 @@ Now that we've built the core components of our application we need a few more t
 To get the runtime loop started, we first need to know what the initial state is. We do this by definiting an initialization function. This function is similar to the `update` function, however it takes no arguments. By convention, it is often desireable to define defaults in the model class and simply return a new instance from the init function.
 
 ```kotlin
-val init: Init<Model> = {
-    Model()
+val init: Init<Model, Msg> = {
+    Model() to none()
 }
 ```
 
