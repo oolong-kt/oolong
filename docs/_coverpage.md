@@ -6,5 +6,3 @@
 
 [GitHub](https://github.com/oolong-kt/oolong/)
 [Getting Started](#oolong)
-
-![color](#f8f8f8)
