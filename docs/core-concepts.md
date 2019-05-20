@@ -113,5 +113,3 @@ val dispose = Oolong.runtime(
     render
 )
 ```
-
-Next, let's learn about [Effects](effects/README.md).
