@@ -11,7 +11,6 @@ dokka {
         // use sourceRoot instead (see below)
         []
     }
-    includes = ['README.md']
     sourceRoot {
         // assuming there is only a single source dir...
         path = kotlin.sourceSets.commonMain.kotlin.srcDirs[0]

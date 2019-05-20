@@ -1,4 +1,4 @@
-Oolong 🍵 
+Oolong
 =========
 
 [![Build Status](https://img.shields.io/travis/oolong-kt/oolong/master.svg)](https://travis-ci.org/oolong-kt/oolong/)

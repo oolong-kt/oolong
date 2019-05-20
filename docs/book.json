@@ -1,6 +1,0 @@
-{
-    "plugins": [
-        "expand-active-chapter",
-        "kotlin-playground@https://github.com/pardom/gitbook-plugin-kotlin-playground"
-    ]
-}
