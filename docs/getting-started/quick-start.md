@@ -1,11 +1,4 @@
-Oolong
-=========
-
-[![Build Status](https://img.shields.io/travis/oolong-kt/oolong/master.svg)](https://travis-ci.org/oolong-kt/oolong/)
-[![Maven Central](https://img.shields.io/maven-central/v/org.oolong-kt/oolong.svg)](#download)
-[![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/https/oss.sonatype.org/org.oolong-kt/oolong.svg)](#download)
-[![License](https://img.shields.io/github/license/oolong-kt/oolong.svg)](LICENSE.md)
-[![Gitter chat](https://img.shields.io/gitter/room/oolong-kt/community.svg)](https://gitter.im/oolong-kt/community)
+# Quick Start
 
 Oolong is an [Elm](https://guide.elm-lang.org/architecture) inspired Model-View-Update (MVU) implementation for Kotiln multiplatform. As the name implies, three core concepts comprise the foundation of this architecture: 
 
@@ -17,8 +10,35 @@ Oolong is an [Elm](https://guide.elm-lang.org/architecture) inspired Model-View-
 
 By applying this simple pattern you can create composable, testable programs that can run on any platform. Oolong enables a common codebase for all platforms by using a `Render` function which is implemented by each frontend.
 
-Example
--------
+## Download
+
+Add Oolong to your project with Gradle.
+
+```kotlin
+dependencies {
+    implementation("org.oolong-kt:oolong:2.0.0-SNAPSHOT")
+}
+```
+
+## Setup
+
+Define your program functions and initialize an Oolong runtime.
+
+```kotlin
+val init:   Int<Model, Msg>    = { ... }
+val update: Update<Model, Msg> = { msg, model -> ... }
+val view:   View<Model, Props> = { model -> ... }
+val render: Render<Msg, Props> = { props, dispatch -> ... }
+
+val dispose = Oolong.runtime(
+    init,
+    update,
+    view,
+    render
+)
+```
+
+## Example
 
 The following is a simple counter example in which the count can be incremented or decremented.
 
@@ -59,14 +79,5 @@ object Counter {
         )
     }
 
-}
-```
-
-Download
---------
-
-```kotlin
-dependencies {
-    implementation("org.oolong-kt:oolong:2.0.0-SNAPSHOT")
 }
 ```

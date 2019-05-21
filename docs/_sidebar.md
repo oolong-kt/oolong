@@ -1,6 +1,14 @@
 - Getting Started
-  - [Core Concepts](/core-concepts.md)
-  - [Effects](/effects.md)
-  - [Rendering](/rendering.md)
+    - [Quick Start](/getting-started/quick-start)
+    - [Core Concepts](/getting-started/core-concepts)
+    - [Side Effects](/getting-started/side-effects)
+    - [Rendering](/getting-started/rendering)
 
-- [API Reference](oolong/index.md)
+- Recipes
+    - [Isolation](/recipes/isolation)
+    - [Navigation](/recipes/navigation)
+    
+- Documentation 
+    - [API Reference](/oolong/index)
+    - [Glossary](/documentation/glossary)
+

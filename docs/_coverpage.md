@@ -5,4 +5,4 @@
 ![](_media/space.svg) 
 
 [GitHub](https://github.com/oolong-kt/oolong/)
-[Getting Started](#oolong)
+[Getting Started](/getting-started/quick-start)
