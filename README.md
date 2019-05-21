@@ -72,7 +72,7 @@ More examples can be found in the [samples directory](samples).
 Documentation
 -------------
 
-Further reading can be found in the [official guide](https://oolong-kt.org) and [documentation](https://oolong-kt.org/oolong).
+Further reading can be found in the [official guide](https://oolong-kt.org) and [documentation](https://oolong-kt.org/#/oolong/index).
 
 Download
 --------
