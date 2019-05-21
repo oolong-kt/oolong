@@ -6,7 +6,7 @@
 
 | Name | Summary |
 |---|---|
-| [Oolong](-oolong/index.md) | `object Oolong` |
+| [Oolong](-oolong/index.md) | `object Oolong`<br>Oolong runtime module. |
 
 ### Type Aliases
 

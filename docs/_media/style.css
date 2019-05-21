@@ -1,6 +1,13 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600");
+
+body {
+    font-family: Open Sans,Source Sans Pro,Helvetica Neue,Arial,sans-serif !important;
+}
+
 section.cover.show {
     background: linear-gradient(to left bottom,#80d8ff 0%,#b9f6ca 100%) !important;
 }
+
 a.gitter-open-chat-button {
     background: #00c853;
 }

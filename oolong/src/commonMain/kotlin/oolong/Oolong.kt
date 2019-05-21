@@ -7,6 +7,9 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 import kotlin.js.JsName
 
+/**
+ * Oolong runtime module.
+ */
 object Oolong {
 
     /**
@@ -70,6 +73,7 @@ object Oolong {
         fun dispose() {
             running = false
         }
+
     }
 
 }
