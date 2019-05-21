@@ -120,6 +120,14 @@ tasks {
     val compileTestKotlinJs by getting(Kotlin2JsCompile::class)
     val npmInstall by getting(NpmInstallTask::class)
 
+    val clean by getting {
+        delete("$rootDir/docs/oolong")
+    }
+
+    val build by getting {
+        dependsOn("dokka")
+    }
+
     val copyJsArtifacts by creating(Copy::class) {
         dependsOn(compileKotlinJs)
         from(compileKotlinJs.destinationDir)
