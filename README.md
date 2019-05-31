@@ -79,6 +79,6 @@ Download
 
 ```kotlin
 dependencies {
-    implementation("org.oolong-kt:oolong:2.0.0-SNAPSHOT")
+    implementation("org.oolong-kt:oolong:2.0.0")
 }
 ```
