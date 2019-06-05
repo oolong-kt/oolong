@@ -7,19 +7,10 @@ echo "Building Kotlin project..."
 echo "=============================="
 
 cd $BASEDIR/../../../
-./gradlew :samples:todo:core:build
-
-echo ""
-echo "=============================="
-echo "Installing NPM dependencies..."
-echo "=============================="
-echo ""
-
-cd $BASEDIR
-npm install
+./gradlew :samples:todomvc:core:jsMainClasses
 
 echo "=============================="
 echo "Finished!"
 echo ""
-echo "$(pwd)/index.html"
+echo "$BASEDIR/index.html"
 echo "=============================="
