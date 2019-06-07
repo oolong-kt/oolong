@@ -24,3 +24,7 @@ node_modules/
 
 ### Dokka ###
 package-list
+
+### Samples ###
+samples/**/oolong.js
+samples/**/core.js

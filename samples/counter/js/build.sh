@@ -2,15 +2,18 @@
 
 BASEDIR=$(dirname "$BASH_SOURCE")
 
-echo "=============================="
-echo "Building Kotlin project..."
-echo "=============================="
+echo "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "┃ Building project..."
 
 cd $BASEDIR/../../../
-./gradlew :samples:counter:core:jsMainClasses
+./gradlew :samples:counter:core:jsMainClasses --quiet
 
-echo "=============================="
-echo "Finished!"
-echo ""
-echo "$BASEDIR/index.html"
-echo "=============================="
+echo "┃ Copying artifacts..."
+
+cp oolong/build/classes/kotlin/js/main/oolong.js samples/counter/js/js/
+cp samples/counter/core/build/classes/kotlin/js/main/core.js samples/counter/js/js
+
+echo "┃ Finished!"
+echo "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "┃ $BASEDIR/index.html"
+echo "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
