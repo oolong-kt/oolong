@@ -42,9 +42,9 @@ object Oolong {
         private val update: Update<Model, Msg>,
         private val view: View<Model, Props>,
         private val render: Render<Msg, Props>,
-        runtimeScope: CoroutineScope = GlobalScope,
-        private val effectContext: CoroutineContext = Dispatchers.Default,
-        private val renderContext: CoroutineContext = effectContext
+        runtimeScope: CoroutineScope,
+        private val effectContext: CoroutineContext,
+        private val renderContext: CoroutineContext
     ) : CoroutineScope by runtimeScope {
 
         private var running = true
