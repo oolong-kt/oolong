@@ -62,25 +62,25 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                api(deps.Kotlin.Coroutines.Core.JS)
+                api(deps.Kotlin.Coroutines.Core.Js)
             }
         }
 
         val jsTest by getting {
             dependencies {
-                implementation(deps.Kotlin.Test.JS)
+                implementation(deps.Kotlin.Test.Js)
             }
         }
 
         val jvmMain by getting {
             dependencies {
-                api(deps.Kotlin.Coroutines.Core)
+                api(deps.Kotlin.Coroutines.Core.Jvm)
             }
         }
 
         val jvmTest by getting {
             dependencies {
-                implementation(deps.Kotlin.Test)
+                implementation(deps.Kotlin.Test.Jvm)
                 implementation(deps.Kotlin.Test.JUnit5)
             }
         }
