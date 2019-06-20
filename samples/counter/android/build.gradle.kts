@@ -25,8 +25,8 @@ android {
 
 dependencies {
     implementation(project(":samples:counter:core"))
-    implementation(deps.Kotlin.StdLib)
-    implementation(deps.Kotlin.Coroutines.Core)
+    implementation(deps.Kotlin.StdLib.Jvm)
+    implementation(deps.Kotlin.Coroutines.Core.Jvm)
     implementation(deps.Kotlin.Coroutines.Android)
-    implementation(deps.Android.X.AppCompat)
+    implementation(deps.Android.X.AppCompat.Core)
 }

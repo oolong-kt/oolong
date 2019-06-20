@@ -34,15 +34,15 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                implementation(deps.Kotlin.StdLib.JS)
-                implementation(deps.Kotlin.Coroutines.Core.JS)
+                implementation(deps.Kotlin.StdLib.Js)
+                implementation(deps.Kotlin.Coroutines.Core.Js)
             }
         }
 
         val jvmMain by getting {
             dependencies {
-                implementation(deps.Kotlin.StdLib.JDK8)
-                implementation(deps.Kotlin.Coroutines.Core)
+                implementation(deps.Kotlin.StdLib.Jvm)
+                implementation(deps.Kotlin.Coroutines.Core.Jvm)
             }
         }
     }
