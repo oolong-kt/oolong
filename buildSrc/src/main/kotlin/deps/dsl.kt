@@ -2,7 +2,7 @@ package deps
 
 abstract class Group(val groupId: String, val version: String) {
 
-    fun dependency(artifactId: String, version: String = this.version) =
+    fun artifact(artifactId: String, version: String = this.version) =
         dependency(groupId, artifactId, version)
 }
 
