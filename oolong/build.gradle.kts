@@ -20,9 +20,10 @@ kotlin {
     js {
         compilations.all {
             kotlinOptions {
-                metaInfo = true
-                sourceMap = true
+                main = "noCall"
                 moduleKind = "umd"
+                noStdlib = false
+                sourceMap = true
             }
         }
     }
