@@ -1,7 +1,3 @@
-import com.moowork.gradle.node.npm.NpmInstallTask
-import com.moowork.gradle.node.task.NodeTask
-import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
-
 val GROUP: String by project
 val VERSION_NAME: String by project
 
@@ -10,10 +6,8 @@ version = VERSION_NAME
 
 plugins {
     kotlin("multiplatform")
-    kotlin("native.cocoapods")
     `maven-publish`
     signing
-    id(deps.Node.Plugin)
 }
 
 repositories {
@@ -22,28 +16,34 @@ repositories {
 }
 
 kotlin {
+    jvm()
     js {
-        compilations.forEach {
-            it.kotlinOptions {
-                moduleKind = "umd"
+        compilations.all {
+            kotlinOptions {
+                metaInfo = true
                 sourceMap = true
+                moduleKind = "umd"
             }
         }
     }
-    jvm()
-    iosX64("ios") {
+    iosArm32 {
         binaries {
-            framework("Oolong")
+            framework()
         }
     }
-    linuxX64("linux")
-    macosX64("macOS")
-    mingwX64("windows")
-
-    cocoapods {
-        summary = "MVU for Kotlin Multiplatform"
-        homepage = "http://oolong-kt.org"
+    iosArm64 {
+        binaries {
+            framework()
+        }
     }
+    iosX64 {
+        binaries {
+            framework()
+        }
+    }
+    linuxX64()
+    macosX64()
+    mingwX64()
 
     sourceSets {
         val commonMain by getting {
@@ -85,79 +85,66 @@ kotlin {
             }
         }
 
-        val iosMain by getting {
+        val nativeMain by creating {
             dependencies {
                 api(deps.Kotlin.Coroutines.Core.Native)
             }
         }
 
-        val linuxMain by getting {
-            dependencies {
-                api(deps.Kotlin.Coroutines.Core.Native)
-            }
+        val nativeTest by creating {
         }
 
-        val macOSMain by getting {
-            dependencies {
-                api(deps.Kotlin.Coroutines.Core.Native)
-            }
+        val iosArm32Main by getting {
+            dependsOn(nativeMain)
         }
 
-        val windowsMain by getting {
-            dependencies {
-                api(deps.Kotlin.Coroutines.Core.Native)
-            }
+        val iosArm32Test by getting {
+            dependsOn(nativeTest)
         }
-    }
-}
 
-node {
-    download = true
-}
+        val iosArm64Main by getting {
+            dependsOn(nativeMain)
+        }
 
-tasks {
-    val compileKotlinJs by getting(Kotlin2JsCompile::class)
-    val compileTestKotlinJs by getting(Kotlin2JsCompile::class)
-    val npmInstall by getting(NpmInstallTask::class)
+        val iosArm64Test by getting {
+            dependsOn(nativeTest)
+        }
 
-    val clean by getting {
-        delete("$rootDir/docs/oolong")
-    }
+        val iosX64Main by getting {
+            dependsOn(nativeMain)
+        }
 
-    val build by getting {
-        dependsOn("dokka")
-    }
+        val iosX64Test by getting {
+            dependsOn(nativeTest)
+        }
 
-    val copyJsArtifacts by creating(Copy::class) {
-        dependsOn(compileKotlinJs)
-        from(compileKotlinJs.destinationDir)
-        from(compileTestKotlinJs.destinationDir)
-        into("$buildDir/node_modules")
-    }
+        val linuxX64Main by getting {
+            dependsOn(nativeMain)
+        }
 
-    val runJest by creating(NodeTask::class) {
-        dependsOn(compileTestKotlinJs, copyJsArtifacts, npmInstall)
-        setScript(file("node_modules/jest/bin/jest.js"))
-        setArgs(mutableListOf(projectDir.toURI().relativize(compileTestKotlinJs.outputFile.toURI())))
-    }
+        val linuxX64Test by getting {
+            dependsOn(nativeTest)
+        }
 
-    val jsTest by getting {
-        dependsOn(runJest)
-    }
-}
+        val macosX64Main by getting {
+            dependsOn(nativeMain)
+        }
 
-// workaround for https://github.com/srs/gradle-node-plugin/issues/301
-repositories.whenObjectAdded {
-    if (this is IvyArtifactRepository) {
-        metadataSources {
-            artifact()
+        val macosX64Test by getting {
+            dependsOn(nativeTest)
+        }
+
+        val mingwX64Main by getting {
+            dependsOn(nativeMain)
+        }
+
+        val mingwX64Test by getting {
+            dependsOn(nativeTest)
         }
     }
 }
 
 // workaround for https://youtrack.jetbrains.com/issue/KT-27170
-configurations {
-    create("compileClasspath")
-}
+configurations.create("compileClasspath")
 
 apply("$rootDir/gradle/gradle-mvn-mpp-push.gradle")
