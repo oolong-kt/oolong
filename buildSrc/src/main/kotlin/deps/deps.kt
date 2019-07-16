@@ -49,11 +49,3 @@ object Kotlin : Group("org.jetbrains.kotlin", "1.3.40") {
         val Jvm = artifact("kotlin-test")
     }
 }
-
-object Node : Group("com.moowork.gradle", "1.3.1") {
-    const val Plugin = "com.moowork.node"
-
-    object Gradle {
-        val Plugin = artifact("gradle-node-plugin")
-    }
-}
