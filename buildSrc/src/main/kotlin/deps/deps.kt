@@ -2,12 +2,12 @@ package deps
 
 
 object Android {
-    object Gradle : Group("com.android.tools.build", "3.3.0") {
+    object Gradle : Group("com.android.tools.build", "3.5.1") {
         val Plugin = artifact("gradle")
     }
 
     object X {
-        object AppCompat : Group("androidx.appcompat", "1.0.0") {
+        object AppCompat : Group("androidx.appcompat", "1.1.0") {
             val Core = artifact("appcompat")
         }
     }
@@ -19,8 +19,8 @@ object Dokka : Group("org.jetbrains.dokka", "0.9.18") {
     }
 }
 
-object Kotlin : Group("org.jetbrains.kotlin", "1.3.40") {
-    object Coroutines : Group("org.jetbrains.kotlinx", "1.2.2") {
+object Kotlin : Group("org.jetbrains.kotlin", "1.3.50") {
+    object Coroutines : Group("org.jetbrains.kotlinx", "1.3.2") {
         val Android = artifact("kotlinx-coroutines-android")
 
         object Core {
