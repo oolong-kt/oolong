@@ -11,7 +11,7 @@ osx_image: xcode9.3
 language: java
 
 jdk:
-  - oraclejdk8
+  - oraclejdk11
 
 install: ./gradlew :oolong:build
 
