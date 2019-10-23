@@ -117,6 +117,6 @@ With our types and functions setup for the navigation component, changing screen
 val navigateToItemDetail = { id: Long, dispatch: Dispatch<Msg> ->
     val init = Detail.makeInit(id)
     val next = bimap(init(), Model::Detail, Msg::Detail)
-    dispatch(Msg.SetRoute(next))
+    dispatch(Msg.SetScreen(next))
 }
 ```
