@@ -53,17 +53,17 @@ object Oolong {
         init {
             with(init()) {
                 currentState = first
-                change(this)
+                step(this)
             }
         }
 
         private fun dispatch(msg: Msg) {
             if (running) {
-                change(update(msg, currentState))
+                step(update(msg, currentState))
             }
         }
 
-        private fun change(next: Next<Model, Msg>) {
+        private fun step(next: Next<Model, Msg>) {
             val (state, effect) = next
             currentState = state
             launch(effectContext) { effect(::dispatch) }
