@@ -48,26 +48,24 @@ object Oolong {
     ) : CoroutineScope by runtimeScope {
 
         private var running = true
-        private var currentState: Model
+        private lateinit var currentState: Model
 
         init {
-            with(init()) {
-                currentState = first
-                change(this)
-            }
+            step(init())
         }
 
         private fun dispatch(msg: Msg) {
             if (running) {
-                change(update(msg, currentState))
+                step(update(msg, currentState))
             }
         }
 
-        private fun change(next: Next<Model, Msg>) {
+        private fun step(next: Next<Model, Msg>) {
             val (state, effect) = next
+            val props = view(state)
             currentState = state
+            launch(renderContext) { render(props, ::dispatch) }
             launch(effectContext) { effect(::dispatch) }
-            launch(renderContext) { render(view(state), ::dispatch) }
         }
 
         fun dispose() {
