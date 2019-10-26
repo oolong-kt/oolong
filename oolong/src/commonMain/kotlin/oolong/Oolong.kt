@@ -67,8 +67,8 @@ object Oolong {
             val (state, effect) = next
             val props = view(state)
             currentState = state
-            launch(effectContext) { effect(::dispatch) }
             launch(renderContext) { render(props, ::dispatch) }
+            launch(effectContext) { effect(::dispatch) }
         }
 
         fun dispose() {
