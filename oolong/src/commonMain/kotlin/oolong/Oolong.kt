@@ -48,13 +48,10 @@ object Oolong {
     ) : CoroutineScope by runtimeScope {
 
         private var running = true
-        private var currentState: Model
+        private lateinit var currentState: Model
 
         init {
-            with(init()) {
-                currentState = first
-                step(this)
-            }
+            step(init())
         }
 
         private fun dispatch(msg: Msg) {
