@@ -4,12 +4,12 @@
 
 | Name | Summary |
 |---|---|
-| [oolong](oolong/index.md) |  |
-| [oolong.delay](oolong.delay/index.md) |  |
-| [oolong.dispatch](oolong.dispatch/index.md) |  |
-| [oolong.effect](oolong.effect/index.md) |  |
-| [oolong.next](oolong.next/index.md) |  |
-| [oolong.random](oolong.random/index.md) |  |
+| (common) [oolong](oolong/index.md) |  |
+| (common) [oolong.delay](oolong.delay/index.md) |  |
+| (common) [oolong.dispatch](oolong.dispatch/index.md) |  |
+| (common) [oolong.effect](oolong.effect/index.md) |  |
+| (common) [oolong.next](oolong.next/index.md) |  |
+| (common) [oolong.random](oolong.random/index.md) |  |
 
 ### Index
 

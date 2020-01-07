@@ -2,16 +2,17 @@
 
 # nextULong
 
-`fun <Msg : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> nextULong(msg: suspend <ERROR CLASS>.(<ERROR CLASS>) -> `[`Msg`](next-u-long.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-u-long.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L236)
-`fun <Msg : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> nextULong(until: <ERROR CLASS>, msg: suspend <ERROR CLASS>.(<ERROR CLASS>) -> `[`Msg`](next-u-long.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-u-long.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L246)
-`fun <Msg : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> nextULong(from: <ERROR CLASS>, until: <ERROR CLASS>, msg: suspend <ERROR CLASS>.(<ERROR CLASS>) -> `[`Msg`](next-u-long.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-u-long.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L256)
+(common) `@ExperimentalUnsignedTypes fun <Msg : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> nextULong(msg: suspend CoroutineScope.(`[`ULong`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html)`) -> Msg): `[`Effect`](../oolong/-effect.md)`<Msg>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L236)
+`@ExperimentalUnsignedTypes fun <Msg : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> nextULong(until: `[`ULong`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html)`, msg: suspend CoroutineScope.(`[`ULong`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html)`) -> Msg): `[`Effect`](../oolong/-effect.md)`<Msg>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L246)
+`@ExperimentalUnsignedTypes fun <Msg : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> nextULong(from: `[`ULong`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html)`, until: `[`ULong`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html)`, msg: suspend CoroutineScope.(`[`ULong`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html)`) -> Msg): `[`Effect`](../oolong/-effect.md)`<Msg>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L256)
+`@ExperimentalUnsignedTypes fun <Msg : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> nextULong(range: `[`ULongRange`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-u-long-range/index.html)`, msg: suspend CoroutineScope.(`[`ULong`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html)`) -> Msg): `[`Effect`](../oolong/-effect.md)`<Msg>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L266)
 
-Call [Random.nextULong](#) with a mapping of [ULong](#) to [Msg](next-u-long.md#Msg).
+Call [Random.nextULong](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.random/next-u-long.html) with a mapping of [ULong](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html) to [Msg](next-u-long.md#Msg).
 
 ### Parameters
 
-`msg` - map function of [ULong](#) to [Msg](next-u-long.md#Msg)
+`msg` - map function of [ULong](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html) to [Msg](next-u-long.md#Msg)
 
 **Return**
-[Effect](../oolong/-effect.md) of [Msg](next-u-long.md#Msg) for the generated [ULong](#)
+[Effect](../oolong/-effect.md) of [Msg](next-u-long.md#Msg) for the generated [ULong](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html)
 
