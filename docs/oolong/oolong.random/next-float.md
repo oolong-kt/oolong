@@ -2,9 +2,9 @@
 
 # nextFloat
 
-`fun <Msg : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> nextFloat(msg: suspend <ERROR CLASS>.(`[`Float`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html)`) -> `[`Msg`](next-float.md#Msg)`): `[`Effect`](../oolong/-effect.md)`<`[`Msg`](next-float.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L94)
+(common) `fun <Msg : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> nextFloat(msg: suspend CoroutineScope.(`[`Float`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html)`) -> Msg): `[`Effect`](../oolong/-effect.md)`<Msg>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/random/util.kt#L94)
 
-Call [Random.nextFloat](#) with a mapping of [Float](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html) to [Msg](next-float.md#Msg).
+Call [Random.nextFloat](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.random/-random/next-float.html) with a mapping of [Float](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html) to [Msg](next-float.md#Msg).
 
 ### Parameters
 

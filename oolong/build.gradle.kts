@@ -6,15 +6,11 @@ version = VERSION_NAME
 
 plugins {
     kotlin("multiplatform")
-    `maven-publish`
-    signing
 }
 
 repositories {
-    mavenCentral()
     jcenter()
 }
-
 kotlin {
     jvm()
     js {
@@ -144,8 +140,5 @@ kotlin {
         }
     }
 }
-
-// workaround for https://youtrack.jetbrains.com/issue/KT-27170
-configurations.create("compileClasspath")
 
 apply("$rootDir/gradle/gradle-mvn-mpp-push.gradle")

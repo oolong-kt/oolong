@@ -2,7 +2,7 @@
 
 # Update
 
-`typealias Update<Model, Msg> = (msg: `[`Msg`](-update.md#Msg)`, model: `[`Model`](-update.md#Model)`) -> `[`Next`](-next.md)`<`[`Model`](-update.md#Model)`, `[`Msg`](-update.md#Msg)`>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/types.kt#L35)
+(common) `typealias Update<Model, Msg> = (msg: Msg, model: Model) -> `[`Next`](-next.md)`<Model, Msg>` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/types.kt#L35)
 
 Creates a next state and side-effects from a message and current state
 

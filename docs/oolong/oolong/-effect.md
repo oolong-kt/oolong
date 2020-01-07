@@ -2,7 +2,7 @@
 
 # Effect
 
-`typealias Effect<Msg> = suspend <ERROR CLASS>.(dispatch: `[`Dispatch`](-dispatch.md)`<`[`Msg`](-effect.md#Msg)`>) -> `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`?` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/types.kt#L17)
+(common) `typealias Effect<Msg> = suspend CoroutineScope.(dispatch: `[`Dispatch`](-dispatch.md)`<Msg>) -> `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`?` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/types.kt#L17)
 
 Runs a side-effect away from the runtime
 
