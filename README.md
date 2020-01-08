@@ -67,7 +67,7 @@ object Counter {
 Samples
 -------
 
-More examples can be found in the [samples directory](samples).
+More examples can be found in the [samples repository](https://github.com/oolong-kt/oolong-samples).
 
 Documentation
 -------------
@@ -79,6 +79,6 @@ Download
 
 ```kotlin
 dependencies {
-    implementation("org.oolong-kt:oolong:2.0.1")
+    implementation("org.oolong-kt:oolong:2.0.2")
 }
 ```
