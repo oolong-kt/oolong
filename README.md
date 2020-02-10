@@ -7,7 +7,7 @@ Oolong
 [![License](https://img.shields.io/github/license/oolong-kt/oolong.svg)](LICENSE.md)
 [![Gitter chat](https://img.shields.io/gitter/room/oolong-kt/community.svg)](https://gitter.im/oolong-kt/community)
 
-Oolong is an [Elm](https://guide.elm-lang.org/architecture) inspired Model-View-Update (MVU) implementation for Kotiln multiplatform. As the name implies, three core concepts comprise the foundation of this architecture: 
+Oolong is an [Elm](https://guide.elm-lang.org/architecture) inspired Model-View-Update (MVU) implementation for Kotlin multiplatform. As the name implies, three core concepts comprise the foundation of this architecture: 
 
 * **Model** - a type to represent the program state
 
