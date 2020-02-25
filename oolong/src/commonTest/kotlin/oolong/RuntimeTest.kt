@@ -2,7 +2,6 @@ package oolong
 
 import oolong.delay.delay
 import oolong.effect.none
-import kotlin.js.JsName
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
@@ -10,10 +9,9 @@ import kotlin.test.fail
 class RuntimeTest {
 
     @Test
-    @JsName("runtime_should_call_render_initially")
-    fun `runtime should call render initially`() = runTest { resolve ->
+    fun `runtime should call render initially`() = test { resolve ->
         val initialState = 1
-        runtime(
+        Oolong.runtime(
             { initialState to none() },
             { _: Unit, model: Int -> model to none() },
             { model: Int -> model },
@@ -25,10 +23,9 @@ class RuntimeTest {
     }
 
     @Test
-    @JsName("runtime_should_call_render_after_dispatch")
-    fun `runtime should call render after dispatch`() = runTest { resolve ->
+    fun `runtime should call render after dispatch`() = test { resolve ->
         var count = 0
-        runtime(
+        Oolong.runtime(
             { "init" to none() },
             { msg: String, _: String -> msg to none() },
             { model: String -> model },
@@ -51,10 +48,9 @@ class RuntimeTest {
     }
 
     @Test
-    @JsName("effects_do_not_block_runtime")
-    fun `effects do not block runtime`() = runTest { resolve ->
+    fun `effects do not block runtime`() = test { resolve ->
         val states = mutableListOf<String>()
-        runtime(
+        Oolong.runtime(
             { "init" to delay(100) { "effect" } },
             { msg: String, _: String -> msg to none() },
             { model: String -> model },
@@ -77,9 +73,8 @@ class RuntimeTest {
     }
 
     @Test
-    @JsName("runtime_should_not_overflow_stack")
-    fun `runtime should not overflow stack`() = runTest(10_000) { resolve ->
-        runtime(
+    fun `runtime should not overflow stack`() = test(10_000) { resolve ->
+        Oolong.runtime(
             { 0 to none() },
             { _: Unit, model: Int -> model + 1 to none() },
             { model: Int -> model },
@@ -94,10 +89,9 @@ class RuntimeTest {
     }
 
     @Test
-    @JsName("runtime_should_not_call_update_view_render_if_disposed")
-    fun `runtime should not call update view render if disposed`() = runTest { resolve ->
+    fun `runtime should not call update view render if disposed`() = test { resolve ->
         var initialRender = true
-        runtime(
+        Oolong.runtime(
             { "state" to none() },
             { msg: String, _: String -> msg to effect { dispatch: Dispatch<String> -> dispatch("next") } },
             { model: String -> model },

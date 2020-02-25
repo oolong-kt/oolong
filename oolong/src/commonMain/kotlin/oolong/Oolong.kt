@@ -3,19 +3,21 @@ package oolong
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
-import kotlin.js.JsName
 
 /**
  * Oolong runtime module.
  */
 object Oolong {
 
-    /**
-     * Create a runtime.
-     */
-    @JsName("runtime")
+    @Deprecated(
+        "",
+        ReplaceWith("runtime(init, update, view, render)", "oolong.Oolong.runtime")
+    )
     fun <Model : Any, Msg : Any, Props : Any> runtime(
         init: Init<Model, Msg>,
         update: Update<Model, Msg>,
@@ -24,16 +26,18 @@ object Oolong {
         runtimeScope: CoroutineScope = GlobalScope,
         effectContext: CoroutineContext = Dispatchers.Default,
         renderContext: CoroutineContext = Dispatchers.Main
+    ) = runtime(init, update, view, render)
+
+    /**
+     * Create a runtime.
+     */
+    fun <Model : Any, Msg : Any, Props : Any> runtime(
+        init: Init<Model, Msg>,
+        update: Update<Model, Msg>,
+        view: View<Model, Props>,
+        render: Render<Msg, Props>
     ): Dispose {
-        val runtime = Runtime(
-            init,
-            update,
-            view,
-            render,
-            runtimeScope,
-            effectContext,
-            renderContext
-        )
+        val runtime = Runtime(init, update, view, render)
         return { runtime.dispose() }
     }
 
@@ -41,22 +45,21 @@ object Oolong {
         init: Init<Model, Msg>,
         private val update: Update<Model, Msg>,
         private val view: View<Model, Props>,
-        private val render: Render<Msg, Props>,
-        runtimeScope: CoroutineScope,
-        private val effectContext: CoroutineContext,
-        private val renderContext: CoroutineContext
-    ) : CoroutineScope by runtimeScope {
+        private val render: Render<Msg, Props>
+    ) : CoroutineScope {
 
-        private var running = true
         private lateinit var currentState: Model
 
+        override val coroutineContext: CoroutineContext
+            get() = Dispatchers.Main + SupervisorJob()
+
         init {
-            step(init())
+            launch { step(init()) }
         }
 
         private fun dispatch(msg: Msg) {
-            if (running) {
-                step(update(msg, currentState))
+            if (isActive) {
+                launch { step(update(msg, currentState)) }
             }
         }
 
@@ -64,12 +67,14 @@ object Oolong {
             val (state, effect) = next
             val props = view(state)
             currentState = state
-            launch(renderContext) { render(props, ::dispatch) }
-            launch(effectContext) { effect(::dispatch) }
+            launch { render(props, ::dispatch) }
+            launch(Dispatchers.Default) { effect(::dispatch) }
         }
 
         fun dispose() {
-            running = false
+            if (isActive) {
+                cancel()
+            }
         }
 
     }

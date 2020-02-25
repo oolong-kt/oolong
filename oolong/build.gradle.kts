@@ -11,36 +11,9 @@ plugins {
 repositories {
     jcenter()
 }
+
 kotlin {
     jvm()
-    js {
-        compilations.all {
-            kotlinOptions {
-                main = "noCall"
-                moduleKind = "umd"
-                noStdlib = false
-                sourceMap = true
-            }
-        }
-    }
-    iosArm32 {
-        binaries {
-            framework()
-        }
-    }
-    iosArm64 {
-        binaries {
-            framework()
-        }
-    }
-    iosX64 {
-        binaries {
-            framework()
-        }
-    }
-    linuxX64()
-    macosX64()
-    mingwX64()
 
     sourceSets {
         val commonMain by getting {
@@ -54,18 +27,6 @@ kotlin {
             dependencies {
                 implementation(deps.Kotlin.Test.Common)
                 implementation(deps.Kotlin.Test.AnnotationsCommon)
-            }
-        }
-
-        val jsMain by getting {
-            dependencies {
-                api(deps.Kotlin.Coroutines.Core.Js)
-            }
-        }
-
-        val jsTest by getting {
-            dependencies {
-                implementation(deps.Kotlin.Test.Js)
             }
         }
 
@@ -90,54 +51,31 @@ kotlin {
 
         val nativeTest by creating {
         }
+    }
 
-        val iosArm32Main by getting {
-            dependsOn(nativeMain)
-        }
+    targets {
+        val coroutinesNativeTargets = listOf(
+            "iosarm32",
+            "iosarm64",
+            "iosx64",
+            "linuxx64",
+            "macosx64",
+            "mingwx64",
+            "tvosarm64",
+            "tvosx64",
+            "watchosarm32",
+            "watchosarm64",
+            "watchosx86"
+        )
 
-        val iosArm32Test by getting {
-            dependsOn(nativeTest)
-        }
-
-        val iosArm64Main by getting {
-            dependsOn(nativeMain)
-        }
-
-        val iosArm64Test by getting {
-            dependsOn(nativeTest)
-        }
-
-        val iosX64Main by getting {
-            dependsOn(nativeMain)
-        }
-
-        val iosX64Test by getting {
-            dependsOn(nativeTest)
-        }
-
-        val linuxX64Main by getting {
-            dependsOn(nativeMain)
-        }
-
-        val linuxX64Test by getting {
-            dependsOn(nativeTest)
-        }
-
-        val macosX64Main by getting {
-            dependsOn(nativeMain)
-        }
-
-        val macosX64Test by getting {
-            dependsOn(nativeTest)
-        }
-
-        val mingwX64Main by getting {
-            dependsOn(nativeMain)
-        }
-
-        val mingwX64Test by getting {
-            dependsOn(nativeTest)
-        }
+        presets
+            .filter { it.name.toLowerCase() in coroutinesNativeTargets }
+            .forEach { preset ->
+                targetFromPreset(preset, preset.name) {
+                    compilations["main"].source(sourceSets["nativeMain"])
+                    compilations["test"].source(sourceSets["nativeTest"])
+                }
+            }
     }
 }
 
