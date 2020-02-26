@@ -73,22 +73,6 @@ class RuntimeTest {
     }
 
     @Test
-    fun `runtime should not overflow stack`() = test(10_000) { resolve ->
-        Oolong.runtime(
-            { 0 to none() },
-            { _: Unit, model: Int -> model + 1 to none() },
-            { model: Int -> model },
-            { model: Int, dispatch: Dispatch<Unit> ->
-                if (model > 50_000) {
-                    resolve()
-                } else {
-                    dispatch(Unit)
-                }
-            }
-        )
-    }
-
-    @Test
     fun `runtime should not call update view render if disposed`() = test { resolve ->
         var initialRender = true
         Oolong.runtime(
