@@ -2,7 +2,6 @@ package oolong
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.isActive
@@ -23,11 +22,11 @@ object Oolong {
         view: View<Model, Props>,
         render: Render<Msg, Props>
     ): Dispose {
-        val runtime = Runtime(init, update, view, render)
+        val runtime = RuntimeImpl(init, update, view, render)
         return { runtime.dispose() }
     }
 
-    private class Runtime<Model : Any, Msg : Any, Props : Any>(
+    private class RuntimeImpl<Model : Any, Msg : Any, Props : Any>(
         init: Init<Model, Msg>,
         private val update: Update<Model, Msg>,
         private val view: View<Model, Props>,
