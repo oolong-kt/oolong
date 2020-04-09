@@ -14,23 +14,6 @@ import kotlin.coroutines.CoroutineContext
  */
 object Oolong {
 
-    @Deprecated(
-        """
-        User defined coroutine scope and context have been deprecated and are ignored. Execution context can be changed 
-        using withContext in an Effect block. 
-        """,
-        ReplaceWith("runtime(init, update, view, render)", "oolong.Oolong.runtime")
-    )
-    fun <Model : Any, Msg : Any, Props : Any> runtime(
-        init: Init<Model, Msg>,
-        update: Update<Model, Msg>,
-        view: View<Model, Props>,
-        render: Render<Msg, Props>,
-        runtimeScope: CoroutineScope = GlobalScope,
-        effectContext: CoroutineContext = Dispatchers.Default,
-        renderContext: CoroutineContext = Dispatchers.Main
-    ) = runtime(init, update, view, render)
-
     /**
      * Create a runtime.
      */
