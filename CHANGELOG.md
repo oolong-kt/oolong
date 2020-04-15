@@ -6,18 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-- Update Kotlin to 1.3.71
-
-## Removed
-- Remove deprecated runtime creator function.
-
-## [2.0.3] - 2020-03-16
-### Added
-- Update Kotlin to 1.3.70
-- Update Kotlin Coroutines to 1.3.4
+- Update Kotlin to 1.3.72
+- Update Kotlin Coroutines to 1.3.5
 
 ## Removed
 - Deprecated coroutine scope and context arguments in runtime creator function.
+- Remove deprecated runtime creator function.
 
 ## [2.0.2] - 2020-01-08
 ### Added
@@ -46,8 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial release
 
-[Unreleased]: https://github.com/oolong-kt/oolong/compare/v2.0.3...HEAD
-[2.0.3]: https://github.com/oolong-kt/oolong/compare/v2.0.2...v2.0.3
+[Unreleased]: https://github.com/oolong-kt/oolong/compare/v2.0.2...HEAD
 [2.0.2]: https://github.com/oolong-kt/oolong/compare/v2.0.1...v2.0.2
 [2.0.1]: https://github.com/oolong-kt/oolong/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/oolong-kt/oolong/compare/v1.0.0...v2.0.0
