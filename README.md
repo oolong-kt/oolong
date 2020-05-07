@@ -64,11 +64,6 @@ object Counter {
 }
 ```
 
-Samples
--------
-
-More examples can be found in the [samples repository](https://github.com/oolong-kt/oolong-samples).
-
 Documentation
 -------------
 
