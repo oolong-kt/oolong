@@ -16,7 +16,7 @@ Add Oolong to your project with Gradle.
 
 ```kotlin
 dependencies {
-    implementation("org.oolong-kt:oolong:2.0.2")
+    implementation("org.oolong-kt:oolong:2.0.3")
 }
 ```
 
