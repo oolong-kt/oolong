@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.4] - 2020-05-17
+### Added
+- Update Kotlin Coroutines to 1.3.6
+- Add samples link to readme
+
+### Fixed
+- Allow dispatcher specification.
+
 ## [2.0.3] - 2020-04-25
 ### Added
 - Update Kotlin to 1.3.72
@@ -42,7 +50,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial release
 
-[Unreleased]: https://github.com/oolong-kt/oolong/compare/v2.0.3...HEAD
+[Unreleased]: https://github.com/oolong-kt/oolong/compare/v2.0.4...HEAD
+[2.0.4]: https://github.com/oolong-kt/oolong/compare/v2.0.3...v2.0.4
 [2.0.3]: https://github.com/oolong-kt/oolong/compare/v2.0.2...v2.0.3
 [2.0.2]: https://github.com/oolong-kt/oolong/compare/v2.0.1...v2.0.2
 [2.0.1]: https://github.com/oolong-kt/oolong/compare/v2.0.0...v2.0.1
