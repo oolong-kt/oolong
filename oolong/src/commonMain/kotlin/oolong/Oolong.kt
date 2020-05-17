@@ -1,13 +1,14 @@
 package oolong
 
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainCoroutineDispatcher
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
+import kotlin.jvm.JvmOverloads
 
 /**
  * Oolong runtime module.
@@ -17,14 +18,20 @@ object Oolong {
     /**
      * Create a runtime.
      */
+    @JvmOverloads
     fun <Model : Any, Msg : Any, Props : Any> runtime(
         init: Init<Model, Msg>,
         update: Update<Model, Msg>,
         view: View<Model, Props>,
         render: Render<Msg, Props>,
-        mainDispatcher: MainCoroutineDispatcher = Dispatchers.Main
+        runtimeDispatcher: CoroutineDispatcher = Dispatchers.Default,
+        renderDispatcher: CoroutineDispatcher = Dispatchers.Main,
+        effectDispatcher: CoroutineDispatcher = Dispatchers.Default
     ): Dispose {
-        val runtime = RuntimeImpl(init, update, view, render, mainDispatcher)
+        val runtime = RuntimeImpl(
+            init, update, view, render,
+            runtimeDispatcher, renderDispatcher, effectDispatcher
+        )
         return { runtime.dispose() }
     }
 
@@ -33,21 +40,23 @@ object Oolong {
         private val update: Update<Model, Msg>,
         private val view: View<Model, Props>,
         private val render: Render<Msg, Props>,
-        private val mainDispatcher: MainCoroutineDispatcher
+        private val runtimeDispatcher: CoroutineDispatcher,
+        private val renderDispatcher: CoroutineDispatcher,
+        private val effectDispatcher: CoroutineDispatcher
     ) : CoroutineScope {
 
         private lateinit var currentState: Model
 
         override val coroutineContext: CoroutineContext
-            get() = mainDispatcher + SupervisorJob()
+            get() = runtimeDispatcher + SupervisorJob()
 
         init {
-            launch { step(init()) }
+            launch(runtimeDispatcher) { step(init()) }
         }
 
         private fun dispatch(msg: Msg) {
             if (isActive) {
-                launch { step(update(msg, currentState)) }
+                launch(runtimeDispatcher) { step(update(msg, currentState)) }
             }
         }
 
@@ -55,8 +64,8 @@ object Oolong {
             val (state, effect) = next
             val props = view(state)
             currentState = state
-            launch { render(props, ::dispatch) }
-            launch(Dispatchers.Default) { effect(::dispatch) }
+            launch(renderDispatcher) { render(props, ::dispatch) }
+            launch(effectDispatcher) { effect(::dispatch) }
         }
 
         fun dispose() {
