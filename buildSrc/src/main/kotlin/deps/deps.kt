@@ -7,7 +7,7 @@ object Dokka : Group("org.jetbrains.dokka", "0.10.1") {
 }
 
 object Kotlin : Group("org.jetbrains.kotlin", "1.3.72") {
-    object Coroutines : Group("org.jetbrains.kotlinx", "1.3.5") {
+    object Coroutines : Group("org.jetbrains.kotlinx", "1.3.6") {
         object Core {
             val Common = artifact("kotlinx-coroutines-core-common")
             val Jvm = artifact("kotlinx-coroutines-core")
