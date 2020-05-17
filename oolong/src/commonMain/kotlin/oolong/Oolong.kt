@@ -2,6 +2,7 @@ package oolong
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainCoroutineDispatcher
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.isActive
@@ -20,9 +21,10 @@ object Oolong {
         init: Init<Model, Msg>,
         update: Update<Model, Msg>,
         view: View<Model, Props>,
-        render: Render<Msg, Props>
+        render: Render<Msg, Props>,
+        mainDispatcher: MainCoroutineDispatcher = Dispatchers.Main
     ): Dispose {
-        val runtime = RuntimeImpl(init, update, view, render)
+        val runtime = RuntimeImpl(init, update, view, render, mainDispatcher)
         return { runtime.dispose() }
     }
 
@@ -30,13 +32,14 @@ object Oolong {
         init: Init<Model, Msg>,
         private val update: Update<Model, Msg>,
         private val view: View<Model, Props>,
-        private val render: Render<Msg, Props>
+        private val render: Render<Msg, Props>,
+        private val mainDispatcher: MainCoroutineDispatcher
     ) : CoroutineScope {
 
         private lateinit var currentState: Model
 
         override val coroutineContext: CoroutineContext
-            get() = Dispatchers.Main + SupervisorJob()
+            get() = mainDispatcher + SupervisorJob()
 
         init {
             launch { step(init()) }
