@@ -14,6 +14,7 @@ repositories {
 
 kotlin {
     jvm()
+    js()
 
     sourceSets {
         val commonMain by getting {
@@ -40,6 +41,18 @@ kotlin {
             dependencies {
                 implementation(deps.Kotlin.Test.Jvm)
                 implementation(deps.Kotlin.Test.JUnit5)
+            }
+        }
+
+        val jsMain by getting {
+            dependencies {
+                api(deps.Kotlin.Coroutines.Core.Js)
+            }
+        }
+
+        val jsTest by getting {
+            dependencies {
+                implementation(deps.Kotlin.Test.Js)
             }
         }
 

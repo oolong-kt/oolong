@@ -11,6 +11,7 @@ object Kotlin : Group("org.jetbrains.kotlin", "1.3.72") {
         object Core {
             val Common = artifact("kotlinx-coroutines-core-common")
             val Jvm = artifact("kotlinx-coroutines-core")
+            val Js = artifact("kotlinx-coroutines-core-js")
             val Native = artifact("kotlinx-coroutines-core-native")
         }
     }
@@ -28,5 +29,6 @@ object Kotlin : Group("org.jetbrains.kotlin", "1.3.72") {
         val Common = artifact("kotlin-test-common")
         val JUnit5 = artifact("kotlin-test-junit5")
         val Jvm = artifact("kotlin-test")
+        val Js = artifact("kotlin-test-js")
     }
 }

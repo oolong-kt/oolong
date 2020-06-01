@@ -2,13 +2,14 @@ package oolong
 
 import oolong.delay.delay
 import oolong.effect.none
+import kotlin.js.JsName
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
 
 class RuntimeTest {
 
-    @Test
+    @Test @JsName("runtimeShouldCallRenderInitially")
     fun `runtime should call render initially`() = test { resolve ->
         val initialState = 1
         Oolong.runtime(
@@ -22,7 +23,7 @@ class RuntimeTest {
         )
     }
 
-    @Test
+    @Test @JsName("runtimeShouldCallRenderAfterDispatch")
     fun `runtime should call render after dispatch`() = test { resolve ->
         var count = 0
         Oolong.runtime(
@@ -47,7 +48,7 @@ class RuntimeTest {
         )
     }
 
-    @Test
+    @Test @JsName("effectsDoNotBlockRuntime")
     fun `effects do not block runtime`() = test { resolve ->
         val states = mutableListOf<String>()
         Oolong.runtime(
@@ -72,7 +73,7 @@ class RuntimeTest {
         )
     }
 
-    @Test
+    @Test @JsName("runtimeShouldNotCallUpdateViewRenderIfDisposed")
     fun `runtime should not call update view render if disposed`() = test { resolve ->
         var initialRender = true
         Oolong.runtime(

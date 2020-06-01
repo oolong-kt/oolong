@@ -6,6 +6,7 @@ import oolong.Effect
 import oolong.delay.delay
 import oolong.effect
 import oolong.runBlocking
+import kotlin.js.JsName
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
@@ -20,7 +21,7 @@ class EffectTest {
         object NoOp : ChildMsg()
     }
 
-    @Test
+    @Test @JsName("mapShouldDispatchMappedMessage")
     fun `map should dispatch mapped message`() = runBlocking {
         val childEffect: Effect<ChildMsg> = { dispatch -> dispatch(ChildMsg.NoOp) }
         val parentEffect = map(childEffect) { ParentMsg.ChildMsgW(it) }
@@ -28,7 +29,7 @@ class EffectTest {
         delay(10)
     }
 
-    @Test
+    @Test @JsName("batchShouldNotBlockIteration")
     fun `batch should not block iteration`() = runBlocking {
         val delay = 10L
         val range = 1..10
@@ -44,7 +45,7 @@ class EffectTest {
         assertEquals(range.toList(), messages.sorted())
     }
 
-    @Test
+    @Test @JsName("disposableEffectShouldCancelEffectWhenDisposed")
     fun `disposable effect should cancel effect when disposed`() = runBlocking {
         val delay = 10L
         val (effect, dispose) = disposableEffect(delay(delay) { })
