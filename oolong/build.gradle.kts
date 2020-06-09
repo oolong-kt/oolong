@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.AbstractKotlinNativeTargetPreset
+
 val GROUP: String by project
 val VERSION_NAME: String by project
 
@@ -54,26 +56,27 @@ kotlin {
     }
 
     targets {
-        val coroutinesNativeTargets = listOf(
-            "iosarm32",
-            "iosarm64",
-            "iosx64",
-            "linuxx64",
-            "macosx64",
-            "mingwx64",
-            "tvosarm64",
-            "tvosx64",
-            "watchosarm32",
-            "watchosarm64",
-            "watchosx86"
+        val unsupportedTargets = setOf(
+            "android_arm32",
+            "android_arm64",
+            "android_x64",
+            "android_x86",
+            "linux_arm32_hfp",
+            "linux_arm64",
+            "wasm32"
         )
 
         presets
-            .filter { it.name.toLowerCase() in coroutinesNativeTargets }
+            .filterIsInstance<AbstractKotlinNativeTargetPreset<*>>()
+            .filter { it.konanTarget.name !in unsupportedTargets }
             .forEach { preset ->
-                targetFromPreset(preset, preset.name) {
-                    compilations["main"].source(sourceSets["nativeMain"])
-                    compilations["test"].source(sourceSets["nativeTest"])
+                try {
+                    targetFromPreset(preset, preset.name) {
+                        compilations["main"].source(sourceSets["nativeMain"])
+                        compilations["test"].source(sourceSets["nativeTest"])
+                    }
+                } catch (e: Exception) {
+                    println("Unsupported target: ${preset.name}")
                 }
             }
     }
