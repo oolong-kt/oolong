@@ -10,7 +10,7 @@ dokka {
         global {
             sourceLink {
                 path = "oolong/src/commonMain/kotlin"
-                url = "https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin"
+                url = "https://github.com/oolong-kt/oolong/tree/main/oolong/src/commonMain/kotlin"
                 lineSuffix = "#L"
             }
         }

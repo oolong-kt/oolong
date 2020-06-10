@@ -2,7 +2,7 @@
 
 # Oolong
 
-(common) `object Oolong` [(source)](https://github.com/oolong-kt/oolong/tree/master/oolong/src/commonMain/kotlin/oolong/Oolong.kt#L16)
+(common) `object Oolong` [(source)](https://github.com/oolong-kt/oolong/tree/main/oolong/src/commonMain/kotlin/oolong/Oolong.kt#L16)
 
 Oolong runtime module.
 
