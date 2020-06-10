@@ -3,8 +3,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath(deps.Kotlin.Gradle.Plugin)
-        classpath(deps.Dokka.Gradle.Plugin)
+        classpath(deps.kotlin.gradle.plugin)
+        classpath(deps.dokka.gradle.plugin)
     }
 }
 
