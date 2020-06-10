@@ -20,34 +20,34 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(deps.Kotlin.StdLib.Common)
-                api(deps.Kotlin.Coroutines.Core.Common)
+                implementation(deps.kotlin.stdlib.common)
+                api(deps.kotlin.coroutines.core.common)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(deps.Kotlin.Test.Common)
-                implementation(deps.Kotlin.Test.AnnotationsCommon)
+                implementation(deps.kotlin.test.common)
+                implementation(deps.kotlin.test.annotations_common)
             }
         }
 
         val jvmMain by getting {
             dependencies {
-                api(deps.Kotlin.Coroutines.Core.Jvm)
+                api(deps.kotlin.coroutines.core.jvm)
             }
         }
 
         val jvmTest by getting {
             dependencies {
-                implementation(deps.Kotlin.Test.Jvm)
-                implementation(deps.Kotlin.Test.JUnit5)
+                implementation(deps.kotlin.test.jvm)
+                implementation(deps.kotlin.test.junit5)
             }
         }
 
         val nativeMain by creating {
             dependencies {
-                api(deps.Kotlin.Coroutines.Core.Native)
+                api(deps.kotlin.coroutines.core.native)
             }
         }
 

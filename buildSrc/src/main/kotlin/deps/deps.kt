@@ -1,32 +1,34 @@
+@file:Suppress("ClassName")
+
 package deps
 
-object Dokka : Group("org.jetbrains.dokka", "0.10.1") {
-    object Gradle {
-        val Plugin = artifact("dokka-gradle-plugin")
+object dokka : Group("org.jetbrains.dokka", "0.10.1") {
+    object gradle {
+        val plugin = artifact("dokka-gradle-plugin")
     }
 }
 
-object Kotlin : Group("org.jetbrains.kotlin", "1.3.72") {
-    object Coroutines : Group("org.jetbrains.kotlinx", "1.3.6") {
-        object Core {
-            val Common = artifact("kotlinx-coroutines-core-common")
-            val Jvm = artifact("kotlinx-coroutines-core")
-            val Native = artifact("kotlinx-coroutines-core-native")
+object kotlin : Group("org.jetbrains.kotlin", "1.3.72") {
+    object coroutines : Group("org.jetbrains.kotlinx", "1.3.7") {
+        object core {
+            val common = artifact("kotlinx-coroutines-core-common")
+            val jvm = artifact("kotlinx-coroutines-core")
+            val native = artifact("kotlinx-coroutines-core-native")
         }
     }
 
-    object Gradle {
-        val Plugin = artifact("kotlin-gradle-plugin")
+    object gradle {
+        val plugin = artifact("kotlin-gradle-plugin")
     }
 
-    object StdLib {
-        val Common = artifact("kotlin-stdlib-common")
+    object stdlib {
+        val common = artifact("kotlin-stdlib-common")
     }
 
-    object Test {
-        val AnnotationsCommon = artifact("kotlin-test-annotations-common")
-        val Common = artifact("kotlin-test-common")
-        val JUnit5 = artifact("kotlin-test-junit5")
-        val Jvm = artifact("kotlin-test")
+    object test {
+        val annotations_common = artifact("kotlin-test-annotations-common")
+        val common = artifact("kotlin-test-common")
+        val junit5 = artifact("kotlin-test-junit5")
+        val jvm = artifact("kotlin-test")
     }
 }
