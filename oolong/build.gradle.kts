@@ -63,6 +63,9 @@ kotlin {
             "android_x86",
             "linux_arm32_hfp",
             "linux_arm64",
+            "linux_mips32",
+            "linux_mipsel32",
+            "mingw_x86",
             "wasm32"
         )
 
