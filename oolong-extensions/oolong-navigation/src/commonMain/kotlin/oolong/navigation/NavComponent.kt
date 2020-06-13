@@ -8,12 +8,12 @@ import oolong.effect.map
 import oolong.effect.none
 import oolong.next.bimap
 
-abstract class NavComponent<Route : Any, Model : Any, Msg : Any, Props : Any> {
+abstract class NavComponent<Model : Any, Msg : Any, Props : Any, Route : Any> {
 
     data class NavModel<Model, Route>(
-        val savedStates: Map<String, Model>,
         val route: Route,
-        val delegate: Model
+        val screenModel: Model,
+        val screenCache: Map<String, Model>
     )
 
     sealed class NavMsg<out Msg, out Route> {
@@ -25,8 +25,8 @@ abstract class NavComponent<Route : Any, Model : Any, Msg : Any, Props : Any> {
             val restore: Boolean
         ) : NavMsg<Nothing, Route>()
 
-        data class Delegate<Msg>(
-            val delegate: Msg
+        data class Screen<Msg>(
+            val screenMsg: Msg
         ) : NavMsg<Msg, Nothing>()
 
     }
@@ -40,10 +40,10 @@ abstract class NavComponent<Route : Any, Model : Any, Msg : Any, Props : Any> {
             {
                 val (model, effect) = screenInit(route)()
                 NavModel(
-                    savedStates = emptyMap(),
                     route = route,
-                    delegate = model
-                ) to map(effect, { msg -> NavMsg.Delegate(msg) })
+                    screenModel = model,
+                    screenCache = emptyMap()
+                ) to map(effect, { msg -> NavMsg.Screen(msg) })
             }
         }
 
@@ -55,37 +55,35 @@ abstract class NavComponent<Route : Any, Model : Any, Msg : Any, Props : Any> {
         { msg, model ->
             when (msg) {
                 is NavMsg.SetRoute -> updateSetRoute(msg, model)
-                is NavMsg.Delegate -> updateDelegate(msg, model)
+                is NavMsg.Screen -> updateDelegate(msg, model)
             }
         }
 
     private val updateSetRoute: (NavMsg.SetRoute<Route>, NavModel<Model, Route>) -> Next<NavModel<Model, Route>, NavMsg<Msg, Route>> =
         { msg, model ->
-            val savedModel: Model? = if (msg.restore) {
-                model.savedStates[msg.lastRouteKey]
-            } else null
+            val savedModel: Model? = if (msg.restore) model.screenCache[msg.lastRouteKey] else null
             if (savedModel != null) {
                 model.copy(
-                    savedStates = model.savedStates - msg.lastRouteKey,
                     route = msg.route,
-                    delegate = savedModel
+                    screenModel = savedModel,
+                    screenCache = model.screenCache - msg.lastRouteKey
                 ) to none()
             } else {
                 val (delegate, effect) = screenInit(msg.route)()
                 model.copy(
-                    savedStates = model.savedStates + (msg.nextRouteKey to model.delegate),
                     route = msg.route,
-                    delegate = delegate
-                ) to map(effect, { NavMsg.Delegate(it) })
+                    screenModel = delegate,
+                    screenCache = model.screenCache + (msg.nextRouteKey to model.screenModel)
+                ) to map(effect, { screenMsg -> NavMsg.Screen(screenMsg) })
             }
         }
 
-    private val updateDelegate: (NavMsg.Delegate<Msg>, NavModel<Model, Route>) -> Next<NavModel<Model, Route>, NavMsg<Msg, Route>> =
+    private val updateDelegate: (NavMsg.Screen<Msg>, NavModel<Model, Route>) -> Next<NavModel<Model, Route>, NavMsg<Msg, Route>> =
         { msg, model ->
             bimap(
-                screenUpdate(msg.delegate, model.delegate),
-                { delegate -> model.copy(delegate = delegate) },
-                { delegate -> NavMsg.Delegate(delegate) }
+                screenUpdate(msg.screenMsg, model.screenModel),
+                { screenModel -> model.copy(screenModel = screenModel) },
+                { screenMsg -> NavMsg.Screen(screenMsg) }
             )
         }
 
@@ -94,6 +92,6 @@ abstract class NavComponent<Route : Any, Model : Any, Msg : Any, Props : Any> {
     abstract val screenView: View<Model, Props>
 
     val view: View<NavModel<Model, Route>, Props> =
-        { model -> screenView(model.delegate) }
+        { model -> screenView(model.screenModel) }
 
 }
