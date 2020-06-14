@@ -10,8 +10,7 @@ import oolong.next.bimap
 
 abstract class NavComponent<Model : Any, Msg : Any, Props : Any, Route : Any> {
 
-    data class NavModel<Model, Route>(
-        val route: Route,
+    data class NavModel<Model>(
         val screenModel: Model,
         val screenCache: Map<String, Model>
     )
@@ -35,12 +34,11 @@ abstract class NavComponent<Model : Any, Msg : Any, Props : Any, Route : Any> {
 
     abstract val screenInit: (Route) -> Init<Model, Msg>
 
-    val init: (Route) -> Init<NavModel<Model, Route>, NavMsg<Msg, Route>> =
+    val init: (Route) -> Init<NavModel<Model>, NavMsg<Msg, Route>> =
         { route ->
             {
                 val (model, effect) = screenInit(route)()
                 NavModel(
-                    route = route,
                     screenModel = model,
                     screenCache = emptyMap()
                 ) to map(effect, { msg -> NavMsg.Screen(msg) })
@@ -51,7 +49,7 @@ abstract class NavComponent<Model : Any, Msg : Any, Props : Any, Route : Any> {
 
     abstract val screenUpdate: Update<Model, Msg>
 
-    val update: Update<NavModel<Model, Route>, NavMsg<Msg, Route>> =
+    val update: Update<NavModel<Model>, NavMsg<Msg, Route>> =
         { msg, model ->
             when (msg) {
                 is NavMsg.SetRoute -> updateSetRoute(msg, model)
@@ -59,26 +57,24 @@ abstract class NavComponent<Model : Any, Msg : Any, Props : Any, Route : Any> {
             }
         }
 
-    private val updateSetRoute: (NavMsg.SetRoute<Route>, NavModel<Model, Route>) -> Next<NavModel<Model, Route>, NavMsg<Msg, Route>> =
+    private val updateSetRoute: (NavMsg.SetRoute<Route>, NavModel<Model>) -> Next<NavModel<Model>, NavMsg<Msg, Route>> =
         { msg, model ->
             val savedModel: Model? = if (msg.restore) model.screenCache[msg.lastRouteKey] else null
             if (savedModel != null) {
                 model.copy(
-                    route = msg.route,
                     screenModel = savedModel,
                     screenCache = model.screenCache - msg.lastRouteKey
                 ) to none()
             } else {
                 val (delegate, effect) = screenInit(msg.route)()
                 model.copy(
-                    route = msg.route,
                     screenModel = delegate,
                     screenCache = model.screenCache + (msg.nextRouteKey to model.screenModel)
                 ) to map(effect, { screenMsg -> NavMsg.Screen(screenMsg) })
             }
         }
 
-    private val updateDelegate: (NavMsg.Screen<Msg>, NavModel<Model, Route>) -> Next<NavModel<Model, Route>, NavMsg<Msg, Route>> =
+    private val updateDelegate: (NavMsg.Screen<Msg>, NavModel<Model>) -> Next<NavModel<Model>, NavMsg<Msg, Route>> =
         { msg, model ->
             bimap(
                 screenUpdate(msg.screenMsg, model.screenModel),
@@ -91,7 +87,7 @@ abstract class NavComponent<Model : Any, Msg : Any, Props : Any, Route : Any> {
 
     abstract val screenView: View<Model, Props>
 
-    val view: View<NavModel<Model, Route>, Props> =
+    val view: View<NavModel<Model>, Props> =
         { model -> screenView(model.screenModel) }
 
 }
