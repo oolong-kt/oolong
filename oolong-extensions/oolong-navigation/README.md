@@ -8,7 +8,7 @@ class AppComponent(
     getItemById: GetItemById,
     getItemIdsByCategory: GetItemIdsByCategory,
     getUserById: GetUserById
-) : NavComponent<Route, Model, Msg, Props>() {
+) : NavComponent<Model, Msg, Props, Route>() {
 
     private val itemListUpdate = ItemListComponent.update(getItemById, getItemIdsByCategory)
     private val itemDetailUpdate = ItemDetailComponent.update(getItemById)
@@ -39,7 +39,7 @@ class AppComponent(
         data class UserDetail(val props: UserDetailComponent.Props) : Props()
     }
 
-    override val screenInit: (Route) -> Init<Model, Msg> =
+    override val initRoute: (Route) -> Init<Model, Msg> =
         { route ->
             {
                 when (route) {
@@ -62,7 +62,7 @@ class AppComponent(
             }
         }
 
-    override val screenUpdate: Update<Model, Msg> =
+    override val updateRoute: Update<Model, Msg> =
         { msg, model ->
             when (msg) {
                 is Msg.ItemList -> when (model) {
@@ -92,7 +92,7 @@ class AppComponent(
             }
         }
 
-    override val screenView: View<Model, Props> =
+    override val viewRoute: View<Model, Props> =
         { model ->
             when (model) {
                 is Model.ItemList -> Props.ItemList(ItemListComponent.view(model.model))
