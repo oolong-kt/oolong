@@ -25,7 +25,7 @@ abstract class Router<Model_ : Any, Msg_ : Any, Props : Any, Route : Any> {
         ) : Msg<Nothing, Route>()
 
         data class Route<Msg_>(
-            val screenMsg: Msg_
+            val routerMsg: Msg_
         ) : Msg<Msg_, Nothing>()
 
     }
@@ -76,16 +76,16 @@ abstract class Router<Model_ : Any, Msg_ : Any, Props : Any, Route : Any> {
                 model.copy(
                     routeModel = delegate,
                     routeCache = routeCache
-                ) to map(effect, { screenMsg -> Msg.Route(screenMsg) })
+                ) to map(effect, { routerMsg -> Msg.Route(routerMsg) })
             }
         }
 
     private val updateDelegate: (Msg.Route<Msg_>, Model<Model_>) -> Next<Model<Model_>, Msg<Msg_, Route>> =
         { msg, model ->
             bimap(
-                updateRoute(msg.screenMsg, model.routeModel),
+                updateRoute(msg.routerMsg, model.routeModel),
                 { routeModel -> model.copy(routeModel = routeModel) },
-                { screenMsg -> Msg.Route(screenMsg) }
+                { routerMsg -> Msg.Route(routerMsg) }
             )
         }
 
