@@ -68,6 +68,8 @@ Samples
 -------------
 
 * [Official samples](https://github.com/oolong-kt/samples)
+* [Lambda News](http://lambda.news)
+* [Dice](https://github.com/pardom/dice)
 
 Documentation
 -------------
