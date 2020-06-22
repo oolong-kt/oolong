@@ -1,3 +1,3 @@
-# Isolation
+# Rendering
 
 Coming soon!

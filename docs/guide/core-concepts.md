@@ -51,8 +51,8 @@ There are two types of data you may want to store in your view properties. First
 ```kotlin
 class Props(
     val count: Int,
-    val increment: () -> Msg,
-    val decrement: () -> Msg
+    val increment: (Dispatch<Msg>) -> Unit,
+    val decrement: (Dispatch<Msg>) -> Unit
 )
 ```
 
@@ -61,20 +61,20 @@ class Props(
 The view function, as mentioned above, takes the current state its argument and returns view properties. In our counter example we populate the view properties with:
 
 * `count` - the current count.
-* `increment` - a function which returns the `Increment` message.
-* `decrement` - a function which returns the `Decrement` message.
+* `increment` - a function which dispatches the `Increment` message.
+* `decrement` - a function which dispatches the `Decrement` message.
 
 ```kotlin
 val view: View<Model, Props> = { model ->
     Props(
         model.count,
-        { Msg.Increment },
-        { Msg.Decrement }
+        { dispatch -> dispatch(Msg.Increment) },
+        { dispatch -> dispatch(Msg.Decrement) }
     )
 }
 ```
 
-## Puting it all together
+## Putting it all together
 
 Now that we've built the core components of our application we need a few more things to complete it, namely a way to create an initial application state and a way to render the view properties.
 

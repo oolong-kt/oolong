@@ -4,10 +4,25 @@ body {
     font-family: Open Sans,Source Sans Pro,Helvetica Neue,Arial,sans-serif !important;
 }
 
-section.cover.show {
-    background: linear-gradient(to left bottom,#80d8ff 0%,#b9f6ca 100%) !important;
+.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
+  line-height: normal;
+  font-weight: bold;
+  color: #353535;
 }
 
-a.gitter-open-chat-button {
-    background: #00c853;
+.md-typeset code {
+    border-radius: 0.25rem;
+}
+
+.md-typeset__table {
+    display: block;
+    border-radius: 0.25rem;
+}
+
+.md-typeset__table table {
+    display: table!important;
+}
+
+.md-search__input {
+    border-radius: 0.25rem;
 }
