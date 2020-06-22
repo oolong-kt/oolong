@@ -1,0 +1,55 @@
+site_name: Oolong
+site_url: https://oolong-kt.org/
+repo_name: oolong
+repo_url: https://github.com/oolong-kt/oolong
+edit_uri: 'edit/main/docs'
+site_description: "Oolong - MVU for Kotlin Multiplatform"
+site_author: Oolong
+remote_branch: gh-pages
+
+nav:
+  - Overview: index.md
+  - API Reference: oolong/index.md
+  - Changelog: CHANGELOG.md
+
+  - Guide:
+    - Core Concepts: guide/core-concepts.md
+    - Side Effects: guide/side-effects.md
+    - Rendering: guide/rendering.md
+
+  - Recipes:
+    - Isolation: recipes/isolation.md
+    - Navigation: recipes/navigation.md
+
+  - Samples:
+      - Official: samples/official.md
+      - Third-party: samples/third-party.md
+
+theme:
+  name: 'material'
+  favicon: favicon.ico
+  logo: _media/icon.svg
+  palette:
+    primary: white
+    accent: green
+  features:
+    tabs: true
+
+plugins:
+  - search
+
+markdown_extensions:
+  - codehilite:
+      guess_lang: false
+  - pymdownx.tabbed
+  - pymdownx.superfences
+
+extra:
+  manifest: site.webmanifest
+
+extra_css:
+  - _media/style.css
+
+google_analytics:
+  - UA-142112816-1
+  - auto
