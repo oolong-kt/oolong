@@ -10,7 +10,7 @@ remote_branch: gh-pages
 nav:
   - Overview: index.md
   - API Reference: oolong/index.md
-  - Changelog: CHANGELOG.md
+  - Changelog: changelog.md
 
   - Guide:
     - Core Concepts: guide/core-concepts.md
