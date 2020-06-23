@@ -22,19 +22,19 @@ jobs:
         run: .github/workflows/prepare_mkdocs.sh
 
       - name: Install plugins
-          run: pip3 install mkdocs-material
+        run: pip3 install mkdocs-material
 
       - name: Build MkDocs
-          run: mkdocs build
+        run: mkdocs build
 
       - name: Deploy
-          if: success()
-          uses: JamesIves/github-pages-deploy-action@releases/v3
-          with:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            BRANCH: gh-pages
-            FOLDER: site
-            SINGLE_COMMIT: true
+        if: success()
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: site
+          SINGLE_COMMIT: true
 
 env:
   GRADLE_OPTS: -Dorg.gradle.configureondemand=true -Dorg.gradle.parallel=true -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx3g -XX:MaxPermSize=2048m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
