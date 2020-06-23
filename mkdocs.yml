@@ -28,12 +28,12 @@ nav:
 theme:
   name: 'material'
   favicon: favicon.ico
-  logo: _media/icon.svg
+  logo: images/icon.svg
   palette:
     primary: white
     accent: green
   features:
-    tabs: true
+    - tabs
 
 plugins:
   - search
@@ -48,7 +48,7 @@ extra:
   manifest: site.webmanifest
 
 extra_css:
-  - _media/style.css
+  - css/style.css
 
 google_analytics:
   - UA-142112816-1
