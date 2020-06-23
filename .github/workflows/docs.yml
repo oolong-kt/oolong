@@ -1,4 +1,4 @@
-name: Publish the mkdocs to gh-pages
+name: Publish docs
 
 on:
   push:
@@ -10,20 +10,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout the repo
+      - name: Checkout main
         uses: actions/checkout@v2
 
-      - name: Prep mkdocs
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8.3
+
+      - name: Prep MkDocs
         run: .github/workflows/prepare_mkdocs.sh
 
-      - name: Deploy to GitHub Pages
-        if: success()
-        uses: crazy-max/ghaction-github-pages@v2
-        with:
-          target_branch: gh-pages
-          build_dir: docs
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install plugins
+          run: pip3 install mkdocs-material
+
+      - name: Build MkDocs
+          run: mkdocs build
+
+      - name: Deploy
+          if: success()
+          uses: JamesIves/github-pages-deploy-action@releases/v3
+          with:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            BRANCH: gh-pages
+            FOLDER: site
+            SINGLE_COMMIT: true
 
 env:
   GRADLE_OPTS: -Dorg.gradle.configureondemand=true -Dorg.gradle.parallel=true -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx3g -XX:MaxPermSize=2048m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"

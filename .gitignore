@@ -25,3 +25,8 @@ package-list
 
 ### pyenv ###
 .python-version
+
+# Mkdocs
+site/
+docs/oolong
+docs/changelog.md
