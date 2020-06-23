@@ -56,7 +56,7 @@ class RouterTest {
         val (initModel, _) = routerInit(Route.Main)()
         assertEquals(routerModel(Model.Main(itemIds)), initModel)
         val (detailModel, _) = routerUpdate(routerMsg(Msg.Detail), initModel)
-        assertEquals(routerModel(Model.Detail(detailId), mapOf("Main" to initModel.routeModel)), detailModel)
+        assertEquals(routerModel(Model.Detail(detailId), mapOf("Main" to initModel.screen)), detailModel)
         val (restoredModel, _) = routerUpdate(routerMsg(Msg.Main), detailModel)
         assertEquals(initModel, restoredModel)
     }
