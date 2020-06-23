@@ -9,12 +9,12 @@ import oolong.next.bimap
 
 object Router {
 
-    data class Model<Model_>(
+    data class Model<Model_ : Any>(
         val screen: Model_,
         internal val cache: Map<String, Model_>
     )
 
-    sealed class Msg<out Msg_, out Route> {
+    sealed class Msg<out Msg_ : Any, out Route : Any> {
 
         data class SetRoute<Route : Any>(
             val nextRoute: Route,
@@ -23,7 +23,7 @@ object Router {
             val direction: Direction
         ) : Msg<Nothing, Route>()
 
-        data class Route<Msg_>(
+        data class Route<Msg_ : Any>(
             val routeMsg: Msg_
         ) : Msg<Msg_, Nothing>()
 
@@ -34,9 +34,9 @@ object Router {
     }
 
     fun <Model_ : Any, Msg_ : Any, Route : Any> create(
-        init_: (Route) -> Init<Model_, Msg_>,
+        init_: RouteInit<Model_, Msg_, Route>,
         update_: Update<Model_, Msg_>
-    ): Pair<(Route) -> Init<Model<Model_>, Msg<Msg_, Route>>, Update<Model<Model_>, Msg<Msg_, Route>>> {
+    ): RouterPair<Model_, Msg_, Route> {
 
         val init: (Route) -> Init<Model<Model_>, Msg<Msg_, Route>> =
             { route ->
