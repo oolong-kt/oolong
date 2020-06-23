@@ -8,7 +8,7 @@ import oolong.effect.map
 import oolong.effect.none
 import oolong.next.bimap
 
-abstract class Router<Model_ : Any, Msg_ : Any, Props : Any, Route : Any> {
+object Router {
 
     data class Model<Model_>(
         val routeModel: Model_,
@@ -34,66 +34,59 @@ abstract class Router<Model_ : Any, Msg_ : Any, Props : Any, Route : Any> {
         FORWARD, BACKWARD, REPLACE
     }
 
-    // Init
+    fun <Model_ : Any, Msg_ : Any, Route : Any> create(
+        init: (Route) -> Init<Model_, Msg_>,
+        update: Update<Model_, Msg_>
+    ): Pair<(Route) -> Init<Model<Model_>, Msg<Msg_, Route>>, Update<Model<Model_>, Msg<Msg_, Route>>> {
 
-    abstract val initRoute: (Route) -> Init<Model_, Msg_>
-
-    val init: (Route) -> Init<Model<Model_>, Msg<Msg_, Route>> =
-        { route ->
-            {
-                val (model, effect) = initRoute(route)()
-                Model(
-                    routeModel = model,
-                    routeCache = emptyMap()
-                ) to map(effect, { msg -> Msg.Route(msg) })
+        val routerInit: (Route) -> Init<Model<Model_>, Msg<Msg_, Route>> =
+            { route ->
+                {
+                    val (model, effect) = init(route)()
+                    Model(
+                        routeModel = model,
+                        routeCache = emptyMap()
+                    ) to map(effect, { msg -> Msg.Route(msg) })
+                }
             }
-        }
 
-    // Update
-
-    abstract val updateRoute: Update<Model_, Msg_>
-
-    val update: Update<Model<Model_>, Msg<Msg_, Route>> =
-        { msg, model ->
-            when (msg) {
-                is Msg.SetRoute -> updateSetRoute(msg, model)
-                is Msg.Route -> updateDelegate(msg, model)
+        val updateSetRoute: (Msg.SetRoute<Route>, Model<Model_>) -> Next<Model<Model_>, Msg<Msg_, Route>> =
+            { msg, model ->
+                val savedModel: Model_? = model.routeCache[msg.nextRouteKey]
+                if (msg.direction == Direction.BACKWARD && savedModel != null) {
+                    model.copy(
+                        routeModel = savedModel,
+                        routeCache = model.routeCache - msg.nextRouteKey
+                    ) to none()
+                } else {
+                    val (delegate, effect) = init(msg.nextRoute)()
+                    val routeCache = if (msg.direction == Direction.REPLACE) emptyMap()
+                    else model.routeCache + (msg.prevRouteKey to model.routeModel)
+                    model.copy(
+                        routeModel = delegate,
+                        routeCache = routeCache
+                    ) to map(effect, { routerMsg -> Msg.Route(routerMsg) })
+                }
             }
-        }
 
-    private val updateSetRoute: (Msg.SetRoute<Route>, Model<Model_>) -> Next<Model<Model_>, Msg<Msg_, Route>> =
-        { msg, model ->
-            val savedModel: Model_? = model.routeCache[msg.nextRouteKey]
-            if (msg.direction == Direction.BACKWARD && savedModel != null) {
-                model.copy(
-                    routeModel = savedModel,
-                    routeCache = model.routeCache - msg.nextRouteKey
-                ) to none()
-            } else {
-                val (delegate, effect) = initRoute(msg.nextRoute)()
-                val routeCache = if (msg.direction == Direction.REPLACE) emptyMap()
-                else model.routeCache + (msg.prevRouteKey to model.routeModel)
-                model.copy(
-                    routeModel = delegate,
-                    routeCache = routeCache
-                ) to map(effect, { routerMsg -> Msg.Route(routerMsg) })
+        val updateDelegate: (Msg.Route<Msg_>, Model<Model_>) -> Next<Model<Model_>, Msg<Msg_, Route>> =
+            { msg, model ->
+                bimap(
+                    update(msg.routerMsg, model.routeModel),
+                    { routeModel -> model.copy(routeModel = routeModel) },
+                    { routerMsg -> Msg.Route(routerMsg) }
+                )
             }
-        }
 
-    private val updateDelegate: (Msg.Route<Msg_>, Model<Model_>) -> Next<Model<Model_>, Msg<Msg_, Route>> =
-        { msg, model ->
-            bimap(
-                updateRoute(msg.routerMsg, model.routeModel),
-                { routeModel -> model.copy(routeModel = routeModel) },
-                { routerMsg -> Msg.Route(routerMsg) }
-            )
-        }
+        val routerUpdate: Update<Model<Model_>, Msg<Msg_, Route>> =
+            { msg, model ->
+                when (msg) {
+                    is Msg.SetRoute -> updateSetRoute(msg, model)
+                    is Msg.Route -> updateDelegate(msg, model)
+                }
+            }
 
-    // View
-
-    abstract val viewRoute: View<Model_, Props>
-
-    val view: View<Model<Model_>, Props> =
-        { model -> viewRoute(model.routeModel) }
+        return routerInit to routerUpdate
+    }
 
 }
