@@ -1,3 +1,4 @@
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.plugin.mpp.AbstractKotlinNativeTargetPreset
 
 val GROUP: String by project
@@ -8,6 +9,8 @@ version = VERSION_NAME
 
 plugins {
     kotlin("multiplatform")
+    id("org.jetbrains.dokka") version "0.10.1"
+    id("com.vanniktech.maven.publish") version "0.11.1"
 }
 
 repositories {
@@ -73,16 +76,35 @@ kotlin {
             .filterIsInstance<AbstractKotlinNativeTargetPreset<*>>()
             .filter { it.konanTarget.name !in unsupportedTargets }
             .forEach { preset ->
-                try {
-                    targetFromPreset(preset, preset.name) {
-                        compilations["main"].source(sourceSets["nativeMain"])
-                        compilations["test"].source(sourceSets["nativeTest"])
-                    }
-                } catch (e: Exception) {
-                    println("Unsupported target: ${preset.name}")
+                targetFromPreset(preset, preset.name) {
+                    compilations["main"].source(sourceSets["nativeMain"])
+                    compilations["test"].source(sourceSets["nativeTest"])
                 }
             }
     }
 }
 
-apply("$rootDir/gradle/gradle-mvn-mpp-push.gradle")
+signing {
+    val signingKey: String? by project
+    if (!signingKey.isNullOrBlank()) {
+        useInMemoryPgpKeys(signingKey, null)
+    }
+}
+
+tasks {
+    val dokka by getting(DokkaTask::class) {
+        outputDirectory = "$rootDir/docs"
+        outputFormat = "gfm"
+
+        multiplatform.apply {
+            val global by creating {
+                sourceLink {
+                    path = "oolong/src/commonMain/kotlin"
+                    url = "https://github.com/oolong-kt/oolong/tree/main/oolong/src/commonMain/kotlin"
+                    lineSuffix = "#L"
+                }
+            }
+            val common by creating {}
+        }
+    }
+}
