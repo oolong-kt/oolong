@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [2.0.6] - 2020-06-30
+### Fixed
+- Maven Central artifacts.
+
 ## [2.0.5] - 2020-06-10
 ### Added
 - Update Kotlin Coroutines to 1.3.7
@@ -50,7 +54,8 @@
 
 Initial release
 
-[Unreleased]: https://github.com/oolong-kt/oolong/compare/v2.0.4...HEAD
+[Unreleased]: https://github.com/oolong-kt/oolong/compare/v2.0.6...HEAD
+[2.0.6]: https://github.com/oolong-kt/oolong/compare/v2.0.5...v2.0.6
 [2.0.5]: https://github.com/oolong-kt/oolong/compare/v2.0.4...v2.0.5
 [2.0.4]: https://github.com/oolong-kt/oolong/compare/v2.0.3...v2.0.4
 [2.0.3]: https://github.com/oolong-kt/oolong/compare/v2.0.2...v2.0.3
