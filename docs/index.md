@@ -56,8 +56,8 @@ Initialize an Oolong runtime by supplying your `Init`, `Update`, and `View` func
 val render: Render<Msg, Props> = { props, dispatch -> 
     // Platform specific rendering
     countLabel.text = "${props.count}"
-    incrementButton.setOnClickListener { dispatch(props.increment()) }
-    decrementButton.setOnClickListener { dispatch(props.decrement()) }
+    incrementButton.setOnClickListener { props.increment(dispatch) }
+    decrementButton.setOnClickListener { props.decrement(dispatch) }
 }
 
 val dispose = Oolong.runtime(
