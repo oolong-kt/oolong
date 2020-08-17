@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Update Kotlin to 1.4.0
+- Update Kotlin Coroutines to 1.3.9
 
 ## [2.0.6] - 2020-06-30
 ### Fixed

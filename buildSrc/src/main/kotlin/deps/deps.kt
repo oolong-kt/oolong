@@ -8,21 +8,13 @@ object dokka : Group("org.jetbrains.dokka", "0.10.1") {
     }
 }
 
-object kotlin : Group("org.jetbrains.kotlin", "1.3.72") {
-    object coroutines : Group("org.jetbrains.kotlinx", "1.3.8") {
-        object core {
-            val common = artifact("kotlinx-coroutines-core-common")
-            val jvm = artifact("kotlinx-coroutines-core")
-            val native = artifact("kotlinx-coroutines-core-native")
-        }
+object kotlin : Group("org.jetbrains.kotlin", "1.4.0") {
+    object coroutines : Group("org.jetbrains.kotlinx", "1.3.9") {
+        val core = artifact("kotlinx-coroutines-core")
     }
 
     object gradle {
         val plugin = artifact("kotlin-gradle-plugin")
-    }
-
-    object stdlib {
-        val common = artifact("kotlin-stdlib-common")
     }
 
     object test {

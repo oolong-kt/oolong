@@ -20,8 +20,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(deps.kotlin.stdlib.common)
-                api(deps.kotlin.coroutines.core.common)
+                api(deps.kotlin.coroutines.core)
             }
         }
 
@@ -32,12 +31,6 @@ kotlin {
             }
         }
 
-        val jvmMain by getting {
-            dependencies {
-                api(deps.kotlin.coroutines.core.jvm)
-            }
-        }
-
         val jvmTest by getting {
             dependencies {
                 implementation(deps.kotlin.test.jvm)
@@ -45,33 +38,30 @@ kotlin {
             }
         }
 
-        val nativeMain by creating {
-            dependencies {
-                api(deps.kotlin.coroutines.core.native)
-            }
-        }
-
-        val nativeTest by creating {
-        }
+        val nativeMain by creating
+        val nativeTest by creating
     }
 
     targets {
-        val unsupportedTargets = setOf(
-            "android_arm32",
-            "android_arm64",
-            "android_x64",
-            "android_x86",
-            "linux_arm32_hfp",
-            "linux_arm64",
-            "linux_mips32",
-            "linux_mipsel32",
-            "mingw_x86",
-            "wasm32"
+        // Print supported targets with:
+        // scripts/fetch_native_targets org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9
+        val supportedTargets = setOf(
+            "ios_arm32",
+            "ios_arm64",
+            "ios_x64",
+            "linux_x64",
+            "macos_x64",
+            "mingw_x64",
+            "tvos_arm64",
+            "tvos_x64",
+            "watchos_arm32",
+            "watchos_arm64",
+            "watchos_x86"
         )
 
         presets
             .filterIsInstance<AbstractKotlinNativeTargetPreset<*>>()
-            .filter { it.konanTarget.name !in unsupportedTargets }
+            .filter { it.konanTarget.name in supportedTargets }
             .forEach { preset ->
                 try {
                     targetFromPreset(preset, preset.name) {

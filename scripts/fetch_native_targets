@@ -1,0 +1,44 @@
+#!/bin/sh
+
+display_usage() {
+  echo "usage: fetch_native_targets [coordinates]"
+}
+
+if [[ $# == "--help" ||  $# == "-h" ]]
+then
+  display_usage
+  exit 0
+fi
+
+if [ $# -ne 1 ]
+then
+  display_usage
+  exit 1
+fi
+
+coordinates=$1
+
+if [ ${coordinates:0:1} == "-" ]
+then
+  display_usage
+  exit 1
+fi
+
+group=$(echo "$coordinates" | cut -d ':' -f1)
+artifact=$(echo "$coordinates" | cut -d ':' -f2)
+version=$(echo "$coordinates" | cut -d ':' -f3)
+
+if [[ -z "$group" || -z "$artifact" || -z "$version" ]]
+then
+  echo "Invalid coordinates"
+  display_usage
+  exit 1
+fi
+
+groupPath=$(echo "$group" | sed 's/\./\//g')
+artifactPath=$(echo "$artifact" | sed 's/\./\//g')
+
+curl -s "https://repo1.maven.org/maven2/$groupPath/$artifact/$version/$artifact-$version.module" \
+  | jq '.variants[].attributes["org.jetbrains.kotlin.native.target"]' \
+  | uniq \
+  | grep -v null
