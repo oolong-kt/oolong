@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [2.0.7] - 2020-08-17
 ### Added
 - Update Kotlin to 1.4.0
 - Update Kotlin Coroutines to 1.3.9
@@ -57,7 +59,8 @@
 
 Initial release
 
-[Unreleased]: https://github.com/oolong-kt/oolong/compare/v2.0.6...HEAD
+[Unreleased]: https://github.com/oolong-kt/oolong/compare/v2.0.7...HEAD
+[2.0.7]: https://github.com/oolong-kt/oolong/compare/v2.0.6...v2.0.7
 [2.0.6]: https://github.com/oolong-kt/oolong/compare/v2.0.5...v2.0.6
 [2.0.5]: https://github.com/oolong-kt/oolong/compare/v2.0.4...v2.0.5
 [2.0.4]: https://github.com/oolong-kt/oolong/compare/v2.0.3...v2.0.4

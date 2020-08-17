@@ -24,6 +24,6 @@ Get started with Oolong by reading the [official guide](https://oolong-kt.org).
 
 ```kotlin
 dependencies {
-    implementation("org.oolong-kt:oolong:2.0.6")
+    implementation("org.oolong-kt:oolong:2.0.7")
 }
 ```
