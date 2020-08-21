@@ -24,22 +24,15 @@ kotlin {
             }
         }
 
-        val commonTest by getting {
-            dependencies {
-                implementation(deps.kotlin.test.common)
-                implementation(deps.kotlin.test.annotations_common)
-            }
-        }
-
         val jvmTest by getting {
             dependencies {
+                implementation(deps.kotlin.coroutines.test)
                 implementation(deps.kotlin.test.jvm)
                 implementation(deps.kotlin.test.junit5)
             }
         }
 
         val nativeMain by creating
-        val nativeTest by creating
     }
 
     targets {
@@ -66,7 +59,6 @@ kotlin {
                 try {
                     targetFromPreset(preset, preset.name) {
                         compilations["main"].source(sourceSets["nativeMain"])
-                        compilations["test"].source(sourceSets["nativeTest"])
                     }
                 } catch (e: Exception) {
                     println("Unsupported target: ${preset.name}")
