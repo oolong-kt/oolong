@@ -14,7 +14,7 @@ By applying this simple pattern you can create composable, testable programs tha
 
 Here is a simple example in which a number can be incremented or decremented.
 
-```kotlin
+```kotlin 
 data class Model(
     val count: Int = 0
 )
@@ -36,8 +36,8 @@ val init: Init<Model, Msg> = {
 
 val update: Update<Model, Msg> = { msg, model ->
     when (msg) {
-        Msg.Increment -> model.copy(count = model + 1)
-        Msg.Decrement -> model.copy(count = model - 1)
+        Msg.Increment -> model.copy(count = model.count + 1)
+        Msg.Decrement -> model.copy(count = model.count - 1)
     } to none()
 }
 
@@ -50,7 +50,8 @@ val view: View<Model, Props> = { model ->
 }
 ```
 
-Initialize an Oolong runtime by supplying your `Init`, `Update`, and `View` functions as well as a `Render` function from the host platform.
+Initialize an Oolong runtime by supplying your `Init`, `Update`, and `View` functions as well as a `Render
+` function from the host platform.
 
 ```kotlin
 val render: Render<Msg, Props> = { props, dispatch -> 
@@ -66,4 +67,75 @@ val dispose = Oolong.runtime(
     view,
     render
 )
+```
+
+## See it in action
+```{.kotlin .playground}
+import oolong.Dispatch
+import oolong.Dispose
+import oolong.Init
+import oolong.Oolong
+import oolong.Render
+import oolong.Update
+import oolong.View
+import oolong.effect.none
+
+import kotlinx.coroutines.Dispatchers
+
+data class Model(
+    val count: Int = 0
+)
+
+sealed class Msg {
+    object Increment : Msg()
+    object Decrement : Msg()
+}
+
+class Props(
+    val count: Int,
+    val increment: (Dispatch<Msg>) -> Unit,
+    val decrement: (Dispatch<Msg>) -> Unit
+)
+
+val init: Init<Model, Msg> = { 
+    Model() to none()
+}
+
+val update: Update<Model, Msg> = { msg, model ->
+    when (msg) {
+        Msg.Increment -> model.copy(count = model.count + 1)
+        Msg.Decrement -> model.copy(count = model.count - 1)
+    } to none()
+}
+
+val view: View<Model, Props> = { model ->
+    Props(
+        model.count,
+        { dispatch -> dispatch(Msg.Increment) },
+        { dispatch -> dispatch(Msg.Decrement) }
+    )
+}
+
+fun <Model : Any, Msg : Any, Props : Any> Oolong.runtime(
+    init: Init<Model, Msg>,
+    update: Update<Model, Msg>,
+    view: View<Model, Props>,
+    render: Render<Msg, Props>,
+): Dispose = Oolong.runtime(
+    init, 
+    update, 
+    view, 
+    render, 
+    Dispatchers.Main, 
+    Dispatchers.Main, 
+    Dispatchers.Main
+)
+
+//sampleStart
+fun main() {
+    Oolong.runtime(init, update, view, { model, dispatch ->
+        println(model)
+    })
+}
+//sampleEnd
 ```

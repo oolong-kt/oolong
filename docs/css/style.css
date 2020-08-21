@@ -4,6 +4,10 @@ body {
     font-family: Open Sans,Source Sans Pro,Helvetica Neue,Arial,sans-serif !important;
 }
 
+header {
+    z-index: 999!important;
+}
+
 .md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
   line-height: normal;
   font-weight: bold;
