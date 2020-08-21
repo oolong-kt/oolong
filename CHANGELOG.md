@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- `CoroutineDispatcher` replaced with `CoroutineContext` in runtime builder.
 
 ## [2.0.7] - 2020-08-17
 ### Added
