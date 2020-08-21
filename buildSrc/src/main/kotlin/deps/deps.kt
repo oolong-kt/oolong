@@ -11,6 +11,7 @@ object dokka : Group("org.jetbrains.dokka", "0.10.1") {
 object kotlin : Group("org.jetbrains.kotlin", "1.4.0") {
     object coroutines : Group("org.jetbrains.kotlinx", "1.3.9") {
         val core = artifact("kotlinx-coroutines-core")
+        val test = artifact("kotlinx-coroutines-test")
     }
 
     object gradle {
