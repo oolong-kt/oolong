@@ -27,6 +27,7 @@ nav:
 
 theme:
   name: 'material'
+  custom_dir: docs/overrides
   favicon: favicon.ico
   logo: images/icon.svg
   palette:
@@ -49,6 +50,7 @@ extra:
 
 extra_css:
   - css/style.css
+  - css/codemirror.css
 
 google_analytics:
   - UA-142112816-1
