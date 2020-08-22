@@ -10,7 +10,7 @@ Oolong is an [Elm](https://guide.elm-lang.org/architecture) inspired Model-View-
 
 By applying this simple pattern you can create composable, testable programs that can run on any platform. Oolong enables a common codebase for all platforms by using a `Render` function which is implemented by each frontend.
 
-## Example
+## An example
 
 Here is a simple example in which a number can be incremented or decremented.
 
@@ -50,26 +50,11 @@ val view: View<Model, Props> = { model ->
 }
 ```
 
-Initialize an Oolong runtime by supplying your `Init`, `Update`, and `View` functions as well as a `Render
-` function from the host platform.
-
-```kotlin
-val render: Render<Msg, Props> = { props, dispatch -> 
-    // Platform specific rendering
-    countLabel.text = "${props.count}"
-    incrementButton.setOnClickListener { props.increment(dispatch) }
-    decrementButton.setOnClickListener { props.decrement(dispatch) }
-}
-
-val dispose = Oolong.runtime(
-    init,
-    update,
-    view,
-    render
-)
-```
-
 ## See it in action
+
+Initialize an Oolong runtime by supplying your `Init`, `Update`, and `View` functions as well as a `Render
+` function from the host platform. Press the play button below to run the example.
+
 ```{.kotlin .playground}
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
@@ -82,7 +67,21 @@ import oolong.Update
 import oolong.View
 import oolong.effect.none
 
-import kotlinx.coroutines.Dispatchers
+fun <Model : Any, Msg : Any, Props : Any> CoroutineScope.runtime(
+    init: Init<Model, Msg>,
+    update: Update<Model, Msg>,
+    view: View<Model, Props>,
+    render: Render<Msg, Props>,
+): Dispose = Oolong.runtime(
+    init, 
+    update, 
+    view, 
+    render, 
+    coroutineContext,
+    coroutineContext, 
+    coroutineContext
+)
+
 
 data class Model(
     val count: Int = 0
@@ -118,31 +117,16 @@ val view: View<Model, Props> = { model ->
     )
 }
 
-fun <Model : Any, Msg : Any, Props : Any> CoroutineScope.runtime(
-    init: Init<Model, Msg>,
-    update: Update<Model, Msg>,
-    view: View<Model, Props>,
-    render: Render<Msg, Props>,
-): Dispose = Oolong.runtime(
-    init, 
-    update, 
-    view, 
-    render, 
-    coroutineContext,
-    coroutineContext, 
-    coroutineContext
-)
-
 fun main() {
     runBlocking {
 //sampleStart
-        val render: Render<Msg, Props> = { model, dispatch ->
+        val render: Render<Msg, Props> = { props, dispatch ->
             // Print the current count
-            println("count: ${model.count}")
+            println("count: ${props.count}")
 
-            // Increment if less than 3
-            if (model.count < 3) {
-                model.increment(dispatch)
+            // Dispatch Msg.Increment if less than 3
+            if (props.count < 3) {
+                props.increment(dispatch)
             }
         }
 
