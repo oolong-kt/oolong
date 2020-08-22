@@ -29,10 +29,21 @@ fun <Msg : Any> batch(effects: Iterable<Effect<Msg>>): Effect<Msg> =
     { dispatch -> for (effect in effects) launch { effect(dispatch) } }
 
 /**
+ * Compose two [Effect]s into a single [Effect].
+ *
+ * @param effect an effect to add
+ */
+operator fun <Msg : Any> Effect<Msg>.plus(effect: Effect<Msg>): Effect<Msg> =
+    batch(this, effect)
+
+/**
  * Map from [Effect] of [A] to [Effect] of [B]
  */
 fun <A : Any, B : Any> map(effect: Effect<A>, f: (A) -> B): Effect<B> =
     { dispatch -> effect { a -> dispatch(f(a)) } }
+
+fun <A : Any, B : Any> Effect<A>.map(f: (A) -> B): Effect<B> =
+    map(this, f)
 
 /**
  * Create a [Pair] of [Effect] and [Dispose].
@@ -46,3 +57,6 @@ fun <Msg : Any> disposableEffect(effect: Effect<Msg>): Pair<Effect<Msg>, Dispose
         }
     } to dispose
 }
+
+fun <Msg : Any> Effect<Msg>.disposableEffect(): Pair<Effect<Msg>, Dispose> =
+    disposableEffect(this)

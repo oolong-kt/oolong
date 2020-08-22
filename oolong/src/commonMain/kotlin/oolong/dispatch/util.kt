@@ -35,3 +35,6 @@ import oolong.Dispatch
  */
 fun <A : Any, B : Any> contramap(dispatch: Dispatch<A>, f: (B) -> A): Dispatch<B> =
     { b -> dispatch(f(b)) }
+
+fun <A : Any, B : Any> Dispatch<A>.contramap(f: (B) -> A): Dispatch<B> =
+    contramap(this, f)
