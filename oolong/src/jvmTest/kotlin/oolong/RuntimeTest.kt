@@ -117,7 +117,7 @@ private class RuntimeTest {
         update: Update<Model, Msg>,
         view: View<Model, Props>,
         render: Render<Msg, Props>
-    ): Dispose = Oolong.runtime(
+    ): Dispose = runtime(
         init,
         update,
         view,

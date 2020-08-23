@@ -49,6 +49,3 @@ import oolong.effect.map
  */
 fun <A : Any, B : Any, C : Any, D : Any> bimap(next: Next<A, B>, fa: (A) -> C, fb: (B) -> D): Next<C, D> =
     fa(next.first) to map(next.second, fb)
-
-fun <A : Any, B : Any, C : Any, D : Any> Next<A, B>.bimap(fa: (A) -> C, fb: (B) -> D): Next<C, D> =
-    bimap(this, fa, fb)

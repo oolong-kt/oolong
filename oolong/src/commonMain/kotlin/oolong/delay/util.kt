@@ -7,11 +7,7 @@ import kotlinx.coroutines.launch
 import oolong.Effect
 
 /**
- * Generate a [Msg] after a specified timeMillis.
- *
- * @param timeMillis time in milliseconds.
- * @param msg generator function of [Msg]
- * @return a delayed effect
+ * Generate an [Effect] of [Msg] using [msg] after a specified [timeMillis] delay.
  */
 fun <Msg : Any> delay(timeMillis: Long, msg: suspend CoroutineScope.() -> Msg): Effect<Msg> =
     { dispatch ->
@@ -20,11 +16,7 @@ fun <Msg : Any> delay(timeMillis: Long, msg: suspend CoroutineScope.() -> Msg): 
     }
 
 /**
- * Generate [Msg]s at a specified timeMillis.
- *
- * @param timeMillis time in milliseconds.
- * @param msg generator function of [Msg]
- * @return a delayed effect
+ * Generate an [Effect] of [Msg]s using [msg] at a specified [timeMillis] interval.
  */
 fun <Msg : Any> interval(timeMillis: Long, msg: suspend CoroutineScope.() -> Msg): Effect<Msg> =
     { dispatch ->
