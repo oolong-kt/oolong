@@ -1,6 +1,5 @@
 package oolong.effect
 
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -38,23 +37,13 @@ fun <A : Any, B : Any> map(effect: Effect<A>, f: (A) -> B): Effect<B> =
 /**
  * Create a [Pair] of [Effect] and [Dispose].
  */
-fun <Msg : Any> cancellableEffect(effect: Effect<Msg>): Pair<Effect<Msg>, Job> {
+@Deprecated("To be removed in the next minor release")
+fun <Msg : Any> disposableEffect(effect: Effect<Msg>): Pair<Effect<Msg>, Dispose> {
     val supervisor = SupervisorJob()
+    val dispose = { supervisor.cancel() }
     return effect<Msg> { dispatch ->
-        withContext(supervisor) {
+        withContext(coroutineContext + supervisor) {
             effect(dispatch)
         }
-    } to supervisor
-}
-
-/**
- * Create a [Pair] of [Effect] and [Dispose].
- */
-@Deprecated(
-    "Use cancellableEffect(effect) instead",
-    ReplaceWith("cancellableEffect(effect)")
-)
-fun <Msg : Any> disposableEffect(effect: Effect<Msg>): Pair<Effect<Msg>, Dispose> {
-    val (effect, job) = cancellableEffect(effect)
-    return effect to { job.cancel() }
+    } to dispose
 }

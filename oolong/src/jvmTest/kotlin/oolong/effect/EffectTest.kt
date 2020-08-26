@@ -40,15 +40,6 @@ class EffectTest {
     }
 
     @Test
-    fun `cancellable effect should cancel effect when disposed`() = runBlockingTest {
-        val delay = 10L
-        val (effect, job) = cancellableEffect(delay(delay) { })
-        launch { effect { fail("Effect was disposed and should not be called.") } }
-        job.cancel()
-        advanceTimeBy(delay)
-    }
-
-    @Test
     fun `disposable effect should cancel effect when disposed`() = runBlockingTest {
         val delay = 10L
         val (effect, dispose) = disposableEffect(delay(delay) { })
