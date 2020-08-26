@@ -3,6 +3,9 @@
 ## [Unreleased]
 ### Changed
 - `CoroutineDispatcher` replaced with `CoroutineContext` in runtime builder.
+- `Dispatch` deprecated in favor of `Job`.
+- `oolong.Oolong.runtime` deprecated in favor of `oolong.runtime`.
+- `disposableEffect` deprecated.
 
 ## [2.0.7] - 2020-08-17
 ### Added
