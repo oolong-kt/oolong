@@ -52,6 +52,10 @@ typealias Render<Msg, Props> = (props: Props, dispatch: Dispatch<Msg>) -> Any?
 /**
  * Stops the function and cleans up resources
  */
+@Deprecated(
+    "Use Job instead",
+    ReplaceWith("Job", "kotlinx.coroutines.Job")
+)
 typealias Dispose = () -> Unit
 
 /**
