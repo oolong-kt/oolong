@@ -2,6 +2,7 @@ package oolong
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.TestCoroutineScope
@@ -39,7 +40,7 @@ private class RuntimeTest {
     @Test
     fun `runtime should call render initially`() = runBlockingTest {
         val initialState = 1
-        runtime(
+        disposableRuntime(
             { initialState to none() },
             { _: Unit, model: Int -> model to none() },
             { model: Int -> model },
@@ -52,7 +53,7 @@ private class RuntimeTest {
     @Test
     fun `runtime should call render after dispatch`() = runBlockingTest {
         var count = 0
-        runtime(
+        disposableRuntime(
             { "init" to none() },
             { msg: String, _: String -> msg to none() },
             { model: String -> model },
@@ -76,7 +77,7 @@ private class RuntimeTest {
     @Test
     fun `effects do not block runtime`() = runBlockingTest {
         val states = mutableListOf<String>()
-        runtime(
+        disposableRuntime(
             { "init" to delay(100) { "effect" } },
             { msg: String, _: String -> msg to none() },
             { model: String -> model },
@@ -98,9 +99,24 @@ private class RuntimeTest {
     }
 
     @Test
+    fun `runtime should not call update view render if cancelled`() = runBlockingTest {
+        var initialRender = true
+        val job = runtime(
+            { "state" to none() },
+            { msg: String, _: String -> msg to effect { dispatch: Dispatch<String> -> dispatch("next") } },
+            { model: String -> model },
+            { _: String, _: Dispatch<String> ->
+                if (initialRender) initialRender = false
+                else fail()
+            }
+        )
+        job.cancel()
+    }
+
+    @Test
     fun `runtime should not call update view render if disposed`() = runBlockingTest {
         var initialRender = true
-        val dispose = runtime(
+        val dispose = disposableRuntime(
             { "state" to none() },
             { msg: String, _: String -> msg to effect { dispatch: Dispatch<String> -> dispatch("next") } },
             { model: String -> model },
@@ -113,6 +129,21 @@ private class RuntimeTest {
     }
 
     private fun <Model : Any, Msg : Any, Props : Any> TestCoroutineScope.runtime(
+        init: Init<Model, Msg>,
+        update: Update<Model, Msg>,
+        view: View<Model, Props>,
+        render: Render<Msg, Props>
+    ): Job = runtime(
+        init,
+        update,
+        view,
+        render,
+        coroutineContext,
+        coroutineContext,
+        coroutineContext
+    )
+
+    private fun <Model : Any, Msg : Any, Props : Any> TestCoroutineScope.disposableRuntime(
         init: Init<Model, Msg>,
         update: Update<Model, Msg>,
         view: View<Model, Props>,
