@@ -13,6 +13,7 @@ import oolong.Effect
  * @param msg generator function of [Msg]
  * @return a delayed effect
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> delay(timeMillis: Long, msg: suspend CoroutineScope.() -> Msg): Effect<Msg> =
     { dispatch ->
         delay(timeMillis)
@@ -26,6 +27,7 @@ fun <Msg : Any> delay(timeMillis: Long, msg: suspend CoroutineScope.() -> Msg): 
  * @param msg generator function of [Msg]
  * @return a delayed effect
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> interval(timeMillis: Long, msg: suspend CoroutineScope.() -> Msg): Effect<Msg> =
     { dispatch ->
         while (isActive) {

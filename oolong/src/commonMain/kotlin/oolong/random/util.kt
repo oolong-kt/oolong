@@ -15,6 +15,7 @@ import kotlin.random.nextULong
  * @param msg map function of [Int] to [Msg]
  * @return [Effect] of [Msg] for the generated [Int]
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextBits(bitCount: Int, msg: suspend CoroutineScope.(Int) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextBits(bitCount))) }
 
@@ -24,6 +25,7 @@ fun <Msg : Any> nextBits(bitCount: Int, msg: suspend CoroutineScope.(Int) -> Msg
  * @param msg map function of [Boolean] to [Msg]
  * @return [Effect] of [Msg] for the generated [Boolean]
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextBoolean(msg: suspend CoroutineScope.(Boolean) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextBoolean())) }
 
@@ -33,6 +35,7 @@ fun <Msg : Any> nextBoolean(msg: suspend CoroutineScope.(Boolean) -> Msg): Effec
  * @param msg map function of [ByteArray] to [Msg]
  * @return [Effect] of [Msg] for the generated [ByteArray]
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextBytes(
     array: ByteArray,
     fromIndex: Int,
@@ -46,6 +49,7 @@ fun <Msg : Any> nextBytes(
  * @param msg map function of [ByteArray] to [Msg]
  * @return [Effect] of [Msg] for the generated [ByteArray]
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextBytes(array: ByteArray, msg: suspend CoroutineScope.(ByteArray) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextBytes(array))) }
 
@@ -55,6 +59,7 @@ fun <Msg : Any> nextBytes(array: ByteArray, msg: suspend CoroutineScope.(ByteArr
  * @param msg map function of [ByteArray] to [Msg]
  * @return [Effect] of [Msg] for the generated [ByteArray]
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextBytes(size: Int, msg: suspend CoroutineScope.(ByteArray) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextBytes(size))) }
 
@@ -64,6 +69,7 @@ fun <Msg : Any> nextBytes(size: Int, msg: suspend CoroutineScope.(ByteArray) -> 
  * @param msg map function of [Double] to [Msg]
  * @return [Effect] of [Msg] for the generated [Double]
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextDouble(msg: suspend CoroutineScope.(Double) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextDouble())) }
 
@@ -73,6 +79,7 @@ fun <Msg : Any> nextDouble(msg: suspend CoroutineScope.(Double) -> Msg): Effect<
  * @param msg map function of [Double] to [Msg]
  * @return [Effect] of [Msg] for the generated [Double]
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextDouble(until: Double, msg: suspend CoroutineScope.(Double) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextDouble(until))) }
 
@@ -82,6 +89,7 @@ fun <Msg : Any> nextDouble(until: Double, msg: suspend CoroutineScope.(Double) -
  * @param msg map function of [Double] to [Msg]
  * @return [Effect] of [Msg] for the generated [Double]
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextDouble(from: Double, until: Double, msg: suspend CoroutineScope.(Double) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextDouble(from, until))) }
 
@@ -91,6 +99,7 @@ fun <Msg : Any> nextDouble(from: Double, until: Double, msg: suspend CoroutineSc
  * @param msg map function of [Float] to [Msg]
  * @return [Effect] of [Msg] for the generated [Float]
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextFloat(msg: suspend CoroutineScope.(Float) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextFloat())) }
 
@@ -100,6 +109,7 @@ fun <Msg : Any> nextFloat(msg: suspend CoroutineScope.(Float) -> Msg): Effect<Ms
  * @param msg map function of [Int] to [Msg]
  * @return [Effect] of [Msg] for the generated [Int]
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextInt(msg: suspend CoroutineScope.(Int) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextInt())) }
 
@@ -109,6 +119,7 @@ fun <Msg : Any> nextInt(msg: suspend CoroutineScope.(Int) -> Msg): Effect<Msg> =
  * @param msg map function of [Int] to [Msg]
  * @return [Effect] of [Msg] for the generated [Int]
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextInt(until: Int, msg: suspend CoroutineScope.(Int) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextInt(until))) }
 
@@ -118,6 +129,7 @@ fun <Msg : Any> nextInt(until: Int, msg: suspend CoroutineScope.(Int) -> Msg): E
  * @param msg map function of [Int] to [Msg]
  * @return [Effect] of [Msg] for the generated [Int]
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextInt(from: Int, until: Int, msg: suspend CoroutineScope.(Int) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextInt(from, until))) }
 
@@ -127,6 +139,7 @@ fun <Msg : Any> nextInt(from: Int, until: Int, msg: suspend CoroutineScope.(Int)
  * @param msg map function of [Int] to [Msg]
  * @return [Effect] of [Msg] for the generated [Int]
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextInt(range: IntRange, msg: suspend CoroutineScope.(Int) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextInt(range))) }
 
@@ -136,6 +149,7 @@ fun <Msg : Any> nextInt(range: IntRange, msg: suspend CoroutineScope.(Int) -> Ms
  * @param msg map function of [Long] to [Msg]
  * @return [Effect] of [Msg] for the generated [Long]
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextLong(msg: suspend CoroutineScope.(Long) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextLong())) }
 
@@ -145,6 +159,7 @@ fun <Msg : Any> nextLong(msg: suspend CoroutineScope.(Long) -> Msg): Effect<Msg>
  * @param msg map function of [Long] to [Msg]
  * @return [Effect] of [Msg] for the generated [Long]
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextLong(until: Long, msg: suspend CoroutineScope.(Long) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextLong(until))) }
 
@@ -154,6 +169,7 @@ fun <Msg : Any> nextLong(until: Long, msg: suspend CoroutineScope.(Long) -> Msg)
  * @param msg map function of [Long] to [Msg]
  * @return [Effect] of [Msg] for the generated [Long]
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextLong(from: Long, until: Long, msg: suspend CoroutineScope.(Long) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextLong(from, until))) }
 
@@ -163,6 +179,7 @@ fun <Msg : Any> nextLong(from: Long, until: Long, msg: suspend CoroutineScope.(L
  * @param msg map function of [Long] to [Msg]
  * @return [Effect] of [Msg] for the generated [Long]
  */
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextLong(range: LongRange, msg: suspend CoroutineScope.(Long) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextLong(range))) }
 
@@ -173,6 +190,7 @@ fun <Msg : Any> nextLong(range: LongRange, msg: suspend CoroutineScope.(Long) ->
  * @return [Effect] of [Msg] for the generated [UByteArray]
  */
 @ExperimentalUnsignedTypes
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextUBytes(array: UByteArray, msg: suspend CoroutineScope.(UByteArray) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextUBytes(array))) }
 
@@ -183,6 +201,7 @@ fun <Msg : Any> nextUBytes(array: UByteArray, msg: suspend CoroutineScope.(UByte
  * @return [Effect] of [Msg] for the generated [UByteArray]
  */
 @ExperimentalUnsignedTypes
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextUBytes(size: Int, msg: suspend CoroutineScope.(UByteArray) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextUBytes(size))) }
 
@@ -193,6 +212,7 @@ fun <Msg : Any> nextUBytes(size: Int, msg: suspend CoroutineScope.(UByteArray) -
  * @return [Effect] of [Msg] for the generated [UInt]
  */
 @ExperimentalUnsignedTypes
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextUInt(msg: suspend CoroutineScope.(UInt) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextUInt())) }
 
@@ -203,6 +223,7 @@ fun <Msg : Any> nextUInt(msg: suspend CoroutineScope.(UInt) -> Msg): Effect<Msg>
  * @return [Effect] of [Msg] for the generated [UInt]
  */
 @ExperimentalUnsignedTypes
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextUInt(until: UInt, msg: suspend CoroutineScope.(UInt) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextUInt(until))) }
 
@@ -213,6 +234,7 @@ fun <Msg : Any> nextUInt(until: UInt, msg: suspend CoroutineScope.(UInt) -> Msg)
  * @return [Effect] of [Msg] for the generated [UInt]
  */
 @ExperimentalUnsignedTypes
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextUInt(from: UInt, until: UInt, msg: suspend CoroutineScope.(UInt) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextUInt(from, until))) }
 
@@ -223,6 +245,7 @@ fun <Msg : Any> nextUInt(from: UInt, until: UInt, msg: suspend CoroutineScope.(U
  * @return [Effect] of [Msg] for the generated [UInt]
  */
 @ExperimentalUnsignedTypes
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextUInt(range: UIntRange, msg: suspend CoroutineScope.(UInt) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextUInt(range))) }
 
@@ -233,6 +256,7 @@ fun <Msg : Any> nextUInt(range: UIntRange, msg: suspend CoroutineScope.(UInt) ->
  * @return [Effect] of [Msg] for the generated [ULong]
  */
 @ExperimentalUnsignedTypes
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextULong(msg: suspend CoroutineScope.(ULong) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextULong())) }
 
@@ -243,6 +267,7 @@ fun <Msg : Any> nextULong(msg: suspend CoroutineScope.(ULong) -> Msg): Effect<Ms
  * @return [Effect] of [Msg] for the generated [ULong]
  */
 @ExperimentalUnsignedTypes
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextULong(until: ULong, msg: suspend CoroutineScope.(ULong) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextULong(until))) }
 
@@ -253,6 +278,7 @@ fun <Msg : Any> nextULong(until: ULong, msg: suspend CoroutineScope.(ULong) -> M
  * @return [Effect] of [Msg] for the generated [ULong]
  */
 @ExperimentalUnsignedTypes
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextULong(from: ULong, until: ULong, msg: suspend CoroutineScope.(ULong) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextULong(from, until))) }
 
@@ -263,5 +289,6 @@ fun <Msg : Any> nextULong(from: ULong, until: ULong, msg: suspend CoroutineScope
  * @return [Effect] of [Msg] for the generated [ULong]
  */
 @ExperimentalUnsignedTypes
+@Deprecated("To be removed in the next minor release")
 fun <Msg : Any> nextULong(range: ULongRange, msg: suspend CoroutineScope.(ULong) -> Msg): Effect<Msg> =
     { dispatch -> dispatch(msg(Random.nextULong(range))) }

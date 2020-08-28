@@ -4,12 +4,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
-import oolong.delay.delay
+import oolong.dispatch.Dispatch
+import oolong.effect.effect
 import oolong.effect.none
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
@@ -77,8 +79,12 @@ private class RuntimeTest {
     @Test
     fun `effects do not block runtime`() = runBlockingTest {
         val states = mutableListOf<String>()
+        val delayedEffect = effect<String> { dispatch ->
+            delay(100)
+            dispatch("effect")
+        }
         disposableRuntime(
-            { "init" to delay(100) { "effect" } },
+            { "init" to delayedEffect },
             { msg: String, _: String -> msg to none() },
             { model: String -> model },
             { model: String, dispatch: Dispatch<String> ->

@@ -1,53 +1,36 @@
 package oolong
 
-import kotlinx.coroutines.CoroutineScope
-
 /**
  * Dispatches a message to the runtime
  *
  * @param msg the message to send
  */
-typealias Dispatch<Msg> = (msg: Msg) -> Unit
+@Deprecated(
+    "Use oolong.dispatch.Dispatch instead",
+    ReplaceWith("Dispatch<Msg>", "oolong.dispatch.Dispatch")
+)
+typealias Dispatch<Msg> = oolong.dispatch.Dispatch<Msg>
 
 /**
  * Runs a side-effect away from the runtime
  *
  * @param dispatch the dispatch function
  */
-typealias Effect<Msg> = suspend CoroutineScope.(dispatch: Dispatch<Msg>) -> Any?
+@Deprecated(
+    "Use oolong.effect.Effect instead",
+    ReplaceWith("Effect<Msg>", "oolong.effect.Effect")
+)
+typealias Effect<Msg> = oolong.effect.Effect<Msg>
 
 /**
  * A pair of the next state and side-effects
  */
-typealias Next<Model, Msg> = Pair<Model, Effect<Msg>>
+@Deprecated(
+    "Use oolong.next.Next instead",
+    ReplaceWith("oolong.next.Next<Model, Msg>", "oolong.next.Next")
+)
+typealias Next<Model, Msg> = oolong.next.Next<Model, Msg>
 
-/**
- * Creates an initial state and side-effects
- */
-typealias Init<Model, Msg> = () -> Next<Model, Msg>
-
-/**
- * Creates a next state and side-effects from a message and current state
- *
- * @param msg the message to interpret
- * @param model the current state
- */
-typealias Update<Model, Msg> = (msg: Msg, model: Model) -> Next<Model, Msg>
-
-/**
- * Creates view properties from the current state
- *
- * @param model the current state
- * @param dispatch the dispatch function
- */
-typealias View<Model, Props> = (model: Model) -> Props
-
-/**
- * Renders the view properties
- *
- * @param props view properties
- */
-typealias Render<Msg, Props> = (props: Props, dispatch: Dispatch<Msg>) -> Any?
 
 /**
  * Stops the function and cleans up resources
@@ -61,24 +44,9 @@ typealias Dispose = () -> Unit
 /**
  * [Effect] builder function.
  */
-fun <Msg : Any> effect(block: Effect<Msg>): Effect<Msg> = block
+@Deprecated(
+    "Use oolong.effect.effect(block) instead",
+    ReplaceWith("oolong.effect.effect(block)", "oolong.effect.effect")
+)
+fun <Msg : Any> effect(block: Effect<Msg>): Effect<Msg> = oolong.effect.effect(block)
 
-/**
- * [Init] builder function.
- */
-fun <Model : Any, Msg : Any> init(block: Init<Model, Msg>): Init<Model, Msg> = block
-
-/**
- * [Update] builder function.
- */
-fun <Model : Any, Msg : Any> update(block: Update<Model, Msg>): Update<Model, Msg> = block
-
-/**
- * [View] builder function.
- */
-fun <Model : Any, Props : Any> view(block: View<Model, Props>): View<Model, Props> = block
-
-/**
- * [Render] builder function.
- */
-fun <Props : Any, Msg : Any> render(block: Render<Props, Msg>): Render<Props, Msg> = block
