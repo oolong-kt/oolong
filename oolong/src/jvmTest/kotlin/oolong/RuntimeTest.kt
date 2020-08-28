@@ -1,20 +1,13 @@
 package oolong
 
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.TestCoroutineScope
-import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
-import kotlinx.coroutines.test.setMain
 import oolong.dispatch.Dispatch
 import oolong.effect.effect
 import oolong.effect.none
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle
@@ -22,27 +15,13 @@ import kotlin.test.assertEquals
 import kotlin.test.fail
 
 @ExperimentalCoroutinesApi
-@ObsoleteCoroutinesApi
 @TestInstance(Lifecycle.PER_CLASS)
 private class RuntimeTest {
-
-    private val mainThreadSurrogate = newSingleThreadContext("UI thread")
-
-    @BeforeAll
-    fun setUp() {
-        Dispatchers.setMain(mainThreadSurrogate)
-    }
-
-    @AfterAll
-    fun tearDown() {
-        Dispatchers.resetMain()
-        mainThreadSurrogate.close()
-    }
 
     @Test
     fun `runtime should call render initially`() = runBlockingTest {
         val initialState = 1
-        disposableRuntime(
+        runtime(
             { initialState to none() },
             { _: Unit, model: Int -> model to none() },
             { model: Int -> model },
@@ -55,7 +34,7 @@ private class RuntimeTest {
     @Test
     fun `runtime should call render after dispatch`() = runBlockingTest {
         var count = 0
-        disposableRuntime(
+        runtime(
             { "init" to none() },
             { msg: String, _: String -> msg to none() },
             { model: String -> model },
@@ -83,7 +62,7 @@ private class RuntimeTest {
             delay(100)
             dispatch("effect")
         }
-        disposableRuntime(
+        runtime(
             { "init" to delayedEffect },
             { msg: String, _: String -> msg to none() },
             { model: String -> model },
@@ -163,4 +142,5 @@ private class RuntimeTest {
         coroutineContext,
         coroutineContext
     )
+
 }

@@ -31,7 +31,6 @@ typealias Effect<Msg> = oolong.effect.Effect<Msg>
 )
 typealias Next<Model, Msg> = oolong.next.Next<Model, Msg>
 
-
 /**
  * Stops the function and cleans up resources
  */
@@ -49,4 +48,3 @@ typealias Dispose = () -> Unit
     ReplaceWith("oolong.effect.effect(block)", "oolong.effect.effect")
 )
 fun <Msg : Any> effect(block: Effect<Msg>): Effect<Msg> = oolong.effect.effect(block)
-
