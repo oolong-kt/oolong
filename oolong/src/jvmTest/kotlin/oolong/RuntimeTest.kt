@@ -128,7 +128,7 @@ private class RuntimeTest {
         dispose()
     }
 
-    private fun <Model : Any, Msg : Any, Props : Any> TestCoroutineScope.runtime(
+    private fun <Model, Msg, Props> TestCoroutineScope.runtime(
         init: Init<Model, Msg>,
         update: Update<Model, Msg>,
         view: View<Model, Props>,
@@ -143,7 +143,7 @@ private class RuntimeTest {
         coroutineContext
     )
 
-    private fun <Model : Any, Msg : Any, Props : Any> TestCoroutineScope.disposableRuntime(
+    private fun <Model, Msg, Props> TestCoroutineScope.disposableRuntime(
         init: Init<Model, Msg>,
         update: Update<Model, Msg>,
         view: View<Model, Props>,
