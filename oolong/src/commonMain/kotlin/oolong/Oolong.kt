@@ -13,7 +13,7 @@ import kotlin.jvm.JvmOverloads
  * Create a runtime.
  */
 @JvmOverloads
-fun <Model : Any, Msg : Any, Props : Any> runtime(
+fun <Model, Msg, Props> runtime(
     init: Init<Model, Msg>,
     update: Update<Model, Msg>,
     view: View<Model, Props>,
@@ -44,7 +44,7 @@ object Oolong {
             "oolong"
         )
     )
-    fun <Model : Any, Msg : Any, Props : Any> runtime(
+    fun <Model, Msg, Props> runtime(
         init: Init<Model, Msg>,
         update: Update<Model, Msg>,
         view: View<Model, Props>,
@@ -62,7 +62,7 @@ object Oolong {
 
 }
 
-private class RuntimeImpl<Model : Any, Msg : Any, Props : Any>(
+private class RuntimeImpl<Model, Msg, Props>(
     init: Init<Model, Msg>,
     private val update: Update<Model, Msg>,
     private val view: View<Model, Props>,
@@ -77,10 +77,12 @@ private class RuntimeImpl<Model : Any, Msg : Any, Props : Any>(
     override val coroutineContext: CoroutineContext
         get() = runtimeContext + job
 
-    private lateinit var currentState: Model
+    private var currentState: Model
 
     init {
-        launch(runtimeContext) { step(init()) }
+        val initNext = init()
+        currentState = initNext.first
+        step(initNext)
     }
 
     private fun dispatch(msg: Msg) {

@@ -67,7 +67,7 @@ import oolong.Update
 import oolong.View
 import oolong.effect.none
 
-fun <Model : Any, Msg : Any, Props : Any> CoroutineScope.runtime(
+fun <Model, Msg, Props> CoroutineScope.runtime(
     init: Init<Model, Msg>,
     update: Update<Model, Msg>,
     view: View<Model, Props>,
