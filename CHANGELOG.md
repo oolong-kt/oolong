@@ -7,6 +7,7 @@
 - `oolong.Oolong.runtime` deprecated in favor of `oolong.runtime`.
 - `disposableEffect` deprecated.
 - Allow incoming types to be nullable.
+- Deprecate `Next<Model, Msg>` in preference of underlying type `Pair<Model, Effect<Msg>>`.
 
 ## [2.0.7] - 2020-08-17
 ### Added

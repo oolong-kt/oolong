@@ -91,7 +91,7 @@ private class RuntimeImpl<Model, Msg, Props>(
         }
     }
 
-    private fun step(next: Next<Model, Msg>) {
+    private fun step(next: Pair<Model, Effect<Msg>>) {
         val (state, effect) = next
         val props = view(state)
         currentState = state

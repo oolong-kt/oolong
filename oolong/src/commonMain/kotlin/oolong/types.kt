@@ -19,12 +19,16 @@ typealias Effect<Msg> = suspend CoroutineScope.(dispatch: Dispatch<Msg>) -> Any?
 /**
  * A pair of the next state and side-effects
  */
+@Deprecated(
+    "Use Pair<Model, Effect<Msg>> instead",
+    ReplaceWith("Pair<Model, Effect<Msg>>", "kotlin.Pair", "oolong.Effect")
+)
 typealias Next<Model, Msg> = Pair<Model, Effect<Msg>>
 
 /**
  * Creates an initial state and side-effects
  */
-typealias Init<Model, Msg> = () -> Next<Model, Msg>
+typealias Init<Model, Msg> = () -> Pair<Model, Effect<Msg>>
 
 /**
  * Creates a next state and side-effects from a message and current state
@@ -32,7 +36,7 @@ typealias Init<Model, Msg> = () -> Next<Model, Msg>
  * @param msg the message to interpret
  * @param model the current state
  */
-typealias Update<Model, Msg> = (msg: Msg, model: Model) -> Next<Model, Msg>
+typealias Update<Model, Msg> = (msg: Msg, model: Model) -> Pair<Model, Effect<Msg>>
 
 /**
  * Creates view properties from the current state

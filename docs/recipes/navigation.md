@@ -6,7 +6,7 @@ Since MVU architecture is fractal and composable, navigation is simply an excerc
 
 The navigation component needs to have an awareness of the logical screens in order to delegate to them, so we must create `Model`, `Msg`, and `Props` wrappers for each screen.
 
-A navigation component's model is comprised of wrapper instances for each screen:
+A navigation component's model consists of wrapper instances for each screen:
 
 ```kotlin
 sealed class Model {
@@ -24,7 +24,7 @@ sealed class Msg {
     data class List(msg: List.Msg) : Msg()
     data class Detail(msg: Detail.Msg) : Msg()
     // Navigation
-    data class SetScreen(next: Next<Model, Msg>): Msg()
+    data class SetScreen(next: Pair<Model, Effect<Msg>>): Msg()
 }
 ```
 
@@ -42,7 +42,7 @@ sealed class Props {
 
 Now that the appropriate types have been defined, we can define program functions which delegate to each screen. Let's look each function in order starting with `init`.
 
-Oolong provides a few utility functions for common use-cases and one of these is [`bimap`](/oolong/oolong.next/bimap). The bimap function transforms an instance of `Next<A, B>` to an instance of `Next<C, D>`. We're goint to use `List` as our initial screen, so in this case we're bimapping from an instance of `Next<List.Model, List.Msg>` to an instance of `Next<Model, Msg>`.
+Oolong provides a few utility functions for common use-cases and one of these is [`bimap`](/oolong/oolong.next/bimap). The bimap function transforms an instance of `Pair<A, Effect<B>>` to an instance of `Pair<C, Effect<D>>`. We're going to use `List` as our initial screen, so in this case we're bimapping from an instance of `Pair<List.Model , Effect<List.Msg >>` to an instance of `Pair<Model, Effect<Msg>>`.
 
 In other words, we're taking the `List.Model` and `List.Msg` returned from `List.init` and wrapping them in the delegated types of `Model.List` and `Msg.List`.
 

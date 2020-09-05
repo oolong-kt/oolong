@@ -1,5 +1,6 @@
 package oolong.next
 
+import oolong.Effect
 import oolong.Next
 import oolong.effect.map
 
@@ -47,5 +48,5 @@ import oolong.effect.map
  *     }
  * }
  */
-fun <A, B, C, D> bimap(next: Next<A, B>, fa: (A) -> C, fb: (B) -> D): Next<C, D> =
+fun <A, B, C, D> bimap(next: Pair<A, Effect<B>>, fa: (A) -> C, fb: (B) -> D): Pair<C, Effect<D>> =
     fa(next.first) to map(next.second, fb)
