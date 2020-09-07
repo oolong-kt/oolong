@@ -47,7 +47,7 @@ Oolong provides a few utility functions for common use-cases and one of these is
 In other words, we're taking the `List.Model` and `List.Msg` returned from `List.init` and wrapping them in the delegated types of `Model.List` and `Msg.List`.
 
 ```kotlin
-val init: Init<Model, Msg> = {
+val init: () -> Pair<Model, Effect<Msg>> = {
     bimap(List.init(), Model::List, Msg::List)
 }
 ```
@@ -55,7 +55,7 @@ val init: Init<Model, Msg> = {
 The same `bimap` function is used to delegate to screens in the `update` function. If the `msg` is an instance of a screen message wrapper, then we delegate to that screen using `bimap`. However, we receive a `SetScreen` message, we simply return the next value provided.
 
 ```kotlin
-val update: Update<Model, Msg> = { msg, model ->
+val update: (Msg, Model) -> Pair<Model, Effect<Msg>> = { msg, model ->
     when (msg) {
         is Msg.List -> {
             bimap(
@@ -81,7 +81,7 @@ val update: Update<Model, Msg> = { msg, model ->
 The `view` function is quite simple, as we only need to wrap the screen's props with it's respected instance in the navigation props.
 
 ```kotlin
-val view: View<Model, Props> = { model ->
+val view: (Model) -> Props = { model ->
     when (model) {
         is Model.List -> {
             Props.List(List.view(model.model))
@@ -96,7 +96,7 @@ val view: View<Model, Props> = { model ->
 Finally, in the `view` function we unwrap the props and delegate to each screen's render function. There is one additional consideration we need to take in this function, however, which is mapping the `dispatch` function from the screen's `Msg` type to the parent's. For this, we can use the provided [`contramap`](/oolong/oolong.dispatch/contramap) fuction.
 
 ```kotlin
-val render: Render<Msg, Props> = { props, dispatch ->
+val render: (Props, Dispatch<Msg>) -> Any? = { props, dispatch ->
     when (props) {
         is Props.List -> {
             List.render(props.props, contramap(dispatch, Msg::List))
