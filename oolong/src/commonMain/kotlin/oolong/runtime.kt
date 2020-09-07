@@ -95,7 +95,7 @@ private class RuntimeImpl<Model, Msg, Props>(
     init {
         val initNext = init()
         currentState = initNext.first
-        step(initNext)
+        launch(runtimeContext) { step(initNext) }
     }
 
     private fun dispatch(msg: Msg) {
