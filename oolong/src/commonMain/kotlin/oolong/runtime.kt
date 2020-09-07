@@ -13,6 +13,19 @@ import kotlin.jvm.JvmOverloads
  * Create a runtime.
  */
 @JvmOverloads
+fun <Model, Msg> runtime(
+    init: () -> Pair<Model, Effect<Msg>>,
+    update: (Msg, Model) -> Pair<Model, Effect<Msg>>,
+    view: (Model, Dispatch<Msg>) -> Any?,
+    runtimeContext: CoroutineContext = Dispatchers.Default,
+    renderContext: CoroutineContext = Dispatchers.Main,
+    effectContext: CoroutineContext = Dispatchers.Default
+): Job = runtime(init, update, { it }, view, runtimeContext, renderContext, effectContext)
+
+/**
+ * Create a runtime.
+ */
+@JvmOverloads
 fun <Model, Msg, Props> runtime(
     init: () -> Pair<Model, Effect<Msg>>,
     update: (Msg, Model) -> Pair<Model, Effect<Msg>>,
