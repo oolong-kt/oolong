@@ -32,7 +32,7 @@ The update function uses these two concepts to take a previous state and transfo
 So far we have mentioned two conventions: models are `data` classes, and messages are `sealed` classes. You can see in the function below how those modifiers are leveraged. The message type is able to be determined in an exhaustive manner using the `when` block. The new state is created by mutating the old state with the `copy` function.
 
 ```kotlin
-val update: Update<Model, Msg> = { msg, model ->
+val update: (Msg, Model) -> Pair<Model, Effect<Msg>> = { msg, model ->
     when (msg) {
         Msg.Increment -> model.copy(count = model.count + 1) to none()
         Msg.Decrement -> model.copy(count = model.count - 1) to none()
@@ -65,7 +65,7 @@ The view function, as mentioned above, takes the current state its argument and 
 * `decrement` - a function which dispatches the `Decrement` message.
 
 ```kotlin
-val view: View<Model, Props> = { model ->
+val view: (Model) -> Props = { model ->
     Props(
         model.count,
         { dispatch -> dispatch(Msg.Increment) },
@@ -83,7 +83,7 @@ Now that we've built the core components of our application we need a few more t
 To get the runtime loop started, we first need to know what the initial state is. We do this by definiting an initialization function. This function is similar to the `update` function, however it takes no arguments. By convention, it is often desireable to define defaults in the model class and simply return a new instance from the init function.
 
 ```kotlin
-val init: Init<Model, Msg> = {
+val init: () -> Pair<Model, Effect<Msg>> = {
     Model() to none()
 }
 ```
@@ -93,7 +93,7 @@ val init: Init<Model, Msg> = {
 We also need to know how to render the view properties returned by the view function. Each target platform does this by implementing a render function which takes the view properties and a dispatch function as arguments. The dispatch function can be invoked to send messages to the update function.
 
 ```kotlin
-val render: Render<Msg, Props> = { props, dispatch ->
+val render: (Props, Dispatch<Msg>) -> Any? = { props, dispatch ->
     // Platform specific rendering
     countLabel.text = "${props.count}"
     incrementButton.setOnClickListener { dispatch(props.increment()) }

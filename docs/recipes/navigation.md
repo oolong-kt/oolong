@@ -6,7 +6,7 @@ Since MVU architecture is fractal and composable, navigation is simply an excerc
 
 The navigation component needs to have an awareness of the logical screens in order to delegate to them, so we must create `Model`, `Msg`, and `Props` wrappers for each screen.
 
-A navigation component's model is comprised of wrapper instances for each screen:
+A navigation component's model consists of wrapper instances for each screen:
 
 ```kotlin
 sealed class Model {
@@ -24,7 +24,7 @@ sealed class Msg {
     data class List(msg: List.Msg) : Msg()
     data class Detail(msg: Detail.Msg) : Msg()
     // Navigation
-    data class SetScreen(next: Next<Model, Msg>): Msg()
+    data class SetScreen(next: Pair<Model, Effect<Msg>>): Msg()
 }
 ```
 
@@ -42,12 +42,12 @@ sealed class Props {
 
 Now that the appropriate types have been defined, we can define program functions which delegate to each screen. Let's look each function in order starting with `init`.
 
-Oolong provides a few utility functions for common use-cases and one of these is [`bimap`](/oolong/oolong.next/bimap). The bimap function transforms an instance of `Next<A, B>` to an instance of `Next<C, D>`. We're goint to use `List` as our initial screen, so in this case we're bimapping from an instance of `Next<List.Model, List.Msg>` to an instance of `Next<Model, Msg>`.
+Oolong provides a few utility functions for common use-cases and one of these is [`bimap`](/oolong/oolong.next/bimap). The bimap function transforms an instance of `Pair<A, Effect<B>>` to an instance of `Pair<C, Effect<D>>`. We're going to use `List` as our initial screen, so in this case we're bimapping from an instance of `Pair<List.Model , Effect<List.Msg >>` to an instance of `Pair<Model, Effect<Msg>>`.
 
 In other words, we're taking the `List.Model` and `List.Msg` returned from `List.init` and wrapping them in the delegated types of `Model.List` and `Msg.List`.
 
 ```kotlin
-val init: Init<Model, Msg> = {
+val init: () -> Pair<Model, Effect<Msg>> = {
     bimap(List.init(), Model::List, Msg::List)
 }
 ```
@@ -55,7 +55,7 @@ val init: Init<Model, Msg> = {
 The same `bimap` function is used to delegate to screens in the `update` function. If the `msg` is an instance of a screen message wrapper, then we delegate to that screen using `bimap`. However, we receive a `SetScreen` message, we simply return the next value provided.
 
 ```kotlin
-val update: Update<Model, Msg> = { msg, model ->
+val update: (Msg, Model) -> Pair<Model, Effect<Msg>> = { msg, model ->
     when (msg) {
         is Msg.List -> {
             bimap(
@@ -81,7 +81,7 @@ val update: Update<Model, Msg> = { msg, model ->
 The `view` function is quite simple, as we only need to wrap the screen's props with it's respected instance in the navigation props.
 
 ```kotlin
-val view: View<Model, Props> = { model ->
+val view: (Model) -> Props = { model ->
     when (model) {
         is Model.List -> {
             Props.List(List.view(model.model))
@@ -96,7 +96,7 @@ val view: View<Model, Props> = { model ->
 Finally, in the `view` function we unwrap the props and delegate to each screen's render function. There is one additional consideration we need to take in this function, however, which is mapping the `dispatch` function from the screen's `Msg` type to the parent's. For this, we can use the provided [`contramap`](/oolong/oolong.dispatch/contramap) fuction.
 
 ```kotlin
-val render: Render<Msg, Props> = { props, dispatch ->
+val render: (Props, Dispatch<Msg>) -> Any? = { props, dispatch ->
     when (props) {
         is Props.List -> {
             List.render(props.props, contramap(dispatch, Msg::List))

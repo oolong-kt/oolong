@@ -30,18 +30,18 @@ class Props(
     val decrement: (Dispatch<Msg>) -> Unit
 )
 
-val init: Init<Model, Msg> = { 
+val init: () -> Pair<Model, Effect<Msg>> = { 
     Model() to none()
 }
 
-val update: Update<Model, Msg> = { msg, model ->
+val update: (Msg, Model) -> Pair<Model, Effect<Msg>> = { msg, model ->
     when (msg) {
         Msg.Increment -> model.copy(count = model.count + 1)
         Msg.Decrement -> model.copy(count = model.count - 1)
     } to none()
 }
 
-val view: View<Model, Props> = { model ->
+val view: (Model) -> Props = { model ->
     Props(
         model.count,
         { dispatch -> dispatch(Msg.Increment) },
@@ -61,18 +61,14 @@ import kotlinx.coroutines.runBlocking
 import oolong.Dispatch
 import oolong.Dispose
 import oolong.Effect
-import oolong.Init
 import oolong.Oolong
-import oolong.Render
-import oolong.Update
-import oolong.View
 import oolong.effect.none
 
 fun <Model : Any, Msg : Any, Props : Any> CoroutineScope.runtime(
-    init: Init<Model, Msg>,
-    update: Update<Model, Msg>,
-    view: View<Model, Props>,
-    render: Render<Msg, Props>,
+    init: () -> Pair<Model, Effect<Msg>>,
+    update: (Msg, Model) -> Pair<Model, Effect<Msg>>,
+    view: (Model) -> Props,
+    render: (Props, Dispatch<Msg>) -> Any?,
 ): Dispose = Oolong.runtime(
     init, 
     update, 
@@ -82,7 +78,6 @@ fun <Model : Any, Msg : Any, Props : Any> CoroutineScope.runtime(
     coroutineContext, 
     coroutineContext
 )
-
 
 data class Model(
     val count: Int = 0

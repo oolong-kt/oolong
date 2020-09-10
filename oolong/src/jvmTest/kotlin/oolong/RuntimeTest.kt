@@ -129,10 +129,10 @@ private class RuntimeTest {
     }
 
     private fun <Model, Msg, Props> TestCoroutineScope.runtime(
-        init: Init<Model, Msg>,
-        update: Update<Model, Msg>,
-        view: View<Model, Props>,
-        render: Render<Msg, Props>
+        init: () -> Pair<Model, Effect<Msg>>,
+        update: (Msg, Model) -> Pair<Model, Effect<Msg>>,
+        view: (Model) -> Props,
+        render: (Props, Dispatch<Msg>) -> Any?
     ): Job = runtime(
         init,
         update,
@@ -144,10 +144,10 @@ private class RuntimeTest {
     )
 
     private fun <Model, Msg, Props> TestCoroutineScope.disposableRuntime(
-        init: Init<Model, Msg>,
-        update: Update<Model, Msg>,
-        view: View<Model, Props>,
-        render: Render<Msg, Props>
+        init: () -> Pair<Model, Effect<Msg>>,
+        update: (Msg, Model) -> Pair<Model, Effect<Msg>>,
+        view: (Model) -> Props,
+        render: (Props, Dispatch<Msg>) -> Any?
     ): Dispose = Oolong.runtime(
         init,
         update,

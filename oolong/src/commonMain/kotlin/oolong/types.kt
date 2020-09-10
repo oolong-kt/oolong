@@ -7,24 +7,32 @@ import kotlinx.coroutines.CoroutineScope
  *
  * @param msg the message to send
  */
-typealias Dispatch<Msg> = (msg: Msg) -> Unit
+typealias Dispatch<Msg> = (Msg) -> Unit
 
 /**
  * Runs a side-effect away from the runtime
  *
  * @param dispatch the dispatch function
  */
-typealias Effect<Msg> = suspend CoroutineScope.(dispatch: Dispatch<Msg>) -> Any?
+typealias Effect<Msg> = suspend CoroutineScope.(Dispatch<Msg>) -> Any?
 
 /**
  * A pair of the next state and side-effects
  */
+@Deprecated(
+    "Use Pair<Model, Effect<Msg>> instead",
+    ReplaceWith("Pair<Model, Effect<Msg>>", "kotlin.Pair", "oolong.Effect")
+)
 typealias Next<Model, Msg> = Pair<Model, Effect<Msg>>
 
 /**
  * Creates an initial state and side-effects
  */
-typealias Init<Model, Msg> = () -> Next<Model, Msg>
+@Deprecated(
+    "Use () -> Pair<Model, Effect<Msg>> instead",
+    ReplaceWith("() -> Pair<Model, Effect<Msg>>", "kotlin.Pair", "oolong.Effect")
+)
+typealias Init<Model, Msg> = () -> Pair<Model, Effect<Msg>>
 
 /**
  * Creates a next state and side-effects from a message and current state
@@ -32,7 +40,11 @@ typealias Init<Model, Msg> = () -> Next<Model, Msg>
  * @param msg the message to interpret
  * @param model the current state
  */
-typealias Update<Model, Msg> = (msg: Msg, model: Model) -> Next<Model, Msg>
+@Deprecated(
+    "Use (Msg, Model) -> Pair<Model, Effect<Msg>> instead",
+    ReplaceWith("(Msg, Model) -> Pair<Model, Effect<Msg>>", "kotlin.Pair", "oolong.Effect")
+)
+typealias Update<Model, Msg> = (msg: Msg, model: Model) -> Pair<Model, Effect<Msg>>
 
 /**
  * Creates view properties from the current state
@@ -40,6 +52,10 @@ typealias Update<Model, Msg> = (msg: Msg, model: Model) -> Next<Model, Msg>
  * @param model the current state
  * @param dispatch the dispatch function
  */
+@Deprecated(
+    "Use (Model) -> Props instead",
+    ReplaceWith("(Model) -> Props")
+)
 typealias View<Model, Props> = (model: Model) -> Props
 
 /**
@@ -47,6 +63,10 @@ typealias View<Model, Props> = (model: Model) -> Props
  *
  * @param props view properties
  */
+@Deprecated(
+    "Use (Props, Dispatch<Msg>) -> Any? instead",
+    ReplaceWith("(Props, Dispatch<Msg>) -> Any?", "oolong.Dispatch")
+)
 typealias Render<Msg, Props> = (props: Props, dispatch: Dispatch<Msg>) -> Any?
 
 /**
@@ -64,21 +84,22 @@ typealias Dispose = () -> Unit
 fun <Msg> effect(block: Effect<Msg>): Effect<Msg> = block
 
 /**
- * [Init] builder function.
+ * Init builder function.
  */
-fun <Model, Msg> init(block: Init<Model, Msg>): Init<Model, Msg> = block
+fun <Model, Msg> init(block: () -> Pair<Model, Effect<Msg>>): () -> Pair<Model, Effect<Msg>> = block
 
 /**
- * [Update] builder function.
+ * Update builder function.
  */
-fun <Model, Msg> update(block: Update<Model, Msg>): Update<Model, Msg> = block
+fun <Model, Msg> update(block: (Msg, Model) -> Pair<Model, Effect<Msg>>): (Msg, Model) -> Pair<Model, Effect<Msg>> =
+    block
 
 /**
- * [View] builder function.
+ * View builder function.
  */
-fun <Model, Props> view(block: View<Model, Props>): View<Model, Props> = block
+fun <Model, Props> view(block: (Model) -> Props): (Model) -> Props = block
 
 /**
- * [Render] builder function.
+ * Render builder function.
  */
-fun <Props, Msg> render(block: Render<Props, Msg>): Render<Props, Msg> = block
+fun <Props, Msg> render(block: (Props, Dispatch<Msg>) -> Any?): (Props, Dispatch<Msg>) -> Any? = block
