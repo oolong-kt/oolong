@@ -60,14 +60,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 import oolong.Dispatch
 import oolong.Dispose
-import oolong.Init
+import oolong.Effect
 import oolong.Oolong
-import oolong.Render
-import oolong.Update
-import oolong.View
 import oolong.effect.none
 
-fun <Model, Msg, Props> CoroutineScope.runtime(
+fun <Model : Any, Msg : Any, Props : Any> CoroutineScope.runtime(
     init: () -> Pair<Model, Effect<Msg>>,
     update: (Msg, Model) -> Pair<Model, Effect<Msg>>,
     view: (Model) -> Props,
@@ -81,7 +78,6 @@ fun <Model, Msg, Props> CoroutineScope.runtime(
     coroutineContext, 
     coroutineContext
 )
-
 
 data class Model(
     val count: Int = 0
