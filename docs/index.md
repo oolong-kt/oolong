@@ -1,6 +1,6 @@
 # Oolong
 
-Oolong is an [Elm](https://guide.elm-lang.org/architecture) inspired Model-View-Update (MVU) implementation for Kotiln multiplatform. As the name implies, three core concepts comprise the foundation of this architecture: 
+Oolong is an [Elm](https://guide.elm-lang.org/architecture) inspired Model-View-Update (MVU) implementation for Kotlin multiplatform. As the name implies, three core concepts comprise the foundation of this architecture: 
 
 * **Model** - a type to represent the program state
 
@@ -8,7 +8,7 @@ Oolong is an [Elm](https://guide.elm-lang.org/architecture) inspired Model-View-
 
 * **Update** - a function to update the state
 
-By applying this simple pattern you can create composable, testable programs that can run on any platform. Oolong enables a common codebase for all platforms by using a `Render` function which is implemented by each frontend.
+By applying this simple pattern you can create composable, testable programs that can run on any platform. Oolong enables a common codebase for all platforms by using a `render` function which is implemented by each frontend.
 
 ## An example
 
@@ -52,8 +52,7 @@ val view: (Model) -> Props = { model ->
 
 ## See it in action
 
-Initialize an Oolong runtime by supplying your `Init`, `Update`, and `View` functions as well as a `Render
-` function from the host platform. Press the play button below to run the example.
+Initialize an Oolong runtime by supplying your `init`, `update`, and `view` functions as well as a `render` function from the host platform. Press the play button below to run the example.
 
 ```{.kotlin .playground}
 import kotlinx.coroutines.CoroutineScope

@@ -6,13 +6,13 @@ A counter app demonstrating simple `Msg` updates.
 
 ### Random
 
-A random number generator demonstrating `Update` effects.
+A random number generator demonstrating `update` effects.
 
 [https://github.com/oolong-kt/samples/tree/master/samples/random](https://github.com/oolong-kt/samples/tree/master/samples/random)
 
 ### Time
 
-A time display demonstrating `Init` effects.
+A time display demonstrating `init` effects.
 
 [https://github.com/oolong-kt/samples/tree/master/samples/time](https://github.com/oolong-kt/samples/tree/master/samples/time)
 

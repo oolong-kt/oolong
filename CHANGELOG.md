@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Add a `runtime` overload which combines `view` and `render`.
+- Update Kotlin to 1.4.10
+
 ### Changed
 - `CoroutineDispatcher` replaced with `CoroutineContext` in runtime builder.
 - `Dispatch` deprecated in favor of `Job`.
