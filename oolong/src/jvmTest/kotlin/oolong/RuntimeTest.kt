@@ -1,18 +1,12 @@
 package oolong
 
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.ObsoleteCoroutinesApi
-import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.TestCoroutineScope
-import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
-import kotlinx.coroutines.test.setMain
-import oolong.delay.delay
 import oolong.effect.none
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle
@@ -23,19 +17,6 @@ import kotlin.test.fail
 @ObsoleteCoroutinesApi
 @TestInstance(Lifecycle.PER_CLASS)
 private class RuntimeTest {
-
-    private val mainThreadSurrogate = newSingleThreadContext("UI thread")
-
-    @BeforeAll
-    fun setUp() {
-        Dispatchers.setMain(mainThreadSurrogate)
-    }
-
-    @AfterAll
-    fun tearDown() {
-        Dispatchers.resetMain()
-        mainThreadSurrogate.close()
-    }
 
     @Test
     fun `runtime should call render initially`() = runBlockingTest {
@@ -77,8 +58,12 @@ private class RuntimeTest {
     @Test
     fun `effects do not block runtime`() = runBlockingTest {
         val states = mutableListOf<String>()
+        val initEffect = effect<String> { dispatch ->
+            delay(100)
+            dispatch("effect")
+        }
         disposableRuntime(
-            { "init" to delay(100) { "effect" } },
+            { "init" to initEffect },
             { msg: String, _: String -> msg to none() },
             { model: String -> model },
             { model: String, dispatch: Dispatch<String> ->

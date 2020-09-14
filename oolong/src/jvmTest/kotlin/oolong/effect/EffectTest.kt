@@ -5,7 +5,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runBlockingTest
 import oolong.Effect
-import oolong.delay.delay
 import oolong.effect
 import oolong.effect.EffectTest.ChildMsg.NoOp
 import oolong.effect.EffectTest.ParentMsg.ChildMsgW
@@ -42,7 +41,11 @@ class EffectTest {
     @Test
     fun `disposable effect should cancel effect when disposed`() = runBlockingTest {
         val delay = 10L
-        val (effect, dispose) = disposableEffect(delay(delay) { })
+        val delayedEffect = effect<Unit> { dispatch ->
+            delay(delay)
+            dispatch(Unit)
+        }
+        val (effect, dispose) = disposableEffect(delayedEffect)
         launch { effect { fail("Effect was disposed and should not be called.") } }
         dispose()
         advanceTimeBy(delay)
