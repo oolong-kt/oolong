@@ -3,16 +3,13 @@ package oolong
 import kotlinx.coroutines.CoroutineScope
 
 /**
- * Dispatches a message to the runtime
- *
- * @param msg the message to send
+ * A function to dispatch a Msg to the runtime in the runtime context.
  */
 typealias Dispatch<Msg> = (Msg) -> Unit
 
 /**
- * Runs a side-effect away from the runtime
- *
- * @param dispatch the dispatch function
+ * A function to run a side-effect in the effect context. Provides a Dispatch function to dispatch a Msg to the
+ * runtime in the runtime context.
  */
 typealias Effect<Msg> = suspend CoroutineScope.(Dispatch<Msg>) -> Any?
 

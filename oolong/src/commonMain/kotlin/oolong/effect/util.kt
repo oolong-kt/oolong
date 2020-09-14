@@ -13,23 +13,19 @@ import oolong.effect
 fun <Msg> none(): Effect<Msg> = {}
 
 /**
- * Compose a collection of [Effect] into a single [Effect].
- *
- * @param effects a list of effects
+ * Compose [effects] into a single [Effect].
  */
 fun <Msg> batch(vararg effects: Effect<Msg>): Effect<Msg> =
     batch(effects.asIterable())
 
 /**
- * Compose a collection of [Effect] into a single [Effect].
- *
- * @param effects a list of effects
+ * Compose [effects] into a single [Effect].
  */
 fun <Msg> batch(effects: Iterable<Effect<Msg>>): Effect<Msg> =
     { dispatch -> for (effect in effects) launch { effect(dispatch) } }
 
 /**
- * Map from [Effect] of [A] to [Effect] of [B]
+ * Map [effect] of type [A] to [Effect] of [B] using [f].
  */
 fun <A, B> map(effect: Effect<A>, f: (A) -> B): Effect<B> =
     { dispatch -> effect { a -> dispatch(f(a)) } }

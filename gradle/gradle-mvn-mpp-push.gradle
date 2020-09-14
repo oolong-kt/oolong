@@ -14,7 +14,9 @@ dokka {
                 lineSuffix = "#L"
             }
         }
-        common {}
+        common {
+            skipDeprecated = true
+        }
     }
 }
 
