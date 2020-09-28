@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [2.1.0] - 2020-09-28
 ### Added
 - Add a `runtime` overload which combines `view` and `render`.
 - Update Kotlin to 1.4.10
@@ -70,7 +72,8 @@
 
 Initial release
 
-[Unreleased]: https://github.com/oolong-kt/oolong/compare/v2.0.7...HEAD
+[Unreleased]: https://github.com/oolong-kt/oolong/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/oolong-kt/oolong/compare/v2.0.7...v2.1.0
 [2.0.7]: https://github.com/oolong-kt/oolong/compare/v2.0.6...v2.0.7
 [2.0.6]: https://github.com/oolong-kt/oolong/compare/v2.0.5...v2.0.6
 [2.0.5]: https://github.com/oolong-kt/oolong/compare/v2.0.4...v2.0.5
