@@ -33,7 +33,7 @@ fun <A, B> map(effect: Effect<A>, f: (A) -> B): Effect<B> =
 /**
  * Create a [Pair] of [Effect] and [Dispose].
  */
-@Deprecated("To be removed in the next minor release")
+@Deprecated("To be removed in the next major release")
 fun <Msg> disposableEffect(effect: Effect<Msg>): Pair<Effect<Msg>, Dispose> {
     val supervisor = SupervisorJob()
     val dispose = { supervisor.cancel() }

@@ -45,7 +45,7 @@ fun <Model, Msg, Props> runtime(
 /**
  * Oolong runtime module.
  */
-@Deprecated("To be removed in the next minor release")
+@Deprecated("To be removed in the next major release")
 object Oolong {
     /**
      * Create a runtime.
