@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Add a `next` builder function.
 
 ## [2.1.0] - 2020-09-28
 ### Added
