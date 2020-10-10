@@ -6,20 +6,18 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runBlockingTest
 import oolong.Effect
 import oolong.effect
-import oolong.effect.EffectTest.ChildMsg.NoOp
-import oolong.effect.EffectTest.ParentMsg.ChildMsgW
+import oolong.effect.EffectTest.Parent.Msg.ChildMsg
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.fail
 
 @ExperimentalCoroutinesApi
 class EffectTest {
 
     @Test
     fun `map should dispatch mapped message`() = runBlockingTest {
-        val childEffect: Effect<ChildMsg> = { dispatch -> dispatch(NoOp) }
-        val parentEffect = map(childEffect) { ChildMsgW(it) }
-        parentEffect { msg -> assertEquals(msg, ChildMsgW(NoOp)) }
+        val childEffect: Effect<Child.Msg> = { dispatch -> dispatch(Child.Msg.NoOp) }
+        val parentEffect = map(childEffect) { ChildMsg(it) }
+        parentEffect { msg -> assertEquals(msg, ChildMsg(Child.Msg.NoOp)) }
     }
 
     @Test
@@ -38,25 +36,16 @@ class EffectTest {
         assertEquals(range.toList(), messages.sorted())
     }
 
-    @Test
-    fun `disposable effect should cancel effect when disposed`() = runBlockingTest {
-        val delay = 10L
-        val delayedEffect = effect<Unit> { dispatch ->
-            delay(delay)
-            dispatch(Unit)
+    object Parent {
+        sealed class Msg {
+            data class ChildMsg(val childMsg: Child.Msg) : Msg()
         }
-        val (effect, dispose) = disposableEffect(delayedEffect)
-        launch { effect { fail("Effect was disposed and should not be called.") } }
-        dispose()
-        advanceTimeBy(delay)
     }
 
-    sealed class ParentMsg {
-        data class ChildMsgW(val childMsg: ChildMsg) : ParentMsg()
-    }
-
-    sealed class ChildMsg {
-        object NoOp : ChildMsg()
+    object Child {
+        sealed class Msg {
+            object NoOp : Msg()
+        }
     }
 
 }
