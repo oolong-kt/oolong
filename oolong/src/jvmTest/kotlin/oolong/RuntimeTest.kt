@@ -6,7 +6,7 @@ import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.runBlockingTest
-import oolong.effect.none
+import oolong.next.next
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle
@@ -22,8 +22,8 @@ private class RuntimeTest {
     fun `runtime should call render initially`() = runBlockingTest {
         val initialState = 1
         disposableRuntime(
-            { initialState to none() },
-            { _: Unit, model: Int -> model to none() },
+            { next(initialState) },
+            { _: Unit, model: Int -> next(model) },
             { model: Int -> model },
             { props: Int, _: Dispatch<Unit> ->
                 assertEquals(initialState, props)
@@ -35,8 +35,8 @@ private class RuntimeTest {
     fun `runtime should call render after dispatch`() = runBlockingTest {
         var count = 0
         disposableRuntime(
-            { "init" to none() },
-            { msg: String, _: String -> msg to none() },
+            { next("init") },
+            { msg: String, _: String -> next(msg) },
             { model: String -> model },
             { model: String, dispatch: Dispatch<String> ->
                 count++
@@ -63,8 +63,8 @@ private class RuntimeTest {
             dispatch("effect")
         }
         disposableRuntime(
-            { "init" to initEffect },
-            { msg: String, _: String -> msg to none() },
+            { next("init", initEffect) },
+            { msg: String, _: String -> next(msg) },
             { model: String -> model },
             { model: String, dispatch: Dispatch<String> ->
                 states.add(model)
@@ -86,9 +86,10 @@ private class RuntimeTest {
     @Test
     fun `runtime should not call update view render if cancelled`() = runBlockingTest {
         var initialRender = true
+        val nextEffect = effect { dispatch: Dispatch<String> -> dispatch("next") }
         val job = runtime(
-            { "state" to none() },
-            { msg: String, _: String -> msg to effect { dispatch: Dispatch<String> -> dispatch("next") } },
+            { next("state") },
+            { msg: String, _: String -> next(msg, nextEffect) },
             { model: String -> model },
             { _: String, _: Dispatch<String> ->
                 if (initialRender) initialRender = false
@@ -101,9 +102,10 @@ private class RuntimeTest {
     @Test
     fun `runtime should not call update view render if disposed`() = runBlockingTest {
         var initialRender = true
+        val nextEffect = effect { dispatch: Dispatch<String> -> dispatch("next") }
         val dispose = disposableRuntime(
-            { "state" to none() },
-            { msg: String, _: String -> msg to effect { dispatch: Dispatch<String> -> dispatch("next") } },
+            { next("state") },
+            { msg: String, _: String -> next(msg, nextEffect) },
             { model: String -> model },
             { _: String, _: Dispatch<String> ->
                 if (initialRender) initialRender = false
