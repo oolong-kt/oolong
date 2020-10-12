@@ -42,40 +42,6 @@ fun <Model, Msg, Props> runtime(
     return runtime.job
 }
 
-/**
- * Oolong runtime module.
- */
-@Deprecated("To be removed in the next major release")
-object Oolong {
-    /**
-     * Create a runtime.
-     */
-    @JvmOverloads
-    @Deprecated(
-        "Use oolong.runtime(init, update, view, render, runtimeContext, renderContext, effectContext) instead",
-        ReplaceWith(
-            "oolong.runtime(init, update, view, render, runtimeContext, renderContext, effectContext)",
-            "oolong"
-        )
-    )
-    fun <Model, Msg, Props> runtime(
-        init: () -> Pair<Model, Effect<Msg>>,
-        update: (Msg, Model) -> Pair<Model, Effect<Msg>>,
-        view: (Model) -> Props,
-        render: (Props, Dispatch<Msg>) -> Any?,
-        runtimeContext: CoroutineContext = Dispatchers.Default,
-        renderContext: CoroutineContext = Dispatchers.Main,
-        effectContext: CoroutineContext = Dispatchers.Default
-    ): Dispose {
-        val runtime = RuntimeImpl(
-            init, update, view, render,
-            runtimeContext, renderContext, effectContext
-        )
-        return { runtime.job.cancel() }
-    }
-
-}
-
 private class RuntimeImpl<Model, Msg, Props>(
     init: () -> Pair<Model, Effect<Msg>>,
     private val update: (Msg, Model) -> Pair<Model, Effect<Msg>>,

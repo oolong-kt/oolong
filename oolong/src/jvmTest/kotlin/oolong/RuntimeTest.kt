@@ -21,7 +21,7 @@ private class RuntimeTest {
     @Test
     fun `runtime should call render initially`() = runBlockingTest {
         val initialState = 1
-        disposableRuntime(
+        runtime(
             { next(initialState) },
             { _: Unit, model: Int -> next(model) },
             { model: Int -> model },
@@ -34,7 +34,7 @@ private class RuntimeTest {
     @Test
     fun `runtime should call render after dispatch`() = runBlockingTest {
         var count = 0
-        disposableRuntime(
+        runtime(
             { next("init") },
             { msg: String, _: String -> next(msg) },
             { model: String -> model },
@@ -62,7 +62,7 @@ private class RuntimeTest {
             delay(100)
             dispatch("effect")
         }
-        disposableRuntime(
+        runtime(
             { next("init", initEffect) },
             { msg: String, _: String -> next(msg) },
             { model: String -> model },
@@ -99,22 +99,6 @@ private class RuntimeTest {
         job.cancel()
     }
 
-    @Test
-    fun `runtime should not call update view render if disposed`() = runBlockingTest {
-        var initialRender = true
-        val nextEffect = effect { dispatch: Dispatch<String> -> dispatch("next") }
-        val dispose = disposableRuntime(
-            { next("state") },
-            { msg: String, _: String -> next(msg, nextEffect) },
-            { model: String -> model },
-            { _: String, _: Dispatch<String> ->
-                if (initialRender) initialRender = false
-                else fail()
-            }
-        )
-        dispose()
-    }
-
     private fun <Model, Msg, Props> TestCoroutineScope.runtime(
         init: () -> Pair<Model, Effect<Msg>>,
         update: (Msg, Model) -> Pair<Model, Effect<Msg>>,
@@ -130,18 +114,4 @@ private class RuntimeTest {
         coroutineContext
     )
 
-    private fun <Model, Msg, Props> TestCoroutineScope.disposableRuntime(
-        init: () -> Pair<Model, Effect<Msg>>,
-        update: (Msg, Model) -> Pair<Model, Effect<Msg>>,
-        view: (Model) -> Props,
-        render: (Props, Dispatch<Msg>) -> Any?
-    ): Dispose = Oolong.runtime(
-        init,
-        update,
-        view,
-        render,
-        coroutineContext,
-        coroutineContext,
-        coroutineContext
-    )
 }
