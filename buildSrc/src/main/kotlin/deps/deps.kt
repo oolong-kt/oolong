@@ -8,8 +8,8 @@ object dokka : Group("org.jetbrains.dokka", "0.10.1") {
     }
 }
 
-object kotlin : Group("org.jetbrains.kotlin", "1.4.10") {
-    object coroutines : Group("org.jetbrains.kotlinx", "1.3.9") {
+object kotlin : Group("org.jetbrains.kotlin", "1.4.30") {
+    object coroutines : Group("org.jetbrains.kotlinx", "1.4.2") {
         val core = artifact("kotlinx-coroutines-core")
         val test = artifact("kotlinx-coroutines-test")
     }
