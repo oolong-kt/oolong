@@ -7,16 +7,13 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.runBlockingTest
 import oolong.next.next
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
-import org.junit.jupiter.api.TestInstance.Lifecycle
+import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
 
 @ExperimentalCoroutinesApi
 @ObsoleteCoroutinesApi
-@TestInstance(Lifecycle.PER_CLASS)
-private class RuntimeTest {
+class RuntimeTest {
 
     @Test
     fun `runtime should call render initially`() = runBlockingTest {

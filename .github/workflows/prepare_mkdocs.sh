@@ -1,15 +1,17 @@
 #!/bin/bash
 
+# Adapted from https://github.com/cashapp/sqldelight/blob/master/.github/workflows/prepare_mkdocs.sh
+
 # The website is built using MkDocs with the Material theme.
 # https://squidfunk.github.io/mkdocs-material/
 # It requires Python to run.
 # Install the packages with the following command:
-# pip install mkdocs mkdocs-material
+# pip install -r requirements.txt
 
 set -ex
 
 # Generate the API docs
-./gradlew dokka
+./gradlew dokkaGfm
 
 # Dokka filenames like `-http-url/index.md` don't work well with MkDocs <title> tags.
 # Assign metadata to the file's first Markdown heading.
