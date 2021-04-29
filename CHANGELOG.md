@@ -1,8 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+
+## [2.1.1] - 2020-04-29
 ### Added
 - Add a `next` builder function.
+- Update Kotlin to 1.4.32
+- Update Kotlin Coroutines to 1.4.3
 
 ## [2.1.0] - 2020-09-28
 ### Added
@@ -74,7 +78,8 @@
 
 Initial release
 
-[Unreleased]: https://github.com/oolong-kt/oolong/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/oolong-kt/oolong/compare/v2.1.1...HEAD
+[2.1.1]: https://github.com/oolong-kt/oolong/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/oolong-kt/oolong/compare/v2.0.7...v2.1.0
 [2.0.7]: https://github.com/oolong-kt/oolong/compare/v2.0.6...v2.0.7
 [2.0.6]: https://github.com/oolong-kt/oolong/compare/v2.0.5...v2.0.6
