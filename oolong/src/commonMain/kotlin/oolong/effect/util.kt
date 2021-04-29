@@ -25,4 +25,3 @@ fun <Msg> batch(effects: Iterable<Effect<Msg>>): Effect<Msg> =
  */
 fun <A, B> map(effect: Effect<A>, f: (A) -> B): Effect<B> =
     { dispatch -> effect { a -> dispatch(f(a)) } }
-
