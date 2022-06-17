@@ -1,7 +1,7 @@
 ext.versions = [
         kotlin          : '1.6.21',
         kotlinCoroutines: '1.6.2',
-ktlint          : '0.45.2',
+	ktlint          : '0.45.2',
 ]
 
 ext.deps = [
