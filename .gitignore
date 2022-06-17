@@ -19,6 +19,7 @@ classes/
 
 ### Node ###
 node_modules/
+kotlin-js-store
 
 ### Dokka ###
 package-list

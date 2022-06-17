@@ -4,8 +4,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.test.TestCoroutineScope
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.runTest
 import oolong.next.next
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -16,7 +16,7 @@ import kotlin.test.fail
 class RuntimeTest {
 
     @Test
-    fun `runtime should call render initially`() = runBlockingTest {
+    fun `runtime should call render initially`() = runTest {
         val initialState = 1
         runtime(
             { next(initialState) },
@@ -29,7 +29,7 @@ class RuntimeTest {
     }
 
     @Test
-    fun `runtime should call render after dispatch`() = runBlockingTest {
+    fun `runtime should call render after dispatch`() = runTest {
         var count = 0
         runtime(
             { next("init") },
@@ -53,7 +53,7 @@ class RuntimeTest {
     }
 
     @Test
-    fun `effects do not block runtime`() = runBlockingTest {
+    fun `effects do not block runtime`() = runTest {
         val states = mutableListOf<String>()
         val initEffect = effect<String> { dispatch ->
             delay(100)
@@ -81,7 +81,7 @@ class RuntimeTest {
     }
 
     @Test
-    fun `runtime should not call update view render if cancelled`() = runBlockingTest {
+    fun `runtime should not call update view render if cancelled`() = runTest {
         var initialRender = true
         val nextEffect = effect { dispatch: Dispatch<String> -> dispatch("next") }
         val job = runtime(
@@ -96,7 +96,7 @@ class RuntimeTest {
         job.cancel()
     }
 
-    private fun <Model, Msg, Props> TestCoroutineScope.runtime(
+    private fun <Model, Msg, Props> TestScope.runtime(
         init: () -> Pair<Model, Effect<Msg>>,
         update: (Msg, Model) -> Pair<Model, Effect<Msg>>,
         view: (Model) -> Props,
