@@ -1,7 +1,7 @@
 ext.versions = [
         kotlin          : '1.6.21',
-        kotlinCoroutines: '1.6.2',
-	ktlint          : '0.45.2',
+        kotlinCoroutines: '1.6.1',
+        ktlint          : '0.45.2',
 ]
 
 ext.deps = [
@@ -12,7 +12,6 @@ ext.deps = [
                 spotless: "com.diffplug.spotless:spotless-plugin-gradle:5.8.2",
         ],
         kotlin : [
-                atomicfu  : "org.jetbrains.kotlin:atomicfu:${versions.kotlin}",
                 test      : [
                         common           : "org.jetbrains.kotlin:kotlin-test-common:${versions.kotlin}",
                         commonAnnotations: "org.jetbrains.kotlin:kotlin-test-annotations-common:${versions.kotlin}",

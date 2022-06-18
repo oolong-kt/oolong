@@ -19,11 +19,6 @@ kotlin {
                 implementation deps.kotlin.test.junit
             }
         }
-        jsMain {
-            dependencies {
-                implementation deps.kotlin.atomicfu
-            }
-        }
         nativeMain {}
         nativeTest {}
     }
