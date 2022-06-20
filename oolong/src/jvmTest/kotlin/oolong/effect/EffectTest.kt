@@ -1,16 +1,17 @@
 package oolong.effect
 
+import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceTimeBy
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import oolong.Effect
 import oolong.effect
 import oolong.effect.EffectTest.Parent.Msg.ChildMsg
-import kotlin.test.Test
-import kotlin.test.assertEquals
 
 @ExperimentalCoroutinesApi
 class EffectTest {
@@ -34,10 +35,7 @@ class EffectTest {
         })
         val messages = mutableListOf<Int>()
         launch { effects { i -> messages.add(i) } }
-        testScheduler.apply {
-            advanceTimeBy(delay)
-            runCurrent()
-        }
+        advanceUntilIdle()
         assertEquals(range.toList(), messages.sorted())
     }
 
@@ -52,5 +50,4 @@ class EffectTest {
             object NoOp : Msg()
         }
     }
-
 }
