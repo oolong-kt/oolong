@@ -30,18 +30,18 @@ class Props(
     val decrement: (Dispatch<Msg>) -> Unit
 )
 
-val init: () -> Pair<Model, Effect<Msg>> = { 
+val init: Init<Model, Msg> = { 
     Model() to none()
 }
 
-val update: (Msg, Model) -> Pair<Model, Effect<Msg>> = { msg, model ->
+val update: Update<Model, Msg> = { msg, model ->
     when (msg) {
         Msg.Increment -> model.copy(count = model.count + 1)
         Msg.Decrement -> model.copy(count = model.count - 1)
     } to none()
 }
 
-val view: (Model) -> Props = { model ->
+val view: View<Model, Props> = { model ->
     Props(
         model.count,
         { dispatch -> dispatch(Msg.Increment) },
@@ -64,10 +64,10 @@ import oolong.Oolong
 import oolong.effect.none
 
 fun <Model : Any, Msg : Any, Props : Any> CoroutineScope.runtime(
-    init: () -> Pair<Model, Effect<Msg>>,
-    update: (Msg, Model) -> Pair<Model, Effect<Msg>>,
-    view: (Model) -> Props,
-    render: (Props, Dispatch<Msg>) -> Any?,
+    init: Init<Model, Msg>,
+    update: Update<Model, Msg>,
+    view: View<Model, Props>,
+    render: Render<Props, Msg>,
 ): Dispose = Oolong.runtime(
     init, 
     update, 
@@ -93,18 +93,18 @@ class Props(
     val decrement: (Dispatch<Msg>) -> Unit
 )
 
-val init: () -> Pair<Model, Effect<Msg>> = { 
+val init: Init<Model, Msg> = { 
     Model() to none()
 }
 
-val update: (Msg, Model) -> Pair<Model, Effect<Msg>> = { msg, model ->
+val update: Update<Model, Msg> = { msg, model ->
     when (msg) {
         Msg.Increment -> model.copy(count = model.count + 1)
         Msg.Decrement -> model.copy(count = model.count - 1)
     } to none()
 }
 
-val view: (Model) -> Props = { model ->
+val view: View<Model, Props> = { model ->
     Props(
         model.count,
         { dispatch -> dispatch(Msg.Increment) },
@@ -115,7 +115,7 @@ val view: (Model) -> Props = { model ->
 fun main() {
     runBlocking {
 //sampleStart
-        val render: (Props, Dispatch<Msg>) -> Any? = { props, dispatch ->
+        val render: Render<Props, Msg> = { props, dispatch ->
             // Print the current count
             println("count: ${props.count}")
 
