@@ -93,7 +93,7 @@ val init: Init<Model, Msg> /* Init<Model, Msg> */ = {
 We also need to know how to render the view properties returned by the view function. Each target platform does this by implementing a render function which takes the view properties and a dispatch function as arguments. The dispatch function can be invoked to send messages to the update function.
 
 ```kotlin
-val render: Render<Props, Msg> /* Render<Props, Msg> */ = { props, dispatch ->
+val render: Render<Msg, Props> /* Render<Msg, Props> */ = { props, dispatch ->
     // Platform specific rendering
     countLabel.text = "${props.count}"
     incrementButton.setOnClickListener { dispatch(props.increment()) }

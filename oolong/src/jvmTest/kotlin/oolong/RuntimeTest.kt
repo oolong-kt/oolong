@@ -100,7 +100,7 @@ class RuntimeTest {
         init: Init<Model, Msg>,
         update: Update<Model, Msg>,
         view: View<Model, Props>,
-        render: Render<Props, Msg>
+        render: Render<Msg, Props>
     ): Job = runtime(
         init,
         update,

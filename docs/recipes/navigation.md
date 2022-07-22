@@ -96,7 +96,7 @@ val view: View<Model, Props> = { model ->
 Finally, in the `view` function we unwrap the props and delegate to each screen's render function. There is one additional consideration we need to take in this function, however, which is mapping the `dispatch` function from the screen's `Msg` type to the parent's. For this, we can use the provided [`contramap`](/oolong/oolong.dispatch/contramap) fuction.
 
 ```kotlin
-val render: Render<Props, Msg> = { props, dispatch ->
+val render: Render<Msg, Props> = { props, dispatch ->
     when (props) {
         is Props.List -> {
             List.render(props.props, contramap(dispatch, Msg::List))

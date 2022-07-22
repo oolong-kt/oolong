@@ -67,7 +67,7 @@ fun <Model : Any, Msg : Any, Props : Any> CoroutineScope.runtime(
     init: Init<Model, Msg>,
     update: Update<Model, Msg>,
     view: View<Model, Props>,
-    render: Render<Props, Msg>,
+    render: Render<Msg, Props>,
 ): Dispose = Oolong.runtime(
     init, 
     update, 
@@ -115,7 +115,7 @@ val view: View<Model, Props> = { model ->
 fun main() {
     runBlocking {
 //sampleStart
-        val render: Render<Props, Msg> = { props, dispatch ->
+        val render: Render<Msg, Props> = { props, dispatch ->
             // Print the current count
             println("count: ${props.count}")
 

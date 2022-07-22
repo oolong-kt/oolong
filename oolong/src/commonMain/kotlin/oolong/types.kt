@@ -37,7 +37,7 @@ fun <Model, Props> view(block: View<Model, Props>): View<Model, Props> = block
 /**
  * Render builder function.
  */
-fun <Props, Msg> render(block: Render<Props, Msg>): Render<Props, Msg> = block
+fun <Props, Msg> render(block: Render<Msg, Props>): Render<Msg, Props> = block
 
 /*
 Typealiases for the function signatures so that they're easily
