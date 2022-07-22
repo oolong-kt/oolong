@@ -97,10 +97,10 @@ class RuntimeTest {
     }
 
     private fun <Model, Msg, Props> TestCoroutineScope.runtime(
-        init: () -> Pair<Model, Effect<Msg>>,
-        update: (Msg, Model) -> Pair<Model, Effect<Msg>>,
-        view: (Model) -> Props,
-        render: (Props, Dispatch<Msg>) -> Any?
+        init: Init<Model, Msg>,
+        update: Update<Model, Msg>,
+        view: View<Model, Props>,
+        render: Render<Msg, Props>
     ): Job = runtime(
         init,
         update,

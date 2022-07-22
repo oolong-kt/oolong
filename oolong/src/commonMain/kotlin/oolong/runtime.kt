@@ -14,9 +14,9 @@ import kotlin.jvm.JvmOverloads
  */
 @JvmOverloads
 fun <Model, Msg> runtime(
-    init: () -> Pair<Model, Effect<Msg>>,
-    update: (Msg, Model) -> Pair<Model, Effect<Msg>>,
-    view: (Model, Dispatch<Msg>) -> Any?,
+    init: Init<Model, Msg>,
+    update: Update<Model, Msg>,
+    view: Render<Msg, Model>,
     runtimeContext: CoroutineContext = Dispatchers.Default,
     renderContext: CoroutineContext = Dispatchers.Main,
     effectContext: CoroutineContext = Dispatchers.Default
@@ -27,10 +27,10 @@ fun <Model, Msg> runtime(
  */
 @JvmOverloads
 fun <Model, Msg, Props> runtime(
-    init: () -> Pair<Model, Effect<Msg>>,
-    update: (Msg, Model) -> Pair<Model, Effect<Msg>>,
-    view: (Model) -> Props,
-    render: (Props, Dispatch<Msg>) -> Any?,
+    init: Init<Model, Msg>,
+    update: Update<Model, Msg>,
+    view: View<Model, Props>,
+    render: Render<Msg, Props>,
     runtimeContext: CoroutineContext = Dispatchers.Default,
     renderContext: CoroutineContext = Dispatchers.Main,
     effectContext: CoroutineContext = Dispatchers.Default
@@ -43,10 +43,10 @@ fun <Model, Msg, Props> runtime(
 }
 
 private class RuntimeImpl<Model, Msg, Props>(
-    init: () -> Pair<Model, Effect<Msg>>,
-    private val update: (Msg, Model) -> Pair<Model, Effect<Msg>>,
-    private val view: (Model) -> Props,
-    private val render: (Props, Dispatch<Msg>) -> Any?,
+    init: Init<Model, Msg>,
+    private val update: Update<Model, Msg>,
+    private val view: View<Model, Props>,
+    private val render: Render<Msg, Props>,
     private val runtimeContext: CoroutineContext,
     private val renderContext: CoroutineContext,
     private val effectContext: CoroutineContext
@@ -71,7 +71,7 @@ private class RuntimeImpl<Model, Msg, Props>(
         }
     }
 
-    private fun step(next: Pair<Model, Effect<Msg>>) {
+    private fun step(next: Next<Model, Msg>) {
         val (state, effect) = next
         val props = view(state)
         currentState = state
