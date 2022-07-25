@@ -5,10 +5,6 @@ tasks.named("dokkaGfm").configure {
     outputDirectory = file("$rootDir/docs/oolong")
 }
 
-mavenPublish {
-    releaseSigningEnabled = !project.findProperty("signingInMemoryKey").isEmpty()
-}
-
 publishing {
     repositories {
         maven {
