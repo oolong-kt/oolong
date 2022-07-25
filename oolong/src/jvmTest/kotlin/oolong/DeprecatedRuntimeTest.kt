@@ -5,15 +5,13 @@ import kotlin.test.assertEquals
 import kotlin.test.fail
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import oolong.next.next
 
 @ExperimentalCoroutinesApi
-@ObsoleteCoroutinesApi
-class RuntimeTest {
+class DeprecatedRuntimeTest {
 
     enum class Stage {
         INIT,
@@ -24,7 +22,6 @@ class RuntimeTest {
 
     data class Props(
         val stage: Stage,
-        val dispatch: Dispatch<Stage>,
     )
 
     @Test
@@ -44,12 +41,12 @@ class RuntimeTest {
         runtime(
             { next(Stage.INIT) },
             { msg: Stage, _: Stage -> next(msg) },
-            { model: Stage, dispatch: Dispatch<Stage> -> Props(model, dispatch) },
-            { props: Props ->
+            { model: Stage -> Props(model) },
+            { props: Props, dispatch: Dispatch<Stage> ->
                 count++
                 when (props.stage) {
-                    Stage.INIT -> props.dispatch(Stage.NEXT)
-                    Stage.NEXT -> props.dispatch(Stage.DONE)
+                    Stage.INIT -> dispatch(Stage.NEXT)
+                    Stage.NEXT -> dispatch(Stage.DONE)
                     else -> assertEquals(count, 3)
                 }
             },
@@ -67,12 +64,12 @@ class RuntimeTest {
         runtime(
             { next(Stage.INIT, initEffect) },
             { msg: Stage, _: Stage -> next(msg) },
-            { model: Stage, dispatch: Dispatch<Stage> -> Props(model, dispatch) },
-            { props: Props ->
+            { model: Stage -> Props(model) },
+            { props: Props, dispatch: Dispatch<Stage> ->
                 states.add(props.stage)
                 when (props.stage) {
-                    Stage.INIT -> props.dispatch(Stage.NEXT)
-                    Stage.EFFECT -> props.dispatch(Stage.DONE)
+                    Stage.INIT -> dispatch(Stage.NEXT)
+                    Stage.EFFECT -> dispatch(Stage.DONE)
                     else ->
                         assertEquals(
                             listOf(
@@ -108,8 +105,8 @@ class RuntimeTest {
     private fun <Model, Msg, Props> TestScope.runtime(
         init: () -> Pair<Model, Effect<Msg>>,
         update: (Msg, Model) -> Pair<Model, Effect<Msg>>,
-        view: (Model, Dispatch<Msg>) -> Props,
-        render: (Props) -> Any?,
+        view: (Model) -> Props,
+        render: (Props, Dispatch<Msg>) -> Any?,
     ): Job =
         runtime(
             init,

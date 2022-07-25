@@ -1,6 +1,21 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Runtime factory that passes `dispatch` to `view` instead of `render`.
+
+### Changed
+- View function changed from `(Model) -> Props` as `(Model, Dispatch<Msg>) -> Props`.
+- Render function changed from `(Props, Dispatch<Msg>) -> Any?` to `(Props) -> Any?`.
+
+### Deprecated
+- Runtime factories that pass `dispatch` to `render` instead of `view`.
+
+### Removed
+
+### Fixed
+
+### Security
 
 ## [2.1.1] - 2020-04-29
 ### Added

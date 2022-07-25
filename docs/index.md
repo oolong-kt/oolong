@@ -26,8 +26,8 @@ sealed class Msg {
 
 class Props(
     val count: Int,
-    val increment: (Dispatch<Msg>) -> Unit,
-    val decrement: (Dispatch<Msg>) -> Unit
+    val increment: () -> Unit,
+    val decrement: () -> Unit
 )
 
 val init: () -> Pair<Model, Effect<Msg>> = { 
@@ -36,16 +36,16 @@ val init: () -> Pair<Model, Effect<Msg>> = {
 
 val update: (Msg, Model) -> Pair<Model, Effect<Msg>> = { msg, model ->
     when (msg) {
-        Msg.Increment -> model.copy(count = model.count + 1)
-        Msg.Decrement -> model.copy(count = model.count - 1)
-    } to none()
+        Msg.Increment -> next(model.copy(count = model.count + 1))
+        Msg.Decrement -> next(model.copy(count = model.count - 1))
+    }
 }
 
-val view: (Model) -> Props = { model ->
+val view: (Model, Dispatch<Msg>) -> Props = { model ->
     Props(
         model.count,
-        { dispatch -> dispatch(Msg.Increment) },
-        { dispatch -> dispatch(Msg.Decrement) }
+        { dispatch(Msg.Increment) },
+        { dispatch(Msg.Decrement) }
     )
 }
 ```
@@ -62,12 +62,13 @@ import oolong.Dispose
 import oolong.Effect
 import oolong.Oolong
 import oolong.effect.none
+import oolong.next.next
 
 fun <Model : Any, Msg : Any, Props : Any> CoroutineScope.runtime(
     init: () -> Pair<Model, Effect<Msg>>,
     update: (Msg, Model) -> Pair<Model, Effect<Msg>>,
-    view: (Model) -> Props,
-    render: (Props, Dispatch<Msg>) -> Any?,
+    view: (Model, Dispatch<Msg>) -> Props,
+    render: (Props) -> Any?,
 ): Dispose = Oolong.runtime(
     init, 
     update, 
@@ -79,7 +80,7 @@ fun <Model : Any, Msg : Any, Props : Any> CoroutineScope.runtime(
 )
 
 data class Model(
-    val count: Int = 0
+    val count: Int = 0,
 )
 
 sealed class Msg {
@@ -89,39 +90,39 @@ sealed class Msg {
 
 class Props(
     val count: Int,
-    val increment: (Dispatch<Msg>) -> Unit,
-    val decrement: (Dispatch<Msg>) -> Unit
+    val increment: () -> Unit,
+    val decrement: () -> Unit,
 )
 
 val init: () -> Pair<Model, Effect<Msg>> = { 
-    Model() to none()
+    next(Model())
 }
 
 val update: (Msg, Model) -> Pair<Model, Effect<Msg>> = { msg, model ->
     when (msg) {
-        Msg.Increment -> model.copy(count = model.count + 1)
-        Msg.Decrement -> model.copy(count = model.count - 1)
-    } to none()
+        Msg.Increment -> next(model.copy(count = model.count + 1))
+        Msg.Decrement -> next(model.copy(count = model.count - 1))
+    }
 }
 
-val view: (Model) -> Props = { model ->
+val view: (Model, Dispatch<Msg>) -> Props = { model ->
     Props(
         model.count,
-        { dispatch -> dispatch(Msg.Increment) },
-        { dispatch -> dispatch(Msg.Decrement) }
+        { dispatch(Msg.Increment) },
+        { dispatch(Msg.Decrement) },
     )
 }
 
 fun main() {
     runBlocking {
 //sampleStart
-        val render: (Props, Dispatch<Msg>) -> Any? = { props, dispatch ->
+        val render: (Props) -> Any? = { props ->
             // Print the current count
             println("count: ${props.count}")
 
             // Dispatch Msg.Increment if less than 3
             if (props.count < 3) {
-                props.increment(dispatch)
+                props.increment()
             }
         }
 
