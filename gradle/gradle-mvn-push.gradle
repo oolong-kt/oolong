@@ -4,12 +4,3 @@ apply plugin: "org.jetbrains.dokka"
 tasks.named("dokkaGfm").configure {
     outputDirectory = file("$rootDir/docs/oolong")
 }
-
-publishing {
-    repositories {
-        maven {
-            name = "installLocally"
-            url = "${rootProject.buildDir}/localMaven"
-        }
-    }
-}
