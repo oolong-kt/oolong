@@ -20,8 +20,10 @@ jobs:
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v2
+
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
+
       - name: Cache gradle
         uses: actions/cache@v2.1.0
         with:
@@ -29,11 +31,14 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+
       - name: Check
         run: ./gradlew check
+
       - name: Bundle the build report
         if: failure()
         run: find . -type d -name 'reports' | zip -@ -r build-reports.zip
+
       - name: Upload the build report
         if: failure()
         uses: actions/upload-artifact@master
