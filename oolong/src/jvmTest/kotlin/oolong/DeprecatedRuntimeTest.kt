@@ -56,11 +56,10 @@ class DeprecatedRuntimeTest {
     @Test
     fun `effects do not block runtime`() = runTest {
         val states = mutableListOf<Stage>()
-        val initEffect =
-            effect<Stage> { dispatch ->
-                delay(100)
-                dispatch(Stage.EFFECT)
-            }
+        val initEffect = effect { dispatch ->
+            delay(100)
+            dispatch(Stage.EFFECT)
+        }
         runtime(
             { next(Stage.INIT, initEffect) },
             { msg: Stage, _: Stage -> next(msg) },
@@ -87,11 +86,10 @@ class DeprecatedRuntimeTest {
 
     @Test
     fun `runtime should not call update view render if cancelled`() = runTest {
-        val initEffect =
-            effect<Stage> { dispatch ->
-                delay(100)
-                dispatch(Stage.EFFECT)
-            }
+        val initEffect = effect { dispatch ->
+            delay(100)
+            dispatch(Stage.EFFECT)
+        }
         val job =
             runtime(
                 { next(Stage.INIT, initEffect) },
