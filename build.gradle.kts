@@ -1,10 +1,5 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath(deps.kotlin.gradle.plugin)
-        classpath(deps.dokka.gradle.plugin)
-    }
+plugins {
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.dokka) apply false
 }
 

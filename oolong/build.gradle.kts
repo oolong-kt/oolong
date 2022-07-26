@@ -20,15 +20,14 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(deps.kotlin.coroutines.core)
+                api(libs.kotlin.coroutines.core)
             }
         }
 
         val jvmTest by getting {
             dependencies {
-                implementation(deps.kotlin.coroutines.test)
-                implementation(deps.kotlin.test.jvm)
-                implementation(deps.kotlin.test.junit)
+                implementation(libs.kotlin.coroutines.test)
+                implementation(libs.kotlin.test.junit)
             }
         }
 
@@ -72,4 +71,4 @@ kotlin {
     }
 }
 
-apply("$rootDir/gradle/gradle-mvn-mpp-push.gradle")
+// apply("$rootDir/gradle/gradle-mvn-mpp-push.gradle")
