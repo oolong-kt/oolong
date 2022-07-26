@@ -11,7 +11,7 @@ In Oolong, for each call to `update` we return a `Next` value. This value is a `
 This is how you call back in to your purely functional code: by calling `dispatch` with an effect response message. Here's a simple example which dispatches a message after a short delay.
 
 ```kotlin
-val continueAfterDelayEffect = effect<Msg> { dispatch ->
+val continueAfterDelayEffect = effect { dispatch ->
     delay(500)
     dispatch(Msg.Continue)
 }
@@ -20,7 +20,7 @@ val continueAfterDelayEffect = effect<Msg> { dispatch ->
 In this example, they delay is a stand-in for any time consuming operation that you might do, for example an HTTP request. An actual network effect might look like this:
 
 ```kotlin
-val getNetworkItemsEffect = effect<Msg> { dispatch ->
+val getNetworkItemsEffect = effect { dispatch ->
     val response = itemNetworkRepository.getItems()
     val msg = when (response) {
         is Either.Left -> {
