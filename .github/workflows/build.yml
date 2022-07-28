@@ -1,0 +1,160 @@
+name: build
+
+on: [push, pull_request]
+
+env:
+  GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx2g -Dorg.gradle.daemon=false -Dkotlin.incremental=false"
+
+jobs:
+  jvm:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version:
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Configure JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: ${{ matrix.java-version }}
+
+      - name: Test
+        run: |
+          ./gradlew -Dkjs=false -Dknative=false build --stacktrace
+
+#      - name: Upload Japicmp report
+#        if: failure()
+#        uses: actions/upload-artifact@master
+#        with:
+#          name: japicmp-report
+#          path: okio/jvm/japicmp/build/reports/japi.txt
+
+  all-platforms:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ macos-11, ubuntu-latest, windows-latest ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Configure JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: 14
+
+      - name: Test
+        run: |
+          ./gradlew build
+
+  publish:
+    runs-on: macos-11
+    if: github.repository == 'oolong-kt/oolong' && github.ref == 'refs/heads/main'
+    needs: [jvm, all-platforms]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: 14
+
+      - name: Upload Artifacts
+        run: |
+          ./gradlew clean publish --stacktrace
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.ARTIFACT_SIGNING_PRIVATE_KEY }}
+
+  publish-windows:
+    runs-on: windows-latest
+    if: github.repository == 'oolong-kt/oolong' && github.ref == 'refs/heads/main'
+    needs: [jvm, all-platforms]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: 8
+
+      - name: Upload Artifacts
+        run: |
+          ./gradlew clean publishMingwX64PublicationToMavenCentralRepository --stacktrace
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.ARTIFACT_SIGNING_PRIVATE_KEY }}
+
+  publish-website:
+    runs-on: ubuntu-latest
+    if: github.repository == 'oolong-kt/oolong' && github.ref == 'refs/heads/main'
+    needs: [jvm, all-platforms]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Configure JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: 14
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Prepare docs
+        run: .buildscript/prepare_mkdocs.sh
+
+      - name: Build mkdocs
+        run: |
+          pip3 install mkdocs-material mkdocs-macros-plugin
+          mkdocs build
+
+#      - name: Restore 1.x docs
+#        run: .buildscript/restore_v1_docs.sh
+
+      - name: Deploy docs
+        if: success()
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GH_CLIPPY_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: site
+          SINGLE_COMMIT: true
