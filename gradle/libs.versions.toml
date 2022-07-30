@@ -2,6 +2,7 @@
 dokka = "1.7.10"
 kotlin = "1.7.10"
 kotlinCoroutines = "1.6.4"
+mavenPublish = "0.21.0"
 
 [libraries]
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
@@ -13,3 +14,4 @@ kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version
 [plugins]
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+maven-publish = { id = "com.vanniktech.maven.publish.base", version.ref = "mavenPublish" }
