@@ -27,6 +27,9 @@
 
 ### Deprecated
 - Runtime factories that pass `dispatch` to `render` instead of `view`.
+ 
+### Removed
+- Remove deprecated type aliases.
 
 ## [2.1.0] - 2020-09-28
 ### Added
@@ -67,7 +70,7 @@
 - Update Kotlin to 1.3.72
 - Update Kotlin Coroutines to 1.3.5
 
-## Removed
+### Removed
 - Deprecated coroutine scope and context arguments in runtime creator function.
 - Remove deprecated runtime creator function.
 
