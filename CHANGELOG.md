@@ -1,7 +1,24 @@
 # Changelog
 
 ## [Unreleased]
+
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [2.1.1] - 2022-08-03
+### Added
+- Update Kotlin to 1.7.10
+- Update Kotlin Coroutines to 1.6.4
+- Add a `next` builder function.
 - Runtime factory that passes `dispatch` to `view` instead of `render`.
 
 ### Changed
@@ -10,18 +27,6 @@
 
 ### Deprecated
 - Runtime factories that pass `dispatch` to `render` instead of `view`.
-
-### Removed
-
-### Fixed
-
-### Security
-
-## [2.1.1] - 2020-04-29
-### Added
-- Add a `next` builder function.
-- Update Kotlin to 1.4.32
-- Update Kotlin Coroutines to 1.4.3
 
 ## [2.1.0] - 2020-09-28
 ### Added

@@ -27,7 +27,7 @@ allprojects {
 
     plugins.withId("com.vanniktech.maven.publish.base") {
         configure<MavenPublishBaseExtension> {
-            publishToMavenCentral(SonatypeHost.S01)
+            publishToMavenCentral(SonatypeHost.DEFAULT)
             signAllPublications()
             pom {
                 description.set("MVU for Kotlin Multiplatform")
