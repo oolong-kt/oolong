@@ -13,4 +13,4 @@ set -ex
 
 # Copy in special files that GitHub wants in the project root.
 cp CHANGELOG.md docs/changelog.md
-cp CONTRIBUTING.md docs/contributing.md
+# cp CONTRIBUTING.md docs/contributing.md
