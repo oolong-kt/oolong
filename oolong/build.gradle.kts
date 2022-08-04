@@ -15,11 +15,22 @@ kotlin {
     jvm()
 
     sourceSets {
-        val commonMain by getting { dependencies { api(libs.kotlin.coroutines.core) } }
+        val commonMain by getting {
+            dependencies {
+                api(libs.kotlin.coroutines.core)
+            }
+        }
+
+        val commonTest by getting {
+            dependencies {
+                implementation(libs.kotlin.coroutines.test)
+                implementation(libs.kotlin.test.common)
+                implementation(libs.kotlin.test.commonAnnotations)
+            }
+        }
 
         val jvmTest by getting {
             dependencies {
-                implementation(libs.kotlin.coroutines.test)
                 implementation(libs.kotlin.test.junit)
             }
         }
