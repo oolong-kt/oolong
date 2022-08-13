@@ -27,7 +27,7 @@ sealed class Msg {
 class Props(
     val count: Int,
     val increment: () -> Unit,
-    val decrement: () -> Unit
+    val decrement: () -> Unit,
 )
 
 val init: () -> Pair<Model, Effect<Msg>> = { 
@@ -45,11 +45,12 @@ val view: (Model, Dispatch<Msg>) -> Props = { model ->
     Props(
         model.count,
         { dispatch(Msg.Increment) },
-        { dispatch(Msg.Decrement) }
+        { dispatch(Msg.Decrement) },
     )
 }
 ```
 
+<!--
 ## See it in action
 
 Initialize an Oolong runtime by supplying your `init`, `update`, and `view` functions as well as a `render` function from the host platform. Press the play button below to run the example.
@@ -131,3 +132,4 @@ fun main() {
     }
 }
 ```
+-->
