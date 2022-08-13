@@ -3,8 +3,9 @@ import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.maven.publish)
+    alias(libs.plugins.dokka) apply false
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.maven.publish) apply false
 }
 
 allprojects {
@@ -21,7 +22,7 @@ allprojects {
         }
 
         if (name == "dokkaHtml") {
-            outputDirectory.set(file("${rootDir}/docs"))
+            outputDirectory.set(file("${rootDir}/docs/api"))
         }
     }
 

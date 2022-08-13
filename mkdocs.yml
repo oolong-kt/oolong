@@ -9,21 +9,19 @@ remote_branch: gh-pages
 
 nav:
   - Overview: index.md
-  - API Reference: oolong/index.md
-  - Changelog: changelog.md
-
   - Guide:
     - Core Concepts: guide/core-concepts.md
     - Side Effects: guide/side-effects.md
-    - Rendering: guide/rendering.md
-
+    # - Rendering: guide/rendering.md
   - Recipes:
-    - Isolation: recipes/isolation.md
+    # - Isolation: recipes/isolation.md
     - Navigation: recipes/navigation.md
-
   - Samples:
       - Official: samples/official.md
       - Third-party: samples/third-party.md
+  - API Reference: api/oolong/oolong/index.html
+  - Changelog: changelog.md
+  - Code of Conduct: code_of_conduct.md
 
 theme:
   name: 'material'
