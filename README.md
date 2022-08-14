@@ -1,6 +1,6 @@
 # Oolong
 
-[![Build Status](https://img.shields.io/github/workflow/status/oolong-kt/oolong/CD)](https://github.com/oolong-kt/oolong/actions?query=workflow%3ACD)
+[![Build Status](https://img.shields.io/github/workflow/status/oolong-kt/oolong/build)](https://github.com/oolong-kt/oolong/actions?query=workflow%3Abuild)
 [![Maven Central](https://img.shields.io/maven-central/v/org.oolong-kt/oolong.svg)](#download)
 [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/https/oss.sonatype.org/org.oolong-kt/oolong.svg)](#download)
 [![License](https://img.shields.io/github/license/oolong-kt/oolong.svg)](LICENSE.md)
