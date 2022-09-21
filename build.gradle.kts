@@ -3,6 +3,7 @@ import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
+    alias(libs.plugins.binaryCompatibilityValidator)
     alias(libs.plugins.dokka) apply false
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.maven.publish) apply false
