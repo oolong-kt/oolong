@@ -14,3 +14,4 @@ binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibilit
 dokka = { id = "org.jetbrains.dokka", version = "1.7.10" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 maven-publish = { id = "com.vanniktech.maven.publish.base", version = "0.21.0" }
+spotless = { id = "com.diffplug.spotless", version = "6.9.1" }

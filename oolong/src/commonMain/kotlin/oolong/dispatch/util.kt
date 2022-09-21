@@ -7,5 +7,4 @@ import oolong.Dispatch
  *
  * See: [https://oolong-kt.org/recipes/navigation/](https://oolong-kt.org/recipes/navigation/)
  */
-fun <A, B> contramap(dispatch: Dispatch<A>, f: (B) -> A): Dispatch<B> =
-    { b -> dispatch(f(b)) }
+fun <A, B> contramap(dispatch: Dispatch<A>, f: (B) -> A): Dispatch<B> = { b -> dispatch(f(b)) }

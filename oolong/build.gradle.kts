@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.dokka)
     alias(libs.plugins.maven.publish)
+    alias(libs.plugins.spotless)
 }
 
 repositories { mavenCentral() }
@@ -73,6 +74,13 @@ kotlin {
                     println("Unsupported target: ${preset.name}")
                 }
             }
+    }
+}
+
+spotless {
+    kotlin {
+        target("**/*.kt")
+        ktfmt("0.40").kotlinlangStyle()
     }
 }
 
