@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600");
+
+body {
+    font-family: Open Sans,Source Sans Pro,Helvetica Neue,Arial,sans-serif !important;
+}
+
+header {
+    z-index: 999!important;
+}
+
+.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
+  line-height: normal;
+  font-weight: bold;
+  color: #353535;
+}
+
+.md-typeset code {
+    border-radius: 0.25rem;
+}
+
+.md-typeset__table {
+    display: block;
+    border-radius: 0.25rem;
+}
+
+.md-typeset__table table {
+    display: table!important;
+}
+
+.md-search__input {
+    border-radius: 0.25rem;
+}

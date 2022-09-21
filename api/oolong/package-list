@@ -1,0 +1,24 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:oolong.dispatch////PointingToDeclaration/oolong/oolong.dispatch/index.html
+$dokka.location:oolong.dispatch//contramap/#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Unit]#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/oolong/oolong.dispatch/contramap.html
+$dokka.location:oolong.effect////PointingToDeclaration/oolong/oolong.effect/index.html
+$dokka.location:oolong.effect//batch/#kotlin.Array[kotlin.coroutines.SuspendFunction2[kotlinx.coroutines.CoroutineScope,kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Unit],kotlin.Any?]]/PointingToDeclaration/oolong/oolong.effect/batch.html
+$dokka.location:oolong.effect//batch/#kotlin.collections.Iterable[kotlin.coroutines.SuspendFunction2[kotlinx.coroutines.CoroutineScope,kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Unit],kotlin.Any?]]/PointingToDeclaration/oolong/oolong.effect/batch.html
+$dokka.location:oolong.effect//map/#kotlin.coroutines.SuspendFunction2[kotlinx.coroutines.CoroutineScope,kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Unit],kotlin.Any?]#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/oolong/oolong.effect/map.html
+$dokka.location:oolong.effect//none/#/PointingToDeclaration/oolong/oolong.effect/none.html
+$dokka.location:oolong.next////PointingToDeclaration/oolong/oolong.next/index.html
+$dokka.location:oolong.next//bimap/#kotlin.Pair[TypeParam(bounds=[kotlin.Any?]),kotlin.coroutines.SuspendFunction2[kotlinx.coroutines.CoroutineScope,kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Unit],kotlin.Any?]]#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/oolong/oolong.next/bimap.html
+$dokka.location:oolong.next//next/#TypeParam(bounds=[kotlin.Any?])#kotlin.coroutines.SuspendFunction2[kotlinx.coroutines.CoroutineScope,kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Unit],kotlin.Any?]/PointingToDeclaration/oolong/oolong.next/next.html
+$dokka.location:oolong////PointingToDeclaration/oolong/oolong/index.html
+$dokka.location:oolong//effect/#kotlin.coroutines.SuspendFunction2[kotlinx.coroutines.CoroutineScope,kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Unit],kotlin.Any?]/PointingToDeclaration/oolong/oolong/effect.html
+$dokka.location:oolong//init/#kotlin.Function0[kotlin.Pair[TypeParam(bounds=[kotlin.Any?]),kotlin.coroutines.SuspendFunction2[kotlinx.coroutines.CoroutineScope,kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Unit],kotlin.Any?]]]/PointingToDeclaration/oolong/oolong/init.html
+$dokka.location:oolong//render/#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Any?]/PointingToDeclaration/oolong/oolong/render.html
+$dokka.location:oolong//runtime/#kotlin.Function0[kotlin.Pair[TypeParam(bounds=[kotlin.Any?]),kotlin.coroutines.SuspendFunction2[kotlinx.coroutines.CoroutineScope,kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Unit],kotlin.Any?]]]#kotlin.Function2[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?]),kotlin.Pair[TypeParam(bounds=[kotlin.Any?]),kotlin.coroutines.SuspendFunction2[kotlinx.coroutines.CoroutineScope,kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Unit],kotlin.Any?]]]#kotlin.Function2[TypeParam(bounds=[kotlin.Any?]),kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Unit],TypeParam(bounds=[kotlin.Any?])]#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Any?]#kotlin.coroutines.CoroutineContext#kotlin.coroutines.CoroutineContext#kotlin.coroutines.CoroutineContext/PointingToDeclaration/oolong/oolong/runtime.html
+$dokka.location:oolong//update/#kotlin.Function2[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?]),kotlin.Pair[TypeParam(bounds=[kotlin.Any?]),kotlin.coroutines.SuspendFunction2[kotlinx.coroutines.CoroutineScope,kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Unit],kotlin.Any?]]]/PointingToDeclaration/oolong/oolong/update.html
+$dokka.location:oolong//view/#kotlin.Function2[TypeParam(bounds=[kotlin.Any?]),kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Unit],TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/oolong/oolong/view.html
+oolong
+oolong.dispatch
+oolong.effect
+oolong.next
+

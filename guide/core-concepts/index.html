@@ -1,0 +1,879 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Oolong - MVU for Kotlin Multiplatform">
+      
+      
+        <meta name="author" content="Oolong">
+      
+      
+        <link rel="canonical" href="https://oolong-kt.org/guide/core-concepts/">
+      
+      <link rel="icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>Core Concepts - Oolong</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ffffff">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/style.css">
+    
+      <link rel="stylesheet" href="../../css/codemirror.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+<script src="https://unpkg.com/kotlin-playground@1"
+        data-selector=".playground code"
+        data-server="https://api.oolong-kt.org"
+        data-version="1.3.41">
+</script>
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="white" data-md-color-accent="green">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#core-concepts" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Oolong" class="md-header__button md-logo" aria-label="Oolong" data-md-component="logo">
+      
+  <img src="../../images/icon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Oolong
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Core Concepts
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/oolong-kt/oolong" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    oolong
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Oolong" class="md-nav__button md-logo" aria-label="Oolong" data-md-component="logo">
+      
+  <img src="../../images/icon.svg" alt="logo">
+
+    </a>
+    Oolong
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/oolong-kt/oolong" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    oolong
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Core Concepts
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Core Concepts
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#model" class="md-nav__link">
+    Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    Update
+  </a>
+  
+    <nav class="md-nav" aria-label="Update">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#messages" class="md-nav__link">
+    Messages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-function" class="md-nav__link">
+    Update function
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view" class="md-nav__link">
+    View
+  </a>
+  
+    <nav class="md-nav" aria-label="View">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#view-properties" class="md-nav__link">
+    View properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#view-function" class="md-nav__link">
+    View function
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-it-all-together" class="md-nav__link">
+    Putting it all together
+  </a>
+  
+    <nav class="md-nav" aria-label="Putting it all together">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initialization-function" class="md-nav__link">
+    Initialization function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#render-function" class="md-nav__link">
+    Render function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runtime" class="md-nav__link">
+    Runtime
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../side-effects/" class="md-nav__link">
+        Side Effects
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Recipes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Recipes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Recipes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recipes/navigation/" class="md-nav__link">
+        Navigation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Samples
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Samples" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Samples
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/official/" class="md-nav__link">
+        Official
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/third-party/" class="md-nav__link">
+        Third-party
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/oolong/oolong/" class="md-nav__link">
+        API Reference
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        Changelog
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_of_conduct/" class="md-nav__link">
+        Code of Conduct
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#model" class="md-nav__link">
+    Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    Update
+  </a>
+  
+    <nav class="md-nav" aria-label="Update">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#messages" class="md-nav__link">
+    Messages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-function" class="md-nav__link">
+    Update function
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view" class="md-nav__link">
+    View
+  </a>
+  
+    <nav class="md-nav" aria-label="View">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#view-properties" class="md-nav__link">
+    View properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#view-function" class="md-nav__link">
+    View function
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-it-all-together" class="md-nav__link">
+    Putting it all together
+  </a>
+  
+    <nav class="md-nav" aria-label="Putting it all together">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initialization-function" class="md-nav__link">
+    Initialization function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#render-function" class="md-nav__link">
+    Render function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runtime" class="md-nav__link">
+    Runtime
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/oolong-kt/oolong/edit/main/docs/guide/core-concepts.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<h1 id="core-concepts">Core Concepts</h1>
+<p>Let's visit each of the core concepts by examining a simple example. We'll create a simple "counter" program that can increment and decrement an <code>Int</code> state. In MVU architecture, state is changed by dispatching and handling messages. We'll look at this more in a moment. First let's take a look at the model.</p>
+<h2 id="model">Model</h2>
+<p>The model is a representation of the state of your application. In this case, the model contains just one property which is an <code>Int</code> named <code>count</code> with a default value of <code>0</code>. By convention, we define the model as a <code>data</code> class so it can be mutated easily. While your application is running, the model will be changing from one state to the next every time a message is dispatched.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Model</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">count</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<h2 id="update">Update</h2>
+<h4 id="messages">Messages</h4>
+<p>Before looking at the update function, let's talk about messages. Messages describe the way we want the application state to change. In the case of our counter app, we have two messages that can be dispatched and handled: <code>Increment</code> and <code>Decrement</code>. <code>Increment</code> adds <code>1</code> to the current value of <code>count</code> and <code>Decrement</code> subtracts <code>1</code> from <code>count</code>. By convention, messages are defined as part of a <code>sealed</code> interface. This allows us to use an exhaustive list of types when interpreting messages.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">sealed</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nc">Msg</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">object</span><span class="w"> </span><span class="nc">Increment</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Msg</span><span class="w"></span>
+<span class="w">    </span><span class="kd">object</span><span class="w"> </span><span class="nc">Decrement</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Msg</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h4 id="update-function">Update function</h4>
+<p>The update function uses these two concepts to take a previous state and transform it to the next state. When a message is dispatched, the update function is called with the dispatched message and the current state as arguments. The function must determine what state to return given these arguments.</p>
+<p>So far we have mentioned two conventions: models are <code>data</code> classes, and messages are <code>sealed</code> interfaces. You can see in the function below how those modifiers are leveraged. The message type is able to be determined in an exhaustive manner using the <code>when</code> block. The new state is created by mutating the old state with the <code>copy</code> function.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">update</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">Msg</span><span class="p">,</span><span class="w"> </span><span class="n">Model</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">Model</span><span class="p">,</span><span class="w"> </span><span class="n">Effect</span><span class="o">&lt;</span><span class="n">Msg</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Msg</span><span class="p">.</span><span class="na">Increment</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">next</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="na">copy</span><span class="p">(</span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model</span><span class="p">.</span><span class="na">count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="n">Msg</span><span class="p">.</span><span class="na">Decrement</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">next</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="na">copy</span><span class="p">(</span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model</span><span class="p">.</span><span class="na">count</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h2 id="view">View</h2>
+<p>The job of the view function is to transform the current state into something that can be rendered in a UI. This could be an HTML string, a tree of widgets, or in multiplatform projects it will be a simple data structure. We call this output type view properties or <code>Props</code>.</p>
+<h4 id="view-properties">View properties</h4>
+<p>There are two types of data you may want to store in your view properties. First is information that you want to be rendered to the UI, and in this case we want to show the current count. The second category of data is dispatching functions. Your rendering code will know how to display properties and call dispatch functions from user events. If you are only targeting one platform then you may decide to return components specific to that platform, but since Oolong is a multiplatform library it is convention to use a hierarchical data structure.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">Props</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">count</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">increment</span><span class="p">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">Unit</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">decrement</span><span class="p">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">Unit</span><span class="p">,</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<h4 id="view-function">View function</h4>
+<p>The view function, as mentioned above, takes the current state and a dispatch function as its arguments and returns view properties. In our counter example we populate the view properties with:</p>
+<ul>
+<li><code>count</code> - the current count.</li>
+<li><code>increment</code> - a function which dispatches the <code>Increment</code> message.</li>
+<li><code>decrement</code> - a function which dispatches the <code>Decrement</code> message.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">view</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">Model</span><span class="p">,</span><span class="w"> </span><span class="n">Dispatch</span><span class="o">&lt;</span><span class="n">Msg</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Props</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Props</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="n">model</span><span class="p">.</span><span class="na">count</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="n">dispatch</span><span class="p">(</span><span class="n">Msg</span><span class="p">.</span><span class="na">Increment</span><span class="p">)</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="n">dispatch</span><span class="p">(</span><span class="n">Msg</span><span class="p">.</span><span class="na">Decrement</span><span class="p">)</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h2 id="putting-it-all-together">Putting it all together</h2>
+<p>Now that we've built the core components of our application we need a few more things to complete it, namely a way to create an initial application state and a way to render the view properties.</p>
+<h4 id="initialization-function">Initialization function</h4>
+<p>To get the runtime loop started, we first need to know what the initial state is. We do this by defining an initialization function. This function is similar to the <code>update</code> function, however it takes no arguments. By convention, it is often desirable to define defaults in the model class and simply return a new instance from the init function.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">init</span><span class="p">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">Model</span><span class="p">,</span><span class="w"> </span><span class="n">Effect</span><span class="o">&lt;</span><span class="n">Msg</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">next</span><span class="p">(</span><span class="n">Model</span><span class="p">())</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h4 id="render-function">Render function</h4>
+<p>We also need to know how to render the view properties returned by the view function. Each target platform does this by implementing a render function which takes the view properties and a dispatch function as arguments. The dispatch function can be invoked to send messages to the update function.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">render</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">Props</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">Any?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">props</span><span class="p">,</span><span class="w"> </span><span class="n">dispatch</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Platform specific rendering</span><span class="w"></span>
+<span class="w">    </span><span class="n">countLabel</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;</span><span class="si">${</span><span class="n">props</span><span class="p">.</span><span class="na">count</span><span class="si">}</span><span class="s">&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="n">incrementButton</span><span class="p">.</span><span class="na">setOnClickListener</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">props</span><span class="p">.</span><span class="na">increment</span><span class="p">()</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">decrementButton</span><span class="p">.</span><span class="na">setOnClickListener</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">props</span><span class="p">.</span><span class="na">decrement</span><span class="p">()</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h4 id="runtime">Runtime</h4>
+<p>The Oolong runtime composes these core functions into a user interaction loop, continually moving from one state to the next. It also handles things like side-effects (which we'll see in the next chapter) and resource disposal. You can start this loop by calling <code>Oolong.runtime</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">dispose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Oolong</span><span class="p">.</span><span class="na">runtime</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">init</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">update</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">view</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">render</span><span class="p">,</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Overview
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../side-effects/" class="md-footer__link md-footer__link--next" aria-label="Next: Side Effects" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Side Effects
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["tabs"], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+    
+  </body>
+</html>
