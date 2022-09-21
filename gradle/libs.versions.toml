@@ -1,8 +1,6 @@
 [versions]
-dokka = "1.7.10"
 kotlin = "1.7.10"
 kotlinCoroutines = "1.6.4"
-mavenPublish = "0.21.0"
 
 [libraries]
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
@@ -12,6 +10,7 @@ kotlin-test-commonAnnotations = { module = "org.jetbrains.kotlin:kotlin-test-ann
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 
 [plugins]
-dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.11.1" }
+dokka = { id = "org.jetbrains.dokka", version = "1.7.10" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-maven-publish = { id = "com.vanniktech.maven.publish.base", version.ref = "mavenPublish" }
+maven-publish = { id = "com.vanniktech.maven.publish.base", version = "0.21.0" }
